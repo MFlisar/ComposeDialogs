@@ -39,23 +39,23 @@ val state = rememberDialogState()
 if (state.showing) 
 {
     DialogInfo(
-      state = state,
-      title = "Info Dialog",
-      info = "Some information...",
-	  // Optional - all options can be set up with custom attributes, following are just the default examples
-	  style = DialogDefaults.styleBottomSheet(), // or DialogDefaults.styleDialog() => both have quite some settings and all default dialog settings...
-	  icon = DialogDefaults.icon(rememberVectorPainter(Icons.Default.Home)),
-	  buttons = DialogDefaults.dialogButtons(
-	  	positive = dialogButton(stringResource(android.R.string.ok)),
-          negative = dialogButton("")
-	  ),
-      options = DialogDefaults.options(
-	  	dismissOnButtonClick = true,
-          wrapContentInScrollableContainer = false
-	  ),
-      onEvent: (event: DialogEvent) -> Unit = { event: DialogEvent ->
-	  	// optional event handler for all dialog events
-	  }
+        state = state,
+        title = "Info Dialog",
+        info = "Some information...",
+        // Optional - all options can be set up with custom attributes, following are just the default examples
+        style = DialogDefaults.styleBottomSheet(), // or DialogDefaults.styleDialog() => both have quite some settings and all default dialog settings...
+        icon = DialogDefaults.icon(rememberVectorPainter(Icons.Default.Home)),
+        buttons = DialogDefaults.dialogButtons(
+            positive = dialogButton(stringResource(android.R.string.ok)),
+            negative = dialogButton("")
+        ),
+        options = DialogDefaults.options(
+            dismissOnButtonClick = true,
+            wrapContentInScrollableContainer = false
+        ),
+        onEvent: (event: DialogEvent) -> Unit = { event: DialogEvent ->
+            // optional event handler for all dialog events
+        }
     )
 }
 
@@ -75,16 +75,16 @@ In case of the simple state `true` means that the dialog is visible and `false` 
 
 In case of the complex state simply use `state.show(data)` to show the dialog and then inside your dialog call `val data = state.requireData()` to get the data from the state.
 
-https://github.com/MFlisar/ComposeDialogs/blob/366e88730530f642048d52b8c87446e89bc10cd7/dialogs/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L26-L32
+https://github.com/MFlisar/ComposeDialogs/blob/d743c8923c7478967d11825b07be5a079f21b4eb/library/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L32-L38
 
-https://github.com/MFlisar/ComposeDialogs/blob/366e88730530f642048d52b8c87446e89bc10cd7/dialogs/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L52-L60
+https://github.com/MFlisar/ComposeDialogs/blob/d743c8923c7478967d11825b07be5a079f21b4eb/library/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L58-L66
   
 ### Existing dialogs
 
 **Info Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/366e88730530f642048d52b8c87446e89bc10cd7/dialogs/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L9-L19
+...
 
 **Input Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/366e88730530f642048d52b8c87446e89bc10cd7/dialogs/input/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInput.kt#L26-L51
+...
