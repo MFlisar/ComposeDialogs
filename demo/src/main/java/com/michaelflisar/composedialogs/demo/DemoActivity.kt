@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,43 +16,38 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
+import com.michaelflisar.composedialogs.demo.classes.DemoStyle
+import com.michaelflisar.composedialogs.demo.classes.DemoTheme
 import com.michaelflisar.composedialogs.demo.views.SegmentedControl
+import com.michaelflisar.composedialogs.dialogs.color.DialogColor
+import com.michaelflisar.composedialogs.dialogs.color.DialogColorLabelStyle
+import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColorState
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogTime
 import com.michaelflisar.composedialogs.dialogs.info.DialogInfo
 import com.michaelflisar.composedialogs.dialogs.info.DialogInput
+import com.michaelflisar.composedialogs.dialogs.info.DialogInputValidator
+import com.michaelflisar.composedialogs.dialogs.progress.DialogProgress
+import com.michaelflisar.composedialogs.dialogs.progress.DialogProgressStyle
 import com.michaelflisar.testcompose.ui.theme.ComposeDialogDemoTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DemoActivity : ComponentActivity() {
-
-    enum class DemoStyle {
-        Dialog,
-        BottomSheet
-    }
-
-    enum class DemoTheme {
-        System,
-        Dark,
-        Light;
-
-        @Composable
-        fun isDark(): Boolean {
-            return when (this) {
-                System -> isSystemInDarkTheme()
-                Dark -> true
-                Light -> false
-            }
-        }
-    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
 
             val theme = rememberSaveable { mutableStateOf(DemoTheme.System) }
@@ -77,32 +71,51 @@ class DemoActivity : ComponentActivity() {
                                 titleContentColor = MaterialTheme.colorScheme.onPrimary
                             )
                         )
+
+                        // Dialog Setting States
+                        val style = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
+                        val swipeDismiss = rememberSaveable { mutableStateOf(false) }
+                        val showIcon = rememberSaveable { mutableStateOf(true) }
+
+                        // UI Settings
+                        val dialogSettings = rememberDialogState()
+                        DialogSettings(
+                            dialogSettings,
+                            theme,
+                            dynamicTheme,
+                            style,
+                            swipeDismiss,
+                            showIcon
+                        )
+                        OutlinedButton(
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(
+                                    top = 16.dp,
+                                    start = 16.dp,
+                                    end = 16.dp,
+                                    bottom = 8.dp
+                                ),
+                            onClick = {
+                                dialogSettings.show()
+                            }) {
+                            Text("Settings")
+                        }
+
+                        // UI Example Dialogs
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f)
-                                .padding(16.dp)
+                                .padding(
+                                    bottom = 16.dp,
+                                    start = 16.dp,
+                                    end = 16.dp
+                                )
                                 .verticalScroll(rememberScrollState()),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-
-                            // Settings
-                            val style = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
-                            val swipeDismiss = rememberSaveable { mutableStateOf(false) }
-                            val showIcon = rememberSaveable { mutableStateOf(true) }
-
-                            Text(text = "Settings", style = MaterialTheme.typography.titleLarge)
-                            OutlinedCard {
-                                Column(modifier = Modifier.padding(8.dp)) {
-                                    Settings(theme, dynamicTheme, style, swipeDismiss, showIcon)
-                                }
-
-                            }
-
-                            // -----------------
-                            // Settings for dialogs
-                            // -----------------
 
                             val s = if (style.value == DemoStyle.BottomSheet) {
                                 DialogDefaults.styleBottomSheet(
@@ -113,23 +126,40 @@ class DemoActivity : ComponentActivity() {
                                 )
                             } else DialogDefaults.styleDialog(swipeDismissable = swipeDismiss.value)
                             val icon = if (showIcon.value) {
-                                DialogDefaults.icon(rememberVectorPainter(Icons.Default.Home))
+                                DialogIcon(rememberVectorPainter(Icons.Default.Home))
                             } else null
 
                             // -----------------
                             // Buttons for Demo Dialogs...
                             // -----------------
 
-                            Text(text = "Demos", style = MaterialTheme.typography.titleLarge)
-
-                            DemoDialogRegion("Info Dialog")
+                            // 1) Info Dialogs
+                            DemoDialogRegion("Info Dialogs")
                             DemoDialogInfo1(s, icon)
                             DemoDialogInfo2(s, icon)
 
-                            DemoDialogRegion("Input Dialog")
-                            DemoDialogInput1(s, icon, "Hello")
+                            // 2) Input Dialogs
+                            DemoDialogRegion("Input Dialogs")
+                            DemoDialogInput1(s, icon)
 
-                            DemoDialogRegion("Custom Dialog")
+                            // 3) DateTime Dialogs
+                            DemoDialogRegion("DateTime Dialogs")
+                            DemoDialogDate1(icon)
+                            DemoDialogTime1(s, icon)
+
+                            // 4) Progress Dialogs
+                            DemoDialogRegion("Progress Dialogs")
+                            DemoDialogProgress1(s, icon)
+                            DemoDialogProgress2(s, icon)
+                            DemoDialogProgress3(s, icon)
+
+                            // 4) Color Dialogs
+                            DemoDialogRegion("Color Dialogs")
+                            DemoDialogColor1(s, icon)
+                            DemoDialogColor2(s, icon)
+
+                            // X) Custom
+                            DemoDialogRegion("Custom Dialogs")
                             DemoDialogCustom1(s, icon)
                             DemoDialogCustom2(s, icon)
                         }
@@ -139,8 +169,49 @@ class DemoActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    private fun DialogSettings(
+        state: DialogState,
+        theme: MutableState<DemoTheme>,
+        dynamicTheme: MutableState<Boolean>,
+        style: MutableState<DemoStyle>,
+        swipeDismiss: MutableState<Boolean>,
+        icon: MutableState<Boolean>
+    ) {
+        if (state.showing) {
+            Dialog(
+                state = state,
+                title = DialogDefaults.title("Settings"),
+                style = DialogDefaults.styleBottomSheet(peekHeight = 0.dp) // disable peek
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        "App Theme",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    SettingsRowSegmentedControl(theme, DemoTheme.values().toList())
+                    SettingsRowCheckbox(dynamicTheme, "Dynamic Colors?")
+                    Text(
+                        "Demo Dialog Appearance",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    SettingsRowSegmentedControl(style, DemoStyle.values().toList())
+                    AnimatedVisibility(visible = style.value == DemoStyle.Dialog) {
+                        SettingsRowCheckbox(swipeDismiss, "Dialog - SwipeDismiss?")
+                    }
+                    SettingsRowCheckbox(icon, "Show Icon?")
+                }
+            }
+        }
+    }
+
     // ----------------
-    // Demos
+    // Demos - Predefined Dialogs
     // ----------------
 
     @Composable
@@ -150,7 +221,7 @@ class DemoActivity : ComponentActivity() {
         if (state.showing) {
             DialogInfo(
                 state = state,
-                title = "Dialog Info",
+                title = DialogDefaults.title("Dialog Info"),
                 info = "Simple Info Dialog",
                 icon = icon,
                 style = style,
@@ -176,10 +247,9 @@ class DemoActivity : ComponentActivity() {
             dismissAllowed = false
         )
         if (state.showing) {
-
-            var icon by remember { mutableStateOf(icon) }
+            var currentIcon by remember { mutableStateOf(icon) }
             var time by rememberSaveable { mutableStateOf(10) }
-            val iconDone = DialogDefaults.icon(rememberVectorPainter(Icons.Default.Check))
+            val iconDone = DialogIcon(rememberVectorPainter(Icons.Default.Check))
             LaunchedEffect(Unit) {
                 launch {
                     while (time > 0) {
@@ -188,15 +258,15 @@ class DemoActivity : ComponentActivity() {
                     }
                     state.enableButton(DialogButtonType.Positive, true)
                     state.dismissable(true)
-                    icon = iconDone
+                    currentIcon = iconDone
                 }
             }
 
             DialogInfo(
                 state = state,
-                title = "Dialog Info 2",
+                title = DialogDefaults.title("Dialog Info 2"),
                 info = if (time == 0) "Dialog can be dismissed" else "Dialog can be dismissed in $time seconds...",
-                icon = icon,
+                icon = currentIcon,
                 style = style,
                 onEvent = {
                     showToast("Event $it")
@@ -212,8 +282,9 @@ class DemoActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun DemoDialogInput1(style: DialogStyle, icon: DialogIcon?, text: String) {
+    private fun DemoDialogInput1(style: DialogStyle, icon: DialogIcon?) {
 
+        val text = "Hello"
         val state = rememberDialogState(
             showing = false,
             buttonPositiveEnabled = text.isNotEmpty(),
@@ -227,7 +298,7 @@ class DemoActivity : ComponentActivity() {
             // input dialog
             DialogInput(
                 state = state,
-                title = "Dialog Input",
+                title = DialogDefaults.title("Dialog Input"),
                 input = input,
                 inputLabel = "Input",
                 icon = icon,
@@ -240,7 +311,7 @@ class DemoActivity : ComponentActivity() {
                         showToast("Event $it")
                     }
                 },
-                validator = DialogInput.InputValidator(
+                validator = DialogInputValidator(
                     validate = {
                         if (it.isNotEmpty())
                             null
@@ -248,7 +319,7 @@ class DemoActivity : ComponentActivity() {
                             "Empty input is not allowed!"
                     }
                 ),
-                onTextStateChanged = { valid, text ->
+                onTextStateChanged = { valid, _ ->
                     state.enableButton(DialogButtonType.Positive, valid)
                 }
             )
@@ -261,6 +332,256 @@ class DemoActivity : ComponentActivity() {
         )
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun DemoDialogDate1(icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+
+            // special state for date dialog
+            val date = rememberDatePickerState()
+
+            DialogDate(
+                state = state,
+                date = date,
+                icon = icon,
+                title = DialogDefaults.titleSmall("Select Date"),
+                // dialog date does support bottom sheet style only!
+                style = DialogDefaults.styleBottomSheet(peekHeight = 0.dp),
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast(
+                            "Selected Date: ${
+                                date.selectedDateMillis?.let { Date(it) }?.toLocaleString()
+                            }"
+                        )
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.CalendarMonth,
+            "Show Dialog DateTime",
+            "Shows an date picker dialog"
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun DemoDialogTime1(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+
+            // special state for time dialog
+            val time = rememberTimePickerState()
+
+            DialogTime(
+                state = state,
+                time = time,
+                icon = icon,
+                title = DialogDefaults.titleSmall("Select Time"),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Selected Time: ${time.hour}:${time.minute} | is24 = ${time.is24hour}")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.Schedule,
+            "Show Dialog Time",
+            "Shows an time picker dialog"
+        )
+    }
+
+    @Composable
+    private fun DemoDialogProgress1(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+
+            DialogProgress(
+                state = state,
+                label = "Working...",
+                progressStyle = DialogProgressStyle.Indeterminate(linear = true),
+                icon = icon,
+                title = DialogDefaults.title("Progress Dialog"),
+                buttons = DialogDefaults.buttons(
+                    positive = DialogButton("Stop")
+                ),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Progress Dialog closed by button")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.Downloading,
+            "Show Dialog Progress",
+            "Shows an endless LINEAR progress dialog"
+        )
+    }
+
+    @Composable
+    private fun DemoDialogProgress2(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+            DialogProgress(
+                state = state,
+                label = "Working...",
+                progressStyle = DialogProgressStyle.Indeterminate(linear = false),
+                icon = icon,
+                title = DialogDefaults.title("Progress Dialog"),
+                buttons = DialogDefaults.buttons(
+                    positive = DialogButton("Stop")
+                ),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Progress Dialog closed by button")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.Downloading,
+            "Show Dialog Progress",
+            "Shows an endless CIRCULAR progress dialog"
+        )
+    }
+
+    @Composable
+    private fun DemoDialogProgress3(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState(
+            dismissAllowed = false,
+            buttonPositiveEnabled = false
+        )
+        if (state.showing) {
+
+
+            var time by rememberSaveable { mutableStateOf(10) }
+            LaunchedEffect(Unit) {
+                launch {
+                    while (time > 0) {
+                        delay(1000)
+                        time--
+                    }
+                    state.enableButton(DialogButtonType.Positive, true)
+                    state.dismissable(true)
+                }
+            }
+
+            val progressStyle by remember {
+                derivedStateOf { DialogProgressStyle.Determinate(linear = true, 10 - time, 10) }
+            }
+
+            DialogProgress(
+                state = state,
+                label = "Working...",
+                progressStyle = progressStyle,
+                icon = icon,
+                title = DialogDefaults.title("Progress Dialog"),
+                buttons = DialogDefaults.buttons(
+                    positive = DialogButton("Stop")
+                ),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Progress Dialog closed by button")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.Downloading,
+            "Show Dialog Progress",
+            "Shows an LINEAR progress dialog for 10 seconds (not cancelable)"
+        )
+    }
+
+    @Composable
+    private fun DemoDialogColor1(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+
+            val color = remember { mutableStateOf(Color.Blue.copy(alpha = .5f)) }
+
+            DialogColor(
+                state = state,
+                color = color,
+                alphaSupported = true,
+                icon = icon,
+                title = DialogDefaults.title("Color Dialog"),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Selected color: #${Integer.toHexString(color.value.toArgb())}")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.ColorLens,
+            "Show Color Dialog",
+            "Shows a color dialog (alpha supported)"
+        )
+    }
+
+    @Composable
+    private fun DemoDialogColor2(style: DialogStyle, icon: DialogIcon?) {
+        val state = rememberDialogState()
+        if (state.showing) {
+
+            val color = remember { mutableStateOf(Color.Red) }
+            DialogColor(
+                state = state,
+                color = color,
+                alphaSupported = false,
+                labelStyle = DialogColorLabelStyle.Percent,
+                icon = icon,
+                title = DialogDefaults.title("Color Dialog"),
+                style = style,
+                onEvent = {
+                    if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                        showToast("Selected color: #${Integer.toHexString(color.value.toArgb())}")
+                    } else {
+                        showToast("Event $it")
+                    }
+                }
+            )
+        }
+        DemoDialogButton(
+            state,
+            Icons.Default.ColorLens,
+            "Show Color Dialog",
+            "Shows a color dialog (alpha NOT supported + RGB values are shown in percentages in all sliders)"
+        )
+    }
+
+    // ----------------
+    // Demos - Custom Dialogs
+    // ----------------
+
     @Composable
     private fun DemoDialogCustom1(style: DialogStyle, icon: DialogIcon?) {
         val state = rememberDialogState()
@@ -269,7 +590,7 @@ class DemoActivity : ComponentActivity() {
                 state = state,
                 style = style,
                 icon = icon,
-                title = "Custom Dialog"
+                title = DialogDefaults.title("Custom Dialog")
             ) {
                 var checked by rememberSaveable { mutableStateOf(false) }
                 Row(
@@ -303,7 +624,7 @@ class DemoActivity : ComponentActivity() {
                 state = state,
                 style = style,
                 icon = icon,
-                title = "Custom Dialog"
+                title = DialogDefaults.title("Custom Dialog")
             ) {
                 Column(
                     modifier = Modifier.verticalScroll(rememberScrollState())
@@ -326,31 +647,6 @@ class DemoActivity : ComponentActivity() {
     // ----------------
 
     @Composable
-    private fun Settings(
-        theme: MutableState<DemoTheme>,
-        dynamicTheme: MutableState<Boolean>,
-        style: MutableState<DemoStyle>,
-        swipeDismiss: MutableState<Boolean>,
-        icon: MutableState<Boolean>
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(2.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SettingsRowSpinner(theme, "Theme", DemoTheme.values().toList())
-            SettingsRowCheckbox(dynamicTheme, "Dynamic Colors?")
-            SettingsRowSpinner(style, "Style", DemoStyle.values().toList())
-            AnimatedVisibility(
-                visible = style.value == DemoStyle.Dialog
-            ) {
-                SettingsRowCheckbox(swipeDismiss, "Dialog - SwipeDismiss?")
-            }
-            SettingsRowCheckbox(icon, "Icon?")
-        }
-    }
-
-    @Composable
     private fun SettingsRowCheckbox(state: MutableState<Boolean>, title: String) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -361,34 +657,25 @@ class DemoActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun <T> SettingsRowSpinner(
+    private fun <T> SettingsRowSegmentedControl(
         state: MutableState<T>,
-        title: String,
         items: List<T>
     ) {
-
         SegmentedControl(
             modifier = Modifier.wrapContentWidth(),
             items = items.map { it.toString() }
         ) {
             state.value = items[it]
         }
-
-        /*Spinner(
-            modifier = Modifier.wrapContentWidth(),
-            title,
-            items,
-            state.value
-        ) { index, item ->
-            state.value = item
-        }*/
     }
 
     @Composable
     private fun DemoDialogRegion(title: String) {
         Text(
+            modifier = Modifier.padding(all = 4.dp),
             text = title,
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
         )
     }
 

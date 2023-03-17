@@ -53,11 +53,27 @@ dependencyResolutionManagement {
 // --------------
 
 include(":ComposeDialogs:Core")
-project(":ComposeDialogs:Core").projectDir = file("dialogs/core")
-include(":ComposeDialogs:Info")
-project(":ComposeDialogs:Info").projectDir = file("dialogs/info")
-include(":ComposeDialogs:Input")
-project(":ComposeDialogs:Input").projectDir = file("dialogs/input")
+project(":ComposeDialogs:Core").projectDir = file("library/core")
+include(":ComposeDialogs:Modules:Info")
+project(":ComposeDialogs:Modules:Info").projectDir = file("library/modules/info")
+include(":ComposeDialogs:Modules:Input")
+project(":ComposeDialogs:Modules:Input").projectDir = file("library/modules/input")
+
+// TODO: defined the directories only
+include(":ComposeDialogs:Modules:Ads")
+project(":ComposeDialogs:Modules:Ads").projectDir = file("library/modules/ads")
+include(":ComposeDialogs:Modules:Billing")
+project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
+include(":ComposeDialogs:Modules:Color")
+project(":ComposeDialogs:Modules:Color").projectDir = file("library/modules/color")
+include(":ComposeDialogs:Modules:DateTime")
+project(":ComposeDialogs:Modules:DateTime").projectDir = file("library/modules/datetime")
+include(":ComposeDialogs:Modules:GDPR")
+project(":ComposeDialogs:Modules:GDPR").projectDir = file("library/modules/gdpr")
+include(":ComposeDialogs:Modules:List")
+project(":ComposeDialogs:Modules:List").projectDir = file("library/modules/list")
+include(":ComposeDialogs:Modules:Progress")
+project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/progress")
 
 include(":demo")
 project(":demo").projectDir = file("demo")

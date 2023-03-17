@@ -55,23 +55,29 @@ dependencies {
     implementation(androidx.core)
     implementation(androidx.lifecycle)
 
-    implementation(compose.compiler)
-    implementation(compose.ui)
-    implementation(compose.ui.tooling.preview)
-    implementation(compose.lifecycle)
-    implementation(compose.activity)
-    implementation(compose.material)
+    // Compose BOM
+    implementation(platform(compose.bom))
     implementation(compose.material3)
-    implementation(compose.theme.adapter)
-    implementation(compose.theme.adapter.core)
     implementation(compose.material.extendedicons)
-    implementation(compose.bottomsheet.dialog)
+
+    implementation(compose.activity)
 
     // ------------------------
     // Libraries
     // ------------------------
 
     implementation(project(":ComposeDialogs:Core"))
-    implementation(project(":ComposeDialogs:Info"))
-    implementation(project(":ComposeDialogs:Input"))
+    implementation(project(":ComposeDialogs:Modules:Info"))
+    implementation(project(":ComposeDialogs:Modules:Input"))
+    implementation(project(":ComposeDialogs:Modules:DateTime"))
+    implementation(project(":ComposeDialogs:Modules:Progress"))
+    implementation(project(":ComposeDialogs:Modules:Color"))
+
+    // IMPORTANT TODO
+    implementation(project(":ComposeDialogs:Modules:List"))
+
+    // TODO:
+    implementation(project(":ComposeDialogs:Modules:Ads"))
+    implementation(project(":ComposeDialogs:Modules:Billing"))
+    implementation(project(":ComposeDialogs:Modules:GDPR"))
 }
