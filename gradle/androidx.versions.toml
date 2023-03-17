@@ -1,0 +1,36 @@
+[versions]
+core = 				"1.9.0"
+fragment = 			"1.5.2"
+lifecycle = 		"2.6.0-rc01"
+appcompat = 		"1.5.0"
+activity = 			"1.6.1"
+coordinator = 		"1.2.0"
+constraintlayout = 	"2.1.4"
+recyclerview = 		"1.2.1"
+viewpager2 = 		"1.0.0"
+gridlayout = 		"1.0.0"
+room =      		"2.4.3"
+palette =       	"1.0.0"
+work =          	"2.7.1"
+
+
+[libraries]
+core = 				    { module = "androidx.core:core-ktx", 						version.ref = "core" }
+fragment = 			    { module = "androidx.fragment:fragment-ktx", 				version.ref = "fragment" }
+activity = 			    { module = "androidx.activity:activity-ktx", 				version.ref = "activity" }
+lifecycle = 		    { module = "androidx.lifecycle:lifecycle-runtime-ktx", 		version.ref = "lifecycle" }
+lifecycle-process = 	{ module = "androidx.lifecycle:lifecycle-process", 	        version.ref = "lifecycle" }
+lifecycle-service =     { module = "androidx.lifecycle:lifecycle-service", 		    version.ref = "lifecycle" }
+lifecycle-livedata =    { module = "androidx.lifecycle:lifecycle-livedata-ktx", 	version.ref = "lifecycle" }
+lifecycle-viewmodel =   { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", 	version.ref = "lifecycle" }
+appcompat = 		    { module = "androidx.appcompat:appcompat", 					version.ref = "appcompat" }
+coordinatorlayout =     { module = "androidx.coordinatorlayout:coordinatorlayout", 	version.ref = "coordinator" }
+constraintlayout =      { module = "androidx.constraintlayout:constraintlayout", 	version.ref = "constraintlayout" }
+recyclerview = 		    { module = "androidx.recyclerview:recyclerview", 			version.ref = "recyclerview" }
+viewpager2 = 		    { module = "androidx.viewpager2:viewpager2", 			    version.ref = "viewpager2" }
+gridlayout = 		    { module = "androidx.gridlayout:gridlayout", 			    version.ref = "gridlayout" }
+room = 		            { module = "androidx.room:room-ktx", 			            version.ref = "room" }
+room-runtime = 		    { module = "androidx.room:room-runtime", 			        version.ref = "room" }
+room-compiler = 		{ module = "androidx.room:room-compiler", 			        version.ref = "room" }
+palette = 		        { module = "androidx.palette:palette", 			            version.ref = "palette" }
+work = 		            { module = "androidx.work:work-runtime-ktx", 			    version.ref = "work" }

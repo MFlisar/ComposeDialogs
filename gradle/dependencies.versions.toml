@@ -1,0 +1,181 @@
+[versions]
+
+# mflisar
+text = 						"1.2"
+lumberjack = 				"5.3.0"
+feedback = 		    		"2.0.3"
+changelog = 	    		"1.1.7"
+materialdialogs =   		"0.8.5"
+materialpreferences = 		"1.1.2"
+materialnumberpicker =  	"0.3"
+kotbilling =        		"0.5"
+
+# google
+material =					"1.7.0"
+ads =               		"21.4.0"
+
+# others
+acra =		        		"5.7.0"
+fastadapter =				"5.7.0"
+glide =						"4.13.2"
+glide-transform =			"4.3.0"
+coil =						"2.2.1"
+coil-transform =			"2.0.2"
+picasso =					"2.8"
+viewpagerdots =				"1.0.0"
+colorpicker =				"3.0.1"
+materialize =				"1.2.0"
+bouncy =		    		"2.3"
+iconics =		    		"5.1.0"
+iconics-weather =   		"2.0.10.7-kotlin"
+leakcanary =        		"2.10"
+jsoup =             		"1.13.1"
+coroutinespermission = 		"2.0.3"
+popupmenu =         		"af97c24785"
+indicatorfastscroll = 		"1.4.0"
+insetter =          		"0.6.1"
+retrofit =          		"2.1.0"
+retrofit-gson =     		"2.1.0"
+simplestack =       		"2.6.4"
+simplestack-ext =   		"2.2.4"
+android-state =     		"1.4.1"
+recyclerview-animators = 	"4.0.2"
+opencsv = 					"5.7.1"
+processphoenix = 			"2.1.2"
+subsamplingscaleimageview = "3.10.0"
+rightsheetbehaviour = 		"1.0"
+animatedcheckbox =  		"1.0.0"
+gravitysnaphelper = 		"2.2.1"
+
+serialization-json = 		"1.4.1"
+
+# ---------
+# libraries
+# ---------
+
+[libraries]
+
+# mflisar
+androidtext = 			        			{ module = "com.github.MFlisar:AndroidText", 										version.ref = "text" }
+lumberjack =			        			{ module = "com.github.MFlisar.Lumberjack:lumberjack-library", 						version.ref = "lumberjack" }
+lumberjack-filelogger =	        			{ module = "com.github.MFlisar.Lumberjack:lumberjack-filelogger", 					version.ref = "lumberjack" }
+lumberjack-feedback =	        			{ module = "com.github.MFlisar.Lumberjack:lumberjack-feedback", 					version.ref = "lumberjack" }
+lumberjack-viewer =	            			{ module = "com.github.MFlisar.Lumberjack:lumberjack-viewer", 		    			version.ref = "lumberjack" }
+lumberjack-notification =       			{ module = "com.github.MFlisar.Lumberjack:lumberjack-notification", 				version.ref = "lumberjack" }
+feedback =			            			{ module = "com.github.MFlisar:FeedbackManager", 			            			version.ref = "feedback" }
+changelog =			            			{ module = "com.github.MFlisar:changelog", 			                    			version.ref = "changelog" }
+materialdialogs-core =                      { module = "com.github.MFlisar.MaterialDialogs:core", 			                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-info =              { module = "com.github.MFlisar.MaterialDialogs:dialogs-info", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-input =             { module = "com.github.MFlisar.MaterialDialogs:dialogs-input", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-list =              { module = "com.github.MFlisar.MaterialDialogs:dialogs-list", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-number =            { module = "com.github.MFlisar.MaterialDialogs:dialogs-number", 	                version.ref = "materialdialogs" }
+materialdialogs-dialogs-datetime =          { module = "com.github.MFlisar.MaterialDialogs:dialogs-datetime", 	                version.ref = "materialdialogs" }
+materialdialogs-dialogs-color =             { module = "com.github.MFlisar.MaterialDialogs:dialogs-color", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-debug =             { module = "com.github.MFlisar.MaterialDialogs:dialogs-debug", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-ads =               { module = "com.github.MFlisar.MaterialDialogs:dialogs-ads", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-gdpr =              { module = "com.github.MFlisar.MaterialDialogs:dialogs-gdpr", 	                    version.ref = "materialdialogs" }
+materialdialogs-dialogs-billing =           { module = "com.github.MFlisar.MaterialDialogs:dialogs-billing", 	                version.ref = "materialdialogs" }
+materialdialogs-dialogs-progress =          { module = "com.github.MFlisar.MaterialDialogs:dialogs-progress", 	                version.ref = "materialdialogs" }
+materialdialogs-ext-animations =            { module = "com.github.MFlisar.MaterialDialogs:extensions-animations", 	            version.ref = "materialdialogs" }
+materialdialogs-ext-fragment-dialog =       { module = "com.github.MFlisar.MaterialDialogs:extensions-fragment-dialog", 	    version.ref = "materialdialogs" }
+materialdialogs-ext-fragment-bottomsheet =  { module = "com.github.MFlisar.MaterialDialogs:extensions-fragment-bottomsheet",    version.ref = "materialdialogs" }
+materialdialogs-ext-fragment-fullscreen =   { module = "com.github.MFlisar.MaterialDialogs:extensions-fragment-fullscreen", 	version.ref = "materialdialogs" }
+materialpreferences =               		{ module = "com.github.MFlisar.MaterialPreferences:core", 							version.ref = "materialpreferences" }
+materialpreferences-datastore =     		{ module = "com.github.MFlisar.MaterialPreferences:datastore",      				version.ref = "materialpreferences" }
+materialpreferences-encryption-aes =     	{ module = "com.github.MFlisar.MaterialPreferences:encryption-aes",      			version.ref = "materialpreferences" }
+materialpreferences-screen =        		{ module = "com.github.MFlisar.MaterialPreferences:screen", 						version.ref = "materialpreferences" }
+materialpreferences-screen-bool =   		{ module = "com.github.MFlisar.MaterialPreferences:screen-bool", 					version.ref = "materialpreferences" }
+materialpreferences-screen-input =  		{ module = "com.github.MFlisar.MaterialPreferences:screen-input", 					version.ref = "materialpreferences" }
+materialpreferences-screen-choice = 		{ module = "com.github.MFlisar.MaterialPreferences:screen-choice", 					version.ref = "materialpreferences" }
+materialpreferences-screen-color =  		{ module = "com.github.MFlisar.MaterialPreferences:screen-color", 					version.ref = "materialpreferences" }
+materialpreferences-screen-slider = 		{ module = "com.github.MFlisar.MaterialPreferences:screen-slider",  				version.ref = "materialpreferences" }
+materialpreferences-screen-image =  		{ module = "com.github.MFlisar.MaterialPreferences:screen-image",   				version.ref = "materialpreferences" }
+materialnumberpicker =	    				{ module = "com.github.MFlisar:MaterialNumberPicker", 			        			version.ref = "materialnumberpicker" }
+kotbilling =                        		{ module = "com.github.MFlisar:KotBilling",                         				version.ref = "kotbilling" }
+
+# google
+material = 				        			{ module = "com.google.android.material:material", 									version.ref = "material" }
+ads = 		                    			{ module = "com.google.android.gms:play-services-ads",                  			version.ref = "ads" }
+
+# others
+acra =			                			{ module = "ch.acra:acra-core", 									    			version.ref = "acra" }
+acra-mail =			            			{ module = "ch.acra:acra-mail", 									    			version.ref = "acra" }
+acra-dialog =			        			{ module = "ch.acra:acra-dialog", 									    			version.ref = "acra" }
+fastadapter =			        			{ module = "com.mikepenz:fastadapter", 												version.ref = "fastadapter" }
+fastadapter-extensions-drag =   			{ module = "com.mikepenz:fastadapter-extensions-drag", 				    			version.ref = "fastadapter" }
+fastadapter-extensions-utils =  			{ module = "com.mikepenz:fastadapter-extensions-utils", 							version.ref = "fastadapter" }
+fastadapter-extensions-binding =	    	{ module = "com.mikepenz:fastadapter-extensions-binding", 							version.ref = "fastadapter" }
+fastadapter-extensions-swipe =	        	{ module = "com.mikepenz:fastadapter-extensions-swipe", 							version.ref = "fastadapter" }
+fastadapter-extensions-diff =	        	{ module = "com.mikepenz:fastadapter-extensions-diff", 				    			version.ref = "fastadapter" }
+fastadapter-extensions-expandable =			{ module = "com.mikepenz:fastadapter-extensions-expandable", 						version.ref = "fastadapter" }
+glide =					        			{ module = "com.github.bumptech.glide:glide", 										version.ref = "glide" }
+glide-transformations =	        			{ module = "jp.wasabeef:glide-transformations", 									version.ref = "glide-transform" }
+coil =					        			{ module = "io.coil-kt:coil", 							                			version.ref = "coil" }
+coil-compose =					        	{ module = "io.coil-kt:coil-compose", 							                	version.ref = "coil" }
+coil-transformations =	        			{ module = "com.github.Commit451.coil-transformations:transformations", 			version.ref = "coil-transform" }
+picasso =	        						{ module = "com.squareup.picasso:picasso", 											version.ref = "picasso" }
+viewpagerdots =			        			{ module = "com.afollestad:viewpagerdots", 											version.ref = "viewpagerdots" }
+colorpicker =			        			{ module = "com.github.martin-stone:hsv-alpha-color-picker-android", 				version.ref = "colorpicker" }
+materialize =			        			{ module = "com.mikepenz:materialize", 												version.ref = "materialize" }
+bouncy =			            			{ module = "com.github.valkriaine:Bouncy", 											version.ref = "bouncy" }
+iconics =			            			{ module = "com.mikepenz:iconics-core", 											version.ref = "iconics" }
+iconics-weather =			    			{ module = "com.mikepenz:weather-icons-typeface", 					    			version.ref = "iconics-weather" }
+leakcanary =			        			{ module = "com.squareup.leakcanary:leakcanary-android", 							version.ref = "leakcanary" }
+jsoup =			                			{ module = "org.jsoup:jsoup", 								            			version.ref = "jsoup" }
+coroutinespermission =		    			{ module = "com.sagar:coroutinespermission", 										version.ref = "coroutinespermission" }
+popupmenu =			            			{ module = "com.github.mflisar:MaterialPopupMenu",                      			version.ref = "popupmenu" }
+indicatorfastscroll =		    			{ module = "com.reddit:indicator-fast-scroll", 										version.ref = "indicatorfastscroll" }
+insetter =			            			{ module = "dev.chrisbanes.insetter:insetter", 										version.ref = "insetter" }
+retrofit =			            			{ module = "com.squareup.retrofit2:retrofit", 										version.ref = "retrofit" }
+retrofit-gson =			        			{ module = "com.squareup.retrofit2:converter-gson", 								version.ref = "retrofit-gson" }
+simplestack =			    				{ module = "com.github.Zhuinden:simple-stack", 					        			version.ref = "simplestack" }
+simplestack-extensions =    				{ module = "com.github.Zhuinden:simple-stack-extensions", 							version.ref = "simplestack-ext" }
+androidstate =			        			{ module = "com.evernote:android-state", 					            			version.ref = "android-state" }
+androidstate-processor =        			{ module = "com.evernote:android-state-processor", 					    			version.ref = "android-state" }
+recyclerview-animators =        			{ module = "jp.wasabeef:recyclerview-animators", 					    			version.ref = "recyclerview-animators" }
+opencsv =                       			{ module = "com.opencsv:opencsv", 					                    			version.ref = "opencsv" }
+subsamplingscaleimageview =              	{ module = "com.davemorrissey.labs:subsampling-scale-image-view", 					version.ref = "subsamplingscaleimageview" }
+processphoenix =              				{ module = "com.jakewharton:process-phoenix", 										version.ref = "processphoenix" }
+rightsheetbehaviour =       				{ module = "com.github.OKatrych:RightSheetBehavior", 				    			version.ref = "rightsheetbehaviour" }
+animatedcheckbox =          				{ module = "com.github.animsh:AnimatedCheckBox", 				        			version.ref = "animatedcheckbox" }
+gravitysnaphelper =         				{ module = "com.github.rubensousa:gravitysnaphelper", 				    			version.ref = "gravitysnaphelper" }
+
+			
+serialization-json =            			{ module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 		    			version.ref = "serialization-json" }
+
+# -------
+# bundles
+# -------
+
+[bundles]
+
+materialdialogs = [
+    "materialdialogs-core",
+    "materialdialogs-dialogs-info",
+    "materialdialogs-dialogs-input",
+    "materialdialogs-dialogs-list",
+    "materialdialogs-dialogs-number",
+    "materialdialogs-dialogs-datetime",
+    "materialdialogs-dialogs-ads",
+    "materialdialogs-dialogs-gdpr",
+    "materialdialogs-dialogs-billing",
+    "materialdialogs-dialogs-color",
+    "materialdialogs-dialogs-debug",
+    "materialdialogs-dialogs-progress",
+    "materialdialogs-ext-animations",
+    "materialdialogs-ext-fragment-dialog",
+    "materialdialogs-ext-fragment-bottomsheet",
+    "materialdialogs-ext-fragment-fullscreen"
+]
+materialpreferences = [
+    "materialpreferences",
+    "materialpreferences-datastore",
+    "materialpreferences-encryption-aes",
+    "materialpreferences-screen",
+    "materialpreferences-screen-bool",
+    "materialpreferences-screen-input",
+    "materialpreferences-screen-choice",
+    "materialpreferences-screen-color",
+    "materialpreferences-screen-slider",
+    "materialpreferences-screen-image"
+]

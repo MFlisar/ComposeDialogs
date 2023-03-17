@@ -1,0 +1,45 @@
+[versions]
+compiler = 				"1.4.2"
+runtime = 				"1.4.0-beta02" # "1.3.3"
+ui = 					"1.4.0-beta02" # "1.3.3"
+lifecycle = 			"2.6.0-rc01"
+activity = 				"1.6.1"
+material = 				"1.4.0-beta02" # "1.3.1"
+material3 = 			"1.1.0-alpha07" # "1.0.1"
+accompanist = 			"0.28.0"
+
+voyager = 				"1.0.0-rc03"
+reorderable = 			"0.9.6"
+bottomsheet-dialog = 	"1.2.0"
+popup-menu = 			"1.0.1"
+
+
+[libraries]
+compiler = 				    { module = "androidx.compose.compiler:compiler", 							version.ref = "compiler" }
+runtime = 				    { module = "androidx.compose.runtime:runtime", 								version.ref = "runtime" }
+
+ui = 				    	{ module = "androidx.compose.ui:ui", 										version.ref = "ui" }
+ui-tooling = 				{ module = "androidx.compose.ui:ui-tooling", 								version.ref = "ui" }
+ui-tooling-preview = 		{ module = "androidx.compose.ui:ui-tooling-preview", 						version.ref = "ui" }
+lifecycle = 				{ module = "androidx.lifecycle:lifecycle-runtime-compose", 					version.ref = "lifecycle" }
+activity = 					{ module = "androidx.activity:activity-compose", 							version.ref = "activity" }
+
+material = 					{ module = "androidx.compose.material:material", 							version.ref = "material" }
+material-extendedicons = 	{ module = "androidx.compose.material:material-icons-extended", 			version.ref = "material" }
+material3 = 				{ module = "androidx.compose.material3:material3", 							version.ref = "material3" }
+
+theme-adapter = 			{ module = "com.google.accompanist:accompanist-themeadapter-material3", 	version.ref = "accompanist" }
+theme-adapter-core = 		{ module = "com.google.accompanist:accompanist-themeadapter-core", 			version.ref = "accompanist" }
+pager = 					{ module = "com.google.accompanist:accompanist-pager", 						version.ref = "accompanist" }
+pager-indication = 			{ module = "com.google.accompanist:accompanist-pager-indicators", 			version.ref = "accompanist" }
+permission = 				{ module = "com.google.accompanist:accompanist-permissions", 				version.ref = "accompanist" }
+systemuicontroller = 		{ module = "com.google.accompanist:accompanist-systemuicontroller", 		version.ref = "accompanist" }
+
+voyager-navigator = 		{ module = "cafe.adriel.voyager:voyager-navigator", 						version.ref = "voyager" }
+voyager-bottomsheet = 		{ module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", 			version.ref = "voyager" }
+voyager-tabs = 				{ module = "cafe.adriel.voyager:voyager-tab-navigator", 					version.ref = "voyager" }
+voyager-transitions = 		{ module = "cafe.adriel.voyager:voyager-transitions", 						version.ref = "voyager" }
+
+reorderable = 				{ module = "org.burnoutcrew.composereorderable:reorderable", 				version.ref = "reorderable" }
+bottomsheet-dialog = 		{ module = "com.holix.android:bottomsheetdialog-compose", 					version.ref = "bottomsheet-dialog" }
+popup-menu = 				{ module = "io.github.androidpoet:dropdown", 								version.ref = "popup-menu" }
