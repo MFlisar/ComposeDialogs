@@ -6,6 +6,8 @@ plugins {
 
 android {
 
+    namespace = "com.michaelflisar.composedialogs.demo"
+
     compileSdk = app.versions.compileSdk.get().toInt()
 
     buildFeatures {
@@ -61,6 +63,7 @@ dependencies {
     implementation(compose.material.extendedicons)
 
     implementation(compose.activity)
+    implementation(compose.drawablepainter)
 
     // ------------------------
     // Libraries
@@ -69,11 +72,10 @@ dependencies {
     implementation(project(":ComposeDialogs:Core"))
     implementation(project(":ComposeDialogs:Modules:Info"))
     implementation(project(":ComposeDialogs:Modules:Input"))
-    implementation(project(":ComposeDialogs:Modules:DateTime"))
+    implementation(project(":ComposeDialogs:Modules:Time"))
+    implementation(project(":ComposeDialogs:Modules:Date"))
     implementation(project(":ComposeDialogs:Modules:Progress"))
     implementation(project(":ComposeDialogs:Modules:Color"))
-
-    // IMPORTANT TODO
     implementation(project(":ComposeDialogs:Modules:List"))
 
     // TODO:

@@ -1,30 +1,25 @@
 [versions]
-composeBom =            "2023.02.00-rc02" # "2023.01.00" # https://github.com/chrisbanes/compose-bom
-compiler =              "1.4.3"
+composeBom =            "2023.10.00"
+compiler =              "1.5.3"
 
-lifecycle = 			"2.6.0"
-activity = 				"1.6.1"
-accompanist = 			"0.28.0"
+lifecycle = 			"2.6.2"
+activity = 				"1.7.2"
+accompanist = 			"0.32.0"
 
 [libraries]
-#bom =                       { group = "androidx.compose",                       name = "compose-bom",   version.ref = "composeBom" }
-bom =                       { group = "dev.chrisbanes.compose",                 name = "compose-bom",   version.ref = "composeBom" }
+bom =                       { group = "androidx.compose",                       name = "compose-bom",   version.ref = "composeBom" }
 animation =                 { group = "androidx.compose.animation",             name = "animation" }
 foundation =                { group = "androidx.compose.foundation",            name = "foundation" }
 material =                  { group = "androidx.compose.material",              name = "material" }
-material3 =                 { group = "androidx.compose.material3",             name = "material3" }
 runtime =                   { group = "androidx.compose.runtime",               name = "runtime" }
 ui =                        { group = "androidx.compose.ui",                    name = "ui" }
 ui-tooling =                { group = "androidx.compose.ui",                    name = "ui-tooling" }
 ui-tooling-preview =        { group = "androidx.compose.ui",                    name = "ui-tooling-preview" }
 material-extendedicons = 	{ group = "androidx.compose.material",              name = "material-icons-extended" }
+material3 =                 { group = "androidx.compose.material3",             name = "material3" }
 
 lifecycle = 				{ module = "androidx.lifecycle:lifecycle-runtime-compose", 					version.ref = "lifecycle" }
 activity = 					{ module = "androidx.activity:activity-compose", 							version.ref = "activity" }
 
-theme-adapter = 			{ module = "com.google.accompanist:accompanist-themeadapter-material3", 	version.ref = "accompanist" }
-theme-adapter-core = 		{ module = "com.google.accompanist:accompanist-themeadapter-core", 			version.ref = "accompanist" }
-pager = 					{ module = "com.google.accompanist:accompanist-pager", 						version.ref = "accompanist" }
-pager-indication = 			{ module = "com.google.accompanist:accompanist-pager-indicators", 			version.ref = "accompanist" }
-permission = 				{ module = "com.google.accompanist:accompanist-permissions", 				version.ref = "accompanist" }
 systemuicontroller = 		{ module = "com.google.accompanist:accompanist-systemuicontroller", 		version.ref = "accompanist" }
+drawablepainter = 		    { module = "com.google.accompanist:accompanist-drawablepainter", 		    version.ref = "accompanist" }

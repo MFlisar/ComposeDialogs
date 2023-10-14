@@ -1,27 +1,30 @@
 package com.michaelflisar.composedialogs.core.internal
 
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.DialogMaxWidth
 import com.michaelflisar.composedialogs.core.copied.DialogMinWidth
 import com.michaelflisar.composedialogs.core.views.ComposeDialogButton
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -29,13 +32,18 @@ import kotlin.math.roundToInt
 // Github: https://stackoverflow.com/questions/71285843/how-to-make-dialog-re-measure-when-a-child-size-changes-dynamically/71287474
 // Issue: https://issuetracker.google.com/issues/221643630
 
+internal val DialogHorizontalMinMargin = 16.dp
+internal val DialogVerticalMinMargin = DialogHorizontalMinMargin
+
 @Composable
 fun ComposeAlertDialog(
-    title: DialogTitle,
+    title: String,
+    titleStyle: DialogTitleStyle,
     icon: DialogIcon?,
     style: DialogStyle.Dialog,
     buttons: DialogButtons,
     options: Options,
+    specialOptions: SpecialOptions,
     state: DialogState,
     onEvent: (event: DialogEvent) -> Unit,
     content: @Composable (ColumnScope.() -> Unit)
@@ -58,7 +66,9 @@ fun ComposeAlertDialog(
                 onEvent
             )
         },
-        Modifier.wrapContentHeight().then(modifierSwipeDismiss),
+        Modifier
+            .wrapContentHeight()
+            .then(modifierSwipeDismiss),
         dismissButton = if (buttons.negative.text.isNotEmpty()) {
             {
                 ComposeDialogButton(
@@ -74,10 +84,15 @@ fun ComposeAlertDialog(
             }
         } else null,
         icon = if (icon != null) {
-            { Icon(painter = icon.painter, contentDescription = "", tint = icon.tint ?: LocalContentColor.current) }
+            {
+                when (icon) {
+                    is DialogIcon.Painter -> Image(modifier = Modifier.size(24.dp), painter = icon.painter(), contentDescription = "")
+                    is DialogIcon.Vector -> Icon(imageVector = icon.imageVector, contentDescription = "", tint = icon.tint ?: LocalContentColor.current)
+                }
+            }
         } else null,
-        title = if (title.text.isNotEmpty()) {
-            { Text(text = title.text, style = title.style ?: LocalTextStyle.current, fontWeight = title.fontWeight) }
+        title = if (title.isNotEmpty()) {
+            { Text(text = title, style = titleStyle.style ?: LocalTextStyle.current, fontWeight = titleStyle.fontWeight) }
         } else null,
         text = {
             val scrollModifier =  if (options.wrapContentInScrollableContainer) {
@@ -88,6 +103,13 @@ fun ComposeAlertDialog(
             Column(
                 modifier = Modifier
                     .then(scrollModifier)
+                    .sizeIn(minWidth = DialogMinWidth, maxWidth = DialogMaxWidth)
+                    .then(
+                        if (specialOptions.dialogIntrinsicWidthMin) {
+                            Modifier .width(IntrinsicSize.Min)
+                        } else Modifier
+                    ),
+                //horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 content()
             }
@@ -111,8 +133,17 @@ private fun getSwipeDismissModifier(
             maxSwipeDistance to 1
         )
 
+        val coroutineScope = rememberCoroutineScope()
+
         if (swipeableState.isAnimationRunning && swipeableState.targetValue != 0) {
-            state.dismiss(onEvent)
+            if (!state.dismiss(onEvent)) {
+                // expand again if dismissing is not allowed
+                SideEffect {
+                    coroutineScope.launch {
+                        swipeableState.animateTo(0)
+                    }
+                }
+            }
         }
 
         val alpha = 1f - (0.3f * abs(swipeableState.offset.value / maxSwipeDistance))
@@ -129,7 +160,6 @@ private fun getSwipeDismissModifier(
     } else Modifier
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun ComposeAlertDialog(
     style: DialogStyle.Dialog,
@@ -142,8 +172,8 @@ internal fun ComposeAlertDialog(
     text: @Composable (() -> Unit)? = null
 ) {
     val properties = style.dialogProperties
-    val (fixedProperties, fixedModifier) = if (properties.usePlatformDefaultWidth) {
-        Pair(
+    val (fixedProperties, fixedModifier, fixedModifierInner) = if (properties.usePlatformDefaultWidth) {
+        Triple(
             DialogProperties(
                 properties.dismissOnBackPress,
                 properties.dismissOnClickOutside,
@@ -151,21 +181,36 @@ internal fun ComposeAlertDialog(
                 false,
                 properties.decorFitsSystemWindows
             ),
+            // outer modifier gets paddings only so that dismiss on click outside works as desired
             Modifier
                 .sizeIn(minWidth = DialogMinWidth, maxWidth = DialogMaxWidth)
-                .padding(horizontal = 16.dp)
+                //.background(Color.Red)
+                .padding(horizontal = DialogHorizontalMinMargin, vertical = DialogVerticalMinMargin)
+                //.background(Color.Green)
+            ,
+            Modifier
+                .sizeIn(minWidth = DialogMinWidth, maxWidth = DialogMaxWidth)
+                //.background(Color.Blue)
+                //.padding(horizontal = DialogHorizontalMinMargin, vertical = DialogVerticalMinMargin)
+                //.background(Color.Yellow)
         )
     } else {
-        Pair(
+        Triple(
             properties,
+            Modifier,
             Modifier
         )
     }
 
-    AlertDialog(
+    com.michaelflisar.composedialogs.core.copied.AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = confirmButton,
-        modifier = modifier.wrapContentHeight().then(fixedModifier),
+        modifier = modifier
+            .wrapContentHeight()
+            .then(fixedModifier),
+        modifierInner = modifier
+            .wrapContentHeight()
+            .then(fixedModifierInner),
         dismissButton = dismissButton,
         icon = icon,
         title = title,

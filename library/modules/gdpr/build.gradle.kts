@@ -7,6 +7,8 @@ plugins {
 
 android {
 
+    namespace = "com.michaelflisar.composedialogs.dialogs.gdpr"
+
     compileSdk = app.versions.compileSdk.get().toInt()
 
     buildFeatures {
@@ -15,7 +17,6 @@ android {
 
     defaultConfig {
         minSdk = app.versions.minSdk.get().toInt()
-        targetSdk = app.versions.targetSdk.get().toInt()
     }
 
     buildTypes {
@@ -64,13 +65,14 @@ dependencies {
     implementation(project(":ComposeDialogs:Core"))
 }
 
+/*
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                artifactId = "dialog-info"
+                artifactId = "dialog-gdpr"
                 from(components["release"])
             }
         }
     }
-}
+}*/

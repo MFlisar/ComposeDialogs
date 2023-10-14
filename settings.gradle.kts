@@ -1,6 +1,3 @@
-//enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-enableFeaturePreview("VERSION_CATALOGS")
-
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
@@ -10,10 +7,10 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
 
-        val kotlin = "1.8.10"
-        val ksp = "1.8.10-1.0.9"
-        val coroutines = "1.6.4"
-        val gradle = "7.2.2"
+        val kotlin = "1.9.10"
+        val ksp = "1.9.10-1.0.13"
+        val coroutines = "1.7.3"
+        val gradle = "8.1.2"
         val maven = "2.0"
 
         // TOML Files
@@ -35,9 +32,9 @@ dependencyResolutionManagement {
             version("ksp", ksp)
         }
         create("app") {
-            version("compileSdk", "33")
+            version("compileSdk", "34")
             version("minSdk", "21")
-            version("targetSdk", "33")
+            version("targetSdk", "34")
         }
         create("libs") {
             // Kotlin
@@ -58,22 +55,25 @@ include(":ComposeDialogs:Modules:Info")
 project(":ComposeDialogs:Modules:Info").projectDir = file("library/modules/info")
 include(":ComposeDialogs:Modules:Input")
 project(":ComposeDialogs:Modules:Input").projectDir = file("library/modules/input")
+include(":ComposeDialogs:Modules:Color")
+project(":ComposeDialogs:Modules:Color").projectDir = file("library/modules/color")
+include(":ComposeDialogs:Modules:Date")
+project(":ComposeDialogs:Modules:Date").projectDir = file("library/modules/date")
+include(":ComposeDialogs:Modules:Time")
+project(":ComposeDialogs:Modules:Time").projectDir = file("library/modules/time")
+include(":ComposeDialogs:Modules:List")
+project(":ComposeDialogs:Modules:List").projectDir = file("library/modules/list")
+include(":ComposeDialogs:Modules:Progress")
+project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/progress")
 
 // TODO: defined the directories only
 include(":ComposeDialogs:Modules:Ads")
 project(":ComposeDialogs:Modules:Ads").projectDir = file("library/modules/ads")
 include(":ComposeDialogs:Modules:Billing")
 project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
-include(":ComposeDialogs:Modules:Color")
-project(":ComposeDialogs:Modules:Color").projectDir = file("library/modules/color")
-include(":ComposeDialogs:Modules:DateTime")
-project(":ComposeDialogs:Modules:DateTime").projectDir = file("library/modules/datetime")
 include(":ComposeDialogs:Modules:GDPR")
 project(":ComposeDialogs:Modules:GDPR").projectDir = file("library/modules/gdpr")
-include(":ComposeDialogs:Modules:List")
-project(":ComposeDialogs:Modules:List").projectDir = file("library/modules/list")
-include(":ComposeDialogs:Modules:Progress")
-project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/progress")
+
 
 include(":demo")
 project(":demo").projectDir = file("demo")

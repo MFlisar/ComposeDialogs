@@ -1,15 +1,12 @@
 package com.michaelflisar.composedialogs.core.internal
 
 import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.SwipeableState
@@ -49,11 +46,13 @@ enum class BottomSheetState {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ComposeBottomSheetDialog(
-    title: DialogTitle,
+    title: String,
+    titleStyle: DialogTitleStyle,
     icon: DialogIcon?,
     style: DialogStyle.BottomSheet,
     buttons: DialogButtons,
     options: Options,
+    specialOptions: SpecialOptions,
     state: DialogState,
     onEvent: (event: DialogEvent) -> Unit,
     content: @Composable (ColumnScope.() -> Unit)
@@ -154,8 +153,12 @@ fun ComposeBottomSheetDialog(
                         .then(modifierContentPadding),
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    SheetHeader(title, icon, style, dismiss)
-                    SheetContent(Modifier.weight(1f, false), offsetState, style, options, content)
+                    SheetHeader(title, titleStyle, icon, style, dismiss)
+                    SheetContent(Modifier
+                        .fillMaxWidth()
+                        .weight(1f, false)
+                        , offsetState, style, options, content
+                    )
                     SheetFooter(offsetState, buttons, options, state, dismiss = {
                         buttonPressed.value = true
                         val dismissed = dismiss()
@@ -170,7 +173,8 @@ fun ComposeBottomSheetDialog(
 
 @Composable
 private fun ColumnScope.SheetHeader(
-    title: DialogTitle,
+    title: String,
+    titleStyle: DialogTitleStyle,
     icon: DialogIcon?,
     style: DialogStyle.BottomSheet,
     dismiss: () -> Boolean
@@ -199,21 +203,20 @@ private fun ColumnScope.SheetHeader(
     }
     // Icon + Title
     if (icon != null) {
-        Icon(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .size(24.dp),
-            painter = icon.painter,
-            contentDescription = "",
-            tint = icon.tint ?: MaterialTheme.colorScheme.onSurface
-        )
+        val modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+            .size(24.dp)
+        when (icon) {
+            is DialogIcon.Painter -> Image(modifier = modifier ,painter = icon.painter(), contentDescription = "")
+            is DialogIcon.Vector -> Icon(modifier = modifier , imageVector = icon.imageVector, contentDescription = "", tint = icon.tint ?: MaterialTheme.colorScheme.onSurface)
+        }
     }
-    if (title.text.isNotEmpty()) {
+    if (title.isNotEmpty()) {
         Text(
             modifier = if (icon != null) Modifier.align(Alignment.CenterHorizontally) else Modifier,
-            text = title.text,
-            style = title.style ?: MaterialTheme.typography.headlineSmall,
-            fontWeight = title.fontWeight
+            text = title,
+            style = titleStyle.style ?: MaterialTheme.typography.headlineSmall,
+            fontWeight = titleStyle.fontWeight
         )
     }
     // Space
@@ -230,9 +233,10 @@ private fun ColumnScope.SheetFooter(
     onEvent: (event: DialogEvent) -> Unit
 ) {
     // Buttons
+    val backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(LocalAbsoluteTonalElevation.current)
     Row(modifier = Modifier
         .offset { IntOffset(0, -offsetState.value) }
-        .background(MaterialTheme.colorScheme.surface)
+        .background(backgroundColor)
     ) {
         Spacer(modifier = Modifier.weight(1f))
         //CompositionLocalProvider(LocalContentColor provides buttonContentColor) {

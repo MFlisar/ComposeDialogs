@@ -7,6 +7,8 @@ plugins {
 
 android {
 
+    namespace = "com.michaelflisar.composedialogs.dialogs.date"
+
     compileSdk = app.versions.compileSdk.get().toInt()
 
     buildFeatures {
@@ -15,7 +17,6 @@ android {
 
     defaultConfig {
         minSdk = app.versions.minSdk.get().toInt()
-        targetSdk = app.versions.targetSdk.get().toInt()
     }
 
     buildTypes {
@@ -27,12 +28,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     composeOptions {
@@ -56,6 +57,7 @@ dependencies {
     // Compose BOM
     implementation(platform(compose.bom))
     implementation(compose.material3)
+    implementation(compose.activity)
 
     // ------------------------
     // Libraries
@@ -68,7 +70,7 @@ project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                artifactId = "dialog-info"
+                artifactId = "dialog-date"
                 from(components["release"])
             }
         }

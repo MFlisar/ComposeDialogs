@@ -3,7 +3,18 @@
 [![Release](https://jitpack.io/v/MFlisar/ComposeDialogs.svg)](https://jitpack.io/#MFlisar/ComposeDialogs)
 ![License](https://img.shields.io/github/license/MFlisar/ComposeDialogs)
 
-This library offers you an easily extendible compose framework for modal dialogs and allows to show them as dialogs or as bottom sheet.
+This library offers you an easily extendible compose framework for modal dialogs and allows to show them as a **dialog** or a **bottom sheet**.
+
+Made for **Compose M3**.
+
+### Dependencies
+
+| Dependency |        Version |
+|:-------------------------------------------------------------------- |---------------:|
+| [Compose BOM](https://developer.android.com/jetpack/compose/bom/bom) |   `2023.10.00` |
+| Material3 | `1.1.2` |
+
+Compose Mappings for BOM file: [Mapping](https://developer.android.com/jetpack/compose/bom/bom-mapping)
 
 ### Gradle (via [JitPack.io](https://jitpack.io/))
 
@@ -13,6 +24,7 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 ```
+
 2. add the compile statement to your module's `build.gradle`:
 ```groovy
 dependencies {
@@ -23,6 +35,11 @@ dependencies {
   // ui modules
   implementation "com.github.MFlisar:ComposeDialogs:dialog-info:<LATEST-VERSION>"
   implementation "com.github.MFlisar:ComposeDialogs:dialog-input:<LATEST-VERSION>"
+  implementation "com.github.MFlisar:ComposeDialogs:dialog-list:<LATEST-VERSION>"
+  implementation "com.github.MFlisar:ComposeDialogs:dialog-progress:<LATEST-VERSION>"
+  implementation "com.github.MFlisar:ComposeDialogs:dialog-time:<LATEST-VERSION>"
+  implementation "com.github.MFlisar:ComposeDialogs:dialog-date:<LATEST-VERSION>"
+  implementation "com.github.MFlisar:ComposeDialogs:dialog-color:<LATEST-VERSION>"
 }
 ```
 
@@ -36,24 +53,22 @@ It works as simple as following:
 val state = rememberDialogState()
 
 // show a dialog if necessary
-if (state.showing) 
+if (state.showing)
 {
     DialogInfo(
         state = state,
-        title = "Info Dialog",
-        info = "Some information...",
-        // Optional - all options can be set up with custom attributes, following are just the default examples
-        style = DialogDefaults.styleBottomSheet(), // or DialogDefaults.styleDialog() => both have quite some settings and all default dialog settings...
-        icon = DialogDefaults.icon(rememberVectorPainter(Icons.Default.Home)),
-        buttons = DialogDefaults.dialogButtons(
-            positive = dialogButton(stringResource(android.R.string.ok)),
-            negative = dialogButton("")
-        ),
-        options = DialogDefaults.options(
-            dismissOnButtonClick = true,
-            wrapContentInScrollableContainer = false
-        ),
-        onEvent: (event: DialogEvent) -> Unit = { event: DialogEvent ->
+        // Custom - Required
+        info: String,
+        // Custom - Optional
+        infoTitle: String = "",
+        // Base Dialog -  Optional - all options can be set up with custom attributes, following are just the default examples
+        title: String = "",
+        titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(), // or DialogDefaults.titleStyleSmall() => both have a few settings...
+        icon: DialogIcon? = null, // use DialogIcon.Painter(...) or DialogIcon.Vector(...) to add an icon
+        style: DialogStyle = DialogDefaults.styleDialog(), // DialogDefaults.styleBottomSheet() => both have a few settings...
+        buttons: DialogButtons = DialogDefaults.buttons(),
+        options: Options = Options(),
+        onEvent: (event: DialogEvent) -> Unit = {
             // optional event handler for all dialog events
         }
     )
@@ -64,6 +79,10 @@ Button(onClick = { state.show() }) {
     Text("Show Dialog")
 }
 ```
+
+### Screenshots
+
+...
 
 ### Settings and advanced usage
 
@@ -86,5 +105,25 @@ https://github.com/MFlisar/ComposeDialogs/blob/d743c8923c7478967d11825b07be5a079
 ...
 
 **Input Dialog**
+
+...
+
+**Date/Time Dialog**
+
+...
+
+**Color Dialog**
+
+...
+
+**List Dialog**
+
+...
+
+**Progress Dialog**
+
+...
+
+**Custom Dialog**
 
 ...

@@ -1,6 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.color.classes
 
-import com.michaelflisar.composedialogs.dialogs.color.R
+import com.mikepenz.materialize.R
 
 internal object ColorDefinitions {
 

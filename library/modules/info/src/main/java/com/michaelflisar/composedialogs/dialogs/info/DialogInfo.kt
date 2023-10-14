@@ -14,14 +14,15 @@ fun DialogInfo(
     // Custom - Optional
     infoTitle: String = "",
     // Base Dialog - Optional
-    title: DialogTitle = DialogDefaults.title(),
+    title: String = "",
+    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
     icon: DialogIcon? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
-    Dialog(state, title, icon, style, buttons, options, onEvent) {
+    Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
         if (infoTitle.isNotEmpty()) {
             Text(text = infoTitle, style = MaterialTheme.typography.titleSmall)
         }

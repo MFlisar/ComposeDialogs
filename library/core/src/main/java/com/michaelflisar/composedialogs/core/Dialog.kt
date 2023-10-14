@@ -1,17 +1,25 @@
 package com.michaelflisar.composedialogs.core
 
+import android.os.Bundle
+import android.os.Parcelable
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.autoSaver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -21,81 +29,25 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.michaelflisar.composedialogs.core.internal.ComposeAlertDialog
 import com.michaelflisar.composedialogs.core.internal.ComposeBottomSheetDialog
+import java.io.Serializable
 
 // ------------------
 // defaults functions
 // ------------------
 
-private val SheetPeekHeight = 56.dp * 2 // we want peek height for content + fixed buttons so with take 56*2
-
-@Composable
-fun rememberDialogState(
-    showing: Boolean = false,
-    buttonPositiveEnabled: Boolean = true,
-    buttonNegativeEnabled: Boolean = true,
-    dismissAllowed: Boolean = true,
-    swipeAllowed: Boolean = true
-): DialogState {
-
-    // showing should survive, even screen rotations and activity recreates
-    val showing = rememberSaveable { mutableStateOf(showing) }
-
-    // interaction state should be reset whenever the dialog is reshown
-    val interaction = remember(showing.value) {
-        mutableStateOf(
-            DialogInteractionSource(
-                buttonPositiveEnabled = mutableStateOf(buttonPositiveEnabled),
-                buttonNegativeEnabled = mutableStateOf(buttonNegativeEnabled),
-                dismissAllowed = mutableStateOf(dismissAllowed),
-                swipeAllowed = mutableStateOf(swipeAllowed)
-            )
-        )
-    }
-    return DialogState(showing, interaction)
-}
-
-@Composable
-fun <T> rememberDialogState(
-    data: T,
-    saver: Saver<MutableState<T>, out Any> = autoSaver(),
-    showing: Boolean = false,
-    buttonPositiveEnabled: Boolean = true,
-    buttonNegativeEnabled: Boolean = true,
-    dismissAllowed: Boolean = true,
-    swipeAllowed: Boolean = true
-): DialogStateWithData<T> {
-
-    // showing should survive, even screen rotations and activity recreates
-    val showing = rememberSaveable { mutableStateOf(showing) }
-
-    // extra data - should survice screen rotations and activity recreates BUT must be reset if dialog is dismissed
-    val d = rememberSaveable(saver = saver) { mutableStateOf(data) }
-    if (!showing.value) {
-        d.value = data
-    }
-
-    // interaction state should be reset whenever the dialog is reshown
-    val interaction = remember(showing.value) {
-        mutableStateOf(
-            DialogInteractionSource(
-                buttonPositiveEnabled = mutableStateOf(buttonPositiveEnabled),
-                buttonNegativeEnabled = mutableStateOf(buttonNegativeEnabled),
-                dismissAllowed = mutableStateOf(dismissAllowed),
-                swipeAllowed = mutableStateOf(swipeAllowed)
-            )
-        )
-    }
-    return DialogStateWithData(showing, d, interaction)
-}
+private val SheetPeekHeight =
+    56.dp * 2 // we want peek height for content + fixed buttons so with take 56*2
 
 @Composable
 fun Dialog(
     state: DialogState,
-    title: DialogTitle = DialogDefaults.title(),
+    title: String = "",
+    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
     icon: DialogIcon? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
+    specialOptions: SpecialOptions = SpecialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -103,10 +55,12 @@ fun Dialog(
         is DialogStyle.BottomSheet -> {
             ComposeBottomSheetDialog(
                 title,
+                titleStyle,
                 icon,
                 style,
                 buttons,
                 options,
+                specialOptions,
                 state,
                 onEvent,
                 content
@@ -115,10 +69,12 @@ fun Dialog(
         is DialogStyle.Dialog -> {
             ComposeAlertDialog(
                 title,
+                titleStyle,
                 icon,
                 style,
                 buttons,
                 options,
+                specialOptions,
                 state,
                 onEvent,
                 content
@@ -201,20 +157,22 @@ object DialogDefaults {
     )
 
     @Composable
-    fun title(
-        text: String = "",
+    fun titleStyle(
         style: TextStyle? = null,
         fontWeight: FontWeight? = null
-    ) = DialogTitle(text, style, fontWeight)
+    ) = DialogTitleStyle(
+        style = null,
+        fontWeight = null
+    )
 
     @Composable
-    fun titleSmall(
-        text: String = "",
-        fontWeight: FontWeight? = null
-    ) = DialogTitle(text, MaterialTheme.typography.titleSmall, fontWeight)
+    fun titleStyleSmall(fontWeight: FontWeight? = null) = DialogTitleStyle(
+        style = MaterialTheme.typography.titleSmall,
+        fontWeight = fontWeight
+    )
 
     @Composable
-    fun dialogNoButtons() = DialogButtons.DISABLED
+    fun buttonsDisabled() = DialogButtons.DISABLED
 }
 
 // ------------------
@@ -385,16 +343,21 @@ data class DialogButton(
     val text: String
 )
 
-data class DialogIcon(
-    val painter: Painter,
-    val tint: Color? = null
-)
+sealed class DialogIcon {
 
-data class DialogTitle internal constructor(
-    val text: String,
+    class Painter(
+        val painter: @Composable () -> androidx.compose.ui.graphics.painter.Painter
+    ) : DialogIcon()
+
+    class Vector(
+        val imageVector: ImageVector,
+        val tint: Color? = null
+    ) : DialogIcon()
+}
+
+data class DialogTitleStyle internal constructor(
     val style: TextStyle?,
-    val fontWeight: FontWeight?,
-    //val alignment: Alignment.Horizontal
+    val fontWeight: FontWeight?
 )
 
 data class DialogButtons internal constructor(
@@ -409,5 +372,9 @@ data class DialogButtons internal constructor(
 data class Options(
     val dismissOnButtonClick: Boolean = true,
     val wrapContentInScrollableContainer: Boolean = false
+)
+
+data class SpecialOptions(
+    val dialogIntrinsicWidthMin: Boolean = false
 )
 
