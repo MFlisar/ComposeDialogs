@@ -82,6 +82,8 @@ Button(onClick = { state.show() }) {
 
 ### Screenshots
 
+I only show the bottom sheet version for the info dialog, but of course any dialog does support the bottom sheet mode.
+
 **Info Dialog**
 
 | | | | |
