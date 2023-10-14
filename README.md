@@ -86,9 +86,13 @@ Button(onClick = { state.show() }) {
 
 | | | | |
 | :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_info1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info5.jpg?raw=true "Demo") |
-| ![Demo](screenshots/demo_info5.jpg?raw=true "Demo") |  |  |  |
+| ![Demo](screenshots/demo_info1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info4.jpg?raw=true "Demo") |
 
+**Input Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_input1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_input2.jpg?raw=true "Demo") | | |
 
 **Date Dialog**
 
