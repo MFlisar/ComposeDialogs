@@ -26,7 +26,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 // ------------------------
 
 /*
- be aware that T must be saveable by auto saver or ou must provide a custom saver!
+ be aware that T must be saveable by autoSaver or you must provide a custom saver!
+ supported types by autoSaver (all data types that are supported by Bundle):
+   - Boolean, Int, Long, Double, String
+   - BooleanArray, IntArray, LongArray, DoubleArray, StringArray
+   - Byte, Char, Short, Float, CharSequence, Parcelable, Size, SizeF
+   - ParcelableArray, ParcelableArrayList, SparseParcelableArray
+   - IntegerArrayList, StringArrayList, CharSequenceArrayList
+   - Serializable
+   - ByteArray, ShortArray, CharArray, FloatArray, CharSequenceArray
+   - Bundle
  */
 @Composable
 fun <T : Any> rememberDialogState(
