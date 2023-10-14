@@ -82,7 +82,45 @@ Button(onClick = { state.show() }) {
 
 ### Screenshots
 
-...
+**Info Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_info1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info5.jpg?raw=true "Demo") |
+| ![Demo](screenshots/demo_info5.jpg?raw=true "Demo") |  |  |  |
+
+
+**Date Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_calendar1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar3.jpg?raw=true "Demo") | |
+
+**Time Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_time1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_time2.jpg?raw=true "Demo") | |  |
+
+**Color Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_color1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color4.jpg?raw=true "Demo") |
+
+**List Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_list1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list4.jpg?raw=true "Demo") |
+| ![Demo](screenshots/demo_list5.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list6.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list7.jpg?raw=true "Demo") | |
+
+**Progress Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_progress1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_progress2.jpg?raw=true "Demo") | |  |
+
 
 ### Settings and advanced usage
 
@@ -104,32 +142,39 @@ https://github.com/MFlisar/ComposeDialogs/blob/7dcafb6f5731bcdd9f744f538988cd3d5
 
 **Info Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L10-L24
 
 **Input Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInput.kt#L43-L72
 
 **Date Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/date/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogDate.kt#L56-L71
 
 **Time Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L19-L33
 
 **Color Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L60-L80
 
 **List Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L45-L64
+
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L85-L109
 
 **Progress Dialog**
 
-...
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L19-L34
 
 **Custom Dialog**
 
-...
+```kotlin
+Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
+	Text("Text in custom dialog")
+	// ...
+}
+```
