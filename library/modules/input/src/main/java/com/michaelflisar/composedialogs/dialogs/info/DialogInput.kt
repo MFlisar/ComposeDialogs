@@ -156,7 +156,7 @@ object DialogInput {
         textStyle: TextStyle = LocalTextStyle.current,
         validator: DialogInputValidator = DialogInputValidator(),
         requestFocus: Boolean = false,
-        initialState: DialogInput.InitialState = DialogInput.InitialState.Default,
+        initialState: InitialState = InitialState.Default,
         onStateChanged: (valid: Boolean, text: String) -> Unit = { _, _ -> }
     ) {
         val focusRequester = FocusRequester()

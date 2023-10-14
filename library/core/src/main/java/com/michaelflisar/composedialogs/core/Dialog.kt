@@ -324,12 +324,12 @@ open class DialogState internal constructor(
     }
 }
 
-class DialogStateWithData<T> internal constructor(
+class DialogStateWithData<T : Any> internal constructor(
     showing: MutableState<Boolean>,
-    private val d: MutableState<T>,
+    private val d: MutableState<T?>,
     interactionSource: MutableState<DialogInteractionSource>
 ) : DialogState(showing, interactionSource) {
-    val data: T
+    val data: T?
         get() = d.value
 
     fun requireData() = d.value!!
