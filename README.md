@@ -80,6 +80,10 @@ Button(onClick = { state.show() }) {
 }
 ```
 
+### Demo
+
+A full demo is included inside the `demo` module, it shows nearly every usage with working examples.
+
 ### Screenshots
 
 I only show the bottom sheet version for the info dialog, but of course any dialog does support the bottom sheet mode.
