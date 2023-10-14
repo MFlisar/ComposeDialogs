@@ -29,17 +29,19 @@ repositories {
 ```groovy
 dependencies {
 
-  // core module
-  implementation "com.github.MFlisar:ComposeDialogs:core:<LATEST-VERSION>"
+  val composeDialog = "<LATEST-VERSION>"
   
-  // ui modules
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-info:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-input:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-list:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-progress:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-time:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-date:<LATEST-VERSION>"
-  implementation "com.github.MFlisar:ComposeDialogs:dialog-color:<LATEST-VERSION>"
+  // core module
+  implementation("com.github.MFlisar.ComposeDialogs:core:$composeDialog")
+  
+   // ui modules
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-info:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-input:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-list:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-progress:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-date:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-color:$composeDialog")
 }
 ```
 

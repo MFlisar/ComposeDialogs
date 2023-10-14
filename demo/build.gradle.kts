@@ -69,6 +69,17 @@ dependencies {
     // Libraries
     // ------------------------
 
+    // release test
+    //val composeDialog = "0.2"
+    //implementation("com.github.MFlisar.ComposeDialogs:core:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-info:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-input:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-list:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-progress:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-date:$composeDialog")
+    //implementation("com.github.MFlisar.ComposeDialogs:dialog-color:$composeDialog")
+
     implementation(project(":ComposeDialogs:Core"))
     implementation(project(":ComposeDialogs:Modules:Info"))
     implementation(project(":ComposeDialogs:Modules:Input"))
@@ -78,8 +89,8 @@ dependencies {
     implementation(project(":ComposeDialogs:Modules:Color"))
     implementation(project(":ComposeDialogs:Modules:List"))
 
-    // TODO:
-    implementation(project(":ComposeDialogs:Modules:Ads"))
-    implementation(project(":ComposeDialogs:Modules:Billing"))
-    implementation(project(":ComposeDialogs:Modules:GDPR"))
+    //// TODO:
+    //implementation(project(":ComposeDialogs:Modules:Ads"))
+    //implementation(project(":ComposeDialogs:Modules:Billing"))
+    //implementation(project(":ComposeDialogs:Modules:GDPR"))
 }

@@ -76,7 +76,7 @@ project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                artifactId = "library"
+                artifactId = "core"
                 from(components["release"])
             }
         }
