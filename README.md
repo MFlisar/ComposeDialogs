@@ -161,11 +161,11 @@ https://github.com/MFlisar/ComposeDialogs/blob/efad0c0a57b735f686dbac8b8c22362c4
 
 **Info Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L10-L24
+https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L9-L23
 
 **Input Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInput.kt#L43-L72
+https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt#L41-L70
 
 **Number Dialog**
 
@@ -181,7 +181,7 @@ https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9
 
 **Color Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L60-L80
+https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L61-L81
 
 **List Dialog**
 
