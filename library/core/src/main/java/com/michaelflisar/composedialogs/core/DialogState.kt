@@ -63,7 +63,7 @@ fun <T : Any> rememberDialogState(
 ): DialogStateWithData<T> {
 
     // showing should survive, even screen rotations and activity recreations
-    val showing = rememberSaveable { mutableStateOf(data == null) }
+    val showing = rememberSaveable { mutableStateOf(data != null) }
 
     // extra data - should survice screen rotations and activity recreates BUT must be reset if dialog is dismissed
     val d = rememberSaveable(saver = saver) { mutableStateOf(data) }
