@@ -1,6 +1,7 @@
 package com.michaelflisar.composedialogs.dialogs.color
 
 import android.content.res.Configuration
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.*
@@ -96,6 +97,10 @@ fun DialogColor(
 
         val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
+        BackHandler(enabled = selectedPresetsLevel.value != 0, onBack = {
+            selectedPresetsLevel.value = 0
+        })
+
         if (landscape) {
             Row {
                Column(
@@ -176,7 +181,8 @@ private fun Content(
     Column(modifier = Modifier.animateContentSize()) {
         Crossfade(
             modifier = Modifier,
-            targetState = colorState.value
+            targetState = colorState.value,
+            label = "color"
         ) {
             when (it) {
                 DialogColorPage.Custom -> {

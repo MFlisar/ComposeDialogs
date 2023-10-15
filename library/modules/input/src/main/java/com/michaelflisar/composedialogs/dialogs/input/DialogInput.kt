@@ -1,6 +1,5 @@
-package com.michaelflisar.composedialogs.dialogs.info
+package com.michaelflisar.composedialogs.dialogs.input
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -57,7 +55,7 @@ fun DialogInput(
     prefix: String = "",
     suffix: String = "",
     textStyle: TextStyle = LocalTextStyle.current,
-    validator: DialogInputValidator = DialogInputValidator(),
+    validator: DialogInputValidator = rememberDialogInputValidator(),
     requestFocus: Boolean = false,
     initialState: DialogInput.InitialState = DialogInput.InitialState.Default,
     onTextStateChanged: (valid: Boolean, text: String) -> Unit = { _, _ -> },
@@ -102,32 +100,6 @@ fun rememberDialogInput(
     input: String
 ): MutableState<String> {
     return rememberSaveable { mutableStateOf(input) }
-}
-
-class DialogInputValidator(
-    private val validate: (value: String) -> Result = { Result.Valid },
-    private val state: MutableState<Result> = mutableStateOf(Result.Valid)
-) {
-    fun state(): State<Result> = state
-
-    fun isValid() = state.value is Result.Valid
-    fun getErrorMessage(): String {
-        return when (val s = state.value) {
-            is Result.Error -> s.message
-            Result.Valid -> ""
-        }
-    }
-
-    fun check(value: String) {
-        state.value = validate(value)
-    }
-
-    fun isValid(value: String) = validate(value) is Result.Valid
-
-    sealed class Result {
-        object Valid : Result()
-        class Error(val message: String) : Result()
-    }
 }
 
 object DialogInput {

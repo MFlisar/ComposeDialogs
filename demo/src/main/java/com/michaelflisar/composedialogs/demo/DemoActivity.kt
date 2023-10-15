@@ -107,10 +107,11 @@ class DemoActivity : ComponentActivity() {
                             if (selectedDemoPage.value == -1) {
                                 MainButton(selectedDemoPage, 0, "Info Demos")
                                 MainButton(selectedDemoPage, 1, "Input Demos")
-                                MainButton(selectedDemoPage, 2, "Date/Time Demos")
-                                MainButton(selectedDemoPage, 3, "Color Demos")
-                                MainButton(selectedDemoPage, 4, "List Demos")
-                                MainButton(selectedDemoPage, 5, "Progress Demos")
+                                MainButton(selectedDemoPage, 2, "Number Demos")
+                                MainButton(selectedDemoPage, 3, "Date/Time Demos")
+                                MainButton(selectedDemoPage, 4, "Color Demos")
+                                MainButton(selectedDemoPage, 5, "List Demos")
+                                MainButton(selectedDemoPage, 6, "Progress Demos")
                                 Divider()
                                 MainButton(selectedDemoPage, 99, "Custom Demos")
                             } else {
@@ -119,10 +120,11 @@ class DemoActivity : ComponentActivity() {
                                     // Predefined dialog demos
                                     0 -> InfoDemos(s, icon)
                                     1 -> InputDemos(s, icon)
-                                    2 -> DateTimeDemos(s, icon)
-                                    3 -> ColorDemos(s, icon)
-                                    4 -> ListDemos(s, icon)
-                                    5 -> ProgressDemos(s, icon)
+                                    2 -> NumberDemos(s, icon)
+                                    3 -> DateTimeDemos(s, icon)
+                                    4 -> ColorDemos(s, icon)
+                                    5 -> ListDemos(s, icon)
+                                    6 -> ProgressDemos(s, icon)
 
                                     // Manually created custom demos
                                     99 -> CustomDemos(s, icon)
