@@ -66,7 +66,7 @@ if (state.showing)
         // Custom - Required
         info: String,
         // Custom - Optional
-        infoLbel: String = "",
+        infoLabel: String = "",
         // Base Dialog -  Optional - all options can be set up with custom attributes, following are just the default examples
         title: String = "",
         titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(), // or DialogDefaults.titleStyleSmall() => both have a few settings...
