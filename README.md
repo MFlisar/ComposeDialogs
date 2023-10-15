@@ -37,6 +37,7 @@ dependencies {
    // ui modules
   implementation("com.github.MFlisar.ComposeDialogs:dialog-info:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-input:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-number:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-list:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-progress:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
@@ -102,6 +103,12 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 | :---: | :---: | :---: | :---: |
 | ![Demo](screenshots/demo_input1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_input2.jpg?raw=true "Demo") | | |
 
+**Number Dialog**
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| ![Demo](screenshots/demo_number1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number3.jpg?raw=true "Demo") | |
+
 **Date Dialog**
 
 | | | | |
@@ -159,6 +166,10 @@ https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5
 **Input Dialog**
 
 https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInput.kt#L43-L72
+
+**Number Dialog**
+
+https://github.com/MFlisar/ComposeDialogs/blob/7e36c2d5143282ffc641390e9438905f5c04db8c/library/modules/number/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInput.kt#L43-L72
 
 **Date Dialog**
 
