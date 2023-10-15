@@ -164,8 +164,13 @@ fun DialogDate(
                     }
                 }
                 Spacer(modifier = Modifier.width(8.dp))
+                val modifier = when (viewState.value) {
+                    DateViewState.Calendar -> Modifier.verticalScroll(rememberScrollState())
+                    DateViewState.SelectYear -> Modifier
+                    DateViewState.SelectMonth -> Modifier
+                }
                 Column(
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+                    modifier = modifier
                 ) {
                     CalendarHeader(pagerState, dateRange, setup, pageData, viewState)
                     when (viewState.value) {
