@@ -26,6 +26,9 @@ repositories {
 ```
 
 2. add the compile statement to your module's `build.gradle`:
+
+Latest release: https://github.com/MFlisar/ComposeDialogs/releases/latest
+
 ```groovy
 dependencies {
 

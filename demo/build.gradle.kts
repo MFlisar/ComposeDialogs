@@ -70,7 +70,7 @@ dependencies {
     // ------------------------
 
     val live = false
-    val composeDialog = "0.4"
+    val composeDialog = "0.5"
 
     // release test
     if (live) {
