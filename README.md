@@ -86,6 +86,36 @@ Button(onClick = { state.show() }) {
 }
 ```
 
+Alternatively, if you want to use one dialog with many items (e.g. for list items) you can do following:
+
+```kotlin
+// create and remember a state with data (e.g. an Integer)
+val state = rememberDialogState<Int>(data = null)
+
+// show a dialog if necessary
+if (state.showing)
+{
+	val data = state.requireData()
+	DialogInfo(
+		state = state,
+		// Custom - Required
+		info = "Data = $data"
+	)
+}
+
+// a list that uses the dialog
+val items = 1..100
+LazyColumn {
+	items.forEach {
+		item(key = it) {
+			Button(onClick = { state.show(it) }) {
+				Text("Item $it")
+			}
+		}
+	}
+}
+```
+
 ### Demo
 
 A full demo is included inside the `demo` module, it shows nearly every usage with working examples.
