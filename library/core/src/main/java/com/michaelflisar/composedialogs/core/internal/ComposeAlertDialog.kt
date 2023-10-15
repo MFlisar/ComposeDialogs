@@ -87,7 +87,7 @@ fun ComposeAlertDialog(
             {
                 when (icon) {
                     is DialogIcon.Painter -> Image(modifier = Modifier.size(24.dp), painter = icon.painter(), contentDescription = "")
-                    is DialogIcon.Vector -> Icon(imageVector = icon.imageVector, contentDescription = "", tint = icon.tint ?: LocalContentColor.current)
+                    is DialogIcon.Vector -> Icon(imageVector = icon.icon, contentDescription = "", tint = icon.tint ?: LocalContentColor.current)
                 }
             }
         } else null,

@@ -5,6 +5,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.michaelflisar.composedialogs.core.*
 
+/**
+ * Shows a dialog with an info text and an optional label for that info
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param info the information text for this dialog
+ * @param infoLabel the optional label for the information text
+ */
 @Composable
 fun DialogInfo(
     state: DialogState,

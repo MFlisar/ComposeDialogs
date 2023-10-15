@@ -26,6 +26,21 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.dialogs.input.composables.PickerIcon
 import com.michaelflisar.composedialogs.dialogs.input.utils.NumberUtil
 
+/**
+ * Shows a dialog with a number picker
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param value the number state for this dialog
+ * @param setup the [NumberPickerSetup]
+ * @param iconDown the icon for the decrease button
+ * @param iconUp the icon for the increase button
+ * @param formatter the formatter for the text of this picker
+ * @param textStyle the [TextStyle] for the text of this picker
+ * @param onValueStateChanged a callback that will be called whenever the value of the number picker changes
+ */
 @Composable
 fun <T : Number> DialogNumberPicker(
     // Base Dialog - State
@@ -81,6 +96,14 @@ fun <T : Number> DialogNumberPicker(
     }
 }
 
+/**
+ * setup class for a number picker dialog
+ *
+ * @param min the minimum value for this picker
+ * @param max the maximum value for this picker
+ * @param stepSize the step size for the decrease and increase buttons of this picker
+ * @param repeatingButton the [RepeatingButton] behavior (can be [RepeatingButton.Disabled] or [RepeatingButton.Enabled])
+ */
 class NumberPickerSetup<T : Number>(
     val min: T,
     val max: T,
@@ -105,9 +128,23 @@ class NumberPickerSetup<T : Number>(
     }
 }
 
+/**
+ * repeating button settings class
+ */
 sealed class RepeatingButton {
+
+    /**
+     *  repeating button clicks on long press are disabled
+     */
     data object Disabled : RepeatingButton()
 
+    /**
+     *  repeating button clicks on long press are enabled
+     *
+     *  @param maxDelayMillis the maximum delay between two consecutive button clicks emulated by a long press
+     *  @param minDelayMillis the minimum delay between two consecutive button clicks emulated by a long press
+     *  @param delayDecayFactor the increase factor of the initial dalay (=minDelayMillis) to the maximum delay (=maxDelayMillis) after each emulated button press
+     */
     class Enabled(
         val maxDelayMillis: Long = 500,
         val minDelayMillis: Long = 5,

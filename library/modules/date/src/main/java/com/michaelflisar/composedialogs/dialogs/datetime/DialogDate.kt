@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -29,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
@@ -52,6 +54,17 @@ import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarTod
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import java.util.Calendar
 
+/**
+ * Shows a dialog with an input field
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param date the state ([DialogDateState]) for the date dialog
+ * @param dateRange the supported [DialogDateRange]
+ * @param setup the [DialogDateSetup]
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DialogDate(
@@ -136,7 +149,7 @@ fun DialogDate(
 
                             is DialogIcon.Vector -> Icon(
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                                imageVector = icon.imageVector,
+                                imageVector = icon.icon,
                                 contentDescription = "",
                                 tint = icon.tint ?: LocalContentColor.current
                             )
@@ -231,6 +244,21 @@ fun DialogDate(
     }
 }
 
+/**
+ * date picker setup
+ *
+ * @param buttonToday the label for the today button (if null this button will be disabled)
+ * @param firstDayOfWeek the first day of the week (use [Calendar.MONDAY] to [Calendar.SUNDAY])
+ * @param selectedDateFormat the date format for the text that represents the currently selected date
+ * @param dateFormatMonthSelector the date format for the current month text
+ * @param dateFormatYearSelector the date format for the current year text
+ * @param dateFormatMonthList the date format for the list in which you can select a month
+ * @param dateFormatYearList the date format for the list in which you can select a year
+ * @param dateCellHeight the height of cell representing a single day
+ * @param showNextPreviousMonthButtons if true, the decrease/increase buttons next to the select month are shown
+ * @param showNextPreviousYearButtons if true, the decrease/increase buttons next to the select year are shown
+ *
+ */
 class DialogDateSetup(
     val buttonToday: String? = "Today",
     val firstDayOfWeek: Int = Calendar.MONDAY,
@@ -244,10 +272,24 @@ class DialogDateSetup(
     val showNextPreviousYearButtons: Boolean = true
 )
 
+/**
+ * range for the date picker
+ *
+ * @param years the range that will be supported by the date picker
+ */
 class DialogDateRange(
     val years: IntRange = 1900..2100
 )
 
+/**
+ * convenient function for [DialogDate]
+ *
+ * @param initialYear the initial year
+ * @param initialMonth the initial month
+ * @param initialDay the initial day
+ *
+ * @return a state holding the current date value
+ */
 @Composable
 fun rememberDialogDateState(
     initialYear: Int = Calendar.getInstance().get(Calendar.YEAR),
@@ -260,7 +302,10 @@ fun rememberDialogDateState(
     return DialogDateState(year, month, day)
 }
 
-class DialogDateState(
+/**
+ * see [rememberDialogDateState]
+ */
+class DialogDateState internal constructor(
     val year: MutableState<Int>,
     val month: MutableState<Int>,
     val day: MutableState<Int>

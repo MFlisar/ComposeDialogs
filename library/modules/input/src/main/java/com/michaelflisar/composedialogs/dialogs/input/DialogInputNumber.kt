@@ -22,6 +22,30 @@ import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.DialogTitleStyle
 import com.michaelflisar.composedialogs.core.Options
 
+/**
+ * Shows a dialog with an input field that only allows numeric characters and validates that the input holds a valid value for the desired data type
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param value the state for the input field
+ * @param valueLabel the optional label of the input field
+ * @param invalidNumberErrorText provide a function that returns a custom error message if the user input is not a valid number
+ *
+ * @param singleLine if true, the input field will only allow a single line
+ * @param maxLines the max lines for the input field
+ * @param minLines the min lines for the input field
+ * @param enabled if true, the input field is enabled
+ * @param clearable if true, the input field can be cleared by a trailing clear icon
+ * @param prefix the prefix for the input field
+ * @param suffix the prefix for the input field
+ * @param textStyle the [TextStyle] for the input field
+ * @param validator the [DialogInputValidator] for the input field - use [rememberDialogInputValidator]
+ * @param requestFocus if true, the input field will request the focus when the dialog si shown (and open the keyboard)
+ * @param selectionState if initial selection state ([DialogInput.SelectionState]) of the input field
+ * @param onValueStateChanged an optional callback that will be called whenever the value of the input field changes
+ */
 @Composable
 fun <T : Number> DialogInputNumber(
     // Base Dialog - State
@@ -41,7 +65,7 @@ fun <T : Number> DialogInputNumber(
     suffix: String = "",
     textStyle: TextStyle = LocalTextStyle.current,
     requestFocus: Boolean = false,
-    initialState: DialogInput.InitialState = DialogInput.InitialState.Default,
+    selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
     onValueStateChanged: (valid: Boolean, value: T?) -> Unit = { _, _ -> },
     // Base Dialog - Optional
     title: String = "",
@@ -103,13 +127,20 @@ fun <T : Number> DialogInputNumber(
             textStyle,
             validator,
             requestFocus,
-            initialState
+            selectionState
         ) { valid, value ->
             onValueStateChanged(valid, converter(value))
         }
     }
 }
 
+/**
+ * convenient function for [DialogInputNumber]
+ *
+ * @param value the initial value for the input field
+ *
+ * @return a state holding the current input value
+ */
 @Composable
 fun <T : Number> rememberDialogNumber(
     value: T

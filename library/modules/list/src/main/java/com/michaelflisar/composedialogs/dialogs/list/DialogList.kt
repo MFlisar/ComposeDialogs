@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.CircularProgressIndicator
@@ -27,6 +28,7 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
@@ -40,6 +42,23 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.dialogs.list.defaults.DialogListContent
 import com.michaelflisar.composedialogs.dialogs.list.defaults.DialogListTrailingContent
 
+/**
+ * Shows a dialog with a list and an optional filter option
+ *
+ * consider the overload with a lambda for the items parameter if items should be loaded lazily
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param items the list items
+ * @param itemIdProvider the items to id lambda that is used to store selected item ids
+ * @param itemContents the [DialogListItemContents] holding composables to customise the rendering of the list items - use [DialogListItemDefaultContent] or [DialogListItemContents] if you want to completely customise the items
+ * @param selectionMode the [DialogListSelectionMode]
+ * @param divider if true, a divider is shown between the list items
+ * @param description a custom text that will be shown as description at the top of the dialog
+ * @param filter the [FilterSetup] - if it is null, filtering is disabled
+ */
 @Composable
 fun <T> DialogList(
     state: DialogState,
@@ -80,6 +99,25 @@ fun <T> DialogList(
     )
 }
 
+/**
+ * Shows a dialog with a list and an optional filter option
+ *
+ * consider the overload with a list if the items are just a simple list of items
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param itemsLoader the lambda that will return the items for this dialog
+ * @param itemIdProvider the items to id lambda that is used to store selected item ids
+ * @param itemContents the [DialogListItemContents] holding composables to customise the rendering of the list items - use [DialogListItemDefaultContent] or [DialogListItemContents] if you want to completely customise the items
+ * @param selectionMode the [DialogListSelectionMode]
+ * @param itemSaver the saver for the list items - if no itemSaver is provided, data won't be remembered as saveable and will be reloaded on recomposition (e.g. screen rotation)
+ * @param loadingIndicator the composable that will be shown while items are loaded
+ * @param divider if true, a divider is shown between the list items
+ * @param description a custom text that will be shown as description at the top of the dialog
+ * @param filter the [FilterSetup] - if it is null, filtering is disabled
+ */
 @Composable
 fun <T> DialogList(
     state: DialogState,
@@ -89,7 +127,6 @@ fun <T> DialogList(
     itemContents: DialogListItemContents<T>,
     selectionMode: DialogListSelectionMode<T>,
     // Custom - Optional
-    // if no itemSaver is provided, data won't be remember as a saveable and will be reloaded on recomposition (e.g. screen rotation)
     itemSaver: Saver<MutableState<List<T>>, out Any>? = null,
     loadingIndicator: @Composable () -> Unit = {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
@@ -296,21 +333,52 @@ private fun <T> Item(
     )
 }
 
+/**
+ * selection mode for the list dialog
+ */
 sealed class DialogListSelectionMode<T> {
+
+    /**
+     * single selection mode for the list dialog
+     *
+     * @param selected holds the currently selected item id
+     * @param selectOnRadioButtonClickOnly if true, only clicks on the radio button will select an item, otherwise a click on the item itself will select it as well
+     */
     class SingleSelect<T>(
         val selected: MutableState<Int?>,
         val selectOnRadioButtonClickOnly: Boolean = true
     ) : DialogListSelectionMode<T>()
 
+    /**
+     * multi selection mode for the list dialog
+     *
+     * @param selected holds the currently selected item ids
+     * @param selectOnCheckboxClickOnly if true, only clicks on the checkbox will select an item, otherwise a click on the item itself will select it as well
+     * @param showSelectionCounter if true, the count of the selected items will be shown in the dialog
+     */
     class MultiSelect<T>(
         val selected: MutableState<List<Int>>,
         val selectOnCheckboxClickOnly: Boolean = true,
         val showSelectionCounter: Boolean = false
     ) : DialogListSelectionMode<T>()
 
+    /**
+     * single click mode for the list dialog
+     *
+     * this mode will close the dialog as soon as a single item is selected
+     *
+     * @param onItemClicked the callback that will be used to emit the single item that was clicked before the dialog is dismissed
+     */
     class SingleClickAndClose<T>(val onItemClicked: (item: T) -> Unit) :
         DialogListSelectionMode<T>()
 
+    /**
+     * multi click mode for the list dialog
+     *
+     * this mode will emit item clicked events whenever an item is clicked
+     *
+     * @param onItemClicked the callback that will be used to emit the click events
+     */
     class MultiClick<T>(val onItemClicked: (item: T) -> Unit) :
         DialogListSelectionMode<T>()
 }
@@ -327,12 +395,27 @@ internal sealed class DialogListItemProvider<T> {
     ) : DialogListItemProvider<T>()
 }
 
+/**
+ * the content provider interface for a list item
+ *
+ * @property content the main content of a list item
+ * @property iconContent the icon of a list item
+ * @property trailingContent the trailing content of a list item
+ */
 interface DialogListItemContents<T> {
     val content: @Composable ColumnScope.(item: T) -> Unit
     val iconContent: @Composable ((item: T) -> Unit)?
     val trailingContent: @Composable (ColumnScope.(item: T) -> Unit)?
 }
 
+/**
+ * the default content provider for a list item that will use the default composables to render the provided texts and icon
+ *
+ * @param text the item text
+ * @param supportingText the optional supporting item text
+ * @property trailingSupportingText the optional trailing supporting text
+ * @property icon the optional icon composable
+ */
 class DialogListItemDefaultContent<T>(
     private val text: (item: T) -> String,
     private val supportingText: ((item: T) -> String)? = null,
@@ -353,6 +436,14 @@ class DialogListItemDefaultContent<T>(
         } else null
 }
 
+/**
+ * the default content provider for a list item that will use the default composables to render the provided texts and icon
+ *
+ * @param filter the filter lambda to determine if an item matches the filter (true) or not (false)
+ * @param infoText the info text that shows how many items are filtered (if null this text is disabled)
+ * @property keepSelectionForInvisibleItems if true, filtered out items stay selected, otherwise they will be deselected on filter changes whenever the are not part of the currently filtered items anymore
+ * @property showClearIcon if true, the filter input field shows a clear icon to clear the filter
+ */
 class FilterSetup<T>(
     val filter: (filter: String, item: T) -> Boolean,
     val infoText: @Composable ((count: Int, total: Int) -> String)? = { count, total -> "$count/$total" },

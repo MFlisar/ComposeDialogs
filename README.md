@@ -66,7 +66,7 @@ if (state.showing)
         // Custom - Required
         info: String,
         // Custom - Optional
-        infoTitle: String = "",
+        infoLbel: String = "",
         // Base Dialog -  Optional - all options can be set up with custom attributes, following are just the default examples
         title: String = "",
         titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(), // or DialogDefaults.titleStyleSmall() => both have a few settings...
@@ -152,13 +152,13 @@ Check out the dialog state and the dialogs to find out what settings you can use
 
 In case of the simple state `true` means that the dialog is visible and `false` that it's not. In case of the complex state holding an object means the dialog is visible and `null` means it's not visible.
 
-https://github.com/MFlisar/ComposeDialogs/blob/efad0c0a57b735f686dbac8b8c22362c42439f60/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L79-L85
+https://github.com/MFlisar/ComposeDialogs/blob/9b3f3b73f4f1d78c9329079f4450fbb8a9b17805/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L79-L85
 
 In case of the complex state simply use `state.show(data)` to show the dialog and then inside your dialog call `val data = state.requireData()` to get the data from the state.
 
 **CAUTION:** the state must be saveable by `Bundle`, if it is not, provide a custom `saver`!
 
-https://github.com/MFlisar/ComposeDialogs/blob/efad0c0a57b735f686dbac8b8c22362c42439f60/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L41-L49
+https://github.com/MFlisar/ComposeDialogs/blob/9b3f3b73f4f1d78c9329079f4450fbb8a9b17805/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L41-L49
   
 ### Existing dialogs
 
@@ -197,6 +197,8 @@ https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9
 https://github.com/MFlisar/ComposeDialogs/blob/dfce0eb3103590cc5cb348e1a937facb9eb8f231/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L19-L34
 
 **Custom Dialog**
+
+https://github.com/MFlisar/ComposeDialogs/blob/9b3f3b73f4f1d78c9329079f4450fbb8a9b17805/library/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L29-L40
 
 ```kotlin
 Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {

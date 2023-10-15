@@ -57,6 +57,21 @@ object DialogColor {
     }
 }
 
+/**
+ * Shows a color dialog
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param color the selected color state
+ * @param texts the texts ([DialogColorTexts]) that are used inside this dialog
+ * @param colorState the current page state ([DialogColorPage]) of the internal composables
+ * @param alphaSupported if true, the dialog supports color alpha values
+ * @param shape the shape of the color cells
+ * @param gridSize the size of the color grid
+ * @param labelStyle the [DialogColorLabelStyle] for the color picker
+ */
 @Composable
 fun DialogColor(
     // Base Dialog - State
@@ -311,6 +326,13 @@ private fun Content(
     }
 }
 
+/**
+ * convenient function for [DialogColor]
+ *
+ * @param color the color state of the dialog
+ *
+ * @return a state holding the current color value
+ */
 @Composable
 fun rememberDialogColor(
     color: Color
@@ -318,6 +340,13 @@ fun rememberDialogColor(
     return rememberSaveable(saver = DialogColor.ColorStateSaver) { mutableStateOf(color) }
 }
 
+/**
+ * convenient function for [rememberDialogColorState]
+ *
+ * @param page the page state of the dialog
+ *
+ * @return a state holding the current page value
+ */
 @Composable
 fun rememberDialogColorState(
     page: DialogColorPage = DialogColorPage.Presets
@@ -335,6 +364,12 @@ enum class DialogColorLabelStyle {
     Value, Percent
 }
 
+/**
+ * texts for the color pager
+ *
+ * @param presets the label of the pager title for the presets color page
+ * @param custom the label of the pager title for the custom color page
+ */
 data class DialogColorTexts(
     val presets: String = "Presets",
     val custom: String = "Custom"

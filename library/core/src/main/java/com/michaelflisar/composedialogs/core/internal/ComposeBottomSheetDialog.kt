@@ -208,7 +208,7 @@ private fun ColumnScope.SheetHeader(
             .size(24.dp)
         when (icon) {
             is DialogIcon.Painter -> Image(modifier = modifier ,painter = icon.painter(), contentDescription = "")
-            is DialogIcon.Vector -> Icon(modifier = modifier , imageVector = icon.imageVector, contentDescription = "", tint = icon.tint ?: MaterialTheme.colorScheme.onSurface)
+            is DialogIcon.Vector -> Icon(modifier = modifier , imageVector = icon.icon, contentDescription = "", tint = icon.tint ?: MaterialTheme.colorScheme.onSurface)
         }
     }
     if (title.isNotEmpty()) {
