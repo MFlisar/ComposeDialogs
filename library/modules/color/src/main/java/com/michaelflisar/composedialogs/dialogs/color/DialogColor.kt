@@ -80,8 +80,8 @@ fun DialogColor(
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     // saved dialog state
-    val selectedSubColor = rememberSaveable(saver = DialogColor.ColorStateSaverNullable) { mutableStateOf<Color?>(null) }
-    val selectedPresetsLevel = rememberSaveable { mutableStateOf(0) }
+    val selectedSubColor = rememberSaveable(saver = DialogColor.ColorStateSaverNullable) { mutableStateOf(null) }
+    val selectedPresetsLevel = rememberSaveable { mutableIntStateOf(0) }
     val context = LocalContext.current
     val selectedMainColor = rememberSaveable {
         mutableStateOf(
@@ -91,14 +91,14 @@ fun DialogColor(
             )
         )
     }
-    val selectedAlpha = rememberSaveable { mutableStateOf(color.value.alpha) }
+    val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
 
     Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
 
         val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-        BackHandler(enabled = selectedPresetsLevel.value != 0, onBack = {
-            selectedPresetsLevel.value = 0
+        BackHandler(enabled = selectedPresetsLevel.intValue != 0, onBack = {
+            selectedPresetsLevel.intValue = 0
         })
 
         if (landscape) {

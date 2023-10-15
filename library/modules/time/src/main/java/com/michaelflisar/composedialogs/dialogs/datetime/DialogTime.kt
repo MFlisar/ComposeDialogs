@@ -7,6 +7,7 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -69,8 +70,8 @@ fun rememberDialogTimeState(
     initialMinutes: Int = Calendar.getInstance().get(Calendar.MINUTE),
     //initialSeconds: Int = Calendar.getInstance().get(Calendar.SECOND)
 ): DialogTimeState {
-    val hour = rememberSaveable { mutableStateOf(initialHour) }
-    val minutes = rememberSaveable { mutableStateOf(initialMinutes) }
+    val hour = rememberSaveable { mutableIntStateOf(initialHour) }
+    val minutes = rememberSaveable { mutableIntStateOf(initialMinutes) }
     //val seconds = rememberSaveable { mutableStateOf(initialSeconds) }
     return DialogTimeState(hour, minutes)//, seconds)
 }

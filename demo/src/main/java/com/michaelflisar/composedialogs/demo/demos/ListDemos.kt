@@ -17,7 +17,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.autoSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -78,7 +82,7 @@ fun ListDemos(style: DialogStyle, icon: DialogIcon?) {
         override val iconContent: @Composable() ((item: AppItem) -> Unit)?
             get() = {
                 Image(
-                    painter = rememberDrawablePainter(it.icon),
+                    painter = rememberDrawablePainter(it.icon(context)),
                     contentDescription = null,
                     modifier = Modifier.size(48.dp)
                 )
@@ -216,6 +220,9 @@ fun ListDemos(style: DialogStyle, icon: DialogIcon?) {
             itemContents = itemContentsCustom,
             itemIdProvider = customItemIdProvider,
             itemsLoader = { loadApps(context) },
+            // optional => if no saver is provided, data will be reloaded and not retained between e.g. screen rotations
+            // AppItem is parcelable so autoSaver can handle it!
+            itemSaver = autoSaver(),
             selectionMode = DialogListSelectionMode.MultiClick {
                 context.showToast("Selected in Multi Click Mode: ${it.id}")
             },
@@ -232,6 +239,7 @@ private fun <T> RowScope.DemoList(
     itemIdProvider: (item: T) -> Int,
     items: List<T>? = null,
     itemsLoader: (suspend () -> List<T>)? = null,
+    itemSaver: Saver<MutableState<List<T>>, out Any>? = null,
     selectionMode: DialogListSelectionMode<T>,
     filter: FilterSetup<T>? = null,
     divider: Boolean = false,
@@ -296,6 +304,7 @@ private fun <T> RowScope.DemoList(
                     }
                 },
                 itemsLoader = itemsLoader!!,
+                itemSaver = itemSaver,
                 itemIdProvider = itemIdProvider,
                 itemContents = itemContents,
                 selectionMode = selectionMode,
@@ -328,8 +337,8 @@ private suspend fun loadApps(context: Context): List<AppItem> {
         var id = 1
         for (info in resolveInfos) {
             val text = info.loadLabel(pm)?.toString() ?: ""
-            val icon = info.loadIcon(context.packageManager)
-            items.add(AppItem(id, info, text, icon))
+            //val icon = info.loadIcon(context.packageManager)
+            items.add(AppItem(id, info, text))
             id++
         }
         items.sortWith { o1, o2 -> o1.label.compareTo(o2.label, true) }

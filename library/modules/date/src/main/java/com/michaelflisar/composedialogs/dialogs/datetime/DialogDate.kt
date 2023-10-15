@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -253,9 +254,9 @@ fun rememberDialogDateState(
     initialMonth: Int = Calendar.getInstance().get(Calendar.MONTH) + 1,
     initialDay: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 ): DialogDateState {
-    val year = rememberSaveable { mutableStateOf(initialYear) }
-    val month = rememberSaveable { mutableStateOf(initialMonth) }
-    val day = rememberSaveable { mutableStateOf(initialDay) }
+    val year = rememberSaveable { mutableIntStateOf(initialYear) }
+    val month = rememberSaveable { mutableIntStateOf(initialMonth) }
+    val day = rememberSaveable { mutableIntStateOf(initialDay) }
     return DialogDateState(year, month, day)
 }
 

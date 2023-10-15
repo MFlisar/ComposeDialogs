@@ -21,11 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -90,6 +89,8 @@ fun <T> DialogList(
     itemContents: DialogListItemContents<T>,
     selectionMode: DialogListSelectionMode<T>,
     // Custom - Optional
+    // if no itemSaver is provided, data won't be remember as a saveable and will be reloaded on recomposition (e.g. screen rotation)
+    itemSaver: Saver<MutableState<List<T>>, out Any>? = null,
     loadingIndicator: @Composable () -> Unit = {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
@@ -109,7 +110,7 @@ fun <T> DialogList(
 ) {
     DialogList(
         state,
-        DialogListItemProvider.Loader(loadingIndicator, itemsLoader),
+        DialogListItemProvider.Loader(loadingIndicator, itemsLoader, itemSaver),
         itemIdProvider,
         itemContents,
         selectionMode,
@@ -148,13 +149,15 @@ private fun <T> DialogList(
     onEvent: (event: DialogEvent) -> Unit
 ) {
     Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
-        var items by remember {
-            mutableStateOf(
-                when (itemsProvider) {
-                    is DialogListItemProvider.List -> itemsProvider.items
-                    is DialogListItemProvider.Loader -> emptyList()
-                }
-            )
+        val items = when (itemsProvider) {
+            is DialogListItemProvider.List -> remember { mutableStateOf(itemsProvider.items) }
+            is DialogListItemProvider.Loader -> {
+                if (itemsProvider.itemSaver != null) {
+                    rememberSaveable(saver = itemsProvider.itemSaver) {
+                        mutableStateOf(emptyList())
+                    }
+                } else remember { mutableStateOf(emptyList()) }
+            }
         }
 
         val filterText = rememberSaveable {
@@ -162,13 +165,16 @@ private fun <T> DialogList(
         }
 
         val filteredItemsLoaded =
-            remember { mutableStateOf(itemsProvider !is DialogListItemProvider.Loader) }
-        val filteredItems = remember(items, filterText, filter) {
+            if (itemsProvider is DialogListItemProvider.Loader && itemsProvider.itemSaver != null) {
+                rememberSaveable { mutableStateOf(false) }
+            } else remember { mutableStateOf(true) }
+
+        val filteredItems = remember(items.value, filterText, filter) {
             derivedStateOf {
                 if (filter == null)
-                    items
+                    items.value
                 else
-                    items.filter { filter.filter.invoke(filterText.value, it) }
+                    items.value.filter { filter.filter.invoke(filterText.value, it) }
             }
         }
 
@@ -184,10 +190,9 @@ private fun <T> DialogList(
             }
         }
 
-
-        if (itemsProvider is DialogListItemProvider.Loader) {
-            LaunchedEffect(itemsProvider) {
-                items = itemsProvider.loader()
+        if (itemsProvider is DialogListItemProvider.Loader && !filteredItemsLoaded.value) {
+            LaunchedEffect(Unit) {
+                items.value = itemsProvider.loader()
                 filteredItemsLoaded.value = true
             }
         }
@@ -198,7 +203,7 @@ private fun <T> DialogList(
         }
 
         if (filter?.infoText != null) {
-            val info = filter.infoText.invoke(filteredItems.value.size, items.size)
+            val info = filter.infoText.invoke(filteredItems.value.size, items.value.size)
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -234,7 +239,7 @@ private fun <T> DialogList(
         if (selectionMode is DialogListSelectionMode.MultiSelect && selectionMode.showSelectionCounter) {
             Text(
                 modifier = Modifier.align(Alignment.End),
-                text = "${selectionMode.selected.value.size}/${items.size}",
+                text = "${selectionMode.selected.value.size}/${items.value.size}",
                 style = MaterialTheme.typography.bodySmall
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -243,7 +248,7 @@ private fun <T> DialogList(
         LazyColumn(
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
-            if (items.isEmpty() && itemsProvider is DialogListItemProvider.Loader) {
+            if (items.value.isEmpty() && itemsProvider is DialogListItemProvider.Loader) {
                 item(key = "${this.javaClass.name}-PLACEHOLDER") {
                     itemsProvider.loadingIndicator()
                 }
@@ -316,8 +321,9 @@ internal sealed class DialogListItemProvider<T> {
     ) : DialogListItemProvider<T>()
 
     class Loader<T>(
-        val loadingIndicator: @Composable () -> Unit = {},
-        val loader: suspend () -> kotlin.collections.List<T>
+        val loadingIndicator: @Composable () -> Unit,
+        val loader: suspend () -> kotlin.collections.List<T>,
+        val itemSaver: Saver<MutableState<kotlin.collections.List<T>>, out Any>?
     ) : DialogListItemProvider<T>()
 }
 
@@ -328,10 +334,10 @@ interface DialogListItemContents<T> {
 }
 
 class DialogListItemDefaultContent<T>(
-    val text: (item: T) -> String,
-    val supportingText: ((item: T) -> String)? = null,
-    val trailingSupportingText: ((item: T) -> String)? = null,
-    val icon: @Composable ((item: T) -> Unit)? = null
+    private val text: (item: T) -> String,
+    private val supportingText: ((item: T) -> String)? = null,
+    private val trailingSupportingText: ((item: T) -> String)? = null,
+    private val icon: @Composable ((item: T) -> Unit)? = null
 ) : DialogListItemContents<T> {
 
     override val content: @Composable ColumnScope.(item: T) -> Unit =

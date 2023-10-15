@@ -1,25 +1,13 @@
 package com.michaelflisar.composedialogs.core
 
-import android.os.Bundle
-import android.os.Parcelable
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.AlertDialogDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.autoSaver
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +17,6 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.michaelflisar.composedialogs.core.internal.ComposeAlertDialog
 import com.michaelflisar.composedialogs.core.internal.ComposeBottomSheetDialog
-import java.io.Serializable
 
 // ------------------
 // defaults functions
@@ -66,6 +53,7 @@ fun Dialog(
                 content
             )
         }
+
         is DialogStyle.Dialog -> {
             ComposeAlertDialog(
                 title,
@@ -161,8 +149,8 @@ object DialogDefaults {
         style: TextStyle? = null,
         fontWeight: FontWeight? = null
     ) = DialogTitleStyle(
-        style = null,
-        fontWeight = null
+        style = style,
+        fontWeight = fontWeight
     )
 
     @Composable
@@ -260,12 +248,6 @@ class DialogInteractionSource internal constructor(
     val dismissAllowed: MutableState<Boolean>,
     val swipeAllowed: MutableState<Boolean>
 )
-
-@Composable
-fun <T : DialogState> T.ifShow(block: @Composable (state: T) -> Unit) {
-    if (showing)
-        block(this)
-}
 
 open class DialogState internal constructor(
     showing: MutableState<Boolean>,
