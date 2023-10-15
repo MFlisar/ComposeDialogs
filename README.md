@@ -95,24 +95,24 @@ val state = rememberDialogState<Int>(data = null)
 // show a dialog if necessary
 if (state.showing)
 {
-	val data = state.requireData()
-	DialogInfo(
-		state = state,
-		// Custom - Required
-		info = "Data = $data"
-	)
+    val data = state.requireData()
+    DialogInfo(
+        state = state,
+        // Custom - Required
+        info = "Data = $data"
+    )
 }
 
 // a list that uses the dialog
 val items = 1..100
 LazyColumn {
-	items.forEach {
-		item(key = it) {
-			Button(onClick = { state.show(it) }) {
-				Text("Item $it")
-			}
-		}
-	}
+    items.forEach {
+        item(key = it) {
+            Button(onClick = { state.show(it) }) {
+                Text("Item $it")
+            }
+        }
+    }
 }
 ```
 
@@ -232,7 +232,7 @@ https://github.com/MFlisar/ComposeDialogs/blob/9b3f3b73f4f1d78c9329079f4450fbb8a
 
 ```kotlin
 Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
-	Text("Text in custom dialog")
-	// ...
+    Text("Text in custom dialog")
+    // ...
 }
 ```
