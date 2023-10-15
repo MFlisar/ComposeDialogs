@@ -92,7 +92,7 @@ A full demo is included inside the `demo` module, it shows nearly every usage wi
 
 ### Screenshots
 
-I only show the bottom sheet version for the info dialog, but of course any dialog does support the bottom sheet mode.
+I only show the bottom sheet version for the info dialog, but of course any dialog does support the bottom sheet mode. Same holds true for the optional dialog icon.
 
 **Info Dialog**
 
