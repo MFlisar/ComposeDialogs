@@ -149,13 +149,13 @@ Check out the dialog state and the dialogs to find out what settings you can use
 
 In case of the simple state `true` means that the dialog is visible and `false` that it's not. In case of the complex state holding an object means the dialog is visible and `null` means it's not visible.
 
-https://github.com/MFlisar/ComposeDialogs/blob/7dcafb6f5731bcdd9f744f538988cd3d567bafc6/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L77-L83
+https://github.com/MFlisar/ComposeDialogs/blob/efad0c0a57b735f686dbac8b8c22362c42439f60/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L79-L85
 
-In case of the complex state simply use `state.show(data)` to show the dialog and then inside your dialog call `val data = state.requireData()` to get the data from the state. I provide an overload for all supported data types (types that are supported by `Bundle`). For all other cases you must provide a custom saver.
+In case of the complex state simply use `state.show(data)` to show the dialog and then inside your dialog call `val data = state.requireData()` to get the data from the state.
 
-https://github.com/MFlisar/ComposeDialogs/blob/7dcafb6f5731bcdd9f744f538988cd3d567bafc6/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L131-L138
+**CAUTION:** the state must be saveable by `Bundle`, if it is not, provide a custom `saver`!
 
-https://github.com/MFlisar/ComposeDialogs/blob/7dcafb6f5731bcdd9f744f538988cd3d567bafc6/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L39-L47
+https://github.com/MFlisar/ComposeDialogs/blob/efad0c0a57b735f686dbac8b8c22362c42439f60/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L41-L49
   
 ### Existing dialogs
 
