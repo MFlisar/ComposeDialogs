@@ -52,7 +52,7 @@ fun <T : Number> DialogInputNumber(
     state: DialogState,
     // Custom - Required
     value: MutableState<T>,
-    valueLabel: String,
+    valueLabel: String = "",
     // Custom - Optional
     invalidNumberErrorText: (value: String) -> String = { "Invalid!" },
     inputPlaceholder: String = "",
