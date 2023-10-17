@@ -3,23 +3,20 @@ package com.michaelflisar.composedialogs.dialogs.datetime
 import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -30,26 +27,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogIcon
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
-import com.michaelflisar.composedialogs.core.DialogTitleStyle
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.SimpleDate
 import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarHeader
 import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarMonth
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectionHeader
 import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectListMonth
 import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectListYear
+import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectionHeader
 import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarTodayButton
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import java.util.Calendar
@@ -75,9 +69,8 @@ fun DialogDate(
     dateRange: DialogDateRange = DialogDateRange(),
     setup: DialogDateSetup = DialogDateSetup(),
     // Base Dialog - Optional
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
@@ -86,9 +79,8 @@ fun DialogDate(
     val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     Dialog(
         state,
-        title.takeIf { !landscape } ?: "",
-        titleStyle,
-        icon.takeIf { !landscape },
+        title?.takeIf { !landscape },
+        icon?.takeIf { !landscape },
         style,
         buttons,
         options,
@@ -138,31 +130,25 @@ fun DialogDate(
                 Column {
                     // custom icon and title placement in case of landscape mode!
                     if (icon != null) {
-                        when (icon) {
-                            is DialogIcon.Painter -> Image(
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .align(Alignment.CenterHorizontally),
-                                painter = icon.painter(),
-                                contentDescription = ""
-                            )
-
-                            is DialogIcon.Vector -> Icon(
-                                modifier = Modifier.align(Alignment.CenterHorizontally),
-                                imageVector = icon.icon,
-                                contentDescription = "",
-                                tint = icon.tint ?: LocalContentColor.current
-                            )
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                        ) {
+                            icon()
                         }
+
                         Spacer(modifier = Modifier.height(8.dp))
                     }
-                    if (title.isNotEmpty()) {
-                        Text(
-                            text = title,
-                            style = titleStyle.style ?: MaterialTheme.typography.headlineSmall,
-                            fontWeight = titleStyle.fontWeight,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
+                    if (title != null) {
+                        CompositionLocalProvider(
+                            LocalTextStyle provides MaterialTheme.typography.headlineSmall
+                        ) {
+                            Box(
+                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            ) {
+                                title()
+                            }
+                        }
                         Spacer(modifier = Modifier.height(8.dp))
                     }
 
@@ -196,7 +182,13 @@ fun DialogDate(
                         }
 
                         DateViewState.SelectYear -> {
-                            CalendarSelectListYear(pageData, setup, dateRange, pagerState, viewState)
+                            CalendarSelectListYear(
+                                pageData,
+                                setup,
+                                dateRange,
+                                pagerState,
+                                viewState
+                            )
                         }
 
                         DateViewState.SelectMonth -> {

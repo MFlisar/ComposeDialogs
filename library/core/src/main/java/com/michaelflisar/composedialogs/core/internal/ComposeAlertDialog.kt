@@ -37,9 +37,8 @@ internal val DialogVerticalMinMargin = DialogHorizontalMinMargin
 
 @Composable
 fun ComposeAlertDialog(
-    title: String,
-    titleStyle: DialogTitleStyle,
-    icon: DialogIcon?,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle.Dialog,
     buttons: DialogButtons,
     options: Options,
@@ -83,17 +82,8 @@ fun ComposeAlertDialog(
                 )
             }
         } else null,
-        icon = if (icon != null) {
-            {
-                when (icon) {
-                    is DialogIcon.Painter -> Image(modifier = Modifier.size(24.dp), painter = icon.painter(), contentDescription = "")
-                    is DialogIcon.Vector -> Icon(imageVector = icon.icon, contentDescription = "", tint = icon.tint ?: LocalContentColor.current)
-                }
-            }
-        } else null,
-        title = if (title.isNotEmpty()) {
-            { Text(text = title, style = titleStyle.style ?: LocalTextStyle.current, fontWeight = titleStyle.fontWeight) }
-        } else null,
+        icon = icon,
+        title = title,
         text = {
             val scrollModifier =  if (options.wrapContentInScrollableContainer) {
                 Modifier

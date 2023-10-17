@@ -16,10 +16,8 @@ import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogIcon
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
-import com.michaelflisar.composedialogs.core.DialogTitleStyle
 import com.michaelflisar.composedialogs.core.Options
 
 /**
@@ -68,15 +66,14 @@ fun <T : Number> DialogInputNumber(
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
     onValueStateChanged: (valid: Boolean, value: T?) -> Unit = { _, _ -> },
     // Base Dialog - Optional
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
-    Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val modifier = when (style) {
             is DialogStyle.BottomSheet -> Modifier.fillMaxWidth()
             is DialogStyle.Dialog -> Modifier

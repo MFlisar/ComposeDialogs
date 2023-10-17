@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -15,7 +16,7 @@ import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.datetime.*
 
 @Composable
-fun DateTimeDemos(style: DialogStyle, icon: DialogIcon?) {
+fun DateTimeDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("DateTime Dialogs")
     DemoDialogRow {
         DemoDialogDate1(style, icon)
@@ -27,7 +28,7 @@ fun DateTimeDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -46,7 +47,7 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: DialogIcon?) {
             setup = setup,
             dateRange = dateRange,
             icon = icon,
-            title = "Select Date",
+            title = { Text("Select Date") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
@@ -66,7 +67,7 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogTime1(style: DialogStyle, icon: DialogIcon?, is24Hours: Boolean) {
+private fun RowScope.DemoDialogTime1(style: DialogStyle, icon: (@Composable () -> Unit)?, is24Hours: Boolean) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -81,7 +82,7 @@ private fun RowScope.DemoDialogTime1(style: DialogStyle, icon: DialogIcon?, is24
             time = time,
             setup = setup,
             icon = icon,
-            title = "Select Time",
+            title = { Text("Select Time") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {

@@ -3,7 +3,13 @@ package com.michaelflisar.composedialogs.dialogs.info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.michaelflisar.composedialogs.core.*
+import com.michaelflisar.composedialogs.core.Dialog
+import com.michaelflisar.composedialogs.core.DialogButtons
+import com.michaelflisar.composedialogs.core.DialogDefaults
+import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.DialogStyle
+import com.michaelflisar.composedialogs.core.Options
 
 /**
  * Shows a dialog with an info text and an optional label for that info
@@ -23,15 +29,14 @@ fun DialogInfo(
     // Custom - Optional
     infoLabel: String = "",
     // Base Dialog - Optional
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
-    Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         if (infoLabel.isNotEmpty()) {
             Text(text = infoLabel, style = MaterialTheme.typography.titleSmall)
         }

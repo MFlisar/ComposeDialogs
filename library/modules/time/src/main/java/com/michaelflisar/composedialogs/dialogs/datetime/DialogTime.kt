@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.datetime
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
@@ -9,11 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import com.michaelflisar.composedialogs.core.*
 import java.util.*
 
@@ -36,9 +33,8 @@ fun DialogTime(
     // Custom - Optional
     setup: DialogTimeSetup = DialogTimeSetup(),
     // Base Dialog - Optional
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
@@ -48,7 +44,7 @@ fun DialogTime(
     //    time.seconds.value = 0
     //}
 
-    Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val state = rememberTimePickerState(
             time.hour.value,
             time.minute.value,

@@ -31,8 +31,7 @@ private val SheetPeekHeight =
  *
  * @param state the [DialogState] of the dialog
  * @param title the optional title of the dialog (an empty title will not be shown)
- * @param titleStyle [DialogTitleStyle] of the dialog - use [DialogDefaults.titleStyle] or [DialogDefaults.titleStyleSmall]
- * @param icon the optional [DialogIcon] of the dialog - use [DialogIcon.Vector] or [DialogIcon.Painter]
+ * @param icon the optional icon of the dialog
  * @param style the [DialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
  * @param options the [Options] of the dialog
@@ -43,9 +42,8 @@ private val SheetPeekHeight =
 @Composable
 fun Dialog(
     state: DialogState,
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
@@ -57,7 +55,6 @@ fun Dialog(
         is DialogStyle.BottomSheet -> {
             ComposeBottomSheetDialog(
                 title,
-                titleStyle,
                 icon,
                 style,
                 buttons,
@@ -72,7 +69,6 @@ fun Dialog(
         is DialogStyle.Dialog -> {
             ComposeAlertDialog(
                 title,
-                titleStyle,
                 icon,
                 style,
                 buttons,
@@ -191,32 +187,6 @@ object DialogDefaults {
     ) = DialogButtons(
         positive,
         negative
-    )
-
-    /**
-     * default title style for dialogs
-     *
-     * @param style a custom [TextStyle] for the dialog title
-     * @param fontWeight a custom [FontWeight] for the dialog title
-     */
-    @Composable
-    fun titleStyle(
-        style: TextStyle? = null,
-        fontWeight: FontWeight? = null
-    ) = DialogTitleStyle(
-        style = style,
-        fontWeight = fontWeight
-    )
-
-    /**
-     * small title style for dialogs
-     *
-     * @param fontWeight a custom [FontWeight] for the dialog title
-     */
-    @Composable
-    fun titleStyleSmall(fontWeight: FontWeight? = null) = DialogTitleStyle(
-        style = MaterialTheme.typography.titleSmall,
-        fontWeight = fontWeight
     )
 
     /**
@@ -473,37 +443,6 @@ class DialogStateWithData<T : Any> internal constructor(
  */
 data class DialogButton(
     val text: String
-)
-
-sealed class DialogIcon {
-
-    /**
-     * an painter based icon for a dialog
-     *
-     * @param painter the [Painter] for this icon (should be remembered)
-     */
-    class Painter(
-        val painter: @Composable () -> androidx.compose.ui.graphics.painter.Painter
-    ) : DialogIcon()
-
-    /**
-     * a vector based icon for a dialog
-     *
-     * @param icon the [ImageVector] for this icon
-     * @param tint the optional tint [Color] for this icon
-     */
-    class Vector(
-        val icon: ImageVector,
-        val tint: Color? = null
-    ) : DialogIcon()
-}
-
-/**
- * see [DialogDefaults.titleStyle]
- */
-data class DialogTitleStyle internal constructor(
-    val style: TextStyle?,
-    val fontWeight: FontWeight?
 )
 
 /**

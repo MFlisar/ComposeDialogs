@@ -96,8 +96,8 @@ class DemoActivity : ComponentActivity() {
                                     // peekHeight = 0.dp
                                 )
                             } else DialogDefaults.styleDialog(swipeDismissable = swipeDismiss.value)
-                            val icon = if (showIcon.value) {
-                                DialogIcon.Vector(Icons.Default.Home)
+                            val icon: @Composable (() -> Unit)? = if (showIcon.value) {
+                                { Icon(Icons.Default.Home, null) }
                             } else null
 
                             // -----------------
@@ -199,7 +199,7 @@ class DemoActivity : ComponentActivity() {
         if (state.showing) {
             Dialog(
                 state = state,
-                title = "Settings",
+                title = { Text("Settings") },
                 style = DialogDefaults.styleBottomSheet(peekHeight = 0.dp) // disable peek
             ) {
                 Column(

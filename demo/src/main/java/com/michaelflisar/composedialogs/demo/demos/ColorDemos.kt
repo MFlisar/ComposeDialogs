@@ -3,6 +3,7 @@ package com.michaelflisar.composedialogs.demo.demos
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ColorLens
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -17,7 +18,7 @@ import com.michaelflisar.composedialogs.dialogs.color.DialogColorLabelStyle
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 
 @Composable
-fun ColorDemos(style: DialogStyle, icon: DialogIcon?) {
+fun ColorDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Color Dialogs")
     DemoDialogRow {
         DemoDialogColor1(style, icon)
@@ -28,7 +29,7 @@ fun ColorDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogColor1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogColor1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -38,7 +39,7 @@ private fun RowScope.DemoDialogColor1(style: DialogStyle, icon: DialogIcon?) {
             color = color,
             alphaSupported = true,
             icon = icon,
-            title = "Color Dialog",
+            title = { Text("Color Dialog") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
@@ -58,7 +59,7 @@ private fun RowScope.DemoDialogColor1(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogColor2(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogColor2(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -69,7 +70,7 @@ private fun RowScope.DemoDialogColor2(style: DialogStyle, icon: DialogIcon?) {
             alphaSupported = false,
             labelStyle = DialogColorLabelStyle.Percent,
             icon = icon,
-            title = "Color Dialog",
+            title = { Text("Color Dialog") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {

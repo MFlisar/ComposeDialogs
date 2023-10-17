@@ -4,12 +4,37 @@ import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -27,14 +52,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.*
+import com.michaelflisar.composedialogs.core.Dialog
+import com.michaelflisar.composedialogs.core.DialogButtons
+import com.michaelflisar.composedialogs.core.DialogDefaults
+import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.DialogStyle
+import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
 import com.michaelflisar.composedialogs.dialogs.color.classes.GroupedColor
 import java.text.DecimalFormat
 import kotlin.math.ceil
 
 object DialogColor {
-    object ColorStateSaver: Saver<MutableState<Color>, Int> {
+    object ColorStateSaver : Saver<MutableState<Color>, Int> {
         override fun restore(value: Int): MutableState<Color> {
             return mutableStateOf(Color(value))
         }
@@ -45,12 +76,12 @@ object DialogColor {
 
     }
 
-    object ColorStateSaverNullable: Saver<MutableState<Color?>, String> {
+    object ColorStateSaverNullable : Saver<MutableState<Color?>, String> {
         override fun restore(value: String): MutableState<Color?> {
             return mutableStateOf(value.takeIf { it.isNotEmpty() }?.toInt()?.let { Color(it) })
         }
 
-        override fun SaverScope.save(value: MutableState<Color?>): String{
+        override fun SaverScope.save(value: MutableState<Color?>): String {
             return value.value?.toArgb()?.toString() ?: ""
         }
 
@@ -86,16 +117,16 @@ fun DialogColor(
     gridSize: Int = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) 6 else 4,
     labelStyle: DialogColorLabelStyle = DialogColorLabelStyle.Value,
     // Base Dialog - Optional
-    title: String = "",
-    titleStyle: DialogTitleStyle = DialogDefaults.titleStyle(),
-    icon: DialogIcon? = null,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle = DialogDefaults.styleDialog(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     // saved dialog state
-    val selectedSubColor = rememberSaveable(saver = DialogColor.ColorStateSaverNullable) { mutableStateOf(null) }
+    val selectedSubColor =
+        rememberSaveable(saver = DialogColor.ColorStateSaverNullable) { mutableStateOf(null) }
     val selectedPresetsLevel = rememberSaveable { mutableIntStateOf(0) }
     val context = LocalContext.current
     val selectedMainColor = rememberSaveable {
@@ -108,9 +139,10 @@ fun DialogColor(
     }
     val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
 
-    Dialog(state, title, titleStyle, icon, style, buttons, options, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
 
-        val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val landscape =
+            LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
         BackHandler(enabled = selectedPresetsLevel.intValue != 0, onBack = {
             selectedPresetsLevel.intValue = 0
@@ -118,17 +150,35 @@ fun DialogColor(
 
         if (landscape) {
             Row {
-               Column(
-                   verticalArrangement = Arrangement.spacedBy(8.dp)
-               ) {
-                   TitleForPages(Modifier.weight(1f), texts, colorState, selectedSubColor, selectedPresetsLevel)
-               }
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(modifier = Modifier
-                    .weight(1f)
-                    .verticalScroll(rememberScrollState())
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Content(color, colorState, selectedMainColor, selectedSubColor, selectedPresetsLevel, selectedAlpha, alphaSupported, shape, gridSize, labelStyle)
+                    TitleForPages(
+                        Modifier.weight(1f),
+                        texts,
+                        colorState,
+                        selectedSubColor,
+                        selectedPresetsLevel
+                    )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Content(
+                        color,
+                        colorState,
+                        selectedMainColor,
+                        selectedSubColor,
+                        selectedPresetsLevel,
+                        selectedAlpha,
+                        alphaSupported,
+                        shape,
+                        gridSize,
+                        labelStyle
+                    )
                 }
             }
         } else {
@@ -137,10 +187,27 @@ fun DialogColor(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                TitleForPages(Modifier.weight(1f), texts, colorState, selectedSubColor, selectedPresetsLevel)
+                TitleForPages(
+                    Modifier.weight(1f),
+                    texts,
+                    colorState,
+                    selectedSubColor,
+                    selectedPresetsLevel
+                )
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Content(color, colorState, selectedMainColor, selectedSubColor, selectedPresetsLevel, selectedAlpha, alphaSupported, shape, gridSize, labelStyle)
+            Content(
+                color,
+                colorState,
+                selectedMainColor,
+                selectedSubColor,
+                selectedPresetsLevel,
+                selectedAlpha,
+                alphaSupported,
+                shape,
+                gridSize,
+                labelStyle
+            )
         }
     }
 }
@@ -271,6 +338,7 @@ private fun Content(
                         }
                     }
                 }
+
                 DialogColorPage.Presets -> {
                     val space = 8.dp
                     val size = 48.dp

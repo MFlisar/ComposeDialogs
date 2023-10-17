@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.DialogIcon
 import com.michaelflisar.composedialogs.core.DialogStateWithData
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
@@ -24,7 +23,7 @@ import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.info.DialogInfo
 
 @Composable
-fun ColumnScope.SingleDialogWithListDemos(style: DialogStyle, icon: DialogIcon?) {
+fun ColumnScope.SingleDialogWithListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Clicking any item in the list below will open its dialog")
 
     val items = 1..100
@@ -59,13 +58,14 @@ fun ColumnScope.SingleDialogWithListDemos(style: DialogStyle, icon: DialogIcon?)
 private fun ListDialog(
     stateWithData: DialogStateWithData<Int>,
     style: DialogStyle,
-    icon: DialogIcon?
+    icon: (@Composable () -> Unit)?
 ) {
     if (stateWithData.showing) {
         val context = LocalContext.current
         val data = stateWithData.requireData()
         DialogInfo(
             state = stateWithData,
+            title = { Text("Item Info") },
             info = "This is the dialog for Item #$data",
             icon = icon,
             style = style,

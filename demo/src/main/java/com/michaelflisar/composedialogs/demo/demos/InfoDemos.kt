@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -18,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun InfoDemos(style: DialogStyle, icon: DialogIcon?) {
+fun InfoDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Info Dialogs")
     DemoDialogRow {
         DemoDialogInfo1(style, icon)
@@ -29,13 +31,13 @@ fun InfoDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogInfo1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
         DialogInfo(
             state = state,
-            title = "Dialog",
+            title = { Text("Dialog") },
             info = "Simple Info Dialog",
             icon = icon,
             style = style,
@@ -53,7 +55,7 @@ private fun RowScope.DemoDialogInfo1(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo2(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogInfo2(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState(
         showing = false,
@@ -63,7 +65,9 @@ private fun RowScope.DemoDialogInfo2(style: DialogStyle, icon: DialogIcon?) {
     if (state.showing) {
         var currentIcon by remember { mutableStateOf(icon) }
         var time by rememberSaveable { mutableStateOf(10) }
-        val iconDone = DialogIcon.Vector(Icons.Default.Check)
+        val iconDone = @Composable {
+            Icon(Icons.Default.Check, null)
+        }
         LaunchedEffect(Unit) {
             launch {
                 while (time > 0) {
@@ -77,7 +81,7 @@ private fun RowScope.DemoDialogInfo2(style: DialogStyle, icon: DialogIcon?) {
         }
         DialogInfo(
             state = state,
-            title = "Dialog",
+            title = { Text("Dialog") },
             info = if (time == 0) "Dialog can be dismissed" else "Dialog can be dismissed in $time seconds...",
             icon = currentIcon,
             style = style,

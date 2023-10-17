@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.autoSaver
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogIcon
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
@@ -48,7 +46,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 @Composable
-fun ListDemos(style: DialogStyle, icon: DialogIcon?) {
+fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     DemoDialogRegion("List Dialogs (Simple Layouts)")
 
@@ -234,7 +232,7 @@ fun ListDemos(style: DialogStyle, icon: DialogIcon?) {
 @Composable
 private fun <T> RowScope.DemoList(
     style: DialogStyle,
-    icon: DialogIcon?,
+    icon: (@Composable () -> Unit)?,
     itemContents: DialogListItemContents<T>,
     itemIdProvider: (item: T) -> Int,
     items: List<T>? = null,
@@ -277,7 +275,7 @@ private fun <T> RowScope.DemoList(
         if (items != null) {
             DialogList(
                 state = state,
-                title = "Dialog",
+                title = { Text("Dialog") },
                 items = items,
                 itemIdProvider = itemIdProvider,
                 itemContents = itemContents,
@@ -292,7 +290,7 @@ private fun <T> RowScope.DemoList(
         } else {
             DialogList(
                 state = state,
-                title = "Dialog",
+                title = { Text("Dialog") },
                 loadingIndicator = {
                     Column(
                         modifier = Modifier.fillMaxWidth(),

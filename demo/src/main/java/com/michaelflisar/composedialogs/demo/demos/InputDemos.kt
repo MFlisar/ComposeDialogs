@@ -5,12 +5,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Numbers
 import androidx.compose.material.icons.filled.TextFields
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogIcon
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
@@ -18,8 +18,8 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.input.DialogInput
-import com.michaelflisar.composedialogs.dialogs.input.DialogInputValidator
 import com.michaelflisar.composedialogs.dialogs.input.DialogInputNumber
+import com.michaelflisar.composedialogs.dialogs.input.DialogInputValidator
 import com.michaelflisar.composedialogs.dialogs.input.DialogNumberPicker
 import com.michaelflisar.composedialogs.dialogs.input.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.input.RepeatingButton
@@ -28,7 +28,7 @@ import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputValidat
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogNumber
 
 @Composable
-fun InputDemos(style: DialogStyle, icon: DialogIcon?) {
+fun InputDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Text Input Dialogs")
     DemoDialogRow {
         DemoDialogInput1(style, icon)
@@ -43,7 +43,7 @@ fun InputDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInput1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogInput1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -61,7 +61,7 @@ private fun RowScope.DemoDialogInput1(style: DialogStyle, icon: DialogIcon?) {
         // input dialog
         DialogInput(
             state = state,
-            title = "Input Dialog",
+            title = { Text("Input Dialog") },
             input = input,
             inputLabel = "Text",
             icon = icon,
@@ -96,7 +96,7 @@ private fun RowScope.DemoDialogInput1(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInput2(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogInput2(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -110,7 +110,7 @@ private fun RowScope.DemoDialogInput2(style: DialogStyle, icon: DialogIcon?) {
         // input dialog
         DialogInput(
             state = state,
-            title = "Input Dialog",
+            title = { Text("Input Dialog") },
             input = input,
             inputLabel = "Numerical Value",
             icon = icon,
@@ -135,7 +135,7 @@ private fun RowScope.DemoDialogInput2(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -150,7 +150,7 @@ private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: DialogIcon?) {
         // number dialog
         DialogInputNumber(
             state = state,
-            title = "Integer Dialog",
+            title = { Text("Input Integer Dialog") },
             value = value,
             valueLabel = "Integer",
             icon = icon,
@@ -174,7 +174,11 @@ private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInput4(style: DialogStyle, icon: DialogIcon?, enableButtonLongPress: Boolean) {
+private fun RowScope.DemoDialogInput4(
+    style: DialogStyle,
+    icon: (@Composable () -> Unit)?,
+    enableButtonLongPress: Boolean
+) {
 
     val context = LocalContext.current
 
@@ -189,7 +193,7 @@ private fun RowScope.DemoDialogInput4(style: DialogStyle, icon: DialogIcon?, ena
         // number dialog
         DialogNumberPicker(
             state = state,
-            title = "Integer Dialog",
+            title = { Text("Input Integer Dialog") },
             value = value,
             icon = icon,
             style = style,

@@ -24,7 +24,7 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 
 @Composable
-fun CustomDemos(style: DialogStyle, icon: DialogIcon?) {
+fun CustomDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Custom Dialogs")
     DemoDialogRow {
         DemoDialogCustom1(style, icon)
@@ -33,14 +33,14 @@ fun CustomDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogCustom1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(
             state = state,
             style = style,
             icon = icon,
-            title = "Custom Dialog"
+            title = { Text("Custom Dialog") }
         ) {
             var checked by rememberSaveable { mutableStateOf(false) }
             Row(
@@ -67,14 +67,14 @@ private fun RowScope.DemoDialogCustom1(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom2(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogCustom2(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(
             state = state,
             style = style,
             icon = icon,
-            title = "Custom Dialog"
+            title = { Text("Custom Dialog") }
         ) {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())

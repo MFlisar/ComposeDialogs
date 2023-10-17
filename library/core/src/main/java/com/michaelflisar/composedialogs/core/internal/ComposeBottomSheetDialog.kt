@@ -46,9 +46,8 @@ enum class BottomSheetState {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ComposeBottomSheetDialog(
-    title: String,
-    titleStyle: DialogTitleStyle,
-    icon: DialogIcon?,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle.BottomSheet,
     buttons: DialogButtons,
     options: Options,
@@ -153,10 +152,11 @@ fun ComposeBottomSheetDialog(
                         .then(modifierContentPadding),
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    SheetHeader(title, titleStyle, icon, style, dismiss)
-                    SheetContent(Modifier
-                        .fillMaxWidth()
-                        .weight(1f, false)
+                    SheetHeader(title, icon, style, dismiss)
+                    SheetContent(
+                        Modifier
+                            .fillMaxWidth()
+                            .weight(1f, false)
                         , offsetState, style, options, content
                     )
                     SheetFooter(offsetState, buttons, options, state, dismiss = {
@@ -173,9 +173,8 @@ fun ComposeBottomSheetDialog(
 
 @Composable
 private fun ColumnScope.SheetHeader(
-    title: String,
-    titleStyle: DialogTitleStyle,
-    icon: DialogIcon?,
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
     style: DialogStyle.BottomSheet,
     dismiss: () -> Boolean
 ) {
@@ -203,21 +202,29 @@ private fun ColumnScope.SheetHeader(
     }
     // Icon + Title
     if (icon != null) {
-        val modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .size(24.dp)
-        when (icon) {
-            is DialogIcon.Painter -> Image(modifier = modifier ,painter = icon.painter(), contentDescription = "")
-            is DialogIcon.Vector -> Icon(modifier = modifier , imageVector = icon.icon, contentDescription = "", tint = icon.tint ?: MaterialTheme.colorScheme.onSurface)
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                //.size(24.dp)
+        ) {
+            CompositionLocalProvider(
+                LocalContentColor provides MaterialTheme.colorScheme.onSurface
+            ) {
+                icon()
+            }
+
         }
     }
-    if (title.isNotEmpty()) {
-        Text(
-            modifier = if (icon != null) Modifier.align(Alignment.CenterHorizontally) else Modifier,
-            text = title,
-            style = titleStyle.style ?: MaterialTheme.typography.headlineSmall,
-            fontWeight = titleStyle.fontWeight
-        )
+    if (title != null) {
+        CompositionLocalProvider(
+            LocalTextStyle provides MaterialTheme.typography.headlineSmall
+        ) {
+            Box(
+                modifier = if (icon != null) Modifier.align(Alignment.CenterHorizontally) else Modifier
+            ) {
+                title()
+            }
+        }
     }
     // Space
     Spacer(modifier = Modifier.height(8.dp))

@@ -2,9 +2,13 @@ package com.michaelflisar.composedialogs.demo.demos
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Downloading
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
@@ -17,7 +21,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProgressDemos(style: DialogStyle, icon: DialogIcon?) {
+fun ProgressDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Progress Dialogs")
     DemoDialogRow {
         DemoDialogProgress1(style, icon)
@@ -29,7 +33,7 @@ fun ProgressDemos(style: DialogStyle, icon: DialogIcon?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -38,7 +42,7 @@ private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: DialogIcon?) 
             label = "Working...",
             progressStyle = DialogProgressStyle.Indeterminate(linear = true),
             icon = icon,
-            title = "Progress Dialog",
+            title = { Text("Progress Dialog") },
             buttons = DialogDefaults.buttons(
                 positive = DialogButton("Stop")
             ),
@@ -61,7 +65,7 @@ private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: DialogIcon?) 
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -70,7 +74,7 @@ private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: DialogIcon?) 
             label = "Working...",
             progressStyle = DialogProgressStyle.Indeterminate(linear = false),
             icon = icon,
-            title = "Progress Dialog",
+            title = { Text("Progress Dialog") },
             buttons = DialogDefaults.buttons(
                 positive = DialogButton("Stop")
             ),
@@ -93,7 +97,7 @@ private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: DialogIcon?) 
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress3(style: DialogStyle, icon: DialogIcon?) {
+private fun RowScope.DemoDialogProgress3(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState(
         dismissAllowed = false,
@@ -114,12 +118,24 @@ private fun RowScope.DemoDialogProgress3(style: DialogStyle, icon: DialogIcon?) 
         val progressStyle by remember {
             derivedStateOf { DialogProgressStyle.Determinate(linear = true, 10 - time, 10) }
         }
+        val label by remember {
+            derivedStateOf {
+                if (time > 0) "Working..." else "Done!"
+            }
+        }
+        val iconToShow by remember {
+            derivedStateOf {
+                if (time > 0) icon else {
+                    { Icon(Icons.Default.Check, null, tint = Color.Green) }
+                }
+            }
+        }
         DialogProgress(
             state = state,
-            label = "Working...",
+            label = label,
             progressStyle = progressStyle,
-            icon = icon,
-            title = "Progress Dialog",
+            icon = iconToShow,
+            title = { Text("Progress Dialog") },
             buttons = DialogDefaults.buttons(
                 positive = DialogButton("Close")
             ),
