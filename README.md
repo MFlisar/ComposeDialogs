@@ -187,47 +187,47 @@ In case of the complex state simply use `state.show(data)` to show the dialog an
 
 **CAUTION:** the state must be saveable by `Bundle`, if it is not, provide a custom `saver`!
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L41-L49
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt#L104-110
   
 ### Existing dialogs
 
 **Info Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L9-L23
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L25-38
 
 **Input Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt#L41-L70
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt#L63-91
 
 **Number Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/number/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogNumberPicker.kt#L30-L54
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/number/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogNumberPicker.kt#L43-66
 
 **Date Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/date/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogDate.kt#L56-L71
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/date/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogDate.kt#L64-78
 
 **Time Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L19-L33
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L29-42
 
 **Color Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L61-L81
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L107-126
 
 **List Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L45-L64
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L59-77
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L85-L109
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/list/src/main/java/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt#L116-140
 
 **Progress Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L19-L34
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L28-42
 
 **Custom Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L29-L40
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/core/src/main/java/com/michaelflisar/composedialogs/core/Dialog.kt#L43-53
 
 ```kotlin
 Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {

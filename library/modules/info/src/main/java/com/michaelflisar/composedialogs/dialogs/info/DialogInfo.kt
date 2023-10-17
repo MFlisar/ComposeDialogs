@@ -3,13 +3,7 @@ package com.michaelflisar.composedialogs.dialogs.info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.michaelflisar.composedialogs.core.Dialog
-import com.michaelflisar.composedialogs.core.DialogButtons
-import com.michaelflisar.composedialogs.core.DialogDefaults
-import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogState
-import com.michaelflisar.composedialogs.core.DialogStyle
-import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.*
 
 /**
  * Shows a dialog with an info text and an optional label for that info
