@@ -193,7 +193,7 @@ https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f063
 
 **Info Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L25-38
+https://github.com/MFlisar/ComposeDialogs/blob/07d81a25ab1803e2ca6b3447116a1f0639357ab0/library/modules/info/src/main/java/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L19-32
 
 **Input Dialog**
 
