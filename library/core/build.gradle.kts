@@ -61,15 +61,6 @@ dependencies {
 
     // accompanist
     implementation(compose.systemuicontroller)
-
-    // ------------------------
-    // Libraries
-    // ------------------------
-
-    // preferences via delegates + datastore based preferences to save all theme settings
-    implementation(deps.materialpreferences)
-    implementation(deps.materialpreferences.datastore)
-    //implementation(deps.materialpreferences.compose)
 }
 
 project.afterEvaluate {
