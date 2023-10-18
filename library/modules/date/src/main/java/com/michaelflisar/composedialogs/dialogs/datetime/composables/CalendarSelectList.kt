@@ -49,7 +49,7 @@ internal fun CalendarSelectListYear(
             DateUtil.getFormattedDate(setup.dateFormatYearList, it, 1, 1)
         }
     ) {
-        val offsetPages = (it - dateRange.years.first) * 12
+        val offsetPages = (it - dateRange.years.first) * 12 + pageData.value.month - 1
         scope.launch { pagerState.scrollToPage(offsetPages) }
         viewState.value = DateViewState.Calendar
     }

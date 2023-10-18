@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -21,13 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateState
-import com.michaelflisar.composedialogs.dialogs.datetime.classes.SimpleDate
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 @Composable
 internal fun CalendarMonth(
-    state: DialogDateState,
+    state: MutableState<LocalDate>,
     setup: DialogDateSetup,
     year: Int,
     month: Int
@@ -52,19 +53,18 @@ internal fun CalendarMonth(
 
     val items = remember(year, month, setup.firstDayOfWeek) {
         derivedStateOf {
-            val items = mutableListOf<SimpleDate?>()
-            val colIndexOfFirstDay = weekdays.indexOf(firstDayOfMonth.value.weekday)
-            val colIndexOfLastDay = weekdays.indexOf(lastDayOfMonth.value.weekday)
+            val items = mutableListOf<LocalDate?>()
+            val colIndexOfFirstDay = weekdays.indexOf(firstDayOfMonth.value.dayOfWeek)
+            val colIndexOfLastDay = weekdays.indexOf(lastDayOfMonth.value.dayOfWeek)
             repeat(colIndexOfFirstDay) {
                 items.add(null)
             }
-            repeat(lastDayOfMonth.value.day) {
+            repeat(lastDayOfMonth.value.dayOfMonth) {
                 val col = (colIndexOfFirstDay + it) % 7
-                val date = SimpleDate(
+                val date = LocalDate.of(
                     firstDayOfMonth.value.year,
                     firstDayOfMonth.value.month,
-                    it + 1,
-                    weekdays[col]
+                    it + 1
                 )
                 items.add(date)
             }
@@ -106,7 +106,7 @@ internal fun CalendarMonth(
 
 @Composable
 private fun CalendarCellHeader(
-    dayOfWeek: Int,
+    dayOfWeek: DayOfWeek,
     modifier: Modifier
 ) {
     val text = DateUtil.getWeekDayInfo(dayOfWeek)
@@ -120,9 +120,9 @@ private fun CalendarCellHeader(
 
 @Composable
 private fun CalendarCell(
-    state: DialogDateState,
-    date: SimpleDate?,
-    today: SimpleDate,
+    state: MutableState<LocalDate>,
+    date: LocalDate?,
+    today: LocalDate,
     modifier: Modifier
 ) {
     if (date == null) {
@@ -130,14 +130,14 @@ private fun CalendarCell(
             modifier = modifier
         )
     } else {
-        if (date.isEqual(state)) {
+        if (date == state.value) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
                     .clip(MaterialTheme.shapes.small)
                     .background(MaterialTheme.colorScheme.primary)
             ) {
-                Text(date.day.toString(), color = MaterialTheme.colorScheme.onPrimary)
+                Text(date.dayOfMonth.toString(), color = MaterialTheme.colorScheme.onPrimary)
             }
         } else {
             val isToday = today == date
@@ -150,10 +150,10 @@ private fun CalendarCell(
                         MaterialTheme.shapes.small
                     )
                     .clickable {
-                        state.update(date)
+                        state.value = date
                     }
             ) {
-                Text(date.day.toString())
+                Text(date.dayOfMonth.toString())
             }
         }
     }

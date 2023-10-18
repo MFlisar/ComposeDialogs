@@ -11,6 +11,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -18,13 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateState
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun CalendarSelectionHeader(state: DialogDateState, setup: DialogDateSetup, pagerState: PagerState, currentPage: State<Int>) {
+internal fun CalendarSelectionHeader(state: MutableState<LocalDate>, setup: DialogDateSetup, pagerState: PagerState, currentPage: State<Int>) {
     val scope = rememberCoroutineScope()
     val interactionSource = remember { MutableInteractionSource() }
     Column(modifier = Modifier
@@ -37,9 +38,9 @@ internal fun CalendarSelectionHeader(state: DialogDateState, setup: DialogDateSe
         Text(
             text = DateUtil.getFormattedDate(
                 setup.selectedDateFormat,
-                state.year.value,
-                state.month.value,
-                state.day.value
+                state.value.year,
+                state.value.monthValue,
+                state.value.dayOfMonth
             ),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,

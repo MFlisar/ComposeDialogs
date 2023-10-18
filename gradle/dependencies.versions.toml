@@ -1,6 +1,7 @@
 [versions]
 
 materialize =				"1.2.0"
+desugar =                   "2.0.3"
 
 # ---------
 # libraries
@@ -9,6 +10,7 @@ materialize =				"1.2.0"
 [libraries]
 
 materialize =			        			{ module = "com.mikepenz:materialize", 												version.ref = "materialize" }
+desugar =			        			    { module = "com.android.tools:desugar_jdk_libs", 									version.ref = "desugar" }
 
 # -------
 # bundles

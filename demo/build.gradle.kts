@@ -29,12 +29,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     composeOptions {
@@ -100,4 +101,10 @@ dependencies {
     //implementation(project(":ComposeDialogs:Modules:Ads"))
     //implementation(project(":ComposeDialogs:Modules:Billing"))
     //implementation(project(":ComposeDialogs:Modules:GDPR"))
+
+    // ------------------------
+    // Desugar
+    // ------------------------
+
+    coreLibraryDesugaring(deps.desugar)
 }

@@ -7,11 +7,12 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.core.*
+import java.time.LocalTime
 import java.util.*
 
 /**
@@ -29,7 +30,7 @@ import java.util.*
 fun DialogTime(
     state: DialogState,
     // Custom - Required
-    time: DialogTimeState,
+    time: MutableState<LocalTime>,
     // Custom - Optional
     setup: DialogTimeSetup = DialogTimeSetup(),
     // Base Dialog - Optional
@@ -46,31 +47,15 @@ fun DialogTime(
 
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val state = rememberTimePickerState(
-            time.hour.value,
-            time.minute.value,
+            time.value.hour,
+            time.value.minute,
             setup.is24Hours
         )
         LaunchedEffect(state.hour, state.minute) {
-            time.hour.value = state.hour
-            time.minute.value = state.minute
+            time.value = LocalTime.of(state.hour, state.minute)
         }
         TimeInput(state = state, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
-}
-
-/**
- * time state
- *
- * @param hour the current state of the hour
- * @param minutes the current state of the minute
- */
-class DialogTimeState(
-    val hour: MutableState<Int>,
-    val minute: MutableState<Int>,
-    //val seconds: MutableState<Int>
-) {
-    override fun toString() =
-        "${"%02d".format(hour.value)}:${"%02d".format(minute.value)}"//:${"%02d".format(seconds.value)}"
 }
 
 /**
@@ -92,13 +77,9 @@ class DialogTimeSetup(
  * @return a state holding the current time values
  */
 @Composable
-fun rememberDialogTimeState(
+fun rememberDialogTime(
     initialHour: Int = Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-    initialMinute: Int = Calendar.getInstance().get(Calendar.MINUTE),
-    //initialSeconds: Int = Calendar.getInstance().get(Calendar.SECOND)
-): DialogTimeState {
-    val hour = rememberSaveable { mutableIntStateOf(initialHour) }
-    val minute = rememberSaveable { mutableIntStateOf(initialMinute) }
-    //val seconds = rememberSaveable { mutableStateOf(initialSeconds) }
-    return DialogTimeState(hour, minute)//, seconds)
+    initialMinute: Int = Calendar.getInstance().get(Calendar.MINUTE)
+): MutableState<LocalTime> {
+    return rememberSaveable { mutableStateOf(LocalTime.of(initialHour, initialMinute)) }
 }
