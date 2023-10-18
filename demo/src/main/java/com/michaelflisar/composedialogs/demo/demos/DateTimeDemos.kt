@@ -86,7 +86,7 @@ private fun RowScope.DemoDialogTime1(style: DialogStyle, icon: (@Composable () -
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
-                    context.showToast("Selected Time: $time")
+                    context.showToast("Selected Time: ${time.value}")
                 } else {
                     context.showToast("Event $it")
                 }
