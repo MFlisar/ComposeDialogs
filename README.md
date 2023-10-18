@@ -209,11 +209,11 @@ https://github.com/MFlisar/ComposeDialogs/blob/6cb94d5c38c5dea251152880a5eafb821
 
 **Time Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/6cb94d5c38c5dea251152880a5eafb8218daad8c/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L29-L42
+https://github.com/MFlisar/ComposeDialogs/blob/6cb94d5c38c5dea251152880a5eafb8218daad8c/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L30-L43
 
 **Color Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/6cb94d5c38c5dea251152880a5eafb8218daad8c/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L107-L126
+https://github.com/MFlisar/ComposeDialogs/blob/6cb94d5c38c5dea251152880a5eafb8218daad8c/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L108-L127
 
 **List Dialog**
 
