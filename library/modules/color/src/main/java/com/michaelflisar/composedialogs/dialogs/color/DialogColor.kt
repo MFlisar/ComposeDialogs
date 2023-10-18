@@ -50,6 +50,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
@@ -254,7 +255,7 @@ private fun Content(
     labelStyle: DialogColorLabelStyle
 ) {
     val context = LocalContext.current
-    val checkerBoardPixelSize = with(LocalDensity.current) { 4.dp.toPx().toInt() }
+    val density = LocalDensity.current
     val updateSelectedPresetColors = {
         selectedMainColor.value = DialogColorUtil.getNearestColorGroup(context, color.value)
         selectedSubColor.value = null
@@ -282,10 +283,7 @@ private fun Content(
                                         //.size(previewSize)
                                         .clip(shape)
                                 ) {
-                                    DialogColorUtil.drawCheckerboard(
-                                        this,
-                                        checkerBoardPixelSize
-                                    )
+                                    DialogColorUtil.drawCheckerboard(this, density)
                                 }
                                 Spacer(
                                     modifier = Modifier
@@ -358,7 +356,7 @@ private fun Content(
                                 shape,
                                 space,
                                 size,
-                                checkerBoardPixelSize
+                                density
                             ) {
                                 selectedMainColor.value = ColorDefinitions.COLORS[it]
                                 selectedPresetsLevel.value = 1
@@ -374,7 +372,7 @@ private fun Content(
                                 shape,
                                 space,
                                 size,
-                                checkerBoardPixelSize
+                                density
                             ) {
                                 selectedSubColor.value =
                                     selectedMainColor.value.colors[it].getColor(context)
@@ -481,7 +479,7 @@ private fun ColorGrid(
     shape: Shape,
     space: Dp,
     size: Dp,
-    checkerBoardPixelSize: Int,
+    density: Density,
     onClick: (index: Int) -> Unit
 ) {
     val rows = ceil(colors.size.toFloat() / gridSize.toFloat()).toInt()
@@ -519,7 +517,7 @@ private fun ColorGrid(
                                 .fillMaxSize()
                                 .clip(shape)
                         ) {
-                            DialogColorUtil.drawCheckerboard(this, checkerBoardPixelSize)
+                            DialogColorUtil.drawCheckerboard(this, density)
                         }
                         if (color == Color.Black && level == 0) {
                             Canvas(

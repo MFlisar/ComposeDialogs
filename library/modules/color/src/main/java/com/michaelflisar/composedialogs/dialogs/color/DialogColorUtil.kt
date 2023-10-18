@@ -5,12 +5,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
 import com.michaelflisar.composedialogs.dialogs.color.classes.GroupedColor
 
-internal object DialogColorUtil {
+object DialogColorUtil {
 
-    fun drawCheckerboard(drawScope: DrawScope, pixelSize: Int) {
+    fun drawCheckerboard(drawScope: DrawScope, density: Density) {
+        val pixelSize = with(density) { 4.dp.toPx().toInt() }
         val color1 = Color(0xFFC2C2C2)
         val color2 = Color(0xFFF3F3F3)
         val sizePixel = Size(pixelSize.toFloat(), pixelSize.toFloat())
@@ -22,12 +26,12 @@ internal object DialogColorUtil {
         }
     }
 
-    fun drawBlackWhite(drawScope: DrawScope, alpha: Float) {
+    internal fun drawBlackWhite(drawScope: DrawScope, alpha: Float) {
         drawScope.drawRect(Color.Black.copy(alpha = alpha), size = Size(drawScope.size.width / 2, drawScope.size.height))
         drawScope.drawRect(Color.White.copy(alpha = alpha), Offset(x = drawScope.size.width / 2, y = 0f), size = Size(drawScope.size.width / 2, drawScope.size.height))
     }
 
-    fun getNearestColorGroup(context: Context, color: Color): GroupedColor {
+    internal fun getNearestColorGroup(context: Context, color: Color): GroupedColor {
         val solidColor = color.copy(alpha = 1f)
         var bestMatch = ColorDefinitions.COLORS_BW
         var minDiff: Double? = null
@@ -45,7 +49,7 @@ internal object DialogColorUtil {
         return bestMatch
     }
 
-    fun getBestTextColor(background: Color): Color {
+    internal fun getBestTextColor(background: Color): Color {
         if (background.alpha <= 0.4f) {
             return Color.Black
         }
@@ -56,11 +60,11 @@ internal object DialogColorUtil {
         }
     }
 
-    fun getDarknessFactor(color: Color): Double {
+    internal fun getDarknessFactor(color: Color): Double {
         return 1.0 - (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue)
     }
 
-    fun calcColorDifference(c1: Color, c2: Color): Double {
+    internal fun calcColorDifference(c1: Color, c2: Color): Double {
         val r1 = c1.red
         val g1 = c1.green
         val b1 = c1.blue
