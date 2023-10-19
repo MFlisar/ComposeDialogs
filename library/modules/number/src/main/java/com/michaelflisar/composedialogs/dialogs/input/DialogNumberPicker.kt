@@ -160,9 +160,9 @@ sealed class RepeatingButton {
  */
 @Composable
 fun <T : Number> rememberDialogNumber(
-    initialValue: T
+    number: T
 ): MutableState<T> {
     return rememberSaveable {
-        mutableStateOf(initialValue)
+        mutableStateOf(number)
     }
 }
