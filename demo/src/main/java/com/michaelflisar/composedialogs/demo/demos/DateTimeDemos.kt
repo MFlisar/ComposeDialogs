@@ -4,22 +4,42 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.Today
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.*
+import com.michaelflisar.composedialogs.core.DialogButtonType
+import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogStyle
+import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.showToast
-import com.michaelflisar.composedialogs.dialogs.datetime.*
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateRange
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogTime
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogTimeSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.rememberDialogDate
+import com.michaelflisar.composedialogs.dialogs.datetime.rememberDialogTime
+import java.time.DayOfWeek
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.time.format.TextStyle
+import java.util.Locale
 
 @Composable
 fun DateTimeDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("DateTime Dialogs")
     DemoDialogRow {
-        DemoDialogDate1(style, icon)
+        DemoDialogDate1(style, icon, false)
+        DemoDialogDate1(style, icon, true)
     }
     DemoDialogRow {
         DemoDialogTime1(style, icon, false)
@@ -28,7 +48,7 @@ fun DateTimeDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -> Unit)?, customSetup: Boolean) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -36,9 +56,30 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -
         // special state for date dialog
         val date = rememberDialogDate()
         // optional settings
-        val setup = DialogDateSetup(
+        var setup = DialogDateSetup(
             dateCellHeight = 32.dp
         )
+        if (customSetup) {
+            setup = DialogDateSetup(
+                buttonToday = { enabled, onClick ->
+                    FilledIconButton(onClick = onClick, enabled = enabled) {
+                        Icon(Icons.Default.Today, null)
+                    }
+                },
+                firstDayOfWeek = DayOfWeek.SUNDAY,
+                dateCellHeight = 32.dp,
+                showNextPreviousMonthButtons = false,
+                showNextPreviousYearButtons = false,
+                // formats are just defined as they are already by default, but you
+                // see how you could simply change them...
+                formatterWeekDayLabel = { it.getDisplayName(TextStyle.SHORT, Locale.getDefault()) },
+                formatterSelectedDate = { it.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) },
+                formatterSelectedMonth = { it.getDisplayName(TextStyle.SHORT, Locale.getDefault()) },
+                formatterSelectedYear = { it.toString() },
+                formatterMonthSelectorList = { it.getDisplayName(TextStyle.FULL, Locale.getDefault()) },
+                formatterYearSelectorList = { it.toString() }
+            )
+        }
         val dateRange = DialogDateRange()
 
         DialogDate(

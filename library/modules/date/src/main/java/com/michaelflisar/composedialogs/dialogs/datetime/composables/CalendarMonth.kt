@@ -60,7 +60,6 @@ internal fun CalendarMonth(
                 items.add(null)
             }
             repeat(lastDayOfMonth.value.dayOfMonth) {
-                val col = (colIndexOfFirstDay + it) % 7
                 val date = LocalDate.of(
                     firstDayOfMonth.value.year,
                     firstDayOfMonth.value.month,
@@ -91,7 +90,7 @@ internal fun CalendarMonth(
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             repeat(7) {
-                CalendarCellHeader(weekdays[it], modifierHeader)
+                CalendarCellHeader(setup, weekdays[it], modifierHeader)
             }
         }
         repeat(rows) { row ->
@@ -106,10 +105,11 @@ internal fun CalendarMonth(
 
 @Composable
 private fun CalendarCellHeader(
+    setup: DialogDateSetup,
     dayOfWeek: DayOfWeek,
     modifier: Modifier
 ) {
-    val text = DateUtil.getWeekDayInfo(dayOfWeek)
+    val text = setup.formatterWeekDayLabel(dayOfWeek)
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center

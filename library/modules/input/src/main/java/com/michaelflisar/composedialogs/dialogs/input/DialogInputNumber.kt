@@ -139,7 +139,7 @@ fun <T : Number> DialogInputNumber(
  * @return a state holding the current input value
  */
 @Composable
-fun <T : Number> rememberDialogNumber(
+fun <T : Number> rememberDialogInputNumber(
     value: T
 ): MutableState<T> {
     return rememberSaveable { mutableStateOf(value) }

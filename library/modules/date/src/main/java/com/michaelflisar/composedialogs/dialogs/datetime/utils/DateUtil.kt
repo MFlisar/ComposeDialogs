@@ -28,23 +28,6 @@ internal object DateUtil {
         Calendar.SUNDAY
     )
 
-    @Suppress("DEPRECATION")
-    fun getFormattedDate(format: String, year: Int, month: Int, day: Int): String {
-        return DateFormat.format(format, Date(year - 1900, month - 1, day)).toString()
-    }
-
-    @Suppress("DEPRECATION")
-    fun getMonthAndYearInfo(year: Int, month: Int): String {
-        return DateFormat.format("MMM yyyy", Date(year - 1900, month - 1, 1)).toString()
-    }
-
-
-    fun getWeekDayInfo(day: DayOfWeek): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, CalendarDays[DayOfWeeks.indexOf(day)])
-        return DateFormat.format("EEE", calendar.time).toString()
-    }
-
     fun today(): LocalDate {
         val calendar = Calendar.getInstance()
         return createLocalDate(calendar)

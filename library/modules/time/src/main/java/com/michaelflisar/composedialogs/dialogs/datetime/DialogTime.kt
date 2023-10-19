@@ -78,8 +78,7 @@ class DialogTimeSetup(
  */
 @Composable
 fun rememberDialogTime(
-    initialHour: Int = Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-    initialMinute: Int = Calendar.getInstance().get(Calendar.MINUTE)
+    time: LocalTime = LocalTime.now()
 ): MutableState<LocalTime> {
-    return rememberSaveable { mutableStateOf(LocalTime.of(initialHour, initialMinute)) }
+    return rememberSaveable { mutableStateOf(time) }
 }

@@ -2,8 +2,6 @@ package com.michaelflisar.composedialogs.dialogs.datetime.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -16,7 +14,7 @@ import java.time.LocalDate
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun CalendarTodayButton(
-    buttonToday: String,
+    buttonToday: @Composable() ((enabled: Boolean, onClick: () -> Unit) -> Unit),
     date: MutableState<LocalDate>,
     todayPage: Int,
     today: LocalDate,
@@ -28,13 +26,8 @@ internal fun CalendarTodayButton(
         }
     }
     val scope = rememberCoroutineScope()
-    OutlinedButton(
-        onClick = {
-            date.value = today
-            scope.launch { pagerState.animateScrollToPage(todayPage) }
-        },
-        enabled = todayButtonEnabled
-    ) {
-        Text(text = buttonToday)
+    buttonToday(todayButtonEnabled) {
+        date.value = today
+        scope.launch { pagerState.animateScrollToPage(todayPage) }
     }
 }

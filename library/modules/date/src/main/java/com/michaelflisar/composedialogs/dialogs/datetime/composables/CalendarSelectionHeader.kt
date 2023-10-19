@@ -36,12 +36,7 @@ internal fun CalendarSelectionHeader(state: MutableState<LocalDate>, setup: Dial
         .padding(8.dp)
     ) {
         Text(
-            text = DateUtil.getFormattedDate(
-                setup.selectedDateFormat,
-                state.value.year,
-                state.value.monthValue,
-                state.value.dayOfMonth
-            ),
+            text = setup.formatterSelectedDate(state.value),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary

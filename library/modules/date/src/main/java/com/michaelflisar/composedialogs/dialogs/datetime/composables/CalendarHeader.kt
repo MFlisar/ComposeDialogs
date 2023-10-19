@@ -30,6 +30,8 @@ import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageDat
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import kotlinx.coroutines.launch
+import java.time.Month
+import java.time.Year
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -46,7 +48,7 @@ internal fun CalendarHeader(
     ) {
         HeaderItem(
             modifier = Modifier.weight(1f),
-            text = DateUtil.getFormattedDate(setup.dateFormatMonthSelector, 0, pageData.value.month, 1),
+            text = setup.formatterSelectedMonth(Month.of(pageData.value.month)),
             showButtons = setup.showNextPreviousMonthButtons,
             onShowMenu = { viewState.value = DateViewState.SelectMonth },
             onDownClick = if (pagerState.currentPage > 0) {
@@ -59,7 +61,7 @@ internal fun CalendarHeader(
         //Spacer(modifier = Modifier.width(8.dp))
         HeaderItem(
             modifier = Modifier.weight(1f),
-            text = DateUtil.getFormattedDate(setup.dateFormatYearSelector, pageData.value.year, 1, 1),
+            text = setup.formatterSelectedYear(Year.of(pageData.value.year)),
             showButtons = setup.showNextPreviousYearButtons,
             onShowMenu = { viewState.value = DateViewState.SelectYear },
             onDownClick = if (pageData.value.year > range.years.first) {

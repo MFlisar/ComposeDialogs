@@ -10,6 +10,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -147,4 +149,20 @@ sealed class RepeatingButton {
         val minDelayMillis: Long = 5,
         val delayDecayFactor: Float = .15f
     ) : RepeatingButton()
+}
+
+/**
+ * convenient function for [DialogNumberPicker]
+ *
+ * @param initialValue the initial number
+ *
+ * @return a state holding the current number value
+ */
+@Composable
+fun <T : Number> rememberDialogNumber(
+    initialValue: T
+): MutableState<T> {
+    return rememberSaveable {
+        mutableStateOf(initialValue)
+    }
 }

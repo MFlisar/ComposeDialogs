@@ -24,6 +24,7 @@ import com.michaelflisar.composedialogs.dialogs.input.DialogNumberPicker
 import com.michaelflisar.composedialogs.dialogs.input.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.input.RepeatingButton
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInput
+import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputNumber
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputValidator
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogNumber
 
@@ -145,7 +146,7 @@ private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: (@Composable () 
     if (state.showing) {
 
         // special state for input dialog
-        val value = rememberDialogNumber(number)
+        val value = rememberDialogInputNumber(number)
 
         // number dialog
         DialogInputNumber(

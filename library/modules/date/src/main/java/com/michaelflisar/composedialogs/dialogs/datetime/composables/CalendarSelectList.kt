@@ -31,6 +31,8 @@ import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageDat
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import kotlinx.coroutines.launch
+import java.time.Month
+import java.time.Year
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -46,7 +48,7 @@ internal fun CalendarSelectListYear(
         value = pageData.value.year,
         range = dateRange.years,
         itemFormatter = {
-            DateUtil.getFormattedDate(setup.dateFormatYearList, it, 1, 1)
+            setup.formatterYearSelectorList(Year.of(it))
         }
     ) {
         val offsetPages = (it - dateRange.years.first) * 12 + pageData.value.month - 1
@@ -68,7 +70,7 @@ internal fun CalendarSelectListMonth(
         value = pageData.value.month,
         range = (1..12),
         itemFormatter = {
-            DateUtil.getFormattedDate(setup.dateFormatMonthList, 0, it, 1)
+            setup.formatterMonthSelectorList(Month.of(it))
         }
     ) {
         val offsetPages = it - pageData.value.month
