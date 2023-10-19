@@ -16,7 +16,6 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.progress.DialogProgress
-import com.michaelflisar.composedialogs.dialogs.progress.DialogProgressStyle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,7 +39,7 @@ private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: (@Composable 
         DialogProgress(
             state = state,
             label = "Working...",
-            progressStyle = DialogProgressStyle.Indeterminate(linear = true),
+            progressStyle = DialogProgress.Style.Indeterminate(linear = true),
             icon = icon,
             title = { Text("Progress Dialog") },
             buttons = DialogDefaults.buttons(
@@ -72,7 +71,7 @@ private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: (@Composable 
         DialogProgress(
             state = state,
             label = "Working...",
-            progressStyle = DialogProgressStyle.Indeterminate(linear = false),
+            progressStyle = DialogProgress.Style.Indeterminate(linear = false),
             icon = icon,
             title = { Text("Progress Dialog") },
             buttons = DialogDefaults.buttons(
@@ -116,7 +115,7 @@ private fun RowScope.DemoDialogProgress3(style: DialogStyle, icon: (@Composable 
             }
         }
         val progressStyle by remember {
-            derivedStateOf { DialogProgressStyle.Determinate(linear = true, 10 - time, 10) }
+            derivedStateOf { DialogProgress.Style.Determinate(linear = true, 10 - time, 10) }
         }
         val label by remember {
             derivedStateOf {

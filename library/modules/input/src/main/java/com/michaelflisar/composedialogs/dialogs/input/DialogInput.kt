@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,7 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /**
  * Shows a dialog with an input field
@@ -42,7 +44,7 @@ import com.michaelflisar.composedialogs.core.Options
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param input the state for the input field
+ * @param input the selected text
  * @param inputLabel the optional label of the input field
  * @param inputPlaceholder the placeholder the for the input field
  * @param singleLine if true, the input field will only allow a single line
@@ -94,7 +96,7 @@ fun DialogInput(
             is DialogStyle.BottomSheet -> Modifier.fillMaxWidth()
             is DialogStyle.Dialog -> Modifier
         }
-        DialogInput.InputText(
+        DialogInputTextField(
             modifier,
             input,
             inputLabel,
@@ -130,6 +132,7 @@ fun rememberDialogInput(
     return rememberSaveable { mutableStateOf(text) }
 }
 
+@Stable
 object DialogInput {
 
     /**
@@ -155,139 +158,5 @@ object DialogInput {
          * if the input field is initially focused, the defined range of the text will be selected
          */
         class Selection(val start: Int, val end: Int) : SelectionState()
-    }
-
-    /**
-     * a reusable sub composable
-     */
-    @Composable
-    fun InputText(
-        modifier: Modifier = Modifier,
-        state: MutableState<String>,
-        label: String = "",
-        placeholder: String = "",
-        singleLine: Boolean = false,
-        maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-        minLines: Int = 1,
-        keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        enabled: Boolean = true,
-        clearable: Boolean = true,
-        prefix: String = "",
-        suffix: String = "",
-        textStyle: TextStyle = LocalTextStyle.current,
-        validator: DialogInputValidator = DialogInputValidator(),
-        requestFocus: Boolean = false,
-        selectionState: SelectionState = SelectionState.Default,
-        onStateChanged: (valid: Boolean, text: String) -> Unit = { _, _ -> }
-    ) {
-        val focusRequester = FocusRequester()
-        LaunchedEffect(Unit) {
-            if (requestFocus)
-                focusRequester.requestFocus()
-        }
-        Column(
-            modifier = modifier
-        ) {
-            // code for cursor position copied from
-            // https://gist.github.com/Zhuinden/ab065534bbf73d7e6de83b5a39366c24
-            // and extended afterwards
-            var textFieldValueState by remember {
-                mutableStateOf(
-                    TextFieldValue(
-                        text = state.value,
-                        selection = if (state.value.isEmpty())
-                            TextRange.Zero
-                        else {
-                            when (selectionState) {
-                                SelectionState.CursorEnd -> TextRange(
-                                    state.value.length,
-                                    state.value.length
-                                )
-
-                                SelectionState.Default -> TextRange.Zero
-                                SelectionState.SelectAll -> TextRange(0, state.value.length)
-                                is SelectionState.Selection -> TextRange(
-                                    selectionState.start.coerceIn(
-                                        0,
-                                        state.value.length
-                                    ), selectionState.end.coerceIn(0, state.value.length)
-                                )
-                            }
-                        }
-                    )
-                )
-            }
-            val textFieldValue = textFieldValueState.copy(text = state.value)
-            SideEffect {
-                if (textFieldValue.selection != textFieldValueState.selection ||
-                    textFieldValue.composition != textFieldValueState.composition
-                ) {
-                    textFieldValueState = textFieldValue
-                }
-            }
-            var lastTextValue by remember(state.value) { mutableStateOf(state.value) }
-
-            OutlinedTextField(
-                value = textFieldValue,
-                modifier = modifier
-                    .focusRequester(focusRequester),
-                enabled = enabled,
-                onValueChange = {
-                    textFieldValueState = it
-                    val changed = lastTextValue != it.text
-                    lastTextValue = it.text
-                    if (changed) {
-                        validator.check(it.text)
-                        state.value = it.text
-                        val valid = validator.isValid()
-                        onStateChanged(valid, it.text)
-                    }
-                },
-                isError = !validator.isValid(),
-                prefix = if (prefix.isNotEmpty()) {
-                    @Composable { Text(prefix, style = MaterialTheme.typography.bodyMedium) }
-                } else null,
-                suffix = if (suffix.isNotEmpty()) {
-                    @Composable { Text(suffix, style = MaterialTheme.typography.bodyMedium) }
-                } else null,
-                keyboardOptions = keyboardOptions,
-                label = if (label.isNotEmpty()) {
-                    @Composable { Text(text = label) }
-                } else null,
-                placeholder = if (placeholder.isNotEmpty()) {
-                    { Text(text = placeholder) }
-                } else null,
-                minLines = minLines,
-                maxLines = maxLines,
-                singleLine = maxLines == 1,
-                textStyle = textStyle,
-                trailingIcon = if (clearable) {
-                    @Composable {
-                        when {
-                            state.value.isNotEmpty() -> IconButton(onClick = {
-                                state.value = ""
-                                validator.check("")
-                                val valid = validator.isValid()
-                                onStateChanged(valid, "")
-                                focusRequester.requestFocus()
-                            }) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Clear,
-                                    contentDescription = "Clear"
-                                )
-                            }
-                        }
-                    }
-                } else null,
-                supportingText = if (enabled && validator.getErrorMessage().isNotEmpty()) {
-                    {
-                        val error = validator.getErrorMessage()
-                        //AnimatedVisibility(visible = error.isNotEmpty()) {
-                        Text(text = error)
-                        //}
-                    }
-                } else null
-            )
-        }
     }
 }

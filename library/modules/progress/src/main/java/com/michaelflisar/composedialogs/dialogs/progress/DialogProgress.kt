@@ -8,6 +8,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ import com.michaelflisar.composedialogs.core.*
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param label the label of the progress
- * @param progressStyle the style of the progress indicator ([DialogProgressStyle])
+ * @param progressStyle the style of the progress indicator ([DialogProgress.Style])
  */
 @Composable
 fun DialogProgress(
@@ -31,7 +32,7 @@ fun DialogProgress(
     // ...
     // Custom - Optional
     label: String = "",
-    progressStyle: DialogProgressStyle = DialogProgressStyle.Indeterminate(),
+    progressStyle: DialogProgress.Style = DialogProgress.Style.Indeterminate(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -50,7 +51,7 @@ fun DialogProgress(
             )
         }
         when (progressStyle) {
-            is DialogProgressStyle.Indeterminate -> {
+            is DialogProgress.Style.Indeterminate -> {
                 if (progressStyle.linear) {
                     LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                 } else Box(
@@ -61,7 +62,7 @@ fun DialogProgress(
                 }
             }
 
-            is DialogProgressStyle.Determinate -> {
+            is DialogProgress.Style.Determinate -> {
                 val progress by animateFloatAsState(targetValue = progressStyle.progress.toFloat() / progressStyle.max.toFloat())
                 if (progressStyle.linear) {
                     LinearProgressIndicator(modifier = Modifier.fillMaxWidth(), progress = progress)
@@ -76,32 +77,36 @@ fun DialogProgress(
     }
 }
 
-/**
- * the progress style
- */
-sealed class DialogProgressStyle {
-
-    abstract val linear: Boolean
+@Stable
+object DialogProgress {
 
     /**
-     * indeterminate progress style
-     *
-     * @param linear if true, a linear progress indicator is used, otherwise a circular
+     * the progress style
      */
-    class Indeterminate(
-        override val linear: Boolean = true
-    ) : DialogProgressStyle()
+    sealed class Style {
 
-    /**
-     * determinate progress style
-     *
-     * @param linear if true, a linear progress indicator is used, otherwise a circular
-     * @param progress the current progress value
-     * @param max the maximum progress value
-     */
-    class Determinate(
-        override val linear: Boolean = true,
-        val progress: Int,
-        val max: Int
-    ) : DialogProgressStyle()
+        abstract val linear: Boolean
+
+        /**
+         * indeterminate progress style
+         *
+         * @param linear if true, a linear progress indicator is used, otherwise a circular
+         */
+        class Indeterminate(
+            override val linear: Boolean = true
+        ) : Style()
+
+        /**
+         * determinate progress style
+         *
+         * @param linear if true, a linear progress indicator is used, otherwise a circular
+         * @param progress the current progress value
+         * @param max the maximum progress value
+         */
+        class Determinate(
+            override val linear: Boolean = true,
+            val progress: Int,
+            val max: Int
+        ) : Style()
+    }
 }

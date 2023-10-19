@@ -14,7 +14,6 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
-import com.michaelflisar.composedialogs.dialogs.color.DialogColorLabelStyle
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 
 @Composable
@@ -68,7 +67,7 @@ private fun RowScope.DemoDialogColor2(style: DialogStyle, icon: (@Composable () 
             state = state,
             color = color,
             alphaSupported = false,
-            labelStyle = DialogColorLabelStyle.Percent,
+            labelStyle = DialogColor.LabelStyle.Percent,
             icon = icon,
             title = { Text("Color Dialog") },
             style = style,

@@ -18,14 +18,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
-import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun CalendarSelectionHeader(state: MutableState<LocalDate>, setup: DialogDateSetup, pagerState: PagerState, currentPage: State<Int>) {
+internal fun CalendarSelectionHeader(state: MutableState<LocalDate>, setup: DialogDate.Setup, pagerState: PagerState, currentPage: State<Int>) {
     val scope = rememberCoroutineScope()
     val interactionSource = remember { MutableInteractionSource() }
     Column(modifier = Modifier

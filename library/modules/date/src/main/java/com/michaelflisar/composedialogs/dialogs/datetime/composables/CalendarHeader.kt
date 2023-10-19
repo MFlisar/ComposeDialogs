@@ -24,8 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateRange
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
@@ -37,8 +36,8 @@ import java.time.Year
 @Composable
 internal fun CalendarHeader(
     pagerState: PagerState,
-    range: DialogDateRange,
-    setup: DialogDateSetup,
+    range: DialogDate.Range,
+    setup: DialogDate.Setup,
     pageData: State<CalendarPageData>,
     viewState: MutableState<DateViewState>
 ) {

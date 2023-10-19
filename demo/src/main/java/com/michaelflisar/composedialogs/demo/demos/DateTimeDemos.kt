@@ -22,10 +22,9 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateRange
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateDefaults
 import com.michaelflisar.composedialogs.dialogs.datetime.DialogTime
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogTimeSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogTimeDefaults
 import com.michaelflisar.composedialogs.dialogs.datetime.rememberDialogDate
 import com.michaelflisar.composedialogs.dialogs.datetime.rememberDialogTime
 import java.time.DayOfWeek
@@ -58,11 +57,11 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -
         // special state for date dialog
         val date = rememberDialogDate()
         // optional settings
-        var setup = DialogDateSetup(
+        var setup = DialogDateDefaults.setup(
             dateCellHeight = 32.dp
         )
         if (customSetup) {
-            setup = DialogDateSetup(
+            setup = DialogDateDefaults.setup(
                 buttonToday = { enabled, onClick ->
                     FilledIconButton(onClick = onClick, enabled = enabled) {
                         Icon(Icons.Default.Today, null)
@@ -82,7 +81,7 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -
                 formatterYearSelectorList = { it.toString() }
             )
         }
-        val dateRange = DialogDateRange()
+        val dateRange = DialogDateDefaults.dateRange()
 
         DialogDate(
             state = state,
@@ -120,7 +119,7 @@ private fun RowScope.DemoDialogTime1(style: DialogStyle, icon: (@Composable () -
         // special state for time dialog
         val time = rememberDialogTime()
         // optional settings
-        val setup = DialogTimeSetup(is24Hours = is24Hours)
+        val setup = DialogTimeDefaults.setup(is24Hours = is24Hours)
 
         DialogTime(
             state = state,

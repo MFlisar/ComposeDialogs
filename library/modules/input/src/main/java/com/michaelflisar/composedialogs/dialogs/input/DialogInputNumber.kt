@@ -19,6 +19,7 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /**
  * Shows a dialog with an input field that only allows numeric characters and validates that the input holds a valid value for the desired data type
@@ -27,7 +28,7 @@ import com.michaelflisar.composedialogs.core.Options
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param value the state for the input field
+ * @param value the selected number
  * @param valueLabel the optional label of the input field
  * @param invalidNumberErrorText provide a function that returns a custom error message if the user input is not a valid number
  *
@@ -102,13 +103,12 @@ fun <T : Number> DialogInputNumber(
             state.enableButton(DialogButtonType.Positive, validator.isValid())
         }
         LaunchedEffect(stringInput.value) {
-            println("stringInput = ${stringInput.value}")
             converter(stringInput.value)?.let {
                 value.value = it
             }
         }
 
-        DialogInput.InputText(
+        DialogInputTextField(
             modifier,
             stringInput,
             valueLabel,

@@ -19,7 +19,9 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -62,9 +64,9 @@ import java.util.Locale
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param date the state ([DialogDateState]) for the date dialog
- * @param dateRange the supported [DialogDateRange]
- * @param setup the [DialogDateSetup]
+ * @param date the selected date state
+ * @param dateRange the supported [DialogDate.Range] - use [DialogDateDefaults.dateRange] to provide your own data
+ * @param setup the [DialogDate.Setup] - use [DialogDateDefaults.setup] to provide your own data
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -73,8 +75,8 @@ fun DialogDate(
     // Custom - Required
     date: MutableState<LocalDate>,
     // Custom - Optional
-    dateRange: DialogDateRange = DialogDateRange(),
-    setup: DialogDateSetup = DialogDateSetup(),
+    dateRange: DialogDate.Range = DialogDateDefaults.dateRange(),
+    setup: DialogDate.Setup = DialogDateDefaults.setup(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -243,56 +245,40 @@ fun DialogDate(
     }
 }
 
-/**
- * date picker setup
- *
- * @param buttonToday the optional today button that is displayed at top next to the selected date
- * @param firstDayOfWeek the first day of the week (use [DayOfWeek.MONDAY] to [DayOfWeek.SUNDAY])
- * @param formatterWeekDayLabel the date format for the weekday names of the calendar
- * @param formatterSelectedDate the date format for the text that represents the currently selected date
- * @param formatterSelectedMonth the date format for the current month text
- * @param formatterSelectedYear the date format for the current year text
- * @param formatterMonthSelectorList the date format for the list in which you can select a month
- * @param formatterYearSelectorList the date format for the list in which you can select a year
- * @param dateCellHeight the height of cell representing a single day
- * @param showNextPreviousMonthButtons if true, the decrease/increase buttons next to the select month are shown
- * @param showNextPreviousYearButtons if true, the decrease/increase buttons next to the select year are shown
- *
- */
-class DialogDateSetup(
-    val buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)? = { enabled, onClick ->
-        OutlinedButton(
-            onClick = onClick,
-            enabled = enabled
-        ) {
-            Text(text = "Today")
-        }
-    },
-    val firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
-    val formatterWeekDayLabel: (date: DayOfWeek) -> String = { it.getDisplayName(TextStyle.SHORT, Locale.getDefault()) },
-    val formatterSelectedDate: (date: LocalDate) -> String = { it.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) },
-    val formatterSelectedMonth: (month: Month) -> String = { it.getDisplayName(TextStyle.SHORT, Locale.getDefault()) },
-    val formatterSelectedYear: (year: Year) -> String = { it.toString() },
-    val formatterMonthSelectorList: (month: Month) -> String = { it.getDisplayName(TextStyle.FULL, Locale.getDefault()) },
-    val formatterYearSelectorList: (year: Year) -> String = { it.toString() },
-    val dateCellHeight: Dp = 48.dp,
-    val showNextPreviousMonthButtons: Boolean = true,
-    val showNextPreviousYearButtons: Boolean = true
-)
+@Stable
+object DialogDate {
+
+    /**
+     * see [DialogDateDefaults.setup]
+     *
+     */
+    @Immutable
+    class Setup internal constructor(
+        val buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)?,
+        val firstDayOfWeek: DayOfWeek,
+        val formatterWeekDayLabel: (date: DayOfWeek) -> String,
+        val formatterSelectedDate: (date: LocalDate) -> String,
+        val formatterSelectedMonth: (month: Month) -> String,
+        val formatterSelectedYear: (year: Year) -> String,
+        val formatterMonthSelectorList: (month: Month) -> String,
+        val formatterYearSelectorList: (year: Year) -> String,
+        val dateCellHeight: Dp,
+        val showNextPreviousMonthButtons: Boolean,
+        val showNextPreviousYearButtons: Boolean
+    )
+
+    /**
+     * see [DialogDateDefaults.dateRange]
+     *
+     */
+    @Immutable
+    class Range internal constructor(
+        val years: IntRange
+    )
+}
 
 /**
- * range for the date picker
- *
- * @param years the range that will be supported by the date picker
- */
-class DialogDateRange(
-    val years: IntRange = 1900..2100
-)
-
-/**
- * convenient function for [DialogDate]
- *
- * @param initialDate the initial date
+ * @param date the initial date
  *
  * @return a state holding the current date value
  */
@@ -303,4 +289,88 @@ fun rememberDialogDate(
     return rememberSaveable {
         mutableStateOf(date)
     }
+}
+
+@Stable
+object DialogDateDefaults {
+
+    /**
+     * @param buttonToday the optional today button that is displayed at top next to the selected date
+     * @param firstDayOfWeek the first day of the week (use [DayOfWeek.MONDAY] to [DayOfWeek.SUNDAY])
+     * @param formatterWeekDayLabel the date format for the weekday names of the calendar
+     * @param formatterSelectedDate the date format for the text that represents the currently selected date
+     * @param formatterSelectedMonth the date format for the current month text
+     * @param formatterSelectedYear the date format for the current year text
+     * @param formatterMonthSelectorList the date format for the list in which you can select a month
+     * @param formatterYearSelectorList the date format for the list in which you can select a year
+     * @param dateCellHeight the height of cell representing a single day
+     * @param showNextPreviousMonthButtons if true, the decrease/increase buttons next to the select month are shown
+     * @param showNextPreviousYearButtons if true, the decrease/increase buttons next to the select year are shown
+     *
+     * @return a [DialogDateSetup]
+     *
+     */
+    @Composable
+    fun setup(
+        buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)? = { enabled, onClick ->
+            OutlinedButton(
+                onClick = onClick,
+                enabled = enabled
+            ) {
+                Text(text = "Today")
+            }
+        },
+        firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
+        formatterWeekDayLabel: (date: DayOfWeek) -> String = {
+            it.getDisplayName(
+                TextStyle.SHORT,
+                Locale.getDefault()
+            )
+        },
+        formatterSelectedDate: (date: LocalDate) -> String = {
+            it.format(
+                DateTimeFormatter.ofLocalizedDate(
+                    FormatStyle.LONG
+                )
+            )
+        },
+        formatterSelectedMonth: (month: Month) -> String = {
+            it.getDisplayName(
+                TextStyle.SHORT,
+                Locale.getDefault()
+            )
+        },
+        formatterSelectedYear: (year: Year) -> String = { it.toString() },
+        formatterMonthSelectorList: (month: Month) -> String = {
+            it.getDisplayName(
+                TextStyle.FULL,
+                Locale.getDefault()
+            )
+        },
+        formatterYearSelectorList: (year: Year) -> String = { it.toString() },
+        dateCellHeight: Dp = 48.dp,
+        showNextPreviousMonthButtons: Boolean = true,
+        showNextPreviousYearButtons: Boolean = true
+    ) = DialogDate.Setup(
+        buttonToday,
+        firstDayOfWeek,
+        formatterWeekDayLabel,
+        formatterSelectedDate,
+        formatterSelectedMonth,
+        formatterSelectedYear,
+        formatterMonthSelectorList,
+        formatterYearSelectorList,
+        dateCellHeight,
+        showNextPreviousMonthButtons,
+        showNextPreviousYearButtons
+    )
+
+    /**
+     * @param years the range that will be supported by the date picker
+     *
+     * @return a [DialogDateRange]
+     */
+    fun dateRange(
+        years: IntRange = 1900..2100
+    ) = DialogDate.Range(years)
 }

@@ -1,5 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.datetime
 
+import android.text.format.DateFormat
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimeInput
@@ -7,10 +8,12 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
 import java.time.LocalTime
 import java.util.*
@@ -22,8 +25,8 @@ import java.util.*
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param time the current [DialogTimeState]
- * @param setup the [DialogTimeSetup]
+ * @param time the selected time
+ * @param setup the [DialogTime.Setup] - use [DialogTimeDefaults.setup] to provide your own data
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +35,7 @@ fun DialogTime(
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional
-    setup: DialogTimeSetup = DialogTimeSetup(),
+    setup: DialogTime.Setup = DialogTimeDefaults.setup(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -58,15 +61,19 @@ fun DialogTime(
     }
 }
 
-/**
- * time setup
- *
- * @param is24Hours if true 24h mode is enabled otherwise 12h mode will be used
- */
-class DialogTimeSetup(
-    //val seconds: Boolean = false,
-    val is24Hours: Boolean = true
-)
+@Stable
+object DialogTime {
+
+    /**
+     * time setup
+     *
+     * check out [DialogTimeDefaults.setup]
+     */
+    class Setup internal constructor(
+        //val seconds: Boolean = false,
+        val is24Hours: Boolean
+    )
+}
 
 /**
  * convenient function for [DialogTime]
@@ -81,4 +88,16 @@ fun rememberDialogTime(
     time: LocalTime = LocalTime.now()
 ): MutableState<LocalTime> {
     return rememberSaveable { mutableStateOf(time) }
+}
+
+@Stable
+object DialogTimeDefaults {
+    /**
+     * time setup
+     *
+     * @param is24Hours if true 24h mode is enabled otherwise 12h mode will be used
+     */
+    @Composable
+    fun setup(is24Hours: Boolean = DateFormat.is24HourFormat(LocalContext.current)) =
+        DialogTime.Setup(is24Hours)
 }

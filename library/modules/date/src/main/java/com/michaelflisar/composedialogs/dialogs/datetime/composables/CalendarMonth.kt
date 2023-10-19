@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDateSetup
+import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
 import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -29,7 +29,7 @@ import java.time.LocalDate
 @Composable
 internal fun CalendarMonth(
     state: MutableState<LocalDate>,
-    setup: DialogDateSetup,
+    setup: DialogDate.Setup,
     year: Int,
     month: Int
 ) {
@@ -105,7 +105,7 @@ internal fun CalendarMonth(
 
 @Composable
 private fun CalendarCellHeader(
-    setup: DialogDateSetup,
+    setup: DialogDate.Setup,
     dayOfWeek: DayOfWeek,
     modifier: Modifier
 ) {
