@@ -197,23 +197,23 @@ https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c8
 
 **Input Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt#L63-L91
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/input/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt#L65-L93
 
 **Number Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/number/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogNumberPicker.kt#L43-L66
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/number/src/main/java/com/michaelflisar/composedialogs/dialogs/input/DialogNumberPicker.kt#L45-L68
 
 **Date Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/date/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogDate.kt#L64-L78
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/date/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogDate.kt#L73-L87
 
 **Time Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L30-L43
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/time/src/main/java/com/michaelflisar/composedialogs/dialogs/datetime/DialogTime.kt#L33-L46
 
 **Color Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L108-L127
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/color/src/main/java/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt#L57-L75
 
 **List Dialog**
 
@@ -223,7 +223,7 @@ https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c8
 
 **Progress Dialog**
 
-https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L28-L42
+https://github.com/MFlisar/ComposeDialogs/blob/bdd338efd15b139227ac27ae8ea7d63c82c6f8c6/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L29-L43
 
 **Custom Dialog**
 
