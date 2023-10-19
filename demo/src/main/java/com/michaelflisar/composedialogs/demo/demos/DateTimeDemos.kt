@@ -39,6 +39,8 @@ fun DateTimeDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("DateTime Dialogs")
     DemoDialogRow {
         DemoDialogDate1(style, icon, false)
+    }
+    DemoDialogRow {
         DemoDialogDate1(style, icon, true)
     }
     DemoDialogRow {
@@ -103,7 +105,9 @@ private fun RowScope.DemoDialogDate1(style: DialogStyle, icon: (@Composable () -
         state,
         Icons.Default.CalendarMonth,
         "Date Dialog",
-        "Shows a date picker dialog"
+        "Shows a date picker dialog" + if (customSetup) {
+            " with a custom setup (firstDayOfWeek = SUNDAY, today button is changed to an icon button, next/previous buttons are hidden for year and month)"
+        } else ""
     )
 }
 
