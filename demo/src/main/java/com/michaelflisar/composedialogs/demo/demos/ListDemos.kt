@@ -37,11 +37,7 @@ import com.michaelflisar.composedialogs.demo.DemoDialogRow
 import com.michaelflisar.composedialogs.demo.classes.AppItem
 import com.michaelflisar.composedialogs.demo.showToast
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
-import com.michaelflisar.composedialogs.dialogs.list.DialogListItemContents
-import com.michaelflisar.composedialogs.dialogs.list.DialogListItemDefaultContent
-import com.michaelflisar.composedialogs.dialogs.list.DialogListSelectionMode
-import com.michaelflisar.composedialogs.dialogs.list.FilterSetup
-import com.michaelflisar.composedialogs.dialogs.list.defaults.DialogListContent
+import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -53,14 +49,14 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     val simpleItems = (1..500).toList()
 
     // Item Content Renderer - Simple Version where you can provide simple strings for text/supporting text/trailing text and an icon composable
-    val itemContentsSimple = DialogListItemDefaultContent<Int>(
+    val itemContentsSimple = DialogList.ItemDefaultContent<Int>(
         text = { "Item $it" }
     )
-    val itemContentsSimpleWithIcon = DialogListItemDefaultContent<Int>(
+    val itemContentsSimpleWithIcon = DialogList.ItemDefaultContent<Int>(
         text = { "Item $it" },
         icon = { Icon(imageVector = Icons.Default.Home, contentDescription = null) }
     )
-    val itemContentsSimpleWithIconAndTrailingInfo = DialogListItemDefaultContent<Int>(
+    val itemContentsSimpleWithIconAndTrailingInfo = DialogList.ItemDefaultContent<Int>(
         text = { "Item $it" },
         icon = { Icon(imageVector = Icons.Default.Home, contentDescription = null) },
         trailingSupportingText = { "Supporting Text $it..." }
@@ -70,7 +66,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 
     // Item Content Renderer - here you can provide composables for the content, icon and trailing area...
     // => I have defined some default composables which I will use here
-    val itemContentsCustom = object : DialogListItemContents<AppItem> {
+    val itemContentsCustom = object : DialogList.ItemContents<AppItem> {
 
         override val content: @Composable() (ColumnScope.(item: AppItem) -> Unit)
             get() = {
@@ -101,7 +97,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimple,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.SingleSelect(selectedSingle)
+            selectionMode = DialogList.SelectionMode.SingleSelect(selectedSingle)
         )
         DemoList(
             style,
@@ -109,7 +105,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimple,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiSelect(selectedMulti)
+            selectionMode = DialogList.SelectionMode.MultiSelect(selectedMulti)
         )
     }
     DemoDialogRow {
@@ -119,7 +115,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimple,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.SingleClickAndClose {
+            selectionMode = DialogList.SelectionMode.SingleClickAndClose {
                 context.showToast("Selected in Single Click Mode: $it")
             })
         DemoList(
@@ -128,7 +124,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimple,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiClick {
+            selectionMode = DialogList.SelectionMode.MultiClick {
                 context.showToast("Selected in Multi Click Mode: $it")
             })
     }
@@ -140,7 +136,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimpleWithIcon,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiSelect(
+            selectionMode = DialogList.SelectionMode.MultiSelect(
                 selectedMulti,
                 selectOnCheckboxClickOnly = false
             ),
@@ -153,7 +149,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimpleWithIcon,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiClick {
+            selectionMode = DialogList.SelectionMode.MultiClick {
                 context.showToast("Selected in Multi Click Mode: $it")
             },
             divider = true,
@@ -167,7 +163,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimpleWithIconAndTrailingInfo,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiClick {
+            selectionMode = DialogList.SelectionMode.MultiClick {
                 context.showToast("Selected in Multi Click Mode: $it")
             },
             infos = "Trailing Text"
@@ -178,7 +174,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimpleWithIconAndTrailingInfo,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiSelect(
+            selectionMode = DialogList.SelectionMode.MultiSelect(
                 selectedMulti,
                 showSelectionCounter = true,
                 selectOnCheckboxClickOnly = false
@@ -195,12 +191,12 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             itemContents = itemContentsSimpleWithIcon,
             itemIdProvider = simpleItemIdProvider,
             items = simpleItems,
-            selectionMode = DialogListSelectionMode.MultiSelect(
+            selectionMode = DialogList.SelectionMode.MultiSelect(
                 selectedMulti,
                 showSelectionCounter = true,
                 selectOnCheckboxClickOnly = false
             ),
-            filter = FilterSetup(
+            filter = DialogList.Filter(
                 filter = { filter, item ->
                     filter.isEmpty() || item.toString().contains(filter)
                 },
@@ -221,7 +217,7 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
             // optional => if no saver is provided, data will be reloaded and not retained between e.g. screen rotations
             // AppItem is parcelable so autoSaver can handle it!
             itemSaver = autoSaver(),
-            selectionMode = DialogListSelectionMode.MultiClick {
+            selectionMode = DialogList.SelectionMode.MultiClick {
                 context.showToast("Selected in Multi Click Mode: ${it.id}")
             },
             infos = "Asynchronous loaded items..."
@@ -233,13 +229,13 @@ fun ListDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
 private fun <T> RowScope.DemoList(
     style: DialogStyle,
     icon: (@Composable () -> Unit)?,
-    itemContents: DialogListItemContents<T>,
+    itemContents: DialogList.ItemContents<T>,
     itemIdProvider: (item: T) -> Int,
     items: List<T>? = null,
     itemsLoader: (suspend () -> List<T>)? = null,
     itemSaver: Saver<MutableState<List<T>>, out Any>? = null,
-    selectionMode: DialogListSelectionMode<T>,
-    filter: FilterSetup<T>? = null,
+    selectionMode: DialogList.SelectionMode<T>,
+    filter: DialogList.Filter<T>? = null,
     divider: Boolean = false,
     infos: String = "",
     description: String = ""
@@ -251,19 +247,19 @@ private fun <T> RowScope.DemoList(
             if (event is DialogEvent.Button && event.button == DialogButtonType.Positive) {
                 // we should probably handle the selected values in this case
                 when (selectionMode) {
-                    is DialogListSelectionMode.MultiClick,
-                    is DialogListSelectionMode.SingleClickAndClose -> {
+                    is DialogList.SelectionMode.MultiClick,
+                    is DialogList.SelectionMode.SingleClickAndClose -> {
                         // Selection (Click) events are handled inside the selection mode callbacks directly!
                         context.showToast("Event $event")
                     }
 
-                    is DialogListSelectionMode.MultiSelect -> {
+                    is DialogList.SelectionMode.MultiSelect -> {
                         context.showToast(
                             "Selected IDs: ${selectionMode.selected.value.joinToString(",")}"
                         )
                     }
 
-                    is DialogListSelectionMode.SingleSelect -> {
+                    is DialogList.SelectionMode.SingleSelect -> {
                         context.showToast("Selection ID: ${selectionMode.selected.value}")
                     }
                 }

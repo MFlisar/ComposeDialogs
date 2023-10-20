@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.KeyboardDoubleArrowLeft
+import androidx.compose.material.icons.filled.KeyboardDoubleArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -54,6 +56,12 @@ fun <T : Number> DialogNumberPicker(
     iconUp: @Composable () -> Unit = {
         Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null)
     },
+    iconDown2: @Composable () -> Unit = {
+        Icon(imageVector = Icons.Default.KeyboardDoubleArrowLeft, contentDescription = null)
+    },
+    iconUp2: @Composable () -> Unit = {
+        Icon(imageVector = Icons.Default.KeyboardDoubleArrowRight, contentDescription = null)
+    },
     formatter: (value: T) -> String = { it.toString() },
     // Custom - Optional
     textStyle: TextStyle = MaterialTheme.typography.bodyMedium,
@@ -77,6 +85,12 @@ fun <T : Number> DialogNumberPicker(
             modifier = modifier,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            if (setup.stepSize2 != setup.stepSize) {
+                PickerIcon(iconDown2, setup.canDecrease(value.value), setup) {
+                    value.value = setup.decrease2(value.value)
+                    onValueStateChanged(value.value)
+                }
+            }
             PickerIcon(iconDown, setup.canDecrease(value.value), setup) {
                 value.value = setup.decrease(value.value)
                 onValueStateChanged(value.value)
@@ -91,6 +105,12 @@ fun <T : Number> DialogNumberPicker(
                 value.value = setup.increase(value.value)
                 onValueStateChanged(value.value)
             }
+            if (setup.stepSize2 != setup.stepSize) {
+                PickerIcon(iconUp2, setup.canIncrease(value.value), setup) {
+                    value.value = setup.increase2(value.value)
+                    onValueStateChanged(value.value)
+                }
+            }
         }
     }
 }
@@ -100,13 +120,15 @@ fun <T : Number> DialogNumberPicker(
  *
  * @param min the minimum value for this picker
  * @param max the maximum value for this picker
- * @param stepSize the step size for the decrease and increase buttons of this picker
+ * @param stepSize the step size for the primary (inner) decrease and increase buttons of this picker
+ * @param stepSize the second step size for the secondary (outer) decrease and increase buttons of this picker (if it is equal to stepSize, the buttons will be hidden)
  * @param repeatingButton the [RepeatingButton] behavior (can be [RepeatingButton.Disabled] or [RepeatingButton.Enabled])
  */
 class NumberPickerSetup<T : Number>(
     val min: T,
     val max: T,
     val stepSize: T,
+    val stepSize2: T = stepSize,
     val repeatingButton: RepeatingButton = RepeatingButton.Disabled
 ) {
     internal fun canIncrease(value: T) = NumberUtil.isLess(value, max)
@@ -121,6 +143,20 @@ class NumberPickerSetup<T : Number>(
 
     internal fun decrease(value: T): T {
         val next = NumberUtil.min(value, stepSize)
+        return if (NumberUtil.isLess(next, min))
+            min
+        else next
+    }
+
+    internal fun increase2(value: T): T {
+        val next = NumberUtil.sum(value, stepSize2)
+        return if (NumberUtil.isMore(next, max))
+            max
+        else next
+    }
+
+    internal fun decrease2(value: T): T {
+        val next = NumberUtil.min(value, stepSize2)
         return if (NumberUtil.isLess(next, min))
             min
         else next

@@ -91,7 +91,7 @@ private fun RowScope.DemoDialogInput1(style: DialogStyle, icon: (@Composable () 
     DemoDialogButton(
         state,
         Icons.Default.TextFields,
-        "Simple Input Dialog",
+        "Input Dialog",
         "Shows an input dialog that does not accept an empty input"
     )
 }
@@ -130,7 +130,7 @@ private fun RowScope.DemoDialogInput2(style: DialogStyle, icon: (@Composable () 
     DemoDialogButton(
         state,
         Icons.Default.TextFields,
-        "Simple Text Input Dialog which only allows numeric characters as input values",
+        "Text Input Dialog which only allows numeric characters as input values",
         "Shows an input dialog that does only accept numeric characters"
     )
 }
@@ -169,7 +169,7 @@ private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: (@Composable () 
     DemoDialogButton(
         state,
         Icons.Default.Numbers,
-        "Simple Number INPUT Dialog",
+        "Number INPUT Dialog",
         "Shows a number dialog that does only accept a valid Integer"
     )
 }
@@ -214,7 +214,7 @@ private fun RowScope.DemoDialogInput4(
     DemoDialogButton(
         state,
         Icons.Default.Numbers,
-        "Simple Number PICKER Dialog",
+        "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5 (repeat button clicks on long press = $enableButtonLongPress)"
     )
 }

@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.list
+package com.michaelflisar.composedialogs.dialogs.list.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,13 +22,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.dialogs.list.DialogList
+import com.michaelflisar.composedialogs.dialogs.list.DialogListUtil
 
 @Composable
 internal fun <T> DialogListItem(
+    state: DialogState,
+    item: T,
+    itemId: Int,
+    selectionMode: DialogList.SelectionMode<T>,
+    itemContents: DialogList.ItemContents<T>
+) {
+    DialogListItem(
+        item = item,
+        itemId = itemId,
+        state = state,
+        selectionMode = selectionMode,
+        content = { itemContents.content(this, item) },
+        icon = if (itemContents.iconContent != null) {
+            { itemContents.iconContent!!.invoke(item) }
+        } else null,
+        trailingContent = if (itemContents.trailingContent != null) {
+            { itemContents.trailingContent!!.invoke(this, item) }
+        } else null
+    )
+}
+
+@Composable
+private fun <T> DialogListItem(
     item: T,
     itemId: Int,
     state: DialogState,
-    selectionMode: DialogListSelectionMode<T>,
+    selectionMode: DialogList.SelectionMode<T>,
     content: @Composable ColumnScope.() -> Unit,
     icon: @Composable (() -> Unit)? = null,
     trailingContent: @Composable (ColumnScope.() -> Unit)? = null
@@ -84,7 +109,7 @@ internal fun <T> DialogListItem(
 
         // Checkbox/RadioButton
         when (selectionMode) {
-            is DialogListSelectionMode.SingleSelect -> {
+            is DialogList.SelectionMode.SingleSelect -> {
                 if (selectionMode.selectOnRadioButtonClickOnly) {
                     RadioButton(
                         selected = selectionMode.selected.value == itemId,
@@ -102,7 +127,7 @@ internal fun <T> DialogListItem(
                 }
             }
 
-            is DialogListSelectionMode.MultiSelect -> {
+            is DialogList.SelectionMode.MultiSelect -> {
                 if (selectionMode.selectOnCheckboxClickOnly) {
                     Checkbox(
                         checked = selectionMode.selected.value.contains(itemId),
@@ -120,8 +145,8 @@ internal fun <T> DialogListItem(
                 }
             }
 
-            is DialogListSelectionMode.SingleClickAndClose,
-            is DialogListSelectionMode.MultiClick -> {
+            is DialogList.SelectionMode.SingleClickAndClose,
+            is DialogList.SelectionMode.MultiClick -> {
                 // no ui here...
             }
         }

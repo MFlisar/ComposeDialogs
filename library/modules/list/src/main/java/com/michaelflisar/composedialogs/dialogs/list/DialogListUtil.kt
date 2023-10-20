@@ -6,7 +6,7 @@ internal object DialogListUtil {
 
     fun <T> onCheckboxChecked(
         itemId: Int,
-        selectionMode: DialogListSelectionMode.MultiSelect<T>,
+        selectionMode: DialogList.SelectionMode.MultiSelect<T>,
         checked: Boolean
     ) {
         if (checked) {
@@ -25,15 +25,15 @@ internal object DialogListUtil {
     fun <T> createOnClick(
         item: T,
         itemId: Int,
-        selectionMode: DialogListSelectionMode<T>,
+        selectionMode: DialogList.SelectionMode<T>,
         state: DialogState
     ): (() -> Unit)? {
         val onClick: (() -> Unit)? = when (selectionMode) {
-            is DialogListSelectionMode.MultiClick -> { ->
+            is DialogList.SelectionMode.MultiClick -> { ->
                 selectionMode.onItemClicked(item)
             }
 
-            is DialogListSelectionMode.MultiSelect -> {
+            is DialogList.SelectionMode.MultiSelect -> {
                 if (selectionMode.selectOnCheckboxClickOnly) {
                     null
                 } else {
@@ -49,12 +49,12 @@ internal object DialogListUtil {
                 }
             }
 
-            is DialogListSelectionMode.SingleClickAndClose -> { ->
+            is DialogList.SelectionMode.SingleClickAndClose -> { ->
                 selectionMode.onItemClicked(item)
                 state.dismiss()
             }
 
-            is DialogListSelectionMode.SingleSelect -> {
+            is DialogList.SelectionMode.SingleSelect -> {
                 if (selectionMode.selectOnRadioButtonClickOnly) {
                     null
                 } else {
@@ -72,23 +72,23 @@ internal object DialogListUtil {
     }
 
     fun <T> ensureOnlyVisibleItemsAreSelected(
-        selectionMode: DialogListSelectionMode<T>,
+        selectionMode: DialogList.SelectionMode<T>,
         items: List<T>,
         itemIdProvider: (item: T) -> Int
     ) {
         when (selectionMode) {
-            is DialogListSelectionMode.MultiClick,
-            is DialogListSelectionMode.SingleClickAndClose, -> {
+            is DialogList.SelectionMode.MultiClick,
+            is DialogList.SelectionMode.SingleClickAndClose, -> {
                 // nothing to do...
             }
-            is DialogListSelectionMode.SingleSelect -> {
+            is DialogList.SelectionMode.SingleSelect -> {
                 val selected = selectionMode.selected.value ?: return
                 val ids = items.map(itemIdProvider)
                 if (!ids.contains(selected)) {
                     selectionMode.selected.value = null
                 }
             }
-            is DialogListSelectionMode.MultiSelect -> {
+            is DialogList.SelectionMode.MultiSelect -> {
                 val selection = selectionMode.selected.value
                 val ids = items.map(itemIdProvider)
                 val newSelection = mutableListOf<Int>()

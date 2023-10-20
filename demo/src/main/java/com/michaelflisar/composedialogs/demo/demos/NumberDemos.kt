@@ -34,6 +34,9 @@ fun NumberDemos(style: DialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRow {
         DemoDialogInput3(style, icon)
     }
+    DemoDialogRow {
+        DemoDialogInput4(style, icon)
+    }
 }
 
 @Composable
@@ -75,7 +78,7 @@ private fun RowScope.DemoDialogInput1(
     DemoDialogButton(
         state,
         Icons.Default.Numbers,
-        "Simple Number PICKER Dialog",
+        "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5"
     )
 }
@@ -120,7 +123,7 @@ private fun RowScope.DemoDialogInput2(
     DemoDialogButton(
         state,
         Icons.Default.Numbers,
-        "Simple Number PICKER Dialog",
+        "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5 + repeat button clicks on long press + custom value formatter"
     )
 }
@@ -167,7 +170,49 @@ private fun RowScope.DemoDialogInput3(style: DialogStyle, icon: (@Composable () 
     DemoDialogButton(
         state,
         Icons.Default.Numbers,
-        "Simple Number PICKER Dialog",
+        "Number PICKER Dialog",
         "Shows a number picker for Float values in [0, 10f] with a step size of .5f + custom icons"
+    )
+}
+
+
+@Composable
+private fun RowScope.DemoDialogInput4(style: DialogStyle, icon: (@Composable () -> Unit)?) {
+
+    val context = LocalContext.current
+
+    // would work with Int, Long, Double and Float (all options of Number!)
+    val number = 50
+    val state = rememberDialogState()
+    if (state.showing) {
+
+        // special state for input dialog
+        val value = rememberDialogNumber(number)
+
+        // number dialog
+        DialogNumberPicker(
+            state = state,
+            title = { Text("Int Picker Dialog") },
+            value = value,
+            icon = icon,
+            style = style,
+            onEvent = {
+                if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                    // we should probably handle the input value in this case
+                    context.showToast("Submitted Input: ${value.value}")
+                } else {
+                    context.showToast("Event $it")
+                }
+            },
+            setup = NumberPickerSetup(
+                min = 0, max = 1000, stepSize = 10, stepSize2 = 100
+            )
+        )
+    }
+    DemoDialogButton(
+        state,
+        Icons.Default.Numbers,
+        "Number PICKER Dialog",
+        "Shows a number picker for Int values in [0, 1000] with a step size of 10 + a second step size of 100 for faster buttons."
     )
 }

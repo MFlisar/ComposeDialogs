@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.list.defaults
+package com.michaelflisar.composedialogs.dialogs.list.composables
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
