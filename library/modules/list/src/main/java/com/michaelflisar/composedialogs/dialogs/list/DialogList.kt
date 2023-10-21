@@ -129,8 +129,8 @@ fun <T> DialogList(
             CircularProgressIndicator()
         }
     },
-    divider: Boolean,
-    description: String,
+    divider: Boolean = false,
+    description: String = "",
     filter: DialogList.Filter<T>? = null,
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
