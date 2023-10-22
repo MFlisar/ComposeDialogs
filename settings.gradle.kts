@@ -11,7 +11,6 @@ dependencyResolutionManagement {
         val ksp = "1.9.10-1.0.13"
         val coroutines = "1.7.3"
         val gradle = "8.1.2"
-        val maven = "2.0"
 
         // TOML Files
         create("androidx") {
@@ -28,7 +27,6 @@ dependencyResolutionManagement {
         create("tools") {
             version("kotlin", kotlin)
             version("gradle", gradle)
-            version("maven", maven)
             version("ksp", ksp)
         }
         create("app") {
