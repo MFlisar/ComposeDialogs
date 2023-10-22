@@ -125,53 +125,44 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 
 **Info Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
 | ![Demo](screenshots/demo_info1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_info4.jpg?raw=true "Demo") |
+| :-: | :-: | :-: | :-: |
 
 **Input Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_input1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_input2.jpg?raw=true "Demo") | | |
+| ![Demo](screenshots/demo_input1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_input2.jpg?raw=true "Demo") |
+| :-: | :-: |
 
 **Number Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_number1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number3.jpg?raw=true "Demo") | |
+| ![Demo](screenshots/demo_number1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_number3.jpg?raw=true "Demo") |
+| :-: | :-: | :-: |
 
 **Date Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_calendar1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar3.jpg?raw=true "Demo") | |
+| ![Demo](screenshots/demo_calendar1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_calendar3.jpg?raw=true "Demo") |
+| :-: | :-: | :-: |
 
 **Time Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_time1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_time2.jpg?raw=true "Demo") | |  |
+| ![Demo](screenshots/demo_time1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_time2.jpg?raw=true "Demo") |
+| :-: | :-: |
 
 **Color Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
 | ![Demo](screenshots/demo_color1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_color4.jpg?raw=true "Demo") |
+| :-: | :-: | :-: | :-: |
 
 **List Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
 | ![Demo](screenshots/demo_list1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list2.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list3.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list4.jpg?raw=true "Demo") |
+| :-: | :-: | :-: | :-: |
 | ![Demo](screenshots/demo_list5.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list6.jpg?raw=true "Demo") | ![Demo](screenshots/demo_list7.jpg?raw=true "Demo") | |
 
 **Progress Dialog**
 
-| | | | |
-| :---: | :---: | :---: | :---: |
-| ![Demo](screenshots/demo_progress1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_progress2.jpg?raw=true "Demo") | |  |
-
+| ![Demo](screenshots/demo_progress1.jpg?raw=true "Demo") | ![Demo](screenshots/demo_progress2.jpg?raw=true "Demo") |
+| :-: | :-: |
 
 ### Settings and advanced usage
 
