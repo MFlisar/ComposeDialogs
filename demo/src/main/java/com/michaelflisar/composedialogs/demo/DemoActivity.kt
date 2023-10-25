@@ -113,6 +113,7 @@ class DemoActivity : ComponentActivity() {
                                 MainButton(selectedDemoPage, 5, "List Demos")
                                 MainButton(selectedDemoPage, 6, "Progress Demos")
                                 MainButton(selectedDemoPage, 7, "Single Dialog with List")
+                                MainButton(selectedDemoPage, 8, "Billing Demos")
                                 Divider()
                                 MainButton(selectedDemoPage, 99, "Custom Demos")
                             } else {
@@ -127,6 +128,7 @@ class DemoActivity : ComponentActivity() {
                                     5 -> ListDemos(s, icon)
                                     6 -> ProgressDemos(s, icon)
                                     7 -> SingleDialogWithListDemos(s, icon)
+                                    8 -> BillingDemos(s, icon)
 
                                     // Manually created custom demos
                                     99 -> CustomDemos(s, icon)

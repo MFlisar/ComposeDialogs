@@ -86,6 +86,7 @@ dependencies {
         implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
         implementation("com.github.MFlisar.ComposeDialogs:dialog-date:$composeDialog")
         implementation("com.github.MFlisar.ComposeDialogs:dialog-color:$composeDialog")
+        implementation("com.github.MFlisar.ComposeDialogs:dialog-billing:$composeDialog")
     } else {
         implementation(project(":ComposeDialogs:Core"))
         implementation(project(":ComposeDialogs:Modules:Info"))
@@ -96,6 +97,7 @@ dependencies {
         implementation(project(":ComposeDialogs:Modules:Progress"))
         implementation(project(":ComposeDialogs:Modules:Color"))
         implementation(project(":ComposeDialogs:Modules:List"))
+        implementation(project(":ComposeDialogs:Modules:Billing"))
     }
     //// TODO:
     //implementation(project(":ComposeDialogs:Modules:Ads"))

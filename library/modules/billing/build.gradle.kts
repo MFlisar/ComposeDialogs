@@ -58,11 +58,14 @@ dependencies {
     implementation(platform(compose.bom))
     implementation(compose.material3)
 
+
     // ------------------------
     // Libraries
     // ------------------------
 
     implementation(project(":ComposeDialogs:Core"))
+
+    api(deps.kotbilling)
 }
 
 /*

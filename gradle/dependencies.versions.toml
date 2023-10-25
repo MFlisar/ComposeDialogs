@@ -3,6 +3,9 @@
 materialize =				"1.2.0"
 desugar =                   "2.0.3"
 
+# mflisar
+kotbilling =                "0.6"
+
 # ---------
 # libraries
 # ---------
@@ -11,6 +14,9 @@ desugar =                   "2.0.3"
 
 materialize =			        			{ module = "com.mikepenz:materialize", 												version.ref = "materialize" }
 desugar =			        			    { module = "com.android.tools:desugar_jdk_libs", 									version.ref = "desugar" }
+
+# mflisar
+kotbilling =			        			{ module = "com.github.MFlisar:KotBilling", 									    version.ref = "kotbilling" }
 
 # -------
 # bundles
