@@ -16,6 +16,21 @@ Made for **Compose M3**.
 | [Compose BOM](https://developer.android.com/jetpack/compose/bom/bom) | `2023.10.00` | [Mapping](https://developer.android.com/jetpack/compose/bom/bom-mapping) |
 | Material3 | `1.1.2` | |
 
+### Other Dependencies
+
+| Modules | Dependency | Version |
+|:-|:-|-:|
+| `core` | no dependency |  |
+| `dialog-info:` | no dependency |  |
+| `dialog-input:` | no dependency |  |
+| `dialog-number:` | no dependency |  |
+| `dialog-list:` | no dependency |  |
+| `dialog-progress:` | no dependency |  |
+| `dialog-time:` | no dependency |  |
+| `dialog-date:` | no dependency |  |
+| `dialog-color:` | no dependency |  |
+| `dialog-billing` | [KotBilling](https://github.com/MFlisar/KotBilling) | 0.6 |
+
 ### Gradle (via [JitPack.io](https://jitpack.io/))
 
 1. add jitpack to your project's `build.gradle`:
@@ -44,6 +59,7 @@ dependencies {
   implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-date:$composeDialog")
   implementation("com.github.MFlisar.ComposeDialogs:dialog-color:$composeDialog")
+  implementation("com.github.MFlisar.ComposeDialogs:dialog-billing:$composeDialog")
 }
 ```
 
@@ -215,6 +231,10 @@ https://github.com/MFlisar/ComposeDialogs/blob/49002d560e59f7cf71167762533d71148
 **Progress Dialog**
 
 https://github.com/MFlisar/ComposeDialogs/blob/49002d560e59f7cf71167762533d71148e418bba/library/modules/progress/src/main/java/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt#L29-L43
+
+**Billing Dialog**
+
+https://github.com/MFlisar/ComposeDialogs/blob/b482515b6a9e365fde04af425ab517809368d819/library/modules/billing/src/main/java/com/michaelflisar/composedialogs/dialogs/billing/DialogBilling.kt#L61-L73
 
 **Custom Dialog**
 
