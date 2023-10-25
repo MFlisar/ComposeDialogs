@@ -7,7 +7,7 @@ This library offers you an easily extendible compose framework for modal dialogs
 
 Made for **Compose M3**.
 
-![Demo](screenshots/overview.jpg?raw=true "Overview")
+![Overview](screenshots/overview.jpg?raw=true "Overview")
 
 ### Dependencies
 
