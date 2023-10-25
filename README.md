@@ -117,7 +117,7 @@ LazyColumn {
 
 ### Demo
 
-A full demo is included inside the `demo` module, it shows nearly every usage with working examples.
+A full [demo](demo/src/main/java/com/michaelflisar/composedialogs/demo/DemoActivity.kt) is included inside the *demo module*, it shows nearly every usage with working examples.
 
 ### Screenshots
 
