@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime
+package com.michaelflisar.composedialogs.dialogs.date
 
 import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
@@ -39,15 +40,15 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageData
-import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarHeader
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarMonth
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectListMonth
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectListYear
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarSelectionHeader
-import com.michaelflisar.composedialogs.dialogs.datetime.composables.CalendarTodayButton
-import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
+import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
+import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarHeader
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarMonth
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectListMonth
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectListYear
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectionHeader
+import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarTodayButton
+import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
@@ -317,7 +318,7 @@ object DialogDateDefaults {
                 onClick = onClick,
                 enabled = enabled
             ) {
-                Text(text = "Today")
+                Text(text = stringResource(R.string.composedialogs_date_today))
             }
         },
         firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,

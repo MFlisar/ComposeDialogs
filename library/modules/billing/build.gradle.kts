@@ -57,7 +57,7 @@ dependencies {
     // Compose BOM
     implementation(platform(compose.bom))
     implementation(compose.material3)
-
+    implementation(compose.activity)
 
     // ------------------------
     // Libraries
@@ -73,7 +73,7 @@ project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                artifactId = "dialog-billng"
+                artifactId = "dialog-billing"
                 from(components["release"])
             }
         }

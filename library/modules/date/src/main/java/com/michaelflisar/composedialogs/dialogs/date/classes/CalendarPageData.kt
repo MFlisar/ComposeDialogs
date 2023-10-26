@@ -1,6 +1,6 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.classes
+package com.michaelflisar.composedialogs.dialogs.date.classes
 
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
+import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import kotlin.math.floor
 
 internal class CalendarPageData(

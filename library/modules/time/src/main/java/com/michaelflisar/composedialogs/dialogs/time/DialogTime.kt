@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime
+package com.michaelflisar.composedialogs.dialogs.time
 
 import android.text.format.DateFormat
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.classes
+package com.michaelflisar.composedialogs.dialogs.date.classes
 
 enum class DateViewState {
     Calendar,

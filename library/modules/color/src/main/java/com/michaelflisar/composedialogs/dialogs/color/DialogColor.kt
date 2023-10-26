@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
@@ -214,10 +215,13 @@ object DialogColorDefaults {
      * @param custom the label of the pager title for the custom color page
      */
     @Composable
-    fun texts(): DialogColor.Texts {
+    fun texts(
+        presets: String = stringResource(R.string.composedialogs_color_label_presets),
+        custom: String = stringResource(R.string.composedialogs_color_label_custom),
+    ): DialogColor.Texts {
         return DialogColor.Texts(
-            presets = "Presets",
-            custom = "Custom"
+            presets = presets,
+            custom = custom
         )
     }
 }

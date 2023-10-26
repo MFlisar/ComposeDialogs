@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.utils
+package com.michaelflisar.composedialogs.dialogs.date.utils
 
 import java.time.DayOfWeek
 import java.time.LocalDate

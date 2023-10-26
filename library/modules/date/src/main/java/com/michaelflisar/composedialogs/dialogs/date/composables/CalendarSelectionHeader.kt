@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.composables
+package com.michaelflisar.composedialogs.dialogs.date.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -18,7 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
+import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 

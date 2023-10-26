@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="composedialogs_color_label_presets">Presets</string>
+    <string name="composedialogs_color_label_custom">Custom</string>
+
+</resources>

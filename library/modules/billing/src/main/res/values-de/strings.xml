@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="composedialogs_billing_pro_version_title">Pro Version</string>
+    <string name="composedialogs_billing_pro_version_info">Die Pro Version entfernt alle Werbungen aus dieser App. Willst du dir die Pro Version holen?</string>
+    <string name="composedialogs_billing_pro_version_info_bought">Gratuliere. Du besitzt die Pro Version dieser App. Viel Spass damit.</string>
+
+    <string name="composedialogs_billing_button_buy">Kaufen</string>
+    <string name="composedialogs_billing_button_back">Zurück</string>
+
+    <string name="composedialogs_billing_info_item_already_owned">Du besitzt dieses Produkt bereits!</string>
+    <string name="composedialogs_billing_info_pro_version_already_owned">Du besitzt die Pro Version bereits. Danke, dass du diese App unterstützt.</string>
+    <string name="composedialogs_billing_info_no_products_found">Keine Produkte gefunden!</string>
+
+    <string name="composedialogs_billing_error_buying_pro_version">Beim Kauf dieses Produktes ist ein Fehler aufgetreten! Probiere es bitte später noch einmal oder kontaktiere den Entwickler.</string>
+    <string name="composedialogs_billing_error_quering_products">Beim abrufen der verfügbaren Produkte aus dem Play Store ist ein Fehler aufgetreten! Probiere es bitte später noch einmal oder kontaktiere den Entwickler.</string>
+
+
+</resources>

@@ -72,36 +72,19 @@ dependencies {
     // Libraries
     // ------------------------
 
-    val live = false
-    val composeDialog = "0.8"
+    implementation(project(":ComposeDialogs:Core"))
+    implementation(project(":ComposeDialogs:Modules:Info"))
+    implementation(project(":ComposeDialogs:Modules:Input"))
+    implementation(project(":ComposeDialogs:Modules:Number"))
+    implementation(project(":ComposeDialogs:Modules:Time"))
+    implementation(project(":ComposeDialogs:Modules:Date"))
+    implementation(project(":ComposeDialogs:Modules:Progress"))
+    implementation(project(":ComposeDialogs:Modules:Color"))
+    implementation(project(":ComposeDialogs:Modules:List"))
+    implementation(project(":ComposeDialogs:Modules:Billing"))
 
-    // release test
-    if (live) {
-        implementation("com.github.MFlisar.ComposeDialogs:core:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-info:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-input:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-number:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-list:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-progress:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-time:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-date:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-color:$composeDialog")
-        implementation("com.github.MFlisar.ComposeDialogs:dialog-billing:$composeDialog")
-    } else {
-        implementation(project(":ComposeDialogs:Core"))
-        implementation(project(":ComposeDialogs:Modules:Info"))
-        implementation(project(":ComposeDialogs:Modules:Input"))
-        implementation(project(":ComposeDialogs:Modules:Number"))
-        implementation(project(":ComposeDialogs:Modules:Time"))
-        implementation(project(":ComposeDialogs:Modules:Date"))
-        implementation(project(":ComposeDialogs:Modules:Progress"))
-        implementation(project(":ComposeDialogs:Modules:Color"))
-        implementation(project(":ComposeDialogs:Modules:List"))
-        implementation(project(":ComposeDialogs:Modules:Billing"))
-    }
-    //// TODO:
+    // TODO:
     //implementation(project(":ComposeDialogs:Modules:Ads"))
-    //implementation(project(":ComposeDialogs:Modules:Billing"))
     //implementation(project(":ComposeDialogs:Modules:GDPR"))
 
     // ------------------------

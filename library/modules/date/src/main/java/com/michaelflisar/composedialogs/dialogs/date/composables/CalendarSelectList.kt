@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.composables
+package com.michaelflisar.composedialogs.dialogs.date.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -25,10 +25,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.datetime.DialogDate
-import com.michaelflisar.composedialogs.dialogs.datetime.classes.CalendarPageData
-import com.michaelflisar.composedialogs.dialogs.datetime.classes.DateViewState
-import com.michaelflisar.composedialogs.dialogs.datetime.utils.DateUtil
+import com.michaelflisar.composedialogs.dialogs.date.DialogDate
+import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
+import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
+import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.coroutines.launch
 import java.time.Month
 import java.time.Year

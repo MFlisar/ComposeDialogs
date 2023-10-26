@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="composedialogs_billing_pro_version_title">Pro Version</string>
+    <string name="composedialogs_billing_pro_version_info">The Pro Version removes all ads from this app. Do you want to get the pro version?</string>
+    <string name="composedialogs_billing_pro_version_info_bought">Congratulations. You just got the pro version of this app. Have fun with it.</string>
+
+    <string name="composedialogs_billing_button_buy">Buy</string>
+    <string name="composedialogs_billing_button_back">Back</string>
+
+    <string name="composedialogs_billing_info_item_already_owned">Item already bought!</string>
+    <string name="composedialogs_billing_info_pro_version_already_owned">You already own the pro version. Thanks for supporting this app.</string>
+    <string name="composedialogs_billing_info_no_products_found">No product found!</string>
+
+    <string name="composedialogs_billing_error_buying_pro_version">Error buying pro version! Please try again later or contact the developer.</string>
+    <string name="composedialogs_billing_error_quering_products">Error quering prodcuts from play store! Please try again later or contact the developer.</string>
+
+</resources>

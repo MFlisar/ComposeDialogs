@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.datetime.composables
+package com.michaelflisar.composedialogs.dialogs.date.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.PagerState

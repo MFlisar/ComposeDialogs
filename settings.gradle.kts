@@ -65,12 +65,12 @@ include(":ComposeDialogs:Modules:List")
 project(":ComposeDialogs:Modules:List").projectDir = file("library/modules/list")
 include(":ComposeDialogs:Modules:Progress")
 project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/progress")
+include(":ComposeDialogs:Modules:Billing")
+project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
 
 // TODO: defined the directories only
 include(":ComposeDialogs:Modules:Ads")
 project(":ComposeDialogs:Modules:Ads").projectDir = file("library/modules/ads")
-include(":ComposeDialogs:Modules:Billing")
-project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
 include(":ComposeDialogs:Modules:GDPR")
 project(":ComposeDialogs:Modules:GDPR").projectDir = file("library/modules/gdpr")
 
