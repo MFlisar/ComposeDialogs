@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -27,7 +26,7 @@ import com.michaelflisar.composedialogs.demo.classes.DemoStyle
 import com.michaelflisar.composedialogs.demo.classes.DemoTheme
 import com.michaelflisar.composedialogs.demo.demos.*
 import com.michaelflisar.composedialogs.demo.views.SegmentedControl
-import com.michaelflisar.testcompose.ui.theme.ComposeDialogDemoTheme
+import com.michaelflisar.composedialogs.demo.theme.ComposeDialogDemoTheme
 
 class DemoActivity : ComponentActivity() {
 
