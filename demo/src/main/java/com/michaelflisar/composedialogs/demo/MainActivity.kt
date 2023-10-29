@@ -13,7 +13,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -30,7 +29,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedemobaseactivity.DemoActivity
+import com.michaelflisar.composedemobaseactivity.DemoBaseActivity
 import com.michaelflisar.composedemobaseactivity.classes.DemoTheme
 import com.michaelflisar.composedemobaseactivity.classes.listSaverKeepEntryStateList
 import com.michaelflisar.composedemobaseactivity.composables.DemoAppThemeRegion
@@ -49,7 +48,7 @@ import com.michaelflisar.composedialogs.demo.demos.ProgressDemos
 import com.michaelflisar.composedialogs.demo.demos.SingleDialogWithListDemos
 import com.michaelflisar.composedialogs.demo.views.SegmentedControl
 
-class MainActivity : DemoActivity() {
+class MainActivity : DemoBaseActivity() {
 
     @Composable
     override fun Content(modifier: Modifier, theme: DemoTheme, dynamicTheme: Boolean) {
