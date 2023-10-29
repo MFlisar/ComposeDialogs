@@ -68,12 +68,5 @@ project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/p
 include(":ComposeDialogs:Modules:Billing")
 project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
 
-// TODO: defined the directories only
-include(":ComposeDialogs:Modules:Ads")
-project(":ComposeDialogs:Modules:Ads").projectDir = file("library/modules/ads")
-include(":ComposeDialogs:Modules:GDPR")
-project(":ComposeDialogs:Modules:GDPR").projectDir = file("library/modules/gdpr")
-
-
 include(":demo")
 project(":demo").projectDir = file("demo")

@@ -83,13 +83,16 @@ dependencies {
     implementation(project(":ComposeDialogs:Modules:List"))
     implementation(project(":ComposeDialogs:Modules:Billing"))
 
-    // TODO:
-    //implementation(project(":ComposeDialogs:Modules:Ads"))
-    //implementation(project(":ComposeDialogs:Modules:GDPR"))
-
     // ------------------------
     // Desugar
     // ------------------------
 
     coreLibraryDesugaring(deps.desugar)
+
+    // ------------------------
+    // Others
+    // ------------------------
+    
+    // a minimal library that provides some useful composables that I use inside demo activities
+    implementation(deps.composedemobaseactivity)
 }

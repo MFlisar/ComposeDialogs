@@ -43,6 +43,7 @@ import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyle
+import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.kotbilling.KotBilling
 import com.michaelflisar.kotbilling.classes.Product
@@ -404,7 +405,7 @@ private fun buy(
 ) {
     purchasing.value = Purchasing.Pending
     scope.launch(Dispatchers.IO) {
-        val result = KotBilling.purchase(context.findActivity(), product, null)
+        val result = KotBilling.purchase(DialogUtil.findActivity(context), product, null)
         purchasing.value = Purchasing.Done(result)
     }
 }
@@ -422,18 +423,6 @@ private fun isOwned(
         is KBError -> null
         is KBPurchaseQuery -> resultToCheck.details.find { it.products.contains(product.id) }?.isOwned
     }
-}
-
-/*
- * same as https://github.com/google/accompanist/blob/a9506584939ed9c79890adaaeb58de01ed0bb823/permissions/src/main/java/com/google/accompanist/permissions/PermissionsUtil.kt#L132
- */
-internal fun Context.findActivity(): Activity {
-    var context = this
-    while (context is ContextWrapper) {
-        if (context is Activity) return context
-        context = context.baseContext
-    }
-    throw IllegalStateException("DialogBilling should be called in the context of an Activity")
 }
 
 private class LoadedData(

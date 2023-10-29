@@ -21,20 +21,21 @@ Made for **Compose M3**.
 | Modules | Dependency | Version |
 |:-|:-|-:|
 | `core` | no dependency |  |
-| `dialog-info:` | no dependency |  |
-| `dialog-input:` | no dependency |  |
-| `dialog-number:` | no dependency |  |
-| `dialog-list:` | no dependency |  |
-| `dialog-progress:` | no dependency |  |
-| `dialog-time:` | no dependency |  |
-| `dialog-date:` | no dependency |  |
-| `dialog-color:` | no dependency |  |
+| `dialog-info` | no dependency |  |
+| `dialog-input` | no dependency |  |
+| `dialog-number` | no dependency |  |
+| `dialog-list` | no dependency |  |
+| `dialog-progress` | no dependency |  |
+| `dialog-time` | no dependency |  |
+| `dialog-date` | no dependency |  |
+| `dialog-color` | no dependency |  |
 | `dialog-billing` | [KotBilling](https://github.com/MFlisar/KotBilling) | 0.6 |
 
 ### Gradle (via [JitPack.io](https://jitpack.io/))
 
 1. add jitpack to your project's `build.gradle`:
-```groovy
+
+```gradle
 repositories {
     maven { url "https://jitpack.io" }
 }
@@ -42,7 +43,7 @@ repositories {
 
 2. add the compile statement to your module's `build.gradle`:
 
-```groovy
+```gradle
 dependencies {
 
   val composeDialog = "<LATEST-VERSION>"
