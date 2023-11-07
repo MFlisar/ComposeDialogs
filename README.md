@@ -5,8 +5,6 @@
 
 This library offers you an easily extendible compose framework for modal dialogs and allows to show them as a **dialog** or a **bottom sheet**.
 
-![Overview](screenshots/overview.jpg?raw=true "Overview")
-
 ## :camera: Screenshots
 
 I only show the bottom sheet version for the info dialog, but of course any dialog does support the bottom sheet mode. Same holds true for the optional dialog icon.
