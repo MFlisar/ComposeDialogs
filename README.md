@@ -54,6 +54,6 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 
 The readme for this library with **code samples**, **screenshots** and more can be found on following *github page*:
 
-[![Static Badge](https://img.shields.io/badge/Open%20Documentation-lightgreen?style=for-the-badge&logo=github&logoColor=black)](https://mflisar.github.io/github-docs/compose/composedialogs/)
+[![Static Badge](https://img.shields.io/badge/Open%20Documentation-lightgreen?style=for-the-badge&logo=github&logoColor=black)](https://mflisar.github.io/github-docs/pages/compose/composedialogs/)
 
 Additionally there is also a full working [demo app](demo) inside the *demo module*.
