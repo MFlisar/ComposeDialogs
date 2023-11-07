@@ -28,6 +28,19 @@ android {
         }
     }
 
+    // eventually use local custom signing
+    val debugKeyStore = providers.gradleProperty("debugKeyStore").orNull
+    if (debugKeyStore != null) {
+        signingConfigs {
+            getByName("debug") {
+                keyAlias = "androiddebugkey"
+                keyPassword = "android"
+                storeFile = File(debugKeyStore)
+                storePassword = "android"
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
