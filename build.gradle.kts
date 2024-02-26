@@ -13,13 +13,3 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-serialization:" + tools.versions.kotlin.get())
     }
 }
-
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-        maven("https://jitpack.io")
-    }
-}
