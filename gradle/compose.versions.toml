@@ -1,9 +1,9 @@
 [versions]
-composeBom =            "2023.10.01"
-compiler =              "1.5.3"
+composeBom =            "2024.02.01"
+compiler =              "1.5.10"
 
-lifecycle = 			"2.6.2"
-activity = 				"1.8.0"
+lifecycle = 			"2.7.0"
+activity = 				"1.8.2"
 accompanist = 			"0.32.0"
 
 [libraries]

@@ -1,5 +1,7 @@
 package com.michaelflisar.composedialogs.dialogs.list
 
+import com.michaelflisar.composedialogs.core.DialogButtonType
+import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 
 internal object DialogListUtil {
@@ -26,7 +28,8 @@ internal object DialogListUtil {
         item: T,
         itemId: Int,
         selectionMode: DialogList.SelectionMode<T>,
-        state: DialogState
+        state: DialogState,
+        onEvent: (event: DialogEvent) -> Unit
     ): (() -> Unit)? {
         val onClick: (() -> Unit)? = when (selectionMode) {
             is DialogList.SelectionMode.MultiClick -> { ->
@@ -61,8 +64,13 @@ internal object DialogListUtil {
                     {
                         if (selectionMode.selected.value == itemId) {
                             // radio button cant be deselected either...
-                        } else {
+                        } else if (selectionMode.selected.value != itemId){
                             selectionMode.selected.value = itemId
+                            if (selectionMode.closeOnSelectionChanged) {
+                                // emulate positive button press as this mode delivers its pressed state via that event
+                                onEvent(DialogEvent.Button(DialogButtonType.Positive, true))
+                                state.dismiss()
+                            }
                         }
                     }
                 }

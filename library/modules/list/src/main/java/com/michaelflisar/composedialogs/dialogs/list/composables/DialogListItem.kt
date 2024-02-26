@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.composedialogs.dialogs.list.DialogListUtil
@@ -31,7 +32,8 @@ internal fun <T> DialogListItem(
     item: T,
     itemId: Int,
     selectionMode: DialogList.SelectionMode<T>,
-    itemContents: DialogList.ItemContents<T>
+    itemContents: DialogList.ItemContents<T>,
+    onEvent: (event: DialogEvent) -> Unit
 ) {
     DialogListItem(
         item = item,
@@ -44,7 +46,8 @@ internal fun <T> DialogListItem(
         } else null,
         trailingContent = if (itemContents.trailingContent != null) {
             { itemContents.trailingContent!!.invoke(this, item) }
-        } else null
+        } else null,
+        onEvent = onEvent
     )
 }
 
@@ -56,9 +59,10 @@ private fun <T> DialogListItem(
     selectionMode: DialogList.SelectionMode<T>,
     content: @Composable ColumnScope.() -> Unit,
     icon: @Composable (() -> Unit)? = null,
-    trailingContent: @Composable (ColumnScope.() -> Unit)? = null
+    trailingContent: @Composable (ColumnScope.() -> Unit)? = null,
+    onEvent: (event: DialogEvent) -> Unit
 ) {
-    val onClick = DialogListUtil.createOnClick(item, itemId, selectionMode, state)
+    val onClick = DialogListUtil.createOnClick(item, itemId, selectionMode, state, onEvent)
 
     val paddingVertical = 8.dp
     val paddingStart = if (onClick != null) 16.dp else 0.dp

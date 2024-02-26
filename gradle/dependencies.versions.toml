@@ -1,7 +1,7 @@
 [versions]
 
 materialize =				"1.2.0"
-desugar =                   "2.0.3"
+desugar =                   "2.0.4"
 
 # mflisar
 kotbilling =                "0.6"

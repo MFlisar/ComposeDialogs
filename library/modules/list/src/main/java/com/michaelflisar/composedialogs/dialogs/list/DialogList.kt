@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -292,10 +293,11 @@ private fun <T> DialogList(
                     it,
                     itemIdProvider(it),
                     selectionMode,
-                    itemContents
+                    itemContents,
+                    onEvent
                 )
                 if (divider && it != filteredItems.value.last()) {
-                    Divider(modifier = Modifier.padding(horizontal = 8.dp))
+                    HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp))
                 }
             }
         }
@@ -316,10 +318,12 @@ object DialogList {
          *
          * @param selected holds the currently selected item id
          * @param selectOnRadioButtonClickOnly if true, only clicks on the radio button will select an item, otherwise a click on the item itself will select it as well
+         * @param closeOnSelectionChanged if true, the dialog will be closed as soon as a different selection is made
          */
         class SingleSelect<T>(
             val selected: MutableState<Int?>,
-            val selectOnRadioButtonClickOnly: Boolean = true
+            val selectOnRadioButtonClickOnly: Boolean = true,
+            val closeOnSelectionChanged: Boolean = false
         ) : SelectionMode<T>()
 
         /**

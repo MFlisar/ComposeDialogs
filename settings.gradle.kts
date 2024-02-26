@@ -7,10 +7,10 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
 
-        val kotlin = "1.9.10"
-        val ksp = "1.9.10-1.0.13"
+        val kotlin = "1.9.22"
+        val ksp = "1.9.22-1.0.17"
         val coroutines = "1.7.3"
-        val gradle = "8.1.2"
+        val gradle = "8.2.2"
 
         // TOML Files
         create("androidx") {
