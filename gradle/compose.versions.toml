@@ -1,25 +1,17 @@
 [versions]
-composeBom =            "2024.02.01"
+composeBom =            "2024.03.00"
 compiler =              "1.5.10"
 
-lifecycle = 			"2.7.0"
 activity = 				"1.8.2"
 accompanist = 			"0.32.0"
 
 [libraries]
-bom =                       { group = "androidx.compose",                       name = "compose-bom",   version.ref = "composeBom" }
-animation =                 { group = "androidx.compose.animation",             name = "animation" }
-foundation =                { group = "androidx.compose.foundation",            name = "foundation" }
-material =                  { group = "androidx.compose.material",              name = "material" }
-runtime =                   { group = "androidx.compose.runtime",               name = "runtime" }
-ui =                        { group = "androidx.compose.ui",                    name = "ui" }
-ui-tooling =                { group = "androidx.compose.ui",                    name = "ui-tooling" }
-ui-tooling-preview =        { group = "androidx.compose.ui",                    name = "ui-tooling-preview" }
-material-extendedicons = 	{ group = "androidx.compose.material",              name = "material-icons-extended" }
-material3 =                 { group = "androidx.compose.material3",             name = "material3" }
+bom =                       	{ group = "androidx.compose",                       name = "compose-bom",   version.ref = "composeBom" }
+material =                  	{ group = "androidx.compose.material",              name = "material" }
+icons-material-extendedicons = 	{ group = "androidx.compose.material",              name = "material-icons-extended" }
+material3 =                 	{ group = "androidx.compose.material3",             name = "material3" }
 
-lifecycle = 				{ module = "androidx.lifecycle:lifecycle-runtime-compose", 					version.ref = "lifecycle" }
-activity = 					{ module = "androidx.activity:activity-compose", 							version.ref = "activity" }
+activity = 						{ module = "androidx.activity:activity-compose", 							version.ref = "activity" }
 
-systemuicontroller = 		{ module = "com.google.accompanist:accompanist-systemuicontroller", 		version.ref = "accompanist" }
-drawablepainter = 		    { module = "com.google.accompanist:accompanist-drawablepainter", 		    version.ref = "accompanist" }
+systemuicontroller = 			{ module = "com.google.accompanist:accompanist-systemuicontroller", 		version.ref = "accompanist" }
+drawablepainter = 		    	{ module = "com.google.accompanist:accompanist-drawablepainter", 		    version.ref = "accompanist" }

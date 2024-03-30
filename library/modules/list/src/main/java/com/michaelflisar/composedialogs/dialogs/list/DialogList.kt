@@ -318,12 +318,12 @@ object DialogList {
          *
          * @param selected holds the currently selected item id
          * @param selectOnRadioButtonClickOnly if true, only clicks on the radio button will select an item, otherwise a click on the item itself will select it as well
-         * @param closeOnSelectionChanged if true, the dialog will be closed as soon as a different selection is made
+         * @param closeOnSelect if true, the dialog will be closed as soon as a selection is made
          */
         class SingleSelect<T>(
             val selected: MutableState<Int?>,
             val selectOnRadioButtonClickOnly: Boolean = true,
-            val closeOnSelectionChanged: Boolean = false
+            val closeOnSelect: Boolean = false
         ) : SelectionMode<T>()
 
         /**

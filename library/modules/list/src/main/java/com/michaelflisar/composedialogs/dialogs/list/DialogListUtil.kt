@@ -66,11 +66,13 @@ internal object DialogListUtil {
                             // radio button cant be deselected either...
                         } else if (selectionMode.selected.value != itemId){
                             selectionMode.selected.value = itemId
-                            if (selectionMode.closeOnSelectionChanged) {
-                                // emulate positive button press as this mode delivers its pressed state via that event
-                                onEvent(DialogEvent.Button(DialogButtonType.Positive, true))
-                                state.dismiss()
-                            }
+                        }
+
+                        // we close the dialog, no matter if the selection was changed or not i following case
+                        if (selectionMode.closeOnSelect) {
+                            // emulate positive button press as this mode delivers its pressed state via that event
+                            onEvent(DialogEvent.Button(DialogButtonType.Positive, true))
+                            state.dismiss()
                         }
                     }
                 }

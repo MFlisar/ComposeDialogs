@@ -1,6 +1,6 @@
 [versions]
 core = 				"1.12.0"
-lifecycle = 		"2.6.2"
+lifecycle = 		"2.7.0"
 
 [libraries]
 core = 				    { module = "androidx.core:core-ktx", 						version.ref = "core" }

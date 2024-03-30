@@ -3,6 +3,7 @@ package com.michaelflisar.composedialogs.dialogs.info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.AnnotatedString
 import com.michaelflisar.composedialogs.core.*
 
 /**
