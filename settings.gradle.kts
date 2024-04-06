@@ -7,8 +7,8 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
 
-        val kotlin = "1.9.22"
-        val ksp = "1.9.22-1.0.17"
+        val kotlin = "1.9.23"
+        val ksp = "1.9.23-1.0.20"
         val coroutines = "1.7.3"
         val gradle = "8.3.1"
 

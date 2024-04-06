@@ -30,8 +30,8 @@ import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTex
  *
  * @param value the selected number
  * @param valueLabel the optional label of the input field
- * @param invalidNumberErrorText provide a function that returns a custom error message if the user input is not a valid number
- *
+
+ * @param inputPlaceholder a placeholder if the input is empty
  * @param singleLine if true, the input field will only allow a single line
  * @param maxLines the max lines for the input field
  * @param minLines the min lines for the input field
@@ -53,7 +53,6 @@ fun <T : Number> DialogInputNumber(
     value: MutableState<T>,
     valueLabel: String = "",
     // Custom - Optional
-    invalidNumberErrorText: (value: String) -> String = { "Invalid!" },
     inputPlaceholder: String = "",
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
@@ -62,6 +61,7 @@ fun <T : Number> DialogInputNumber(
     clearable: Boolean = true,
     prefix: String = "",
     suffix: String = "",
+    validator: DialogInputValidator = DialogInputNumber.rememberDefaultValidator(value.value),
     textStyle: TextStyle = LocalTextStyle.current,
     requestFocus: Boolean = false,
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
@@ -82,28 +82,11 @@ fun <T : Number> DialogInputNumber(
 
         val stringInput = rememberSaveable { mutableStateOf(value.value.toString()) }
 
-        val converter = when (value.value) {
-            is Int -> { value: String -> value.toIntOrNull() }
-            is Double -> { value: String -> value.toDoubleOrNull() }
-            is Float -> { value: String -> value.toFloatOrNull() }
-            is Long -> { value: String -> value.toLongOrNull() }
-            else -> throw RuntimeException("No string to T converter defined!")
-        } as (String) -> T?
-
-        val validator = rememberDialogInputValidator(
-            validate = {
-                val converted = converter(it)
-                if (converted == null)
-                    DialogInputValidator.Result.Error(invalidNumberErrorText(it))
-                else DialogInputValidator.Result.Valid
-            }
-        )
-
         LaunchedEffect(validator.isValid()) {
             state.enableButton(DialogButtonType.Positive, validator.isValid())
         }
         LaunchedEffect(stringInput.value) {
-            converter(stringInput.value)?.let {
+            DialogInputNumber.convert(value.value, stringInput.value)?.let {
                 value.value = it
             }
         }
@@ -125,8 +108,8 @@ fun <T : Number> DialogInputNumber(
             validator,
             requestFocus,
             selectionState
-        ) { valid, value ->
-            onValueStateChanged(valid, converter(value))
+        ) { valid, text ->
+            onValueStateChanged(valid, DialogInputNumber.convert(value.value, text))
         }
     }
 }
@@ -134,7 +117,7 @@ fun <T : Number> DialogInputNumber(
 /**
  * convenient function for [DialogInputNumber]
  *
- * @param value the initial value for the input field
+ * @param number the initial value for the input field
  *
  * @return a state holding the current input value
  */
@@ -144,3 +127,79 @@ fun <T : Number> rememberDialogInputNumber(
 ): MutableState<T> {
     return rememberSaveable { mutableStateOf(number) }
 }
+
+object DialogInputNumber {
+
+    /**
+     * helper function to convert a text input to a number based on the number type
+     *
+     * @param value the input dialog state from which the desired number type is derived
+     * @param input the input string that should be converted to the number class T
+     *
+     * @return the input converted to the number class T or null
+     */
+    fun <T : Number> convert(value: T, input: String): T? {
+        return when (value) {
+            is Int -> input.toIntOrNull()
+            is Double -> input.toDoubleOrNull()
+            is Float -> input.toFloatOrNull()
+            is Long -> input.toLongOrNull()
+            else -> throw RuntimeException("No string to ${value::class.simpleName} converter defined!")
+        } as T?
+    }
+
+    /**
+     * helper function to convert a text input to a number based on the number type
+     *
+     * @param input the input string that should be converted to the number class T
+     *
+     * @return the input converted to the number class T or null
+     */
+    inline fun <reified T : Number> convert(input: String): T? {
+        return when (T::class) {
+            Int::class -> input.toIntOrNull()
+            Double::class -> input.toDoubleOrNull()
+            Float::class -> input.toFloatOrNull()
+            Long::class -> input.toLongOrNull()
+            else -> throw RuntimeException("No string to ${T::class.simpleName} converter defined!")
+        } as T?
+    }
+
+    /**
+     * default validator that simply ensures, that the input is a valid number of type T
+     *
+     * @param value the input dialog state from which the desired number type is derived
+     *
+     * @return a [DialogInputValidator]
+     */
+    @Composable
+    fun <T : Number> rememberDefaultValidator(value: T) = rememberDialogInputValidator(
+        validate = {
+            val converted = convert(value, it)
+            if (converted == null)
+                defaultInvalidNumberError(value)
+            else DialogInputValidator.Result.Valid
+        }
+    )
+
+    /**
+     * default error state for invalid numbers
+     *
+     * @param value the input dialog state from which the desired number type is derived
+     *
+     * @return [DialogInputValidator.Result.Error] state
+     */
+    fun <T : Number> defaultInvalidNumberError(value: T) =
+        DialogInputValidator.Result.Error("Invalid ${value::class.java.simpleName}!")
+
+    /**
+     * default error state for invalid numbers
+     *
+     * @param value the input dialog state from which the desired number type is derived
+     *
+     * @return [DialogInputValidator.Result.Error] state
+     */
+    inline fun <reified T : Number> defaultInvalidNumberError() =
+        DialogInputValidator.Result.Error("Invalid ${T::class.java.simpleName}!")
+}
+

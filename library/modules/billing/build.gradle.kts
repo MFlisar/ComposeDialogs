@@ -65,7 +65,12 @@ dependencies {
 
     implementation(project(":ComposeDialogs:Core"))
 
-    api(deps.kotbilling)
+    val useLiveDependencies = providers.gradleProperty("useLiveDependencies").get().toBoolean()
+    if (useLiveDependencies) {
+        api(deps.kotbilling)
+    } else {
+        api(project(":KotBilling"))
+    }
 }
 
 
