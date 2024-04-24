@@ -38,7 +38,9 @@ private fun RowScope.DemoDialogProgress1(style: DialogStyle, icon: (@Composable 
     if (state.showing) {
         DialogProgress(
             state = state,
-            label = "Working...",
+            content = {
+                Text("Working...")
+            },
             progressStyle = DialogProgress.Style.Indeterminate(linear = true),
             icon = icon,
             title = { Text("Progress Dialog") },
@@ -70,7 +72,9 @@ private fun RowScope.DemoDialogProgress2(style: DialogStyle, icon: (@Composable 
     if (state.showing) {
         DialogProgress(
             state = state,
-            label = "Working...",
+            content = {
+                Text("Working...")
+            },
             progressStyle = DialogProgress.Style.Indeterminate(linear = false),
             icon = icon,
             title = { Text("Progress Dialog") },
@@ -131,7 +135,9 @@ private fun RowScope.DemoDialogProgress3(style: DialogStyle, icon: (@Composable 
         }
         DialogProgress(
             state = state,
-            label = label,
+            content = {
+                Text("Working...")
+            },
             progressStyle = progressStyle,
             icon = iconToShow,
             title = { Text("Progress Dialog") },
