@@ -38,7 +38,11 @@ internal fun AlertDialog(
     textContentColor: Color = AlertDialogDefaults.textContentColor,
     tonalElevation: Dp = AlertDialogDefaults.TonalElevation,
     properties: DialogProperties = DialogProperties()
-) = AlertDialog(onDismissRequest = onDismissRequest, modifier = modifier, properties = properties) {
+) = BasicAlertDialog(
+    onDismissRequest = onDismissRequest,
+    modifier = modifier,
+    properties = properties
+) {
     AlertDialogContent(
         buttons = {
             AlertDialogFlowRow(

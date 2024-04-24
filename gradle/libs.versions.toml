@@ -1,0 +1,17 @@
+[versions]
+
+gradle = 				"8.3.2"
+kotlin = 				"1.9.23"
+kotlinx-coroutines = 	"1.8.0"
+
+[plugins]
+
+[libraries]
+
+gradle =						{ module = "com.android.tools.build:gradle", 									version.ref = "gradle" }
+kotlin-gradle-plugin =			{ module = "org.jetbrains.kotlin:kotlin-gradle-plugin", 						version.ref = "kotlin" }
+kotlin-serialization =			{ module = "org.jetbrains.kotlin:kotlin-serialization", 						version.ref = "kotlin" }
+
+kotlin =						{ module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", 							version.ref = "kotlin" }
+
+kotlinx-coroutines =			{ module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 					version.ref = "kotlinx-coroutines" }

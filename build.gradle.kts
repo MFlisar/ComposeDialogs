@@ -8,8 +8,8 @@ buildscript {
         maven("https://jitpack.io")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:" + tools.versions.gradle.get())
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:" + tools.versions.kotlin.get())
-        classpath("org.jetbrains.kotlin:kotlin-serialization:" + tools.versions.kotlin.get())
+        classpath(libs.gradle)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.kotlin.serialization)
     }
 }
