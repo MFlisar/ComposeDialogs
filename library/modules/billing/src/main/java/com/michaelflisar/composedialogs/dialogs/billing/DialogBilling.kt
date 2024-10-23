@@ -1,9 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.billing
 
-import com.michaelflisar.composedialogs.dialogs.billing.R
-import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,9 +39,10 @@ import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
-import com.michaelflisar.composedialogs.core.DialogStyle
 import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.defaultDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.kotbilling.KotBilling
 import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
@@ -77,9 +75,9 @@ fun DialogBilling(
     products: List<DialogBilling.BillingProduct>,
     texts: DialogBilling.Texts = DialogBillingDefaults.texts(),
     // Base Dialog - Optional
-    title: (@Composable () -> Unit)? = null,
+    title: String? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: DialogStyle = DialogDefaults.styleDialog(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     //buttons: DialogButtons = DialogDefaults.buttons(),
     //options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}

@@ -1,13 +1,92 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
+import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("maven-publish")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.gradle.maven.publish.plugin)
+}
+
+// -------------------
+// Informations
+// -------------------
+
+// Module
+val artifactId = "dialog-date"
+val androidNamespace = "com.michaelflisar.composedialogs.dialogs.date"
+
+// Library
+val libraryName = "ComposeDialogs"
+val libraryDescription = "ComposeDialogs - $artifactId module"
+val groupID = "io.github.mflisar.composedialogs"
+val release = 2023
+val github = "https://github.com/MFlisar/ComposeDialogs"
+val license = "Apache License 2.0"
+val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Setup
+// -------------------
+
+kotlin {
+
+    // Java
+    jvm()
+
+    // Android
+    androidTarget {
+        publishLibraryVariants("release")
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    // iOS
+    //macosX64()
+    //macosArm64()
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
+
+    // -------
+    // Sources
+    // -------
+
+    sourceSets {
+
+        commonMain.dependencies {
+
+            implementation(compose.components.resources)
+
+            // Kotlin
+            implementation(libs.kotlin)
+            implementation(libs.kotlinx.coroutines)
+            api(libs.kotlinx.datetime)
+
+            // Compose
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+
+            // library
+            implementation(project(":ComposeDialogs:Core"))
+
+            //implementation(libs.moko.parcelize)
+
+        }
+    }
 }
 
 android {
 
-    namespace = "com.michaelflisar.composedialogs.dialogs.date"
+    namespace = androidNamespace
 
     compileSdk = app.versions.compileSdk.get().toInt()
 
@@ -33,53 +112,56 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose.versions.compiler.get()
-    }
 }
 
 dependencies {
-
-    // ------------------------
-    // Kotlin
-    // ------------------------
-
-    implementation(libs.kotlin)
-    implementation(libs.kotlinx.coroutines)
-
-    // ------------------------
-    // AndroidX / Google / Goolge
-    // ------------------------
-
-    // Compose BOM
-    implementation(platform(compose.bom))
-    implementation(compose.material3)
-    implementation(compose.activity)
-
-    // ------------------------
-    // Libraries
-    // ------------------------
-
-    implementation(project(":ComposeDialogs:Core"))
-
-    // ------------------------
-    // Desugar
-    // ------------------------
-
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "dialog-date"
-                from(components["release"])
+mavenPublishing {
+
+    configure(
+        KotlinMultiplatform(
+            javadocJar = JavadocJar.Dokka("dokkaHtml"),
+            sourcesJar = true
+        )
+    )
+
+    coordinates(
+        groupId = groupID,
+        artifactId = artifactId,
+        version = System.getenv("TAG")
+    )
+
+    pom {
+        name.set(libraryName)
+        description.set(libraryDescription)
+        inceptionYear.set("$release")
+        url.set(github)
+
+        licenses {
+            license {
+                name.set(license)
+                url.set(licenseUrl)
             }
         }
+
+        developers {
+            developer {
+                id.set("mflisar")
+                name.set("Michael Flisar")
+                email.set("mflisar.development@gmail.com")
+            }
+        }
+
+        scm {
+            url.set(github)
+        }
     }
+
+    // Configure publishing to Maven Central
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+
+    // Enable GPG signing for all publications
+    signAllPublications()
 }

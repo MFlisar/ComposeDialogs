@@ -1,7 +1,0 @@
-[versions]
-core = 				"1.12.0"
-lifecycle = 		"2.7.0"
-
-[libraries]
-core = 				    { module = "androidx.core:core-ktx", 						version.ref = "core" }
-lifecycle = 		    { module = "androidx.lifecycle:lifecycle-runtime-ktx", 		version.ref = "lifecycle" }

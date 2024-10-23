@@ -1,13 +1,39 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("maven-publish")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.gradle.maven.publish.plugin)
 }
+
+// -------------------
+// Informations
+// -------------------
+
+// Module
+val artifactId = "dialog-billing"
+val androidNamespace = "com.michaelflisar.composedialogs.dialogs.billing"
+
+// Library
+val libraryName = "ComposeDialogs"
+val libraryDescription = "ComposeDialogs - $artifactId module"
+val groupID = "io.github.mflisar.composedialogs"
+val release = 2023
+val github = "https://github.com/MFlisar/ComposeDialogs"
+val license = "Apache License 2.0"
+val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Setup
+// -------------------
 
 android {
 
-    namespace = "com.michaelflisar.composedialogs.dialogs.billing"
+    namespace = androidNamespace
 
     compileSdk = app.versions.compileSdk.get().toInt()
 
@@ -36,9 +62,7 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose.versions.compiler.get()
-    }
+
 }
 
 dependencies {
@@ -54,10 +78,9 @@ dependencies {
     // AndroidX / Google / Goolge
     // ------------------------
 
-    // Compose BOM
-    implementation(platform(compose.bom))
-    implementation(compose.material3)
-    implementation(compose.activity)
+    // Compose
+    implementation(libs.compose.material3)
+    implementation(libs.androidx.activity.compose)
 
     // ------------------------
     // Libraries
@@ -67,20 +90,51 @@ dependencies {
 
     val useLiveDependencies = providers.gradleProperty("useLiveDependencies").get().toBoolean()
     if (useLiveDependencies) {
-        api(deps.kotbilling)
+        api(libs.kotbilling)
     } else {
         api(project(":KotBilling"))
     }
 }
 
+mavenPublishing {
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "dialog-billing"
-                from(components["release"])
+    configure(AndroidSingleVariantLibrary("release", true, true))
+
+    coordinates(
+        groupId = groupID,
+        artifactId = artifactId,
+        version = System.getenv("TAG")
+    )
+
+    pom {
+        name.set(libraryName)
+        description.set(libraryDescription)
+        inceptionYear.set("$release")
+        url.set(github)
+
+        licenses {
+            license {
+                name.set(license)
+                url.set(licenseUrl)
             }
         }
+
+        developers {
+            developer {
+                id.set("mflisar")
+                name.set("Michael Flisar")
+                email.set("mflisar.development@gmail.com")
+            }
+        }
+
+        scm {
+            url.set(github)
+        }
     }
+
+    // Configure publishing to Maven Central
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+
+    // Enable GPG signing for all publications
+    signAllPublications()
 }

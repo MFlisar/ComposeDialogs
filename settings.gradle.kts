@@ -1,28 +1,31 @@
 dependencyResolutionManagement {
+
     repositories {
         mavenCentral()
         google()
         gradlePluginPortal()
         maven("https://jitpack.io")
     }
+
     versionCatalogs {
-        create("androidx") {
-            from(files("gradle/androidx.versions.toml"))
-        }
-        create("deps") {
-            from(files("gradle/dependencies.versions.toml"))
-        }
-        create("compose") {
-            from(files("gradle/compose.versions.toml"))
-        }
         create("app") {
             from(files("gradle/app.versions.toml"))
         }
     }
 }
 
+pluginManagement {
+
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+        maven("https://jitpack.io")
+    }
+}
+
 // --------------
-// App
+// Library
 // --------------
 
 include(":ComposeDialogs:Core")
@@ -46,5 +49,5 @@ project(":ComposeDialogs:Modules:Progress").projectDir = file("library/modules/p
 include(":ComposeDialogs:Modules:Billing")
 project(":ComposeDialogs:Modules:Billing").projectDir = file("library/modules/billing")
 
-include(":demo")
-project(":demo").projectDir = file("demo")
+include(":demo:android")
+include(":demo:desktop")
