@@ -1,5 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.color.classes
 
+import dev.icerock.moko.parcelize.IgnoredOnParcel
 import dev.icerock.moko.parcelize.Parcelable
 import dev.icerock.moko.parcelize.Parcelize
 
@@ -12,5 +13,6 @@ internal class GroupedColor(
     override val color: Int
         get() = colors[indexOfMainColor].color
 
+    @IgnoredOnParcel
     override val label = ""
 }

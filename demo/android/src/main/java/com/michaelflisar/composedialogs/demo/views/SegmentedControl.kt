@@ -1,7 +1,7 @@
 package com.michaelflisar.composedialogs.demo.views
 
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
@@ -15,6 +15,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -36,7 +37,7 @@ fun SegmentedControl(
     colorOnColor: Color = MaterialTheme.colorScheme.onPrimary,
     onItemSelection: (selectedItemIndex: Int) -> Unit
 ) {
-    val selectedIndex = remember { mutableStateOf(selectedIndex) }
+    val selectedIndex = remember { mutableIntStateOf(selectedIndex) }
 
     val cornerSize0 = CornerSize(0)
 
@@ -60,7 +61,7 @@ fun SegmentedControl(
                     targetState = selectedIndex
                 }
             }
-            val transition = updateTransition(transitionState, label = "transition")
+            val transition = rememberTransition(transitionState, label = "transition")
             val colorBackground by transition.animateColorTween("background") {
                 if (it.value == index) color else Color.Transparent
             }
@@ -78,29 +79,30 @@ fun SegmentedControl(
                             Modifier
                                 .width(itemWidth)
                                 .offset(0.dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex.intValue == index) 1f else 0f)
                         } else {
                             Modifier
                                 .wrapContentSize()
                                 .offset(0.dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex.intValue == index) 1f else 0f)
                         }
                     }
+
                     else -> {
                         if (useFixedWidth)
                             Modifier
                                 .width(itemWidth)
                                 .offset((-1 * index).dp, 0.dp)
-                                .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                                .zIndex(if (selectedIndex.intValue == index) 1f else 0f)
                         else Modifier
                             .wrapContentSize()
                             .offset((-1 * index).dp, 0.dp)
-                            .zIndex(if (selectedIndex.value == index) 1f else 0f)
+                            .zIndex(if (selectedIndex.intValue == index) 1f else 0f)
                     }
                 },
                 onClick = {
-                    selectedIndex.value = index
-                    onItemSelection(selectedIndex.value)
+                    selectedIndex.intValue = index
+                    onItemSelection(selectedIndex.intValue)
                 },
                 shape = shapeOfIndex,
                 border = BorderStroke(1.dp, colorBorder),

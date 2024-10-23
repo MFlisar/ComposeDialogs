@@ -107,7 +107,7 @@ internal fun HeaderItem(
                 .weight(1f)
                 .clip(MaterialTheme.shapes.small)
                 .clickable {
-                    if (viewState.value == DateViewState.Calendar)
+                    if (viewState.value != targetViewState)
                         viewState.value = targetViewState
                     else
                         viewState.value = DateViewState.Calendar

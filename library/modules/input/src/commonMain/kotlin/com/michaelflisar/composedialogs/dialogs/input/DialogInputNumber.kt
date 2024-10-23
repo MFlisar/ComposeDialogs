@@ -141,6 +141,7 @@ object DialogInputNumber {
      *
      * @return the input converted to the number class T or null
      */
+    @Suppress("UNCHECKED_CAST")
     fun <T : Number> convert(value: T, input: String): T? {
         return when (value) {
             is Int -> input.toIntOrNull()
@@ -197,8 +198,6 @@ object DialogInputNumber {
 
     /**
      * default error state for invalid numbers
-     *
-     * @param value the input dialog state from which the desired number type is derived
      *
      * @return [DialogInputValidator.Result.Error] state
      */

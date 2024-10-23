@@ -2,6 +2,7 @@ package com.michaelflisar.composedialogs.dialogs.number.utils
 
 internal object NumberUtil {
 
+    @Suppress("UNCHECKED_CAST")
     fun <T : Number> sum(value1: T, value2: T): T {
         return when (value1) {
             is Int -> value1.toInt() + value2.toInt()
@@ -12,6 +13,7 @@ internal object NumberUtil {
         } as T
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun <T : Number> min(value1: T, value2: T): T {
         return when (value1) {
             is Int -> value1.toInt() - value2.toInt()

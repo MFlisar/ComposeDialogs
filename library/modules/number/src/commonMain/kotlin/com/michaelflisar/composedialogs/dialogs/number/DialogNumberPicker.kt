@@ -3,8 +3,8 @@ package com.michaelflisar.composedialogs.dialogs.number
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardDoubleArrowLeft
 import androidx.compose.material.icons.filled.KeyboardDoubleArrowRight
 import androidx.compose.material3.Icon
@@ -53,10 +53,10 @@ fun <T : Number> DialogNumberPicker(
     value: MutableState<T>,
     setup: NumberPickerSetup<T>,
     iconDown: @Composable () -> Unit = {
-        Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null)
+        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = null)
     },
     iconUp: @Composable () -> Unit = {
-        Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null)
+        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
     },
     iconDown2: @Composable () -> Unit = {
         Icon(imageVector = Icons.Default.KeyboardDoubleArrowLeft, contentDescription = null)
@@ -193,7 +193,7 @@ sealed class RepeatingButton {
 /**
  * convenient function for [DialogNumberPicker]
  *
- * @param initialValue the initial number
+ * @param number the initial number
  *
  * @return a state holding the current number value
  */

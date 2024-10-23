@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -174,7 +175,7 @@ class MainActivity : DemoBaseActivity() {
                 MainButton(selectedDemoPage, 6, "Progress Demos")
                 MainButton(selectedDemoPage, 7, "Single Dialog with List")
                 MainButton(selectedDemoPage, 8, "Billing Demos")
-                Divider()
+                HorizontalDivider()
                 MainButton(selectedDemoPage, 99, "Custom Demos")
             }
         }

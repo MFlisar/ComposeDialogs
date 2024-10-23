@@ -29,7 +29,7 @@ fun Spinner(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> Spinner(
     modifier: Modifier = Modifier,
@@ -53,7 +53,7 @@ fun <T> Spinner(
         OutlinedTextField(
             modifier = modifier
                 .focusable(false)
-                .menuAnchor(),
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable),
             readOnly = true,
             enabled = enabled,
             value = itemToString(selected),
