@@ -251,3 +251,4 @@ Modules
 * [Number](readmes/dialog-number.md)
 * [Progress](readmes/dialog-progress.md)
 * [Time](readmes/dialog-time.md)
+* [Custom](readmes/dialog-custom.md)
