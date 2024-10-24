@@ -32,11 +32,11 @@ val licenseUrl = "$github/blob/main/LICENSE"
 // -------------------
 
 // this task fails  in github action - so we disable it...
-/*tasks.matching { task ->
+tasks.matching { task ->
     task.name.contains("javaDocReleaseGeneration", ignoreCase = true)
 }.configureEach {
     enabled = false
-}*/
+}
 
 android {
 

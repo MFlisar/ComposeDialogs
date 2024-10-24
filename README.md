@@ -1,7 +1,14 @@
-## About
+[![Maven](https://img.shields.io/maven-central/v/io.github.mflisar.composedialogs/core?style=for-the-badge&color=blue)](https://central.sonatype.com/namespace/io.github.mflisar.composedialogs)
+[![API](https://img.shields.io/badge/api-21%2B-brightgreen.svg?style=for-the-badge)](https://android-arsenal.com/api?level=21)
+[![Kotlin](https://img.shields.io/github/languages/top/mflisar/composedialogs.svg?style=for-the-badge&color=blueviolet)](https://kotlinlang.org/)
+[![KMP](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&label=Kotlin)](https://kotlinlang.org/docs/multiplatform.html)
+[![License](https://img.shields.io/github/license/MFlisar/ComposeDialogs?style=for-the-badge)](LICENSE)
 
-[![Release](https://jitpack.io/v/MFlisar/ComposeDialogs.svg)](https://jitpack.io/#MFlisar/ComposeDialogs)
-![License](https://img.shields.io/github/license/MFlisar/ComposeDialogs)
+<h1 align="center">ComposeDialogs</h1>
+
+A <b>lazy logging library</b>.
+
+## :heavy_check_mark: Features
 
 This library offers you an easily extendible compose framework for modal dialogs and allows to show them as a **dialog** or a **bottom sheet**.
 
@@ -49,6 +56,23 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 
 | ![Demo](screenshots/dark/demo_progress1.jpg?raw=true "Demo") | ![Demo](screenshots/dark/demo_progress2.jpg?raw=true "Demo") |
 | :-: | :-: |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## :book: Documentation
 
