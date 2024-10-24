@@ -189,9 +189,13 @@ Check out the dialog state and the dialogs to find out what settings you can use
 In case of the simple state `true` means that the dialog is visible and `false` that it's not. In case of the complex state holding an object means the dialog is visible and `null` means it's not visible.
 
 ```kotlin
---8<--
-https://raw.githubusercontent.com/MFlisar/ComposeDialogs/49002d560e59f7cf71167762533d71148e418bba/library/core/src/main/java/com/michaelflisar/composedialogs/core/DialogState.kt:104:110
---8<--
+fun rememberDialogState(
+    showing: Boolean = false,
+    buttonPositiveEnabled: Boolean = true,
+    buttonNegativeEnabled: Boolean = true,
+    dismissAllowed: Boolean = true,
+    swipeAllowed: Boolean = true
+): DialogState
 ```
 
 In case of the complex state simply use `state.show(data)` to show the dialog and then inside your dialog call `val data = state.requireData()` to get the data from the state.
