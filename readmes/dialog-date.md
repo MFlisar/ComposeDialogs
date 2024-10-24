@@ -6,21 +6,4 @@
 
 This shows a date selector dialog. First day of week, labels, and style can be adjusted to your needs.
 
-```kotlin
-fun DialogDate(
-    state: DialogState,
-    // Custom - Required
-    date: MutableState<LocalDate>,
-    // Custom - Optional
-    dateRange: DialogDate.Range = DialogDateDefaults.dateRange(),
-    setup: DialogDate.Setup = DialogDateDefaults.setup(),
-    // Base Dialog - Optional
-    title: String? = null,
-    icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
-    buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.defaultDateDialogSpecialOptions(),
-    onEvent: (event: DialogEvent) -> Unit = {}
-)
-```
+https://github.com/MFlisar/ComposeDialogs/blob/bb3a19df48614024b57c97ea88e18e38cfd9b41d/library/modules/date/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/date/DialogDate.kt#L71-L86
