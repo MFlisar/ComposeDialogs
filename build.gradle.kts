@@ -10,12 +10,17 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.compose) apply false
+    alias(libs.plugins.gradle.maven.publish.plugin) apply false
     alias(libs.plugins.dokka) apply false
 }
 
-// this task fails  in github action - so we disable it...
-tasks.matching { task ->
-    task.name.contains("javaDocReleaseGeneration", ignoreCase = true)
-}.configureEach {
-    enabled = false
+allprojects {
+
+    // this task fails in github action - so I disable it...
+    tasks.matching { task ->
+        task.name.contains("javaDocReleaseGeneration", ignoreCase = true)
+    }.configureEach {
+        enabled = false
+    }
+
 }
