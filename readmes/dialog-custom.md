@@ -5,12 +5,12 @@ Of course you can use the complete framework for your own dialogs as well.
 ```kotlin
 fun Dialog(
     state: DialogState,
-    title: (@Composable () -> Unit)? = null,
+    title: String? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: DialogStyle = DialogDefaults.styleDialog(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = SpecialOptions(),
+    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 )
