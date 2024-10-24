@@ -2,7 +2,7 @@
 
 | Preview | | Module |
 | :- | :- | :- |
-| ![Preview](screenshots/demo_calendar1.jpg "Preview") | ![Preview](screenshots/demo_calendar2.jpg "Preview") | `date` |
+| ![Preview](../screenshots/dark/demo_calendar1.jpg "Preview") | ![Preview](../screenshots/dark/demo_calendar2.jpg "Preview") | `date` |
 
 This shows a date selector dialog. First day of week, labels, and style can be adjusted to your needs.
 

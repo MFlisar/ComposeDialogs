@@ -2,7 +2,7 @@
 
 | Preview | | Module |
 | :- | :- | :- |
-| ![Preview](screenshots/demo_progress1.jpg "Preview") | ![Preview](screenshots/demo_progress2.jpg "Preview") | `progress` |
+| ![Preview](../screenshots/dark/demo_progress1.jpg "Preview") | ![Preview](../screenshots/dark/demo_progress2.jpg "Preview") | `progress` |
 
 This shows a simple loading dialog with a progress indicator.
 

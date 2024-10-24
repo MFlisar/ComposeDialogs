@@ -2,7 +2,7 @@
 
 | Preview | | Module |
 | :- | :- | :- |
-| ![Preview](screenshots/demo_info1.jpg "Preview") | ![Preview](screenshots/demo_info2.jpg "Preview") | `info` |
+| ![Preview](../screenshots/dark/demo_info1.jpg "Preview") | ![Preview](../screenshots/dark/demo_info2.jpg "Preview") | `info` |
 
 This shows a simple dialog with some informational text.
 

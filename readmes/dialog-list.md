@@ -2,8 +2,8 @@
 
 | Preview | | Module |
 | :- | :- | :- |
-| ![Preview](screenshots/demo_list1.jpg "Preview") | ![Preview](screenshots/demo_list2.jpg "Preview") | `list` |
-| ![Preview](screenshots/demo_list3.jpg "Preview") | ![Preview](screenshots/demo_list4.jpg "Preview") | `list` |
+| ![Preview](../screenshots/dark/demo_list1.jpg "Preview") | ![Preview](../screenshots/dark/demo_list2.jpg "Preview") | `list` |
+| ![Preview](../screenshots/dark/demo_list3.jpg "Preview") | ![Preview](../screenshots/dark/demo_list4.jpg "Preview") | `list` |
 
 This shows a dialog with a list of items. Rendering, selection mode and more is adjustable.
 

@@ -2,7 +2,7 @@
 
 | Preview | Module |
 | :- | :- |
-| ![Preview](screenshots/demo_time1.jpg "Preview") | `time` |
+| ![Preview](../screenshots/dark/demo_time1.jpg "Preview") | `time` |
 
 This shows a time selector dialog. 24h mode is optional.
 
