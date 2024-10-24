@@ -69,6 +69,20 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 |:---------------------:|:-------:|:----------------------------------------------:|
 | Compose Multiplatform | `1.7.0` | based on compose `1.7.1` and material3 `1.3.0` |
 
+
+| Module            | Dependency                                          | Version |
+|:------------------|:----------------------------------------------------|:--------|
+| core              | -                                                   |         |
+| `dialog-billing`  | [KotBilling)(https://github.com/MFlisar/KotBilling) | `0.7`   |
+| `dialog-color`    | -                                                   |         |
+| `dialog-date`     | -                                                   |         |
+| `dialog-info`     | -                                                   |         |
+| `dialog-input`    | -                                                   |         |
+| `dialog-list`     | -                                                   |         |
+| `dialog-number`   | -                                                   |         |
+| `dialog-progress` | -                                                   |         |
+| `dialog-time`     | -                                                   |         |
+
 ## :elephant: Gradle
 
 This library is distributed via [maven central](https://central.sonatype.com/).
@@ -92,7 +106,6 @@ implementation("io.github.mflisar.composedialogs:dialog-number:$composedialogs")
 implementation("io.github.mflisar.composedialogs:dialog-progress:$composedialogs")
 implementation("io.github.mflisar.composedialogs:dialog-time:$composedialogs")
 ```
-
 
 ## :zap: Modules
 
