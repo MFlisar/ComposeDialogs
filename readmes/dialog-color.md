@@ -1,8 +1,8 @@
 ## Color Dialog
 
-| Preview                                              | | Module |
-|:-----------------------------------------------------| :- | :- |
-| ![Preview](../screenshots/demo_color1.jpg "Preview") | ![Preview](../screenshots/demo_color2.jpg "Preview") | `color` |
+| Preview                                                    | | Module |
+|:-----------------------------------------------------------| :- | :- |
+| ![Preview](../screenshots/light/demo_color1.jpg "Preview") | ![Preview](../screenshots/light/demo_color2.jpg "Preview") | `color` |
 
 This shows a color selector dialog. A table with predefined material colors as well as a customisation page will be shown. Alpha support can be enabled optionally.
 
