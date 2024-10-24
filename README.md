@@ -72,7 +72,7 @@ I only show the bottom sheet version for the info dialog, but of course any dial
 
 | Module            | Dependency                                          | Version |
 |:------------------|:----------------------------------------------------|:--------|
-| core              | -                                                   |         |
+| `core`            | -                                                   |         |
 | `dialog-billing`  | [KotBilling](https://github.com/MFlisar/KotBilling) | `0.7`   |
 | `dialog-color`    | -                                                   |         |
 | `dialog-date`     | -                                                   |         |
