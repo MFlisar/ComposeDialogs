@@ -6,20 +6,4 @@
 
 This shows a simple dialog with some informational text.
 
-```kotlin
-fun DialogInfo(
-    state: DialogState,
-    // Custom - Required
-    info: String,
-    // Custom - Optional
-    infoLabel: String = "",
-    // Base Dialog - Optional
-    title: String? = null,
-    icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
-    buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.defaultInfoDialogSpecialOptions(),
-    onEvent: (event: DialogEvent) -> Unit = {}
-)
-```
+https://github.com/MFlisar/ComposeDialogs/blob/c3044394524924c794d2fbccd686a7afbbeb1791/library/modules/info/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt#L20-L34
