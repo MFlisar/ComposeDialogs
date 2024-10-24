@@ -180,7 +180,7 @@ LazyColumn {
 </details>
 
 <details>
-<summary>Advanced Usage</summary>
+<summary>Dialog State</summary>
 
 Check out the dialog state and the dialogs to find out what settings you can use and especially the demo app for a working example.
 
