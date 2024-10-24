@@ -129,15 +129,15 @@ if (state.showing)
         info: String,
         // Custom - Optional
         infoLabel: String = "",
-    // Base Dialog -  Optional - all options can be set up with custom attributes, following are just the default examples
-    title: (@Composable () -> Unit)? = null,
-    icon: (@Composable () -> Unit)? = null,
-    style: DialogStyle = DialogDefaults.styleDialog(), // DialogDefaults.styleBottomSheet() => both have a few settings...
-    buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
-    onEvent: (event: DialogEvent) -> Unit = {
-    // optional event handler for all dialog events
-}
+        // Base Dialog -  Optional - all options can be set up with custom attributes, following are just the default examples
+        title: (@Composable () -> Unit)? = null,
+        icon: (@Composable () -> Unit)? = null,
+        style: DialogStyle = DialogDefaults.styleDialog(), // DialogDefaults.styleBottomSheet() => both have a few settings...
+        buttons: DialogButtons = DialogDefaults.buttons(),
+        options: Options = Options(),
+        onEvent: (event: DialogEvent) -> Unit = {
+            // optional event handler for all dialog events
+        }
     )
 }
 
