@@ -98,7 +98,7 @@ dependencies {
 
 mavenPublishing {
 
-    configure(AndroidSingleVariantLibrary("release", true, true))
+    configure(AndroidSingleVariantLibrary("release", true, false))
 
     coordinates(
         groupId = groupID,
