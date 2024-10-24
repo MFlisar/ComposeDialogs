@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.compose) apply false
+    alias(libs.plugins.dokka) apply false
 }

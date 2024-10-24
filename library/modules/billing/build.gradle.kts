@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize)
-    //alias(libs.plugins.dokka)
+    alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
 }
 
@@ -30,6 +30,13 @@ val licenseUrl = "$github/blob/main/LICENSE"
 // -------------------
 // Setup
 // -------------------
+
+// this task fails  in github action - so we disable it...
+/*tasks.matching { task ->
+    task.name.contains("javaDocReleaseGeneration", ignoreCase = true)
+}.configureEach {
+    enabled = false
+}*/
 
 android {
 
@@ -98,7 +105,7 @@ dependencies {
 
 mavenPublishing {
 
-    configure(AndroidSingleVariantLibrary("release", true, false))
+    configure(AndroidSingleVariantLibrary("release", true, true))
 
     coordinates(
         groupId = groupID,
