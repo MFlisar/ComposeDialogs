@@ -12,3 +12,10 @@ plugins {
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.dokka) apply false
 }
+
+// this task fails  in github action - so we disable it...
+tasks.matching { task ->
+    task.name.contains("javaDocReleaseGeneration", ignoreCase = true)
+}.configureEach {
+    enabled = false
+}
