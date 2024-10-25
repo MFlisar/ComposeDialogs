@@ -16,18 +16,21 @@ import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogContentScrollableColumn
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.DialogStyleDesktopOtions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.copied.AlertDialogContent
 import com.michaelflisar.composedialogs.core.views.ComposeDialogButton
 
-internal class DialogStyle : ComposeDialogStyle {
+class DialogStyleDesktop(
+    val desktopOptions: DialogStyleDesktopOtions
+) : ComposeDialogStyle2 {
 
-    override val type = ComposeDialogStyle.Type.Dialog
+    override val type = ComposeDialogStyle2.Type.Dialog
 
     @Composable
     override fun Show(
-        title: String?,
+        title: (@Composable () -> Unit)?,
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
         options: Options,
@@ -37,16 +40,16 @@ internal class DialogStyle : ComposeDialogStyle {
         content: @Composable (ColumnScope.() -> Unit)
     ) {
         val dialogState = androidx.compose.ui.window.rememberDialogState(
-            position = specialOptions.position,
-            width = specialOptions.width,
-            height = specialOptions.height
+            position = desktopOptions.position,
+            width = desktopOptions.width,
+            height = desktopOptions.height
         )
         DialogWindow(
             visible = state.showing,
             onCloseRequest = {
                 state.dismiss(onEvent)
             },
-            title = title ?: "",
+            title = desktopOptions.dialogTitle,
             state = dialogState,
             content = {
                 AlertDialogContent(

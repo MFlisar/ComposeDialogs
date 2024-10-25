@@ -20,7 +20,8 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.specialOptions
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /**
@@ -69,18 +70,18 @@ fun <T : Number> DialogInputNumber(
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
     onValueStateChanged: (valid: Boolean, value: T?) -> Unit = { _, _ -> },
     // Base Dialog - Optional
-    title: String? = null,
+    title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.defaultInputDialogSpecialOptions(),
+    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent = onEvent) {
         val modifier = when (style.type) {
-            ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()
-            ComposeDialogStyle.Type.Dialog -> DialogStyleModifier
+            ComposeDialogStyle2.Type.BottomSheet -> Modifier.fillMaxWidth()
+            ComposeDialogStyle2.Type.Dialog -> DialogStyleModifier
         }
 
         val stringInput = rememberSaveable { mutableStateOf(value.value.toString()) }

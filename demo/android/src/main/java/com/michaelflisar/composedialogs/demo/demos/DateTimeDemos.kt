@@ -7,13 +7,14 @@ import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -32,7 +33,7 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
-fun DateTimeDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun DateTimeDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("DateTime Dialogs")
     DemoDialogRow {
         DemoDialogDate1(style, icon, false)
@@ -48,7 +49,7 @@ fun DateTimeDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun RowScope.DemoDialogDate1(
-    style: ComposeDialogStyle,
+    style: ComposeDialogStyle2,
     icon: (@Composable () -> Unit)?,
     customSetup: Boolean
 ) {
@@ -103,7 +104,7 @@ private fun RowScope.DemoDialogDate1(
             setup = setup,
             dateRange = dateRange,
             icon = icon,
-            title = "Select Date",
+            title = { Text("Select Date") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
@@ -126,7 +127,7 @@ private fun RowScope.DemoDialogDate1(
 
 @Composable
 private fun RowScope.DemoDialogTime1(
-    style: ComposeDialogStyle,
+    style: ComposeDialogStyle2,
     icon: (@Composable () -> Unit)?,
     is24Hours: Boolean
 ) {
@@ -144,7 +145,7 @@ private fun RowScope.DemoDialogTime1(
             time = time,
             setup = setup,
             icon = icon,
-            title = "Select Time",
+            title = { Text("Select Time") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {

@@ -3,12 +3,13 @@ package com.michaelflisar.composedialogs.demo.demos
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ColorLens
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -17,7 +18,7 @@ import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 
 @Composable
-fun ColorDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun ColorDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Color Dialogs")
     DemoDialogRow {
         DemoDialogColor1(style, icon)
@@ -28,7 +29,7 @@ fun ColorDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -38,7 +39,7 @@ private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composa
             color = color,
             alphaSupported = true,
             icon = icon,
-            title = "Color Dialog",
+            title = { Text("Color Dialog") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
@@ -58,7 +59,7 @@ private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composa
 }
 
 @Composable
-private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -69,7 +70,7 @@ private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle, icon: (@Composa
             alphaSupported = false,
             labelStyle = DialogColor.LabelStyle.Percent,
             icon = icon,
-            title = "Color Dialog",
+            title = { Text("Color Dialog") },
             style = style,
             onEvent = {
                 if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {

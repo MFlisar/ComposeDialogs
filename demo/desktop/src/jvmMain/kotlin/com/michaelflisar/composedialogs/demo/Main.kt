@@ -23,27 +23,33 @@ import androidx.compose.ui.window.rememberWindowState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.styleDialog
+import com.michaelflisar.composedialogs.core.styleWindowsDialog
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
-import com.michaelflisar.composedialogs.dialogs.color.specialOptionsColorDialog
+import com.michaelflisar.composedialogs.dialogs.color.styleWindowsColorDialog
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import com.michaelflisar.composedialogs.dialogs.date.rememberDialogDate
+import com.michaelflisar.composedialogs.dialogs.date.styleWindowsDateDialog
 import com.michaelflisar.composedialogs.dialogs.info.DialogInfo
+import com.michaelflisar.composedialogs.dialogs.info.styleWindowsInfoDialog
 import com.michaelflisar.composedialogs.dialogs.input.DialogInput
 import com.michaelflisar.composedialogs.dialogs.input.DialogInputNumber
-import com.michaelflisar.composedialogs.dialogs.number.DialogNumberPicker
-import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInput
 import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputNumber
+import com.michaelflisar.composedialogs.dialogs.input.styleWindowsInputDialog
+import com.michaelflisar.composedialogs.dialogs.list.DialogList
+import com.michaelflisar.composedialogs.dialogs.list.styleWindowsListDialog
+import com.michaelflisar.composedialogs.dialogs.number.DialogNumberPicker
+import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.number.rememberDialogNumber
+import com.michaelflisar.composedialogs.dialogs.number.styleWindowsNumberDialog
 import com.michaelflisar.composedialogs.dialogs.progress.DialogProgress
+import com.michaelflisar.composedialogs.dialogs.progress.styleWindowsProgressDialog
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
-import com.michaelflisar.composedialogs.dialogs.list.DialogList
+import com.michaelflisar.composedialogs.dialogs.time.styleWindowsTimeDialog
+import com.michaelflisar.toolbox.composables.MyCheckbox
 import com.michaelflisar.toolbox.composables.MyTitle
 import com.michaelflisar.toolbox.ui.MyScrollableLazyColumn
 
@@ -73,6 +79,7 @@ fun main() {
                 height = 600.dp
             )
         ) {
+            val useWindowsDialog = remember { mutableStateOf(false) }
             val infos = remember { mutableStateListOf<String>() }
             val dialog = rememberDialogState<Dialog>(data = null)
             Column(
@@ -80,6 +87,7 @@ fun main() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 MyTitle("Dialogs")
+                MyCheckbox(title = "Use Windows Dialog?", checked = useWindowsDialog)
                 FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
@@ -109,12 +117,15 @@ fun main() {
             when (dialog.data) {
                 Dialog.Color -> {
                     val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsColorDialog("Color Dialog")
                     DialogColor(
-                        title = "Color Dialog",
+                        style = style,
+                        title = { Text("Color Dialog") },
                         state = dialog,
                         color = color,
                         alphaSupported = true,
-                        style = DialogDefaults.styleDialog(),
                         onEvent = {
                             if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
                                 infos.add("Selected color: #${color.value.toArgb().toHexString()}")
@@ -124,10 +135,15 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Date -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsDateDialog("Select Date")
                     val date = rememberDialogDate()
                     DialogDate(
-                        title = "Select Date",
+                        style = style,
+                        title = { Text("Select Date") },
                         state = dialog,
                         date = date,
                         onEvent = {
@@ -139,10 +155,15 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Time -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsTimeDialog("Select Time")
                     val time = rememberDialogTime()
                     DialogTime(
-                        title = "Select Time",
+                        style = style,
+                        title = { Text("Select Time") },
                         state = dialog,
                         time = time,
                         //setup = DialogTimeDefaults.setup(is24Hours = true),
@@ -155,9 +176,14 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Info -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsInfoDialog("Info Dialog")
                     DialogInfo(
-                        title = "Info Dialog",
+                        style = style,
+                        title = { Text("Info Dialog") },
                         state = dialog,
                         info = "Information",
                         infoLabel = "Important",
@@ -166,9 +192,14 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Progress -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsProgressDialog("Progress Dialog")
                     DialogProgress(
-                        title = "Progress Dialog",
+                        style = style,
+                        title = { Text("Progress Dialog") },
                         state = dialog,
                         content = {
                             Text("Loading...")
@@ -178,10 +209,15 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Input -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsInputDialog("Input Dialog")
                     val input = rememberDialogInput("")
                     DialogInput(
-                        title = "Input Dialog",
+                        style = style,
+                        title = { Text("Input Dialog") },
                         state = dialog,
                         inputLabel = "Enter some text...",
                         input = input,
@@ -194,10 +230,15 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.Number -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsInputDialog("Number Dialog")
                     val input = rememberDialogInputNumber(0)
                     DialogInputNumber(
-                        title = "Number Dialog",
+                        style = style,
+                        title = { Text("Number Dialog") },
                         state = dialog,
                         valueLabel = "Enter a valid Integer...",
                         value = input,
@@ -210,10 +251,15 @@ fun main() {
                         }
                     )
                 }
+
                 Dialog.NumberPicker -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsNumberDialog("Number Picker Dialog")
                     val value = rememberDialogNumber(0)
                     DialogNumberPicker(
-                        title = "Number Picker Dialog",
+                        style = style,
+                        title = { Text("Number Picker Dialog") },
                         state = dialog,
                         value = value,
                         setup = NumberPickerSetup(
@@ -228,11 +274,16 @@ fun main() {
                         }
                     )
                 }
-                Dialog.List ->  {
+
+                Dialog.List -> {
+                    val style = if (!useWindowsDialog.value) {
+                        DialogDefaults.styleDialog()
+                    } else DialogDefaults.styleWindowsListDialog("List Dialog")
                     val selected = remember { mutableStateOf<Int?>(null) }
-                    val items = List(100) { "Item $it"}
+                    val items = List(100) { "Item $it" }
                     DialogList(
-                        title = "List Dialog",
+                        style = style,
+                        title = { Text("List Dialog") },
                         description = "Some optional description",
                         state = dialog,
                         items = items,
@@ -253,6 +304,7 @@ fun main() {
                         }
                     )
                 }
+
                 null -> {
                     //
                 }

@@ -9,7 +9,3 @@ import com.michaelflisar.composedialogs.core.specialOptions
 actual fun is24HourFormat(): Boolean {
     return false
 }
-
-actual fun DialogDefaults.defaultTimeDialogSpecialOptions(): SpecialOptions {
-    return specialOptions()
-}

@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -96,7 +96,7 @@ internal fun HeaderItem(
                     onClick = { onDownClick?.invoke() },
                     enabled = onDownClick != null
                 ) {
-                    Icon(Icons.Default.KeyboardArrowLeft, null)
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, null)
                 }
             }
         }
@@ -134,7 +134,7 @@ internal fun HeaderItem(
                     onClick = { onUpClick?.invoke() },
                     enabled = onUpClick != null
                 ) {
-                    Icon(Icons.Default.KeyboardArrowRight, null)
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null)
                 }
             }
         }

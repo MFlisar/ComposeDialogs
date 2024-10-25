@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.WindowPosition
 
 @Composable
@@ -87,16 +88,3 @@ actual fun DialogContentScrollableLazyColumn(
 actual fun DialogDefaults.specialOptions() : SpecialOptions {
     return SpecialOptions()
 }
-
-/**
- * the special options for a dialog
- *
- * @param position the initial window position
- * @param width the initial window width
- * @param height the initial window height
- */
-actual data class SpecialOptions(
-    val position: WindowPosition = WindowPosition(Alignment.Center),
-    val width: Dp = 800.dp,
-    val height: Dp = 600.dp
-)

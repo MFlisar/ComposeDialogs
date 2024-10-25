@@ -6,9 +6,10 @@ import androidx.compose.material.icons.filled.Fastfood
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Shop
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
@@ -19,7 +20,7 @@ import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
 
 @Composable
-fun BillingDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun BillingDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Billing Dialogs")
     DemoDialogRow {
         DemoDialogBilling(style, icon)
@@ -27,13 +28,13 @@ fun BillingDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogBilling(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogBilling(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
         DialogBilling(
             state = state,
-            title = "Dialog",
+            title = { Text("Dialog") },
             products = listOf(
                 DialogBilling.BillingProduct(
                     Product(

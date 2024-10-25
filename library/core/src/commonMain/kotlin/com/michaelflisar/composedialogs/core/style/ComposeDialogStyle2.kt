@@ -8,13 +8,13 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 
-interface ComposeDialogStyle {
+interface ComposeDialogStyle2 {
 
     val type: Type
 
     @Composable
     fun Show(
-        title: String? = null,
+        title: (@Composable () -> Unit)? = null,
         icon: (@Composable () -> Unit)? = null,
         buttons: DialogButtons,
         options: Options,

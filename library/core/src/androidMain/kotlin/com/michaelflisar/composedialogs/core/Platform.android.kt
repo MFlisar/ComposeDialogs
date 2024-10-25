@@ -3,8 +3,6 @@ package com.michaelflisar.composedialogs.core
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -64,12 +62,3 @@ actual fun DialogContentScrollableLazyColumn(
 actual fun DialogDefaults.specialOptions() : SpecialOptions {
     return SpecialOptions()
 }
-
-/**
- * the special options for a dialog
- *
- * @param dialogIntrinsicWidthMin if true, the dialog width will use [IntrinsicSize.Min]
- */
-actual class SpecialOptions(
-    val dialogIntrinsicWidthMin: Boolean = false
-)

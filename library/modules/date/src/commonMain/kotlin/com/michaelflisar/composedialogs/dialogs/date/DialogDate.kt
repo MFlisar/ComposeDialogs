@@ -39,7 +39,8 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.specialOptions
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarHeader
@@ -76,12 +77,12 @@ fun DialogDate(
     dateRange: DialogDate.Range = DialogDateDefaults.dateRange(),
     setup: DialogDate.Setup = DialogDateDefaults.setup(),
     // Base Dialog - Optional
-    title: String? = null,
+    title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.defaultDateDialogSpecialOptions(),
+    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     val landscape = isLandscape()
@@ -155,7 +156,7 @@ fun DialogDate(
                             Box(
                                 modifier = Modifier.align(Alignment.CenterHorizontally)
                             ) {
-                                Text(title)
+                                title()
                             }
                         }
                         Spacer(modifier = Modifier.height(8.dp))
@@ -170,7 +171,14 @@ fun DialogDate(
                     )
                     if (todayPage != null && setup.buttonToday != null) {
                         Spacer(modifier = Modifier.height(8.dp))
-                        CalendarTodayButton(setup.buttonToday, date, todayPage!!, today, pagerState, viewState)
+                        CalendarTodayButton(
+                            setup.buttonToday,
+                            date,
+                            todayPage!!,
+                            today,
+                            pagerState,
+                            viewState
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.width(8.dp))

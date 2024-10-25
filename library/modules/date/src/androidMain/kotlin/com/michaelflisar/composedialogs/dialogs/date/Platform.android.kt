@@ -12,10 +12,6 @@ import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.util.Locale
 
-actual fun DialogDefaults.defaultDateDialogSpecialOptions(): SpecialOptions {
-    return specialOptions()
-}
-
 actual fun defaultFormatterWeekDayLabel(dayOfWeek: DayOfWeek): String {
     return dayOfWeek.getDisplayName(
         TextStyle.SHORT,

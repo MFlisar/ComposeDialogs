@@ -8,10 +8,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 import kotlinx.datetime.format
 
-actual fun DialogDefaults.defaultDateDialogSpecialOptions(): SpecialOptions {
-    return specialOptions()
-}
-
 actual fun defaultFormatterWeekDayLabel(dayOfWeek: DayOfWeek): String {
     return dayOfWeek.name
 }

@@ -30,7 +30,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -42,7 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 @Composable
-fun ListDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun ListDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     DemoDialogRegion("List Dialogs (Simple Layouts)")
 
@@ -227,7 +227,7 @@ fun ListDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun <T> RowScope.DemoList(
-    style: ComposeDialogStyle,
+    style: ComposeDialogStyle2,
     icon: (@Composable () -> Unit)?,
     itemContents: DialogList.ItemContents<T>,
     itemIdProvider: (item: T) -> Int,
@@ -271,7 +271,7 @@ private fun <T> RowScope.DemoList(
         if (items != null) {
             DialogList(
                 state = state,
-                title = "Dialog",
+                title = { Text("List Dialog") },
                 items = items,
                 itemIdProvider = itemIdProvider,
                 itemContents = itemContents,
@@ -286,7 +286,7 @@ private fun <T> RowScope.DemoList(
         } else {
             DialogList(
                 state = state,
-                title = "Dialog",
+                title = { Text("List Dialog") },
                 loadingIndicator = {
                     Column(
                         modifier = Modifier.fillMaxWidth(),

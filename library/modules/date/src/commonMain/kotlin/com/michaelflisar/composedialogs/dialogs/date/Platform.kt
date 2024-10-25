@@ -6,8 +6,6 @@ import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
-expect fun DialogDefaults.defaultDateDialogSpecialOptions(): SpecialOptions
-
 expect fun defaultFormatterWeekDayLabel(dayOfWeek: DayOfWeek): String
 expect fun defaultFormatterSelectedDate(date: LocalDate): String
 expect fun defaultFormatterSelectedMonth(month: Month): String

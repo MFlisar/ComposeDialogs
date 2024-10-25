@@ -1,9 +1,12 @@
 package com.michaelflisar.composedialogs.core.style
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableState
+import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.animateTo
@@ -34,7 +37,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -48,7 +50,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clipToBounds
@@ -71,8 +72,6 @@ import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.ButtonsCrossAxisSpacing
 import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
-import com.michaelflisar.composedialogs.core.internal.Swipeable
-import com.michaelflisar.composedialogs.core.internal.Swipeable.BottomSheetState
 import com.michaelflisar.composedialogs.core.views.ComposeDialogButton
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -88,15 +87,14 @@ internal class BottomSheetStyle(
     securePolicy: SecureFlagPolicy,
     //usePlatformDefaultWidth: Boolean,
     decorFitsSystemWindows: Boolean,
-) : ComposeDialogStyle {
+) : ComposeDialogStyle2 {
 
-    override val type = ComposeDialogStyle.Type.BottomSheet
+    override val type = ComposeDialogStyle2.Type.BottomSheet
 
     private val BottomSheetMaxWidth = 640.dp
     private val BottomSheetTopPadding = 72.dp
     private val BottomSheetVerticalPaddingPadding = 56.dp
 
-    @OptIn(ExperimentalComposeUiApi::class)
     internal val dialogProperties = DialogProperties(
         dismissOnBackPress,
         dismissOnClickOutside,
@@ -108,7 +106,7 @@ internal class BottomSheetStyle(
     @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
     @Composable
     override fun Show(
-        title: String?,
+        title: (@Composable () -> Unit)?,
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
@@ -138,7 +136,7 @@ internal class BottomSheetStyle(
 
         val buttonPressed = remember { mutableStateOf(false) }
 
-        val dragState = Swipeable.createState(this, contentSize)
+        val dragState = createDraggableState(this, contentSize)
         val dismiss = {
             if (hideAnimated) {
                 if (state.interactionSource.dismissAllowed.value) {
@@ -252,7 +250,7 @@ internal class BottomSheetStyle(
 
     @Composable
     private fun ColumnScope.SheetHeader(
-        title: String? = null,
+        title: (@Composable () -> Unit)? = null,
         icon: (@Composable () -> Unit)? = null,
         dismiss: () -> Boolean
     ) {
@@ -300,7 +298,7 @@ internal class BottomSheetStyle(
                 Box(
                     modifier = if (icon != null) Modifier.align(Alignment.CenterHorizontally) else Modifier
                 ) {
-                    Text(title)
+                    title()
                 }
             }
         }
@@ -438,5 +436,43 @@ internal class BottomSheetStyle(
                 enabled = state.interactionSource.swipeAllowed.value,
                 orientation = Orientation.Vertical
             )
+    }
+
+    enum class BottomSheetState { Collapsed, Peek, Expanded }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Composable
+    private fun createDraggableState(
+        style: BottomSheetStyle,
+        contentSize: MutableState<IntSize>
+    ): AnchoredDraggableState<BottomSheetState> {
+        val density = LocalDensity.current
+
+        val maxSwipeDistance by remember(contentSize.value) {
+            derivedStateOf { (contentSize.value.height.takeIf { it > 0 } ?: 0f).toFloat() }
+        }
+        val peekHeight =
+            (maxSwipeDistance - with(density) { style.peekHeight.toPx() }).coerceAtLeast(0f)
+
+
+        val anchors = DraggableAnchors {
+            BottomSheetState.Collapsed at maxSwipeDistance
+            BottomSheetState.Peek at peekHeight
+            BottomSheetState.Expanded at 0f
+        }
+
+        val decayAnimSpec = rememberSplineBasedDecay<Float>()
+        val dragState = remember(maxSwipeDistance) {
+            AnchoredDraggableState(
+                initialValue = BottomSheetState.Expanded,
+                anchors = anchors,
+                positionalThreshold = { distance: Float -> distance * 0.5f },
+                velocityThreshold = { maxSwipeDistance },
+                snapAnimationSpec = tween(),
+                decayAnimationSpec = decayAnimSpec,
+                confirmValueChange = { true }
+            )
+        }
+        return dragState
     }
 }

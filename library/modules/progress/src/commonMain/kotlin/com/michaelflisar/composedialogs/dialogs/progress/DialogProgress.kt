@@ -22,7 +22,8 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.specialOptions
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 
 /**
  * Shows a dialog with an optional label and a progress indicator
@@ -43,11 +44,11 @@ fun DialogProgress(
     content: (@Composable ColumnScope.() -> Unit)? = null,
     progressStyle: DialogProgress.Style = DialogProgress.Style.Indeterminate(),
     // Base Dialog - Optional
-    title: String? = null,
+    title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    specialOptions: SpecialOptions = DialogDefaults.defaultProgressDialogSpecialOptions(),
+    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {

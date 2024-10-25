@@ -5,13 +5,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Numbers
 import androidx.compose.material.icons.filled.TextFields
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -28,7 +29,7 @@ import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputValidat
 import com.michaelflisar.composedialogs.dialogs.number.rememberDialogNumber
 
 @Composable
-fun InputDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun InputDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Text Input Dialogs")
     DemoDialogRow {
         DemoDialogInput1(style, icon)
@@ -43,7 +44,7 @@ fun InputDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -61,7 +62,7 @@ private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle, icon: (@Composa
         // input dialog
         DialogInput(
             state = state,
-            title = "Input Dialog",
+            title = { Text("Input Dialog") },
             input = input,
             inputLabel = "Text",
             icon = icon,
@@ -96,7 +97,7 @@ private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle, icon: (@Composa
 }
 
 @Composable
-private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -110,7 +111,7 @@ private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle, icon: (@Composa
         // input dialog
         DialogInput(
             state = state,
-            title = "Input Dialog",
+            title = { Text("Input Dialog") },
             input = input,
             inputLabel = "Numerical Value",
             icon = icon,
@@ -135,7 +136,7 @@ private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle, icon: (@Composa
 }
 
 @Composable
-private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -150,7 +151,7 @@ private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composa
         // number dialog
         DialogInputNumber(
             state = state,
-            title = "Input Integer Dialog",
+            title = { Text("Input Integer Dialog") },
             value = value,
             valueLabel = "Integer",
             icon = icon,
@@ -175,7 +176,7 @@ private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composa
 
 @Composable
 private fun RowScope.DemoDialogInput4(
-    style: ComposeDialogStyle,
+    style: ComposeDialogStyle2,
     icon: (@Composable () -> Unit)?,
     enableButtonLongPress: Boolean
 ) {
@@ -193,7 +194,7 @@ private fun RowScope.DemoDialogInput4(
         // number dialog
         DialogNumberPicker(
             state = state,
-            title = "Input Integer Dialog",
+            title = { Text("Input Integer Dialog") },
             value = value,
             icon = icon,
             style = style,

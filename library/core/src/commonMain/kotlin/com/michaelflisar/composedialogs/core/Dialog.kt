@@ -1,8 +1,14 @@
 package com.michaelflisar.composedialogs.core
 
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.runtime.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.window.DialogProperties
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.DialogStyle
 
 // ------------------
 // defaults functions
@@ -14,7 +20,7 @@ import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
  * @param state the [DialogState] of the dialog
  * @param title the optional title of the dialog (an empty title will not be shown)
  * @param icon the optional icon of the dialog
- * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
+ * @param style the [ComposeDialogStyle2] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
  * @param options the [Options] of the dialog
  * @param specialOptions the [SpecialOptions] of the dialog
@@ -24,9 +30,9 @@ import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 @Composable
 fun Dialog(
     state: DialogState,
-    title: String? = null,
+    title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
@@ -71,6 +77,45 @@ object DialogDefaults {
      */
     @Composable
     fun buttonsDisabled() = DialogButtons.DISABLED
+
+    /**
+     * the setup of a dialog that shows as a normal dialog popup
+     *
+     * @param swipeDismissable if true, the dialog can be swiped away by an up/down swipe
+     * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
+     * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param usePlatformDefaultWidth if true, platform default width is used
+     * @param shape the [Shape] of the dialog
+     * @param containerColor the [Color] of the container
+     * @param iconContentColor the content [Color] of the icon
+     * @param titleContentColor the content [Color] of the title
+     * @param textContentColor the content [Color] of the text
+     * @param tonalElevation the elevation for the tonal [Color]
+     */
+    @Composable
+    fun styleDialog(
+        swipeDismissable: Boolean = false,
+        // DialogProperties
+        dialogProperties: DialogProperties = DialogProperties(),
+        // AlertDialog Settings
+        shape: Shape = AlertDialogDefaults.shape,
+        containerColor: Color = AlertDialogDefaults.containerColor,
+        iconContentColor: Color = AlertDialogDefaults.iconContentColor,
+        titleContentColor: Color = AlertDialogDefaults.titleContentColor,
+        textContentColor: Color = AlertDialogDefaults.textContentColor,
+        tonalElevation: Dp = AlertDialogDefaults.TonalElevation
+    ): ComposeDialogStyle2 = DialogStyle(
+        swipeDismissable,
+        // DialogProperties
+        dialogProperties,
+        // AlertDialog Settings
+        shape,
+        containerColor,
+        iconContentColor,
+        titleContentColor,
+        textContentColor,
+        tonalElevation
+    )
 }
 
 // ------------------
@@ -282,3 +327,11 @@ data class Options(
     val wrapContentInScrollableContainer: Boolean = false
 )
 
+/**
+ * the special options for a dialog
+ *
+ * @param dialogIntrinsicWidthMin if true, the dialog width will use [IntrinsicSize.Min]
+ */
+data class SpecialOptions(
+    val dialogIntrinsicWidthMin: Boolean = false
+)

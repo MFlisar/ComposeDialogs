@@ -5,11 +5,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -19,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun InfoDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+fun InfoDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Info Dialogs")
     DemoDialogRow {
         DemoDialogInfo1(style, icon)
@@ -30,13 +31,13 @@ fun InfoDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
         DialogInfo(
             state = state,
-            title = "Dialog",
+            title = { Text("Dialog") },
             info = "Simple Info Dialog",
             icon = icon,
             style = style,
@@ -54,7 +55,7 @@ private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composab
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState(
         showing = false,
@@ -80,7 +81,7 @@ private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle, icon: (@Composab
         }
         DialogInfo(
             state = state,
-            title = "Dialog",
+            title = { Text("Dialog") },
             info = if (time == 0) "Dialog can be dismissed" else "Dialog can be dismissed in $time seconds...",
             icon = currentIcon,
             style = style,

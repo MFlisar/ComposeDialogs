@@ -11,7 +11,3 @@ import com.michaelflisar.composedialogs.core.specialOptions
 actual fun is24HourFormat(): Boolean {
     return DateFormat.is24HourFormat(LocalContext.current)
 }
-
-actual fun DialogDefaults.defaultTimeDialogSpecialOptions(): SpecialOptions {
-    return specialOptions()
-}
