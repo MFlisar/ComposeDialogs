@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.DialogProperties
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.style.DialogStyle
 
 // ------------------
@@ -20,7 +20,7 @@ import com.michaelflisar.composedialogs.core.style.DialogStyle
  * @param state the [DialogState] of the dialog
  * @param title the optional title of the dialog (an empty title will not be shown)
  * @param icon the optional icon of the dialog
- * @param style the [ComposeDialogStyle2] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
+ * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
  * @param options the [Options] of the dialog
  * @param specialOptions the [SpecialOptions] of the dialog
@@ -32,7 +32,7 @@ fun Dialog(
     state: DialogState,
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
@@ -104,7 +104,7 @@ object DialogDefaults {
         titleContentColor: Color = AlertDialogDefaults.titleContentColor,
         textContentColor: Color = AlertDialogDefaults.textContentColor,
         tonalElevation: Dp = AlertDialogDefaults.TonalElevation
-    ): ComposeDialogStyle2 = DialogStyle(
+    ): ComposeDialogStyle = DialogStyle(
         swipeDismissable,
         // DialogProperties
         dialogProperties,

@@ -40,7 +40,7 @@ import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
 import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarHeader
@@ -79,7 +79,7 @@ fun DialogDate(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -33,7 +33,7 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
-fun DateTimeDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun DateTimeDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("DateTime Dialogs")
     DemoDialogRow {
         DemoDialogDate1(style, icon, false)
@@ -49,7 +49,7 @@ fun DateTimeDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun RowScope.DemoDialogDate1(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     customSetup: Boolean
 ) {
@@ -127,7 +127,7 @@ private fun RowScope.DemoDialogDate1(
 
 @Composable
 private fun RowScope.DemoDialogTime1(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     is24Hours: Boolean
 ) {

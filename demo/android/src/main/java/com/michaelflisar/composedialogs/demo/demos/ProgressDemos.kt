@@ -11,7 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProgressDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun ProgressDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Progress Dialogs")
     DemoDialogRow {
         DemoDialogProgress1(style, icon)
@@ -34,7 +34,7 @@ fun ProgressDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun RowScope.DemoDialogProgress1(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
     val context = LocalContext.current
@@ -71,7 +71,7 @@ private fun RowScope.DemoDialogProgress1(
 
 @Composable
 private fun RowScope.DemoDialogProgress2(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
     val context = LocalContext.current
@@ -108,7 +108,7 @@ private fun RowScope.DemoDialogProgress2(
 
 @Composable
 private fun RowScope.DemoDialogProgress3(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
     val context = LocalContext.current

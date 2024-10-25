@@ -24,9 +24,9 @@ internal class DialogStyle(
     titleContentColor: Color,
     textContentColor: Color,
     tonalElevation: Dp
-) : ComposeDialogStyle2 {
+) : ComposeDialogStyle {
 
-    override val type = ComposeDialogStyle2.Type.Dialog
+    override val type = ComposeDialogStyle.Type.Dialog
 
     private val data = ComposeAlertDialog.Data(
         swipeDismissable = swipeDismissable,

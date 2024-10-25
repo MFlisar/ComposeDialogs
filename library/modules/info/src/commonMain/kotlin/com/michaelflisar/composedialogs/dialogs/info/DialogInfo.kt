@@ -4,7 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 
 /**
  * Shows a dialog with an info text and an optional label for that info
@@ -26,7 +26,7 @@ fun DialogInfo(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),

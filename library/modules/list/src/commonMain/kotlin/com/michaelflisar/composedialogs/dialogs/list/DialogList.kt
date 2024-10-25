@@ -38,7 +38,7 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListItem
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListTrailingContent
@@ -75,7 +75,7 @@ fun <T> DialogList(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
@@ -140,7 +140,7 @@ fun <T> DialogList(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
@@ -180,7 +180,7 @@ private fun <T> DialogList(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     buttons: DialogButtons,
     options: Options,
     specialOptions: SpecialOptions,

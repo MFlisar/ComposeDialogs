@@ -20,7 +20,7 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /**
@@ -72,7 +72,7 @@ fun DialogInput(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     options: Options = Options(),
@@ -80,8 +80,8 @@ fun DialogInput(
 ) {
     Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent = onEvent) {
         val modifier = when (style.type) {
-            ComposeDialogStyle2.Type.BottomSheet -> Modifier.fillMaxWidth()
-            ComposeDialogStyle2.Type.Dialog -> DialogStyleModifier
+            ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()
+            ComposeDialogStyle.Type.Dialog -> DialogStyleModifier
         }
         DialogInputTextField(
             modifier,

@@ -37,7 +37,6 @@ import com.michaelflisar.composedemobaseactivity.composables.DemoAppThemeRegion
 import com.michaelflisar.composedemobaseactivity.composables.DemoCollapsibleRegion
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.styleBottomSheet
-import com.michaelflisar.composedialogs.core.styleDialog
 import com.michaelflisar.composedialogs.demo.classes.DemoStyle
 import com.michaelflisar.composedialogs.demo.demos.BillingDemos
 import com.michaelflisar.composedialogs.demo.demos.ColorDemos

@@ -87,9 +87,9 @@ internal class BottomSheetStyle(
     securePolicy: SecureFlagPolicy,
     //usePlatformDefaultWidth: Boolean,
     decorFitsSystemWindows: Boolean,
-) : ComposeDialogStyle2 {
+) : ComposeDialogStyle {
 
-    override val type = ComposeDialogStyle2.Type.BottomSheet
+    override val type = ComposeDialogStyle.Type.BottomSheet
 
     private val BottomSheetMaxWidth = 640.dp
     private val BottomSheetTopPadding = 72.dp

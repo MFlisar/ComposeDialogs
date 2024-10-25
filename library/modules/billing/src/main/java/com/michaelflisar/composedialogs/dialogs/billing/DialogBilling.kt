@@ -42,7 +42,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.kotbilling.KotBilling
 import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
@@ -77,7 +77,7 @@ fun DialogBilling(
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
-    style: ComposeDialogStyle2 = DialogDefaults.defaultDialogStyle(),
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     //buttons: DialogButtons = DialogDefaults.buttons(),
     //options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}

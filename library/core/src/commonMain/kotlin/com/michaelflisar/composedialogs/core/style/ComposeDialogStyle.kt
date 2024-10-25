@@ -8,7 +8,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.SpecialOptions
 
-interface ComposeDialogStyle2 {
+interface ComposeDialogStyle {
 
     val type: Type
 

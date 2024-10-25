@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun InfoDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun InfoDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Info Dialogs")
     DemoDialogRow {
         DemoDialogInfo1(style, icon)
@@ -31,7 +31,7 @@ fun InfoDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -55,7 +55,7 @@ private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle2, icon: (@Composa
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState(
         showing = false,

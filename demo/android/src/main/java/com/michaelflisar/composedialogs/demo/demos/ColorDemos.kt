@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -18,7 +18,7 @@ import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 
 @Composable
-fun ColorDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun ColorDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Color Dialogs")
     DemoDialogRow {
         DemoDialogColor1(style, icon)
@@ -29,7 +29,7 @@ fun ColorDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
@@ -59,7 +59,7 @@ private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle2, icon: (@Compos
 }
 
 @Composable
-private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {

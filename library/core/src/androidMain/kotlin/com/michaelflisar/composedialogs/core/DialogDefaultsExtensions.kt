@@ -5,7 +5,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 
 
 private val SheetPeekHeight =
@@ -33,7 +33,7 @@ fun DialogDefaults.styleBottomSheet(
     securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
     //usePlatformDefaultWidth: Boolean = true,
     decorFitsSystemWindows: Boolean = true
-): ComposeDialogStyle2 = BottomSheetStyle(
+): ComposeDialogStyle = BottomSheetStyle(
     dragHandle,
     hideAnimated,
     resizeContent,

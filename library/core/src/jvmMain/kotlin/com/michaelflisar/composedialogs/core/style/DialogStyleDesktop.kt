@@ -24,9 +24,9 @@ import com.michaelflisar.composedialogs.core.views.ComposeDialogButton
 
 class DialogStyleDesktop(
     val desktopOptions: DialogStyleDesktopOtions
-) : ComposeDialogStyle2 {
+) : ComposeDialogStyle {
 
-    override val type = ComposeDialogStyle2.Type.Dialog
+    override val type = ComposeDialogStyle.Type.Dialog
 
     @Composable
     override fun Show(

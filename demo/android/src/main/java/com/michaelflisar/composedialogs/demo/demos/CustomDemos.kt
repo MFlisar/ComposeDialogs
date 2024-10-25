@@ -19,13 +19,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
 
 @Composable
-fun CustomDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun CustomDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Custom Dialogs")
     DemoDialogRow {
         DemoDialogCustom1(style, icon)
@@ -34,7 +34,7 @@ fun CustomDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(
@@ -68,7 +68,7 @@ private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle2, icon: (@Compo
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom2(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogCustom2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(

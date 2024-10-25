@@ -11,7 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 
 @Composable
 actual fun isLandscape() = false
@@ -20,7 +20,7 @@ actual fun isLandscape() = false
 actual fun stringOk() = "OK"
 
 @Composable
-actual fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle2 = TODO()
+actual fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle = TODO()
 
 @Composable
 actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {

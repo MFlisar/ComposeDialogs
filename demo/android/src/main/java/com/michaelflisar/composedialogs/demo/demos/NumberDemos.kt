@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle2
+import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
@@ -23,7 +23,7 @@ import com.michaelflisar.composedialogs.dialogs.number.RepeatingButton
 import com.michaelflisar.composedialogs.dialogs.number.rememberDialogNumber
 
 @Composable
-fun NumberDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+fun NumberDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     DemoDialogRegion("Number Picker Dialogs")
     DemoDialogRow {
         DemoDialogInput1(style, icon)
@@ -41,7 +41,7 @@ fun NumberDemos(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun RowScope.DemoDialogInput1(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
 
@@ -85,7 +85,7 @@ private fun RowScope.DemoDialogInput1(
 
 @Composable
 private fun RowScope.DemoDialogInput2(
-    style: ComposeDialogStyle2,
+    style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
 
@@ -129,7 +129,7 @@ private fun RowScope.DemoDialogInput2(
 }
 
 @Composable
-private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
@@ -177,7 +177,7 @@ private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle2, icon: (@Compos
 
 
 @Composable
-private fun RowScope.DemoDialogInput4(style: ComposeDialogStyle2, icon: (@Composable () -> Unit)?) {
+private fun RowScope.DemoDialogInput4(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 
     val context = LocalContext.current
 
