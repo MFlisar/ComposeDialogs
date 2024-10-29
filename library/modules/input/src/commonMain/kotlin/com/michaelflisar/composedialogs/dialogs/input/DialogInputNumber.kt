@@ -32,7 +32,7 @@ import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTex
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param value the selected number
- * @param valueLabel the optional label of the input field
+ * @param label the optional label of the input field
 
  * @param inputPlaceholder a placeholder if the input is empty
  * @param singleLine if true, the input field will only allow a single line
@@ -54,7 +54,7 @@ fun <T : Number> DialogInputNumber(
     state: DialogState,
     // Custom - Required
     value: MutableState<T>,
-    valueLabel: String = "",
+    label: String = "",
     // Custom - Optional
     inputPlaceholder: String = "",
     singleLine: Boolean = false,
@@ -98,7 +98,7 @@ fun <T : Number> DialogInputNumber(
         DialogInputTextField(
             modifier,
             stringInput,
-            valueLabel,
+            label,
             inputPlaceholder,
             singleLine,
             maxLines,

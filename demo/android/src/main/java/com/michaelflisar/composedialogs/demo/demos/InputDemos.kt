@@ -63,8 +63,8 @@ private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle, icon: (@Composa
         DialogInput(
             state = state,
             title = { Text("Input Dialog") },
-            input = input,
-            inputLabel = "Text",
+            value = input,
+            label = "Text",
             icon = icon,
             style = style,
             onEvent = {
@@ -112,8 +112,8 @@ private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle, icon: (@Composa
         DialogInput(
             state = state,
             title = { Text("Input Dialog") },
-            input = input,
-            inputLabel = "Numerical Value",
+            value = input,
+            label = "Numerical Value",
             icon = icon,
             style = style,
             onEvent = {
@@ -153,7 +153,7 @@ private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composa
             state = state,
             title = { Text("Input Integer Dialog") },
             value = value,
-            valueLabel = "Integer",
+            label = "Integer",
             icon = icon,
             style = style,
             onEvent = {

@@ -219,8 +219,8 @@ fun main() {
                         style = style,
                         title = { Text("Input Dialog") },
                         state = dialog,
-                        inputLabel = "Enter some text...",
-                        input = input,
+                        label = "Enter some text...",
+                        value = input,
                         onEvent = {
                             if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
                                 infos.add("Selected input: ${input.value}")
@@ -240,7 +240,7 @@ fun main() {
                         style = style,
                         title = { Text("Number Dialog") },
                         state = dialog,
-                        valueLabel = "Enter a valid Integer...",
+                        label = "Enter a valid Integer...",
                         value = input,
                         onEvent = {
                             if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {

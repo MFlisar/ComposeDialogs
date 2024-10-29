@@ -31,7 +31,7 @@ import com.michaelflisar.composedialogs.dialogs.input.DialogInputValidator
 @Composable
 fun DialogInputTextField(
     modifier: Modifier = Modifier,
-    state: MutableState<String>,
+    value: MutableState<String>,
     label: String = "",
     placeholder: String = "",
     singleLine: Boolean = false,
@@ -62,30 +62,30 @@ fun DialogInputTextField(
         var textFieldValueState by remember {
             mutableStateOf(
                 TextFieldValue(
-                    text = state.value,
-                    selection = if (state.value.isEmpty())
+                    text = value.value,
+                    selection = if (value.value.isEmpty())
                         TextRange.Zero
                     else {
                         when (selectionState) {
                             DialogInput.SelectionState.CursorEnd -> TextRange(
-                                state.value.length,
-                                state.value.length
+                                value.value.length,
+                                value.value.length
                             )
 
                             DialogInput.SelectionState.Default -> TextRange.Zero
-                            DialogInput.SelectionState.SelectAll -> TextRange(0, state.value.length)
+                            DialogInput.SelectionState.SelectAll -> TextRange(0, value.value.length)
                             is DialogInput.SelectionState.Selection -> TextRange(
                                 selectionState.start.coerceIn(
                                     0,
-                                    state.value.length
-                                ), selectionState.end.coerceIn(0, state.value.length)
+                                    value.value.length
+                                ), selectionState.end.coerceIn(0, value.value.length)
                             )
                         }
                     }
                 )
             )
         }
-        val textFieldValue = textFieldValueState.copy(text = state.value)
+        val textFieldValue = textFieldValueState.copy(text = value.value)
         SideEffect {
             if (textFieldValue.selection != textFieldValueState.selection ||
                 textFieldValue.composition != textFieldValueState.composition
@@ -93,7 +93,7 @@ fun DialogInputTextField(
                 textFieldValueState = textFieldValue
             }
         }
-        var lastTextValue by remember(state.value) { mutableStateOf(state.value) }
+        var lastTextValue by remember(value.value) { mutableStateOf(value.value) }
 
         OutlinedTextField(
             value = textFieldValue,
@@ -106,7 +106,7 @@ fun DialogInputTextField(
                 lastTextValue = it.text
                 if (changed) {
                     validator.check(it.text)
-                    state.value = it.text
+                    value.value = it.text
                     val valid = validator.isValid()
                     onStateChanged(valid, it.text)
                 }
@@ -132,8 +132,8 @@ fun DialogInputTextField(
             trailingIcon = if (clearable) {
                 @Composable {
                     when {
-                        state.value.isNotEmpty() -> IconButton(onClick = {
-                            state.value = ""
+                        value.value.isNotEmpty() -> IconButton(onClick = {
+                            value.value = ""
                             validator.check("")
                             val valid = validator.isValid()
                             onStateChanged(valid, "")

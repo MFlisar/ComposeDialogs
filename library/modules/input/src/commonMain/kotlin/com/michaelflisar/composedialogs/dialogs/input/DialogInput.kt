@@ -30,8 +30,8 @@ import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTex
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param input the selected text
- * @param inputLabel the optional label of the input field
+ * @param value the selected text
+ * @param label the optional label of the input field
  * @param inputPlaceholder the placeholder the for the input field
  * @param singleLine if true, the input field will only allow a single line
  * @param maxLines the max lines for the input field
@@ -52,8 +52,8 @@ fun DialogInput(
     // Base Dialog - State
     state: DialogState,
     // Custom - Required
-    input: MutableState<String>,
-    inputLabel: String = "",
+    value: MutableState<String>,
+    label: String = "",
     // Custom - Optional
     inputPlaceholder: String = "",
     singleLine: Boolean = false,
@@ -85,8 +85,8 @@ fun DialogInput(
         }
         DialogInputTextField(
             modifier,
-            input,
-            inputLabel,
+            value,
+            label,
             inputPlaceholder,
             singleLine,
             maxLines,
@@ -108,7 +108,7 @@ fun DialogInput(
 /**
  * convenient function for [DialogInput]
  *
- * @param input the initial text for the input field
+ * @param text the initial text for the input field
  *
  * @return a state holding the current input value
  */

@@ -1,7 +1,5 @@
 package com.michaelflisar.composedialogs.dialogs.date
 
-import com.michaelflisar.composedialogs.core.DialogDefaults
-import com.michaelflisar.composedialogs.core.SpecialOptions
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
