@@ -1,6 +1,6 @@
 [versions]
 
-gradle = 				        "8.7.1"
+gradle = 				        "8.5.2"
 kotlin = 				        "2.0.21"
 compose =                       "1.7.0"
 dokka =                         "1.9.20"
@@ -9,19 +9,18 @@ gradle-maven-publish-plugin =   "0.30.0"
 # KotlinX / AndroidX / Google
 kotlinx-coroutines = 	    "1.9.0"
 kotlinx-datetime = 	        "0.6.1"
-androidx-core = 		    "1.13.1"
-androidx-lifecycle = 	    "2.8.6"
+androidx-core = 		    "1.15.0"
+androidx-lifecycle = 	    "2.8.7"
 androidx-activity = 		"1.9.3"
 
 desugar =                   "2.1.2"
-accompanist = 			    "0.32.0"
+accompanist = 			    "0.36.0"
 moko-parcelize =            "0.9.0"
 
 # mflisar
 composecolors =             "1.0.1"
 kotbilling =                "0.7"
-composedemobaseactivity =   "0.7"
-toolbox =                   "2.2.0"
+toolbox =                   "2.2.1"
 
 [plugins]
 
@@ -67,7 +66,6 @@ moko-parcelize =                    { module = "dev.icerock.moko:parcelize", 		 
 composecolors-material =			{ module = "io.github.mflisar.composecolors:material", 				    version.ref = "composecolors" }
 composecolors-material-palette =    { module = "io.github.mflisar.composecolors:material-palette", 		    version.ref = "composecolors" }
 kotbilling =			        	{ module = "com.github.MFlisar:KotBilling", 						    version.ref = "kotbilling" }
-composedemobaseactivity =           { module = "com.github.MFlisar:ComposeDemoBaseActivity", 			    version.ref = "composedemobaseactivity" }
 
 toolbox-core =                      { module = "io.github.mflisar.toolbox:core", 			                version.ref = "toolbox" }
 toolbox-ui =                        { module = "io.github.mflisar.toolbox:ui", 			                    version.ref = "toolbox" }

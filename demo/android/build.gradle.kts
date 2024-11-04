@@ -104,5 +104,7 @@ dependencies {
     // ------------------------
     
     // a minimal library that provides some useful composables that I use inside demo activities
-    implementation(libs.composedemobaseactivity)
+    implementation(libs.toolbox.core)
+    implementation(libs.toolbox.ui)
+    implementation(libs.toolbox.android.demo.app)
 }

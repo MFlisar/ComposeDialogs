@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.core
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
@@ -25,23 +24,19 @@ private val SheetPeekHeight =
 fun DialogDefaults.styleBottomSheet(
     dragHandle: Boolean = true,
     hideAnimated: Boolean = false,
-    resizeContent: Boolean = false,
-    peekHeight: Dp = SheetPeekHeight,
+    //resizeContent: Boolean = false,
+    //peekHeight: Dp = SheetPeekHeight,
     // DialogProperties
     dismissOnBackPress: Boolean = true,
     dismissOnClickOutside: Boolean = true,
-    securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit,
-    //usePlatformDefaultWidth: Boolean = true,
-    decorFitsSystemWindows: Boolean = true
+    securePolicy: SecureFlagPolicy = SecureFlagPolicy.Inherit
 ): ComposeDialogStyle = BottomSheetStyle(
     dragHandle,
     hideAnimated,
-    resizeContent,
-    peekHeight,
+    //resizeContent,
+    //peekHeight,
     // DialogProperties
     dismissOnBackPress,
     dismissOnClickOutside,
-    securePolicy,
-    //usePlatformDefaultWidth,
-    decorFitsSystemWindows
+    securePolicy
 )

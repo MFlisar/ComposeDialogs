@@ -8,6 +8,7 @@ import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.animateTo
+import androidx.compose.foundation.gestures.snapTo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -154,7 +155,7 @@ private fun getSwipeDismissModifier(
     return if (swipeDismissable) {
         val density = LocalDensity.current
 
-        val maxSwipeDistance = with(density) { 96.dp.toPx() }
+        val maxSwipeDistance = with(density) { 192.dp.toPx() }
         val dragState = createDraggableState(maxSwipeDistance)
 
         val coroutineScope = rememberCoroutineScope()
@@ -168,10 +169,7 @@ private fun getSwipeDismissModifier(
                 ComposeAlertDialog.DragValue.Start,
                 ComposeAlertDialog.DragValue.End -> {
                     if (!state.dismiss(onEvent)) {
-                        // expand again if dismissing is not allowed
-                        coroutineScope.launch {
-                            dragState.animateTo(ComposeAlertDialog.DragValue.Center)
-                        }
+                        dragState.snapTo(ComposeAlertDialog.DragValue.Center)
                     }
                 }
             }

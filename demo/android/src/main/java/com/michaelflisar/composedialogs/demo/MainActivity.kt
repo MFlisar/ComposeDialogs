@@ -4,17 +4,14 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
@@ -23,18 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedemobaseactivity.DemoBaseActivity
-import com.michaelflisar.composedemobaseactivity.classes.DemoTheme
-import com.michaelflisar.composedemobaseactivity.classes.listSaverKeepEntryStateList
-import com.michaelflisar.composedemobaseactivity.composables.DemoAppThemeRegion
-import com.michaelflisar.composedemobaseactivity.composables.DemoCollapsibleRegion
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.styleBottomSheet
 import com.michaelflisar.composedialogs.demo.classes.DemoStyle
@@ -49,11 +39,18 @@ import com.michaelflisar.composedialogs.demo.demos.NumberDemos
 import com.michaelflisar.composedialogs.demo.demos.ProgressDemos
 import com.michaelflisar.composedialogs.demo.demos.SingleDialogWithListDemos
 import com.michaelflisar.composedialogs.demo.views.SegmentedControl
+import com.michaelflisar.composethemer.ComposeTheme
+import com.michaelflisar.toolbox.androiddemoapp.DemoActivity
+import com.michaelflisar.toolbox.androiddemoapp.composables.DemoAppThemeRegion
+import com.michaelflisar.toolbox.androiddemoapp.composables.DemoCollapsibleRegion
+import com.michaelflisar.toolbox.androiddemoapp.composables.rememberDemoExpandedRegions
 
-class MainActivity : DemoBaseActivity() {
+class MainActivity : DemoActivity(
+    scrollableContent = true
+) {
 
     @Composable
-    override fun Content(modifier: Modifier, theme: DemoTheme, dynamicTheme: Boolean) {
+    override fun ColumnScope.Content(themeState: ComposeTheme.State) {
 
         val selectedDemoPage = rememberSaveable { mutableIntStateOf(-1) }
 
@@ -61,74 +58,56 @@ class MainActivity : DemoBaseActivity() {
             selectedDemoPage.intValue = -1
         }
 
-        val expandedRootRegions = rememberSaveable(Unit, saver = listSaverKeepEntryStateList()) {
-            mutableStateListOf(2)
-        }
-
         // Dialog Setting States
         val style = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
         val swipeDismiss = rememberSaveable { mutableStateOf(false) }
         val showIcon = rememberSaveable { mutableStateOf(true) }
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    bottom = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp
-                )
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
 
-            val s = if (style.value == DemoStyle.BottomSheet) {
-                DialogDefaults.styleBottomSheet(
-                    // dragHandle = true,
-                    //hideAnimated = true,
-                    // resizeContent = true // only use this with scrollable content!
-                    // peekHeight = 0.dp
-                )
-            } else DialogDefaults.styleDialog(swipeDismissable = swipeDismiss.value)
-            val icon: @Composable (() -> Unit)? = if (showIcon.value) {
-                { Icon(Icons.Default.Home, null) }
-            } else null
+        val s = if (style.value == DemoStyle.BottomSheet) {
+            DialogDefaults.styleBottomSheet(
+                // dragHandle = true,
+                //hideAnimated = true,
+                // resizeContent = true // only use this with scrollable content!
+                // peekHeight = 0.dp
+            )
+        } else DialogDefaults.styleDialog(swipeDismissable = swipeDismiss.value)
+        val icon: @Composable (() -> Unit)? = if (showIcon.value) {
+            { Icon(Icons.Default.Home, null) }
+        } else null
 
-            // -----------------
-            // Demos
-            // -----------------
+        // -----------------
+        // Demos
+        // -----------------
 
-            if (selectedDemoPage.intValue == -1) {
-                RootContent(
-                    modifier = modifier
-                        .padding(top = 16.dp)
-                        .verticalScroll(rememberScrollState()),
-                    theme,
-                    dynamicTheme,
-                    expandedRootRegions,
-                    selectedDemoPage,
-                    style,
-                    swipeDismiss,
-                    showIcon
-                )
-            } else {
-                when (selectedDemoPage.intValue) {
+        if (selectedDemoPage.intValue == -1) {
+            RootContent(
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                //.verticalScroll(rememberScrollState()
+                ,
+                themeState,
+                selectedDemoPage,
+                style,
+                swipeDismiss,
+                showIcon
+            )
+        } else {
+            when (selectedDemoPage.intValue) {
 
-                    // Predefined dialog demos
-                    0 -> InfoDemos(s, icon)
-                    1 -> InputDemos(s, icon)
-                    2 -> NumberDemos(s, icon)
-                    3 -> DateTimeDemos(s, icon)
-                    4 -> ColorDemos(s, icon)
-                    5 -> ListDemos(s, icon)
-                    6 -> ProgressDemos(s, icon)
-                    7 -> SingleDialogWithListDemos(s, icon)
-                    8 -> BillingDemos(s, icon)
+                // Predefined dialog demos
+                0 -> InfoDemos(s, icon)
+                1 -> InputDemos(s, icon)
+                2 -> NumberDemos(s, icon)
+                3 -> DateTimeDemos(s, icon)
+                4 -> ColorDemos(s, icon)
+                5 -> ListDemos(s, icon)
+                6 -> ProgressDemos(s, icon)
+                7 -> SingleDialogWithListDemos(s, icon)
+                8 -> BillingDemos(s, icon)
 
-                    // Manually created custom demos
-                    99 -> CustomDemos(s, icon)
-                }
+                // Manually created custom demos
+                99 -> CustomDemos(s, icon)
             }
         }
     }
@@ -140,9 +119,7 @@ class MainActivity : DemoBaseActivity() {
     @Composable
     private fun RootContent(
         modifier: Modifier,
-        theme: DemoTheme,
-        dynamicTheme: Boolean,
-        expandedRootRegions: SnapshotStateList<Int>,
+        themeState: ComposeTheme.State,
         selectedDemoPage: MutableIntState,
         style: MutableState<DemoStyle>,
         swipeDismiss: MutableState<Boolean>,
@@ -152,19 +129,19 @@ class MainActivity : DemoBaseActivity() {
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            val expandedRegions = rememberDemoExpandedRegions(listOf(2))
 
+            DemoAppThemeRegion(regionId = 0, state = expandedRegions)
 
-            DemoAppThemeRegion(theme, dynamicTheme, id = 0, expandedIds = expandedRootRegions)
-
-            DemoCollapsibleRegion(title = "Settings", id = 1, expandedIds = expandedRootRegions) {
-                SettingsRowSegmentedControl(style, DemoStyle.values().toList())
+            DemoCollapsibleRegion(title = "Settings", regionId = 1, state = expandedRegions) {
+                SettingsRowSegmentedControl(style, DemoStyle.entries)
                 AnimatedVisibility(visible = style.value == DemoStyle.Dialog) {
                     SettingsRowCheckbox(swipeDismiss, "Support SwipeDismiss?")
                 }
                 SettingsRowCheckbox(showIcon, "Show Icon?")
             }
 
-            DemoCollapsibleRegion(title = "Demos", id = 2, expandedIds = expandedRootRegions) {
+            DemoCollapsibleRegion(title = "Demos", regionId = 2, state = expandedRegions) {
                 MainButton(selectedDemoPage, 0, "Info Demos")
                 MainButton(selectedDemoPage, 1, "Input Demos")
                 MainButton(selectedDemoPage, 2, "Number Demos")
