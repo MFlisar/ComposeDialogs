@@ -19,7 +19,7 @@ moko-parcelize =            "0.9.0"
 
 # mflisar
 composecolors =             "1.0.1"
-kotbilling =                "0.7"
+kotbilling =                "0.8.1"
 toolbox =                   "2.2.1"
 
 [plugins]
@@ -65,7 +65,7 @@ moko-parcelize =                    { module = "dev.icerock.moko:parcelize", 		 
 
 composecolors-material =			{ module = "io.github.mflisar.composecolors:material", 				    version.ref = "composecolors" }
 composecolors-material-palette =    { module = "io.github.mflisar.composecolors:material-palette", 		    version.ref = "composecolors" }
-kotbilling =			        	{ module = "com.github.MFlisar:KotBilling", 						    version.ref = "kotbilling" }
+kotbilling =			        	{ module = "io.github.mflisar.kotbilling:library", 						version.ref = "kotbilling" }
 
 toolbox-core =                      { module = "io.github.mflisar.toolbox:core", 			                version.ref = "toolbox" }
 toolbox-ui =                        { module = "io.github.mflisar.toolbox:ui", 			                    version.ref = "toolbox" }
