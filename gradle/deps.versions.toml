@@ -1,0 +1,27 @@
+[versions]
+
+desugar =                   "2.1.3"
+accompanist = 			    "0.36.0"
+moko-parcelize =            "0.9.0"
+composables =               "1.20.0"
+
+# mflisar
+composecolors =             "1.0.1"
+kotbilling =                "0.8.1"
+toolbox =                   "2.4.3"
+
+[libraries]
+
+desugar =			        	    { module = "com.android.tools:desugar_jdk_libs", 					    version.ref = "desugar" }
+drawablepainter = 		    	    { module = "com.google.accompanist:accompanist-drawablepainter", 		version.ref = "accompanist" }
+moko-parcelize =                    { module = "dev.icerock.moko:parcelize", 		                        version.ref = "moko-parcelize" }
+composables-core =                  { module = "com.composables:core", 		                                version.ref = "composables" }
+
+# mflisar
+composecolors-material =			{ module = "io.github.mflisar.composecolors:material", 				    version.ref = "composecolors" }
+composecolors-material-palette =    { module = "io.github.mflisar.composecolors:material-palette", 		    version.ref = "composecolors" }
+kotbilling =			        	{ module = "io.github.mflisar.kotbilling:library", 						version.ref = "kotbilling" }
+toolbox-core =                      { module = "io.github.mflisar.toolbox:core", 			                version.ref = "toolbox" }
+toolbox-ui =                        { module = "io.github.mflisar.toolbox:ui", 			                    version.ref = "toolbox" }
+toolbox-android-demo-app =          { module = "io.github.mflisar.toolbox:android-demo-app", 			    version.ref = "toolbox" }
+toolbox-windows-app =               { module = "io.github.mflisar.toolbox:windows-app", 			        version.ref = "toolbox" }

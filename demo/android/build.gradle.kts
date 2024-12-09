@@ -56,27 +56,21 @@ android {
 dependencies {
 
     // ------------------------
-    // Kotlin
-    // ------------------------
-
-    implementation(libs.kotlin)
-
-    // ------------------------
     // AndroidX
     // ------------------------
 
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle)
+    implementation(androidx.core)
+    implementation(androidx.lifecycle)
 
     // Compose
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.material.icons.extended)
 
-    implementation(libs.androidx.activity.compose)
+    implementation(androidx.activity.compose)
 
     // accompanist
-    implementation(libs.drawablepainter)
+    implementation(deps.drawablepainter)
 
     // ------------------------
     // Libraries
@@ -97,14 +91,14 @@ dependencies {
     // Desugar
     // ------------------------
 
-    coreLibraryDesugaring(libs.desugar)
+    coreLibraryDesugaring(deps.desugar)
 
     // ------------------------
     // Others
     // ------------------------
     
     // a minimal library that provides some useful composables that I use inside demo activities
-    implementation(libs.toolbox.core)
-    implementation(libs.toolbox.ui)
-    implementation(libs.toolbox.android.demo.app)
+    implementation(deps.toolbox.core)
+    implementation(deps.toolbox.ui)
+    implementation(deps.toolbox.android.demo.app)
 }

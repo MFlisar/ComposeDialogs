@@ -32,8 +32,8 @@ kotlin {
                 implementation(project(":ComposeDialogs:Modules:Number"))
                 implementation(project(":ComposeDialogs:Modules:List"))
 
-                implementation(libs.toolbox.core)
-                implementation(libs.toolbox.ui)
+                implementation(deps.toolbox.core)
+                implementation(deps.toolbox.ui)
                 //implementation(libs.toolbox.windows.app)
             }
         }

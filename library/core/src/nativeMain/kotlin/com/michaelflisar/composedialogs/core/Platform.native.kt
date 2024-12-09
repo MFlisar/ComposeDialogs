@@ -11,7 +11,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 
 @Composable
 actual fun isLandscape() = false
@@ -54,8 +53,4 @@ actual fun DialogContentScrollableLazyColumn(
     ) {
         content()
     }
-}
-
-actual fun DialogDefaults.specialOptions() : SpecialOptions {
-    return SpecialOptions()
 }

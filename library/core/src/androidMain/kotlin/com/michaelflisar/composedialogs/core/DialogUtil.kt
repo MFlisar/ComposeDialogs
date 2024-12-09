@@ -17,5 +17,4 @@ object DialogUtil {
         }
         throw IllegalStateException("This dialog should be called in the context of an Activity")
     }
-
 }

@@ -1,29 +1,29 @@
 package com.michaelflisar.composedialogs.core.style
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogWindow
-import com.michaelflisar.composedialogs.core.DialogButtonType
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
-import com.michaelflisar.composedialogs.core.DialogContentScrollableColumn
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyleDesktopOtions
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.SpecialOptions
-import com.michaelflisar.composedialogs.core.copied.AlertDialogContent
-import com.michaelflisar.composedialogs.core.views.ComposeDialogButton
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
 
 class DialogStyleDesktop(
-    val desktopOptions: DialogStyleDesktopOtions
+    val desktopOptions: DialogStyleDesktopOtions,
+    // Style
+    private val iconColor: Color,
+    private val titleColor: Color,
+    private val contentColor: Color
 ) : ComposeDialogStyle {
 
     override val type = ComposeDialogStyle.Type.Dialog
@@ -34,10 +34,9 @@ class DialogStyleDesktop(
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        specialOptions: SpecialOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
-        content: @Composable (ColumnScope.() -> Unit)
+        content: @Composable () -> Unit
     ) {
         val dialogState = androidx.compose.ui.window.rememberDialogState(
             position = desktopOptions.position,
@@ -52,62 +51,27 @@ class DialogStyleDesktop(
             title = desktopOptions.dialogTitle,
             state = dialogState,
             content = {
-                AlertDialogContent(
-                    confirmButton = {
-                        ComposeDialogButton(
-                            buttons.positive,
-                            DialogButtonType.Positive,
-                            options,
-                            state,
-                            requestDismiss = {
-                                state.dismiss()
-                            },
-                            onEvent
-                        )
-                    },
-                    dismissButton = if (buttons.negative.text.isNotEmpty()) {
-                        {
-                            ComposeDialogButton(
-                                buttons.negative,
-                                DialogButtonType.Negative,
-                                options,
-                                state,
-                                requestDismiss = {
-                                    state.dismiss()
-                                },
-                                onEvent
-                            )
-                        }
-                    } else null,
-                    icon = icon,
-                    title = null,
-                    modifier = Modifier.fillMaxSize(),
-                    shape = RectangleShape,
-                    containerColor = MaterialTheme.colorScheme.background,
-                    iconContentColor = MaterialTheme.colorScheme.onBackground,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground,
-                    textContentColor = MaterialTheme.colorScheme.onBackground,
-                    tonalElevation = 0.dp,
-                    buttonContentColor = MaterialTheme.colorScheme.primary,
-                    contentShouldFillHeight = true,
-                    textPadding = PaddingValues(bottom = 8.dp),
-                    text = {
-                        if (options.wrapContentInScrollableContainer) {
-                            DialogContentScrollableColumn(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                content = content
-                            )
-                        } else {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            ) {
-                                content()
-                            }
-                        }
-                    }
-                )
+                Column(
+                    modifier = Modifier.fillMaxSize().padding(all = 16.dp)
+                ) {
+
+                    // Icon + Title
+                    ComposeDialogTitle(null, icon, iconColor = iconColor, titleColor = titleColor)
+
+                    // Content
+                    ComposeDialogContent(content, contentColor, fill = true)
+
+                    // Buttons
+                    ComposeDialogButtons(
+                        buttons = buttons,
+                        options = options,
+                        state = state,
+                        dismissOnButtonPressed = {
+                            state.dismiss()
+                        },
+                        onEvent = onEvent
+                    )
+                }
             }
         )
     }

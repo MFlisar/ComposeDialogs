@@ -1,14 +1,13 @@
 package com.michaelflisar.composedialogs.core
 
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.window.DialogProperties
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
+import com.michaelflisar.composedialogs.core.style.BottomSheetStyleDefaults
 import com.michaelflisar.composedialogs.core.style.DialogStyle
+import com.michaelflisar.composedialogs.core.style.DialogStyleDefaults
 
 // ------------------
 // defaults functions
@@ -23,7 +22,6 @@ import com.michaelflisar.composedialogs.core.style.DialogStyle
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
  * @param options the [Options] of the dialog
- * @param specialOptions the [SpecialOptions] of the dialog
  * @param onEvent the callback for all [DialogEvent] - this can be a button click [DialogEvent.Button] or the dismiss information [DialogEvent.Dismissed]
  * @param content the content of this dialog
  */
@@ -35,16 +33,14 @@ fun Dialog(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     style.Show(
         title,
         icon,
         buttons,
         options,
-        specialOptions,
         state,
         onEvent,
         content
@@ -84,37 +80,78 @@ object DialogDefaults {
      * @param swipeDismissable if true, the dialog can be swiped away by an up/down swipe
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
-     * @param usePlatformDefaultWidth if true, platform default width is used
      * @param shape the [Shape] of the dialog
      * @param containerColor the [Color] of the container
-     * @param iconContentColor the content [Color] of the icon
-     * @param titleContentColor the content [Color] of the title
-     * @param textContentColor the content [Color] of the text
-     * @param tonalElevation the elevation for the tonal [Color]
+     * @param iconColor the content [Color] of the icon
+     * @param titleColor the content [Color] of the title
+     * @param textColor the content [Color] of the text
      */
     @Composable
     fun styleDialog(
         swipeDismissable: Boolean = false,
         // DialogProperties
-        dialogProperties: DialogProperties = DialogProperties(),
-        // AlertDialog Settings
-        shape: Shape = AlertDialogDefaults.shape,
-        containerColor: Color = AlertDialogDefaults.containerColor,
-        iconContentColor: Color = AlertDialogDefaults.iconContentColor,
-        titleContentColor: Color = AlertDialogDefaults.titleContentColor,
-        textContentColor: Color = AlertDialogDefaults.textContentColor,
-        tonalElevation: Dp = AlertDialogDefaults.TonalElevation
+        dismissOnBackPress: Boolean = true,
+        dismissOnClickOutside: Boolean = true,
+        // Style
+        shape: Shape = DialogStyleDefaults.shape,
+        containerColor: Color = DialogStyleDefaults.containerColor,
+        iconColor: Color = DialogStyleDefaults.iconColor,
+        titleColor: Color = DialogStyleDefaults.titleColor,
+        contentColor: Color = DialogStyleDefaults.contentColor
     ): ComposeDialogStyle = DialogStyle(
         swipeDismissable,
         // DialogProperties
-        dialogProperties,
-        // AlertDialog Settings
+        dismissOnBackPress,
+        dismissOnClickOutside,
+        // Style
         shape,
         containerColor,
-        iconContentColor,
-        titleContentColor,
-        textContentColor,
-        tonalElevation
+        iconColor,
+        titleColor,
+        contentColor
+    )
+
+    /**
+     * the setup of a dialog that shows as a normal dialog popup
+     *
+     * @param dragHandle if true, a drag handle will be shown
+     * @param peekHeight the peek height calculation of the bottom sheet
+     * @param expandInitially if true, the bottom sheet is initially displayed in expanded state (even if it has a peek height)
+     * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
+     * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param shape the [Shape] of the dialog
+     * @param containerColor the [Color] of the container
+     * @param iconColor the content [Color] of the icon
+     * @param titleColor the content [Color] of the title
+     * @param textColor the content [Color] of the text
+     */
+    @Composable
+    fun styleBottomSheet(
+        dragHandle: Boolean = true,
+        peekHeight: ((containerHeight: Dp, sheetHeight: Dp) -> Dp)? = BottomSheetStyleDefaults.peekHeight,
+        expandInitially: Boolean = true,
+        // DialogProperties
+        dismissOnBackPress: Boolean = true,
+        dismissOnClickOutside: Boolean = true,
+        // Style
+        shape: Shape = BottomSheetStyleDefaults.shape,
+        containerColor: Color = BottomSheetStyleDefaults.containerColor,
+        iconColor: Color = BottomSheetStyleDefaults.iconColor,
+        titleColor: Color = BottomSheetStyleDefaults.titleColor,
+        contentColor: Color = BottomSheetStyleDefaults.contentColor
+    ): ComposeDialogStyle = BottomSheetStyle(
+        dragHandle,
+        peekHeight,
+        expandInitially,
+        // DialogProperties
+        dismissOnBackPress,
+        dismissOnClickOutside,
+        // Style
+        shape,
+        containerColor,
+        iconColor,
+        titleColor,
+        contentColor
     )
 }
 
@@ -321,17 +358,12 @@ data class DialogButtons internal constructor(
  *
  * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
  * @param wrapContentInScrollableContainer if true, the dialog will wrap its content inside a scrollable container
+ * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
+ * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
  */
 data class Options(
     val dismissOnButtonClick: Boolean = true,
-    val wrapContentInScrollableContainer: Boolean = false
-)
-
-/**
- * the special options for a dialog
- *
- * @param dialogIntrinsicWidthMin if true, the dialog width will use [IntrinsicSize.Min]
- */
-data class SpecialOptions(
-    val dialogIntrinsicWidthMin: Boolean = false
+    val wrapContentInScrollableContainer: Boolean = false,
+    val dismissOnBackPress: Boolean = true,
+    val dismissOnClickOutside: Boolean = true,
 )

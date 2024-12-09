@@ -67,20 +67,19 @@ kotlin {
             implementation(compose.components.resources)
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
+            implementation(kotlinx.coroutines)
 
             // Compose
             implementation(libs.compose.material3)
 
             // Color Palette
-            implementation(libs.composecolors.material)
-            implementation(libs.composecolors.material.palette)
+            implementation(deps.composecolors.material)
+            implementation(deps.composecolors.material.palette)
 
             // library
             implementation(project(":ComposeDialogs:Core"))
 
-            implementation(libs.moko.parcelize)
+            implementation(deps.moko.parcelize)
 
         }
     }

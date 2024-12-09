@@ -2,6 +2,7 @@ package com.michaelflisar.composedialogs.dialogs.progress
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,10 +21,8 @@ import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 
 /**
  * Shows a dialog with an optional label and a progress indicator
@@ -48,39 +47,40 @@ fun DialogProgress(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
-    Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent) {
-        if (content != null) {
-            content()
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-        when (progressStyle) {
-            is DialogProgress.Style.Indeterminate -> {
-                if (progressStyle.linear) {
-                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                } else Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.TopCenter
-                ) {
-                    CircularProgressIndicator()
-                }
+    Dialog(state, title, icon, style, buttons, options, onEvent) {
+        Column {
+            if (content != null) {
+                content()
+                Spacer(modifier = Modifier.height(8.dp))
             }
-
-            is DialogProgress.Style.Determinate -> {
-                val progress by animateFloatAsState(targetValue = progressStyle.progress.toFloat() / progressStyle.max.toFloat())
-                if (progressStyle.linear) {
-                    LinearProgressIndicator(
-                        progress = { progress },
+            when (progressStyle) {
+                is DialogProgress.Style.Indeterminate -> {
+                    if (progressStyle.linear) {
+                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                    } else Box(
                         modifier = Modifier.fillMaxWidth(),
-                    )
-                } else Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.TopCenter
-                ) {
-                    CircularProgressIndicator(progress = { progress })
+                        contentAlignment = Alignment.TopCenter
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+
+                is DialogProgress.Style.Determinate -> {
+                    val progress by animateFloatAsState(targetValue = progressStyle.progress.toFloat() / progressStyle.max.toFloat())
+                    if (progressStyle.linear) {
+                        LinearProgressIndicator(
+                            progress = { progress },
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                    } else Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+                    ) {
+                        CircularProgressIndicator(progress = { progress })
+                    }
                 }
             }
         }

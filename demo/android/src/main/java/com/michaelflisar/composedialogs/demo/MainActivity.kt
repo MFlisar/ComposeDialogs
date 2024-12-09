@@ -59,7 +59,7 @@ class MainActivity : DemoActivity(
         }
 
         // Dialog Setting States
-        val style = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
+        val style = rememberSaveable { mutableStateOf(DemoStyle.BottomSheet) }
         val swipeDismiss = rememberSaveable { mutableStateOf(false) }
         val showIcon = rememberSaveable { mutableStateOf(true) }
 

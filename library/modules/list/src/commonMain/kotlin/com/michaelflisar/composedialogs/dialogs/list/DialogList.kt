@@ -1,6 +1,7 @@
 package com.michaelflisar.composedialogs.dialogs.list
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,10 +36,8 @@ import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListItem
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListTrailingContent
@@ -78,7 +77,6 @@ fun <T> DialogList(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     DialogList(
@@ -95,7 +93,6 @@ fun <T> DialogList(
         style,
         buttons,
         options,
-        specialOptions,
         onEvent
     )
 }
@@ -143,7 +140,6 @@ fun <T> DialogList(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     DialogList(
@@ -160,7 +156,6 @@ fun <T> DialogList(
         style,
         buttons,
         options,
-        specialOptions,
         onEvent
     )
 }
@@ -183,10 +178,9 @@ private fun <T> DialogList(
     style: ComposeDialogStyle,
     buttons: DialogButtons,
     options: Options,
-    specialOptions: SpecialOptions,
     onEvent: (event: DialogEvent) -> Unit
 ) {
-    Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val items = when (itemsProvider) {
             is DialogList.ItemProvider.List -> remember { mutableStateOf(itemsProvider.items) }
             is DialogList.ItemProvider.Loader -> {
@@ -235,77 +229,80 @@ private fun <T> DialogList(
             }
         }
 
-        if (description.isNotEmpty()) {
-            Text(text = description, style = MaterialTheme.typography.bodyMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-        }
+        Column {
 
-        if (filter?.infoText != null) {
-            val info = filter.infoText.invoke(filteredItems.value.size, items.value.size)
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp), value = filterText.value, onValueChange = {
-                    filterText.value = it
-                },
-                supportingText = if (info.isNotEmpty()) {
-                    {
-                        Text(
-                            modifier = Modifier.align(Alignment.End),
-                            text = info,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-                } else null,
-                trailingIcon = if (filter.showClearIcon && filterText.value.isNotEmpty()) {
-                    {
-                        IconButton(
-                            onClick = {
-                                filterText.value = ""
-                            }) {
-                            Icon(
-                                imageVector = Icons.Outlined.Clear,
-                                contentDescription = "Clear"
+            if (description.isNotEmpty()) {
+                Text(text = description, style = MaterialTheme.typography.bodyMedium)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            if (filter?.infoText != null) {
+                val info = filter.infoText.invoke(filteredItems.value.size, items.value.size)
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp), value = filterText.value, onValueChange = {
+                        filterText.value = it
+                    },
+                    supportingText = if (info.isNotEmpty()) {
+                        {
+                            Text(
+                                modifier = Modifier.align(Alignment.End),
+                                text = info,
+                                style = MaterialTheme.typography.bodySmall
                             )
                         }
-                    }
-                } else null
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-
-        if (selectionMode is DialogList.SelectionMode.MultiSelect && selectionMode.showSelectionCounter) {
-            Text(
-                modifier = Modifier.align(Alignment.End),
-                text = "${selectionMode.selected.value.size}/${items.value.size}",
-                style = MaterialTheme.typography.bodySmall
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-
-        DialogContentScrollableLazyColumn(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-        ) {
-            if (items.value.isEmpty() && itemsProvider is DialogList.ItemProvider.Loader) {
-                item(key = "${this::class.simpleName}-PLACEHOLDER") {
-                    itemsProvider.loadingIndicator()
-                }
-            }
-            items(
-                filteredItems.value,
-                key = { itemIdProvider(it) }
-            ) {
-                DialogListItem(
-                    state,
-                    it,
-                    itemIdProvider(it),
-                    selectionMode,
-                    itemContents,
-                    onEvent
+                    } else null,
+                    trailingIcon = if (filter.showClearIcon && filterText.value.isNotEmpty()) {
+                        {
+                            IconButton(
+                                onClick = {
+                                    filterText.value = ""
+                                }) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Clear,
+                                    contentDescription = "Clear"
+                                )
+                            }
+                        }
+                    } else null
                 )
-                if (divider && it != filteredItems.value.last()) {
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp))
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            if (selectionMode is DialogList.SelectionMode.MultiSelect && selectionMode.showSelectionCounter) {
+                Text(
+                    modifier = Modifier.align(Alignment.End),
+                    text = "${selectionMode.selected.value.size}/${items.value.size}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            DialogContentScrollableLazyColumn(
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+            ) {
+                if (items.value.isEmpty() && itemsProvider is DialogList.ItemProvider.Loader) {
+                    item(key = "${this::class.simpleName}-PLACEHOLDER") {
+                        itemsProvider.loadingIndicator()
+                    }
+                }
+                items(
+                    filteredItems.value,
+                    key = { itemIdProvider(it) }
+                ) {
+                    DialogListItem(
+                        state,
+                        it,
+                        itemIdProvider(it),
+                        selectionMode,
+                        itemContents,
+                        onEvent
+                    )
+                    if (divider && it != filteredItems.value.last()) {
+                        HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp))
+                    }
                 }
             }
         }

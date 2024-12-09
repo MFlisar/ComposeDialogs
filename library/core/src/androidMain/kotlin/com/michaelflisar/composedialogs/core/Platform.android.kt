@@ -58,7 +58,3 @@ actual fun DialogContentScrollableLazyColumn(
         content()
     }
 }
-
-actual fun DialogDefaults.specialOptions() : SpecialOptions {
-    return SpecialOptions()
-}

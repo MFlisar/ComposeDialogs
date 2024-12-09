@@ -68,19 +68,14 @@ android {
 dependencies {
 
     // ------------------------
-    // Kotlin
+    // KotlinX / AndroidX / Google
     // ------------------------
 
-    implementation(libs.kotlin)
-    implementation(libs.kotlinx.coroutines)
-
-    // ------------------------
-    // AndroidX / Google / Goolge
-    // ------------------------
+    implementation(kotlinx.coroutines)
 
     // Compose
     implementation(libs.compose.material3)
-    implementation(libs.androidx.activity.compose)
+    implementation(androidx.activity.compose)
 
     // ------------------------
     // Libraries
@@ -90,7 +85,7 @@ dependencies {
 
     val useLiveDependencies = providers.gradleProperty("useLiveDependencies").get().toBoolean()
     if (useLiveDependencies) {
-        api(libs.kotbilling)
+        api(deps.kotbilling)
     } else {
         api(project(":KotBilling"))
     }

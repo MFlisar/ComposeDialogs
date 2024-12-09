@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
 
 @Composable
 expect fun stringOk() : String
@@ -25,5 +24,3 @@ expect fun DialogContentScrollableColumn(modifier: Modifier = Modifier, content:
 
 @Composable
 expect fun DialogContentScrollableLazyColumn(modifier: Modifier = Modifier, state: LazyListState = rememberLazyListState(), content: LazyListScope.() -> Unit)
-
-expect fun DialogDefaults.specialOptions() : SpecialOptions

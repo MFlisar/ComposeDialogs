@@ -14,7 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.time.utils.TimeUtil
 import kotlinx.datetime.LocalTime
 
@@ -42,14 +42,13 @@ fun DialogTime(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     //if (!setup.seconds) {
     //    time.seconds.value = 0
     //}
 
-    Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val state = rememberTimePickerState(
             time.value.hour,
             time.value.minute,
@@ -58,7 +57,9 @@ fun DialogTime(
         LaunchedEffect(state.hour, state.minute) {
             time.value = LocalTime(state.hour, state.minute)
         }
-        TimeInput(state = state, modifier = Modifier.align(Alignment.CenterHorizontally))
+        Column {
+            TimeInput(state = state, modifier = Modifier.align(Alignment.CenterHorizontally))
+        }
     }
 }
 

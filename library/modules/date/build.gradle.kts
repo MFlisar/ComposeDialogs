@@ -8,8 +8,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
 }
@@ -66,9 +66,8 @@ kotlin {
             implementation(compose.components.resources)
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
-            api(libs.kotlinx.datetime)
+            implementation(kotlinx.coroutines)
+            api(kotlinx.datetime)
 
             // Compose
             implementation(libs.compose.material3)
@@ -114,7 +113,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring(libs.desugar)
+    coreLibraryDesugaring(deps.desugar)
 }
 
 mavenPublishing {

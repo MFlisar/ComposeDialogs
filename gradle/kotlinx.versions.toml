@@ -1,0 +1,9 @@
+[versions]
+
+coroutines = 	    "1.9.0"
+datetime = 	        "0.6.1"
+
+[libraries]
+
+datetime =			        { module = "org.jetbrains.kotlinx:kotlinx-datetime", 	        version.ref = "datetime" }
+coroutines =			    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 	version.ref = "coroutines" }

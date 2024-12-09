@@ -67,9 +67,8 @@ kotlin {
             implementation(compose.components.resources)
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
-            api(libs.kotlinx.datetime)
+            implementation(kotlinx.coroutines)
+            api(kotlinx.datetime)
 
             // Compose
             implementation(libs.compose.material3)
@@ -114,7 +113,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring(libs.desugar)
+    coreLibraryDesugaring(deps.desugar)
 }
 
 mavenPublishing {

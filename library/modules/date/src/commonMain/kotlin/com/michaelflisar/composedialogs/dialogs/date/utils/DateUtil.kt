@@ -49,7 +49,7 @@ internal object DateUtil {
     fun getSortedWeekDays(firstDayOfWeek: DayOfWeek): List<DayOfWeek> {
         val weekdays = DayOfWeeks.toMutableList()
         while (weekdays.first() != firstDayOfWeek) {
-            val first = weekdays.removeFirst()
+            val first = weekdays.removeAt(0)
             weekdays.add(first)
         }
         return weekdays

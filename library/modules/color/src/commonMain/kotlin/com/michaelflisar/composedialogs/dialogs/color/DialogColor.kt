@@ -30,11 +30,9 @@ import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.SpecialOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
-import com.michaelflisar.composedialogs.core.specialOptions
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.color.DialogColorDefaults.texts
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
@@ -77,7 +75,6 @@ fun DialogColor(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
-    specialOptions: SpecialOptions = DialogDefaults.specialOptions(),
     onEvent: (event: DialogEvent) -> Unit = {}
 ) {
     // saved dialog state
@@ -92,7 +89,7 @@ fun DialogColor(
     val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
     val colorState = rememberSaveable { mutableStateOf(DialogColor.Page.Presets) }
 
-    Dialog(state, title, icon, style, buttons, options, specialOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
 
         val landscape = isLandscape()
 
@@ -100,10 +97,46 @@ fun DialogColor(
             selectedPresetsLevel.intValue = 0
         })
 
-        if (landscape) {
-            Row {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+        Column {
+
+            if (landscape) {
+                Row {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        TitleForPages(
+                            Modifier.weight(1f),
+                            texts,
+                            colorState,
+                            selectedSubColor,
+                            selectedPresetsLevel
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        Content(
+                            color,
+                            colorState,
+                            selectedMainColor,
+                            selectedSubColor,
+                            selectedPresetsLevel,
+                            selectedAlpha,
+                            alphaSupported,
+                            shape,
+                            gridSize,
+                            labelStyle
+                        )
+                    }
+                }
+            } else {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     TitleForPages(
                         Modifier.weight(1f),
@@ -113,53 +146,20 @@ fun DialogColor(
                         selectedPresetsLevel
                     )
                 }
-                Spacer(modifier = Modifier.width(8.dp))
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    Content(
-                        color,
-                        colorState,
-                        selectedMainColor,
-                        selectedSubColor,
-                        selectedPresetsLevel,
-                        selectedAlpha,
-                        alphaSupported,
-                        shape,
-                        gridSize,
-                        labelStyle
-                    )
-                }
-            }
-        } else {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                TitleForPages(
-                    Modifier.weight(1f),
-                    texts,
+                Spacer(modifier = Modifier.height(8.dp))
+                Content(
+                    color,
                     colorState,
+                    selectedMainColor,
                     selectedSubColor,
-                    selectedPresetsLevel
+                    selectedPresetsLevel,
+                    selectedAlpha,
+                    alphaSupported,
+                    shape,
+                    gridSize,
+                    labelStyle
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Content(
-                color,
-                colorState,
-                selectedMainColor,
-                selectedSubColor,
-                selectedPresetsLevel,
-                selectedAlpha,
-                alphaSupported,
-                shape,
-                gridSize,
-                labelStyle
-            )
         }
     }
 }

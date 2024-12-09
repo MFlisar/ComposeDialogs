@@ -42,7 +42,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
-import com.michaelflisar.composedialogs.core.style.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.kotbilling.KotBilling
 import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
@@ -217,67 +217,69 @@ fun DialogBilling(
         // UI
         // ----------
 
-        if (showInfo) {
-            Text(texts.info)
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-        if (showLoading) {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+        Column {
+            if (showInfo) {
+                Text(texts.info)
+                Spacer(modifier = Modifier.height(8.dp))
             }
-        }
-        if (productErrors.isNotEmpty()) {
-            Column(modifier = Modifier.fillMaxWidth()) {
+            if (showLoading) {
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+            if (productErrors.isNotEmpty()) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        texts.textErrorQueringProducts,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    productErrors.forEach {
+                        Text(it.toString(), style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+            }
+            if (purchaseInfoInfo != null) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    when (purchaseInfoInfo) {
+                        is KBError -> {
+                            Text(
+                                "Purchase Error", // TODO text
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                purchaseInfoInfo.toString(),
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+
+                        is KBPurchase -> {
+                            Text(
+                                "Purchase Done",
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
+                    }
+                }
+            }
+            if (showEmpty) {
                 Text(
-                    texts.textErrorQueringProducts,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    text = texts.textNoProductFound,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.error
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                productErrors.forEach {
-                    Text(it.toString(), style = MaterialTheme.typography.bodySmall)
-                }
-            }
-        }
-        if (purchaseInfoInfo != null) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                when (purchaseInfoInfo) {
-                    is KBError -> {
-                        Text(
-                            "Purchase Error", // TODO text
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.error
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            purchaseInfoInfo.toString(),
-                            style = MaterialTheme.typography.bodySmall
-                        )
+            } else {
+                state.enableButton(DialogButtonType.Positive, true)
+                LazyColumn(
+                    modifier = Modifier.padding(vertical = 8.dp)
+                ) {
+                    items.forEach {
+                        item { Item(it) }
                     }
-
-                    is KBPurchase -> {
-                        Text(
-                            "Purchase Done",
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                    }
-                }
-            }
-        }
-        if (showEmpty) {
-            Text(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = texts.textNoProductFound,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.error
-            )
-        } else {
-            state.enableButton(DialogButtonType.Positive, true)
-            LazyColumn(
-                modifier = Modifier.padding(vertical = 8.dp)
-            ) {
-                items.forEach {
-                    item { Item(it) }
                 }
             }
         }

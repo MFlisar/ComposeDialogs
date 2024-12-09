@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,11 +21,11 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.styleWindowsDialog
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 import com.michaelflisar.composedialogs.dialogs.color.styleWindowsColorDialog
@@ -49,7 +50,7 @@ import com.michaelflisar.composedialogs.dialogs.progress.styleWindowsProgressDia
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import com.michaelflisar.composedialogs.dialogs.time.styleWindowsTimeDialog
-import com.michaelflisar.toolbox.composables.MyCheckbox
+import com.michaelflisar.toolbox.composables.MyDropdown
 import com.michaelflisar.toolbox.composables.MyTitle
 import com.michaelflisar.toolbox.ui.MyScrollableLazyColumn
 
@@ -79,7 +80,8 @@ fun main() {
                 height = 600.dp
             )
         ) {
-            val useWindowsDialog = remember { mutableStateOf(false) }
+            val styles = listOf("Dialog", "Bottom Sheet", "Windows Dialog")
+            val selectedStyle = remember { mutableStateOf(0) }
             val infos = remember { mutableStateListOf<String>() }
             val dialog = rememberDialogState<Dialog>(data = null)
             Column(
@@ -87,7 +89,7 @@ fun main() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 MyTitle("Dialogs")
-                MyCheckbox(title = "Use Windows Dialog?", checked = useWindowsDialog)
+                MyDropdown(title = "Dialog Mode", items = styles, selected = selectedStyle)
                 FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
@@ -114,12 +116,20 @@ fun main() {
                 }
             }
 
+            val getStyle = @Composable { windowsDialogStyle: @Composable () -> ComposeDialogStyle ->
+                when (selectedStyle.value) {
+                    0 -> DialogDefaults.styleDialog(swipeDismissable = true)
+                    1 -> DialogDefaults.styleBottomSheet()
+                    else -> windowsDialogStyle()
+                }
+            }
+
             when (dialog.data) {
                 Dialog.Color -> {
                     val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsColorDialog("Color Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsColorDialog("Color Dialog")
+                    }
                     DialogColor(
                         style = style,
                         title = { Text("Color Dialog") },
@@ -137,9 +147,9 @@ fun main() {
                 }
 
                 Dialog.Date -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsDateDialog("Select Date")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsDateDialog("Select Date")
+                    }
                     val date = rememberDialogDate()
                     DialogDate(
                         style = style,
@@ -157,9 +167,9 @@ fun main() {
                 }
 
                 Dialog.Time -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsTimeDialog("Select Time")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsTimeDialog("Select Time")
+                    }
                     val time = rememberDialogTime()
                     DialogTime(
                         style = style,
@@ -178,9 +188,9 @@ fun main() {
                 }
 
                 Dialog.Info -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsInfoDialog("Info Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsInfoDialog("Info Dialog")
+                    }
                     DialogInfo(
                         style = style,
                         title = { Text("Info Dialog") },
@@ -194,9 +204,9 @@ fun main() {
                 }
 
                 Dialog.Progress -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsProgressDialog("Progress Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsProgressDialog("Progress Dialog")
+                    }
                     DialogProgress(
                         style = style,
                         title = { Text("Progress Dialog") },
@@ -211,9 +221,9 @@ fun main() {
                 }
 
                 Dialog.Input -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsInputDialog("Input Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsInputDialog("Input Dialog")
+                    }
                     val input = rememberDialogInput("")
                     DialogInput(
                         style = style,
@@ -232,9 +242,9 @@ fun main() {
                 }
 
                 Dialog.Number -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsInputDialog("Number Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsInputDialog("Number Dialog")
+                    }
                     val input = rememberDialogInputNumber(0)
                     DialogInputNumber(
                         style = style,
@@ -253,9 +263,9 @@ fun main() {
                 }
 
                 Dialog.NumberPicker -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsNumberDialog("Number Picker Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsNumberDialog("Number Picker Dialog")
+                    }
                     val value = rememberDialogNumber(0)
                     DialogNumberPicker(
                         style = style,
@@ -276,9 +286,9 @@ fun main() {
                 }
 
                 Dialog.List -> {
-                    val style = if (!useWindowsDialog.value) {
-                        DialogDefaults.styleDialog()
-                    } else DialogDefaults.styleWindowsListDialog("List Dialog")
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsListDialog("List Dialog")
+                    }
                     val selected = remember { mutableStateOf<Int?>(null) }
                     val items = List(100) { "Item $it" }
                     DialogList(

@@ -64,16 +64,20 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
+            implementation(kotlinx.coroutines)
 
             // Compose
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
+
+            // Compose Unstyled
+            implementation(deps.composables.core)
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.activity.compose)
+
+            implementation(androidx.activity.compose)
+
         }
     }
 }
