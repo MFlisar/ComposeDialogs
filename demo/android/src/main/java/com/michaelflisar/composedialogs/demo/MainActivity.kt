@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogDefaults
-import com.michaelflisar.composedialogs.core.styleBottomSheet
 import com.michaelflisar.composedialogs.demo.classes.DemoStyle
 import com.michaelflisar.composedialogs.demo.demos.BillingDemos
 import com.michaelflisar.composedialogs.demo.demos.ColorDemos
@@ -66,12 +65,15 @@ class MainActivity : DemoActivity(
 
         val s = if (style.value == DemoStyle.BottomSheet) {
             DialogDefaults.styleBottomSheet(
-                // dragHandle = true,
-                //hideAnimated = true,
-                // resizeContent = true // only use this with scrollable content!
-                // peekHeight = 0.dp
+                dragHandle = true
+                // ...
             )
-        } else DialogDefaults.styleDialog(swipeDismissable = swipeDismiss.value)
+        } else {
+            DialogDefaults.styleDialog(
+                swipeDismissable = swipeDismiss.value
+                // ...
+            )
+        }
         val icon: @Composable (() -> Unit)? = if (showIcon.value) {
             { Icon(Icons.Default.Home, null) }
         } else null
