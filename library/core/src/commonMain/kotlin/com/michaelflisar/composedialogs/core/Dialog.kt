@@ -337,14 +337,14 @@ class DialogStateWithData<T : Any> internal constructor(
  *
  * @param text the text of the button
  */
-data class DialogButton(
+class DialogButton(
     val text: String
 )
 
 /**
  * see [DialogDefaults.buttons] and [DialogDefaults.buttonsDisabled]
  */
-data class DialogButtons internal constructor(
+class DialogButtons internal constructor(
     val positive: DialogButton,
     val negative: DialogButton
 ) {
