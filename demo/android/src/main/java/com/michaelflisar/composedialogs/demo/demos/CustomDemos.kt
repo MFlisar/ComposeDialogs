@@ -18,11 +18,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.michaelflisar.composedialogs.core.*
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.DemoDialogButton
 import com.michaelflisar.composedialogs.demo.DemoDialogRegion
 import com.michaelflisar.composedialogs.demo.DemoDialogRow
+import com.michaelflisar.composedialogs.demo.showToast
 
 @Composable
 fun CustomDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
@@ -35,6 +37,7 @@ fun CustomDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 
 @Composable
 private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+    val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(
@@ -42,19 +45,24 @@ private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Compos
             style = style,
             icon = icon,
             title = { Text("Custom Dialog") },
-        ) {
-            var checked by rememberSaveable { mutableStateOf(false) }
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Checkbox(checked = checked, onCheckedChange = { checked = it })
-                Text(text = "Show Details")
+            onEvent = { event ->
+                context.showToast("Event $event")
             }
-            AnimatedVisibility(visible = checked) {
-                Column {
-                    Text(text = "Detail 1...")
-                    Text(text = "Detail 2...")
-                    Text(text = "Detail 3...")
+        ) {
+            Column {
+                var checked by rememberSaveable { mutableStateOf(false) }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(checked = checked, onCheckedChange = { checked = it })
+                    Text(text = "Show Details")
+                }
+                AnimatedVisibility(visible = checked) {
+                    Column {
+                        Text(text = "Detail 1...")
+                        Text(text = "Detail 2...")
+                        Text(text = "Detail 3...")
+                    }
                 }
             }
         }
@@ -69,6 +77,7 @@ private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Compos
 
 @Composable
 private fun RowScope.DemoDialogCustom2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
+    val context = LocalContext.current
     val state = rememberDialogState()
     if (state.showing) {
         Dialog(
@@ -76,6 +85,9 @@ private fun RowScope.DemoDialogCustom2(style: ComposeDialogStyle, icon: (@Compos
             style = style,
             icon = icon,
             title = { Text("Custom Dialog") },
+            onEvent = { event ->
+                context.showToast("Event $event")
+            }
         ) {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())

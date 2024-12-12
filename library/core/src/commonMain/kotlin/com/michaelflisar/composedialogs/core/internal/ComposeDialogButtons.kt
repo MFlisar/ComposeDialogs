@@ -23,7 +23,7 @@ import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
 import com.michaelflisar.composedialogs.core.DialogState
 
 @Composable
-internal fun ColumnScope.ComposeDialogButtons(
+internal fun ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
     options: Options,

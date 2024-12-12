@@ -17,7 +17,7 @@ import com.michaelflisar.composedialogs.core.style.DialogStyleDefaults
  * Shows a dialog containing some arbitrary [content]
  *
  * @param state the [DialogState] of the dialog
- * @param title the optional title of the dialog (an empty title will not be shown)
+ * @param title the optional title of the dialog
  * @param icon the optional icon of the dialog
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
@@ -129,7 +129,7 @@ object DialogDefaults {
     fun styleBottomSheet(
         dragHandle: Boolean = true,
         peekHeight: ((containerHeight: Dp, sheetHeight: Dp) -> Dp)? = BottomSheetStyleDefaults.peekHeight,
-        expandInitially: Boolean = true,
+        expandInitially: Boolean = false,
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         dismissOnClickOutside: Boolean = true,

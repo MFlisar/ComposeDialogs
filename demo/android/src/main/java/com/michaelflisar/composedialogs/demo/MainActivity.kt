@@ -2,12 +2,9 @@ package com.michaelflisar.composedialogs.demo
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -24,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.demo.classes.DemoStyle
 import com.michaelflisar.composedialogs.demo.demos.BillingDemos
@@ -43,6 +39,7 @@ import com.michaelflisar.toolbox.androiddemoapp.DemoActivity
 import com.michaelflisar.toolbox.androiddemoapp.composables.DemoAppThemeRegion
 import com.michaelflisar.toolbox.androiddemoapp.composables.DemoCollapsibleRegion
 import com.michaelflisar.toolbox.androiddemoapp.composables.rememberDemoExpandedRegions
+import com.michaelflisar.toolbox.composables.MyColumn
 
 class MainActivity : DemoActivity(
     scrollableContent = true
@@ -58,10 +55,9 @@ class MainActivity : DemoActivity(
         }
 
         // Dialog Setting States
-        val style = rememberSaveable { mutableStateOf(DemoStyle.BottomSheet) }
+        val style = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
         val swipeDismiss = rememberSaveable { mutableStateOf(false) }
         val showIcon = rememberSaveable { mutableStateOf(true) }
-
 
         val s = if (style.value == DemoStyle.BottomSheet) {
             DialogDefaults.styleBottomSheet(
@@ -84,11 +80,6 @@ class MainActivity : DemoActivity(
 
         if (selectedDemoPage.intValue == -1) {
             RootContent(
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                //.verticalScroll(rememberScrollState()
-                ,
-                themeState,
                 selectedDemoPage,
                 style,
                 swipeDismiss,
@@ -119,23 +110,18 @@ class MainActivity : DemoActivity(
     // ----------------
 
     @Composable
-    private fun RootContent(
-        modifier: Modifier,
-        themeState: ComposeTheme.State,
+    private fun ColumnScope.RootContent(
         selectedDemoPage: MutableIntState,
         style: MutableState<DemoStyle>,
         swipeDismiss: MutableState<Boolean>,
         showIcon: MutableState<Boolean>
     ) {
-        Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val expandedRegions = rememberDemoExpandedRegions(listOf(2))
+        val expandedRegions = rememberDemoExpandedRegions(listOf(2))
 
-            DemoAppThemeRegion(regionId = 0, state = expandedRegions)
+        DemoAppThemeRegion(regionId = 0, state = expandedRegions)
 
-            DemoCollapsibleRegion(title = "Settings", regionId = 1, state = expandedRegions) {
+        DemoCollapsibleRegion(title = "Settings", regionId = 1, state = expandedRegions) {
+            MyColumn {
                 SettingsRowSegmentedControl(style, DemoStyle.entries)
                 AnimatedVisibility(visible = style.value == DemoStyle.Dialog) {
                     SettingsRowCheckbox(swipeDismiss, "Support SwipeDismiss?")
@@ -143,7 +129,10 @@ class MainActivity : DemoActivity(
                 SettingsRowCheckbox(showIcon, "Show Icon?")
             }
 
-            DemoCollapsibleRegion(title = "Demos", regionId = 2, state = expandedRegions) {
+        }
+
+        DemoCollapsibleRegion(title = "Demos", regionId = 2, state = expandedRegions) {
+            MyColumn {
                 MainButton(selectedDemoPage, 0, "Info Demos")
                 MainButton(selectedDemoPage, 1, "Input Demos")
                 MainButton(selectedDemoPage, 2, "Number Demos")

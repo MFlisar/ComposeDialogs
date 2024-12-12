@@ -4,9 +4,11 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
@@ -17,16 +19,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,7 +62,7 @@ import kotlin.math.roundToInt
 object BottomSheetStyleDefaults {
 
     val peekHeight: (containerHeight: Dp, sheetHeight: Dp) -> Dp =
-        { containerHeight, sheetHeight -> sheetHeight * .5f }
+        { containerHeight, sheetHeight -> containerHeight * .5f }
 
     val shape: Shape
         @Composable get() = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
@@ -107,59 +109,84 @@ internal class BottomSheetStyle(
     ) {
         val coroutineScope = rememberCoroutineScope()
 
-        val skipPartiallyExpanded by rememberSaveable { mutableStateOf(false) }
-        val peek = peekHeight?.let {
+        val peek: SheetDetent? = peekHeight?.let {
             SheetDetent("peek", it)
         }
 
-        val shoudDismissOnBackPress by remember {
+        val shouldDismissOnBackPress by remember {
             derivedStateOf { dismissOnBackPress && state.interactionSource.dismissAllowed.value }
         }
-        val shoudDismissOnClickOutside by remember {
+        val shouldDismissOnClickOutside by remember {
             derivedStateOf { dismissOnClickOutside && state.interactionSource.dismissAllowed.value }
         }
 
         val bottomSheetState = rememberModalBottomSheetState(
             initialDetent = if (expandInitially || peek == null) SheetDetent.FullyExpanded else peek,
-            detents = listOfNotNull(SheetDetent.Hidden, peek, SheetDetent.FullyExpanded).filter {
-                !skipPartiallyExpanded || it != peek
-            },
+            detents = listOfNotNull(SheetDetent.Hidden, peek, SheetDetent.FullyExpanded),
             confirmDetentChange = {
-                if (it == SheetDetent.Hidden) {
+                val confirm = if (it == SheetDetent.Hidden) {
                     state.interactionSource.dismissAllowed.value
-                }
-                true
+                } else true
+                println("TEST - confirmDetentChange = $confirm | ${it.identifier}")
+                confirm
             }
         )
         val bottomSheetProperties = ModalSheetProperties(
-            dismissOnBackPress = shoudDismissOnBackPress,
-            dismissOnClickOutside = shoudDismissOnClickOutside
+            dismissOnBackPress = shouldDismissOnBackPress,
+            dismissOnClickOutside = shouldDismissOnClickOutside
         )
 
         val onDismiss = { buttonPressed: Boolean ->
-            //if (state.interactionSource.dismissAllowed.value) {
-            coroutineScope.launch {
-                bottomSheetState.animateTo(SheetDetent.Hidden)
-                if (buttonPressed)
-                    state.dismiss()
-                else
-                    state.dismiss(onEvent)
+            println("TEST - onDismiss - 1")
+            if (state.interactionSource.dismissAllowed.value) {
+                coroutineScope.launch {
+                    bottomSheetState.animateTo(SheetDetent.Hidden)
+                    println("TEST - onDismiss - 2")
+                    if (buttonPressed)
+                        state.dismiss()
+                    else
+                        state.dismiss(onEvent)
+                    println("TEST - onDismiss - 3")
+                }
+                true
+            } else {
+                println("TEST - show again from onDismiss")
+                bottomSheetState.currentDetent = SheetDetent.FullyExpanded
+                false
             }
-            true
-            //} else {
-            //    coroutineScope.launch {
-            //        bottomSheetState.animateTo(SheetDetent.FullyExpanded)
-            //    }
-            //    false
-            //}
         }
 
         val density = LocalDensity.current
 
+        //LaunchedEffect(bottomSheetState.isIdle) {
+        //    println("TEST - isIdle = ${bottomSheetState.isIdle} | target = ${bottomSheetState.currentDetent.identifier} | interaction allowed = ${state.interactionSource.dismissAllowed.value}")
+        //    if (bottomSheetState.isIdle &&
+        //        bottomSheetState.currentDetent == SheetDetent.Hidden &&
+        //        !state.interactionSource.dismissAllowed.value
+        //    ) {
+        //        println("TEST - show again")
+        //        bottomSheetState.currentDetent = SheetDetent.FullyExpanded
+        //    }
+        //}
+
+        // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
+        var buttonPressed2 = false
+        LaunchedEffect(bottomSheetState.progress == 1f) {
+            if (!state.interactionSource.dismissAllowed.value) {
+                if (buttonPressed2)
+                    state.dismiss()
+                else
+                    state.dismiss(onEvent)
+            }
+        }
+
         ModalBottomSheet(
             state = bottomSheetState,
             properties = bottomSheetProperties,
-            onDismiss = { onDismiss(false) }
+            onDismiss = {
+                println("TEST - onDismiss callback...")
+                onDismiss(false)
+            }
         ) {
 
             val contentSize = remember { mutableStateOf(DpSize.Zero) }
@@ -175,6 +202,7 @@ internal class BottomSheetStyle(
                 exit = fadeOut(),
                 scrimColor = MaterialTheme.colorScheme.scrim.copy(0.3f),
                 modifier = Modifier
+                    .fillMaxSize()
                     .onSizeChanged {
                         scrimSize.value =
                             with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
@@ -200,12 +228,12 @@ internal class BottomSheetStyle(
                     .widthIn(max = 640.dp)
                     .fillMaxWidth()
                     .imePadding()
-
             ) {
 
                 Column(
                     Modifier
                         .fillMaxWidth()
+
                 ) {
 
                     // 1) Drag Header On Top
@@ -224,13 +252,23 @@ internal class BottomSheetStyle(
                     }
 
                     // 2) Icon + Title
-                    ComposeDialogTitle(title, icon, iconColor, titleColor, modifier = Modifier.padding(horizontal = 24.dp))
+                    ComposeDialogTitle(
+                        title,
+                        icon,
+                        iconColor,
+                        titleColor,
+                        modifier = Modifier.padding(horizontal = 24.dp)
+                    )
 
                     // 3) Content
-                    ComposeDialogContent(content, contentColor, modifier = Modifier.padding(horizontal = 24.dp))
+                    ComposeDialogContent(
+                        content,
+                        contentColor,
+                        modifier = Modifier.padding(horizontal = 24.dp)
+                    )
 
                     // 4) Footer
-                    ComposeDialogButtons(
+                    Column(
                         modifier = Modifier
                             .offset {
                                 IntOffset(
@@ -238,19 +276,29 @@ internal class BottomSheetStyle(
                                     (contentSize.value.height.roundToPx() - bottomSheetState.offset).roundToInt() * -1
                                 )
                             }
-                            .background(containerColor)
-                            .padding(
-                                bottom = WindowInsets.navigationBars
-                                    .only(WindowInsetsSides.Vertical)
-                                    .asPaddingValues()
-                                    .calculateBottomPadding()
-                            ),
-                        buttons = buttons,
-                        options = options,
-                        state = state,
-                        dismissOnButtonPressed = { onDismiss(true) },
-                        onEvent = onEvent
-                    )
+                    ) {
+                        ComposeDialogButtons(
+                            modifier = Modifier
+                                .background(containerColor)
+                                .padding(horizontal = 24.dp),
+                            buttons = buttons,
+                            options = options,
+                            state = state,
+                            dismissOnButtonPressed = {
+                                buttonPressed2 = true
+                                onDismiss(true)
+                            },
+                            onEvent = onEvent
+                        )
+
+                        // 5) Spacer behind nav bar
+                        Spacer(
+                            Modifier
+                                .fillMaxWidth()
+                                .windowInsetsBottomHeight(WindowInsets.navigationBars)
+                                .background(containerColor)
+                        )
+                    }
                 }
             }
         }

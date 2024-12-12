@@ -13,13 +13,25 @@ import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.snapTo
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -148,11 +160,11 @@ internal class DialogStyle(
 
             val contentSize = remember { mutableStateOf(DpSize.Zero) }
             val scrimSize = remember { mutableStateOf(DpSize.Zero) }
-            val isCompact by remember {
-                derivedStateOf {
-                    scrimSize.value.width < 600.dp
-                }
-            }
+            //val isCompact by remember {
+            //    derivedStateOf {
+            //        scrimSize.value.width < 600.dp
+            //    }
+            //}
 
             val density = LocalDensity.current
             val modifierSwipeDismiss = getSwipeDismissModifier(swipeDismissable, with(density) { scrimSize.value.height.toPx() } / 2f) {
@@ -167,6 +179,7 @@ internal class DialogStyle(
                 exit = fadeOut(),
                 scrimColor = MaterialTheme.colorScheme.scrim.copy(0.3f),
                 modifier = Modifier
+                    .fillMaxSize()
                     .onSizeChanged {
                         scrimSize.value =
                             with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
@@ -179,20 +192,24 @@ internal class DialogStyle(
                             with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
                     }
                     .systemBarsPadding()
+                    .imePadding()
                     .padding(16.dp)
                     .then(modifierSwipeDismiss)
                     .shadow(6.dp /* L3 */, shape)
                     .clip(shape)
                     .background(containerColor)
-                    .padding(24.dp),
+                    .padding(24.dp)
+                   ,
                 enter = animEnter,
                 exit = animExit
             ) {
                 Column(
-                    modifier = Modifier.let {
-                        if (isCompact) it.fillMaxWidth() else it.widthIn(min = 280.dp, max = 560.dp)
-                    },
-                    horizontalAlignment = if (isCompact) Alignment.CenterHorizontally else Alignment.Start
+                    modifier = Modifier
+                        .widthIn(min = 280.dp, max = 560.dp)
+                        .width(IntrinsicSize.Min)
+                        .then(if (options.wrapContentInScrollableContainer) Modifier.verticalScroll(rememberScrollState()) else Modifier)
+                    ,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
                     // Icon + Title
@@ -213,7 +230,6 @@ internal class DialogStyle(
                         },
                         onEvent = onEvent
                     )
-
                 }
             }
         }

@@ -118,7 +118,7 @@ fun main() {
 
             val getStyle = @Composable { windowsDialogStyle: @Composable () -> ComposeDialogStyle ->
                 when (selectedStyle.value) {
-                    0 -> DialogDefaults.styleDialog(swipeDismissable = true)
+                    0 -> DialogDefaults.styleDialog(swipeDismissable = false)
                     1 -> DialogDefaults.styleBottomSheet()
                     else -> windowsDialogStyle()
                 }
