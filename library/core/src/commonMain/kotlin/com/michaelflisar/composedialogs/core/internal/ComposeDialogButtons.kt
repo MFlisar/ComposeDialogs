@@ -23,7 +23,7 @@ import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
 import com.michaelflisar.composedialogs.core.DialogState
 
 @Composable
-internal fun ComposeDialogButtons(
+internal fun ColumnScope.ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
     options: Options,
@@ -32,7 +32,7 @@ internal fun ComposeDialogButtons(
     onEvent: (event: DialogEvent) -> Unit
 ) {
     Box(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.align(Alignment.End),
         contentAlignment = Alignment.BottomEnd
     ) {
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {

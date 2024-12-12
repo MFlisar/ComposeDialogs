@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -206,7 +207,7 @@ internal class DialogStyle(
                 Column(
                     modifier = Modifier
                         .widthIn(min = 280.dp, max = 560.dp)
-                        .width(IntrinsicSize.Min)
+                        .wrapContentWidth()
                         .then(if (options.wrapContentInScrollableContainer) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                     ,
                     horizontalAlignment = Alignment.CenterHorizontally
