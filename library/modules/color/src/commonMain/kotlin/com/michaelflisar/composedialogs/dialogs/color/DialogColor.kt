@@ -38,9 +38,9 @@ import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
 import com.michaelflisar.composedialogs.dialogs.color.composables.Content
 import com.michaelflisar.composedialogs.dialogs.color.composables.TitleForPages
-import composedialogs.composedialogs.modules.color.generated.resources.Res
-import composedialogs.composedialogs.modules.color.generated.resources.composedialogs_color_label_custom
-import composedialogs.composedialogs.modules.color.generated.resources.composedialogs_color_label_presets
+import com.michaelflisar.composedialogs.dialogs.color.resources.Res
+import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_color_label_custom
+import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_color_label_presets
 import org.jetbrains.compose.resources.stringResource
 
 /**

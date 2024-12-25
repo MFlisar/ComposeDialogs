@@ -208,7 +208,6 @@ internal class DialogStyle(
                     modifier = Modifier
                         .widthIn(min = 280.dp, max = 560.dp)
                         .wrapContentWidth()
-                        .then(if (options.wrapContentInScrollableContainer) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                     ,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

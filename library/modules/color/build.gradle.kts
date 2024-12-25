@@ -67,7 +67,7 @@ kotlin {
             implementation(compose.components.resources)
 
             // Kotlin
-            implementation(kotlinx.coroutines)
+            implementation(kotlinx.coroutines.core)
 
             // Compose
             implementation(libs.compose.material3)
@@ -77,12 +77,16 @@ kotlin {
             implementation(deps.composecolors.material.palette)
 
             // library
-            implementation(project(":ComposeDialogs:Core"))
+            implementation(project(":composedialogs:core"))
 
             implementation(deps.moko.parcelize)
 
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "$androidNamespace.resources"
 }
 
 android {

@@ -66,7 +66,7 @@ kotlin {
             implementation(compose.components.resources)
 
             // Kotlin
-            implementation(kotlinx.coroutines)
+            implementation(kotlinx.coroutines.core)
             api(kotlinx.datetime)
 
             // Compose
@@ -74,12 +74,16 @@ kotlin {
             implementation(libs.compose.ui)
 
             // library
-            implementation(project(":ComposeDialogs:Core"))
+            implementation(project(":composedialogs:core"))
 
             //implementation(libs.moko.parcelize)
 
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "$androidNamespace.resources"
 }
 
 android {
@@ -113,7 +117,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
 }
 
 mavenPublishing {

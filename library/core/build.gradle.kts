@@ -64,7 +64,7 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(kotlinx.coroutines)
+            implementation(kotlinx.coroutines.core)
 
             // Compose
             implementation(libs.compose.material3)

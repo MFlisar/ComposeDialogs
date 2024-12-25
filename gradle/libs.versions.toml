@@ -1,10 +1,11 @@
 [versions]
 
 gradle = 				        "8.7.3"
-kotlin = 				        "2.0.21"
+kotlin = 				        "2.1.0"
 dokka =                         "1.9.20"
 gradle-maven-publish-plugin =   "0.30.0"
 compose =                       "1.7.1"
+desugar =                       "2.1.4"
 
 [plugins]
 
@@ -36,3 +37,6 @@ compose-ui =                        { module = "org.jetbrains.compose.ui:ui",   
 compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose" }
 compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose" }
 compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose" }
+
+# desugar
+desugar =			        	    { module = "com.android.tools:desugar_jdk_libs", 						version.ref = "desugar" }

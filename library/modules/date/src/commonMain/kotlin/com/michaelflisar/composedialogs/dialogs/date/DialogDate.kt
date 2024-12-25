@@ -47,9 +47,9 @@ import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectL
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectListYear
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectionHeader
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarTodayButton
+import com.michaelflisar.composedialogs.dialogs.date.resources.Res
+import com.michaelflisar.composedialogs.dialogs.date.resources.composedialogs_date_today
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
-import composedialogs.composedialogs.modules.date.generated.resources.Res
-import composedialogs.composedialogs.modules.date.generated.resources.composedialogs_date_today
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month

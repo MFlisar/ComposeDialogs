@@ -357,13 +357,11 @@ class DialogButtons internal constructor(
  * the main options for a dialog
  *
  * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
- * @param wrapContentInScrollableContainer if true, the dialog will wrap its content inside a scrollable container
  * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
  * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
  */
 data class Options(
     val dismissOnButtonClick: Boolean = true,
-    val wrapContentInScrollableContainer: Boolean = false,
     val dismissOnBackPress: Boolean = true,
     val dismissOnClickOutside: Boolean = true,
 )

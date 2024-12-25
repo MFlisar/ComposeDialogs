@@ -64,7 +64,7 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(kotlinx.coroutines)
+            implementation(kotlinx.coroutines.core)
 
             // Compose
             implementation(libs.compose.material.icons.core)
@@ -72,7 +72,7 @@ kotlin {
             implementation(libs.compose.material3)
 
             // library
-            implementation(project(":ComposeDialogs:Core"))
+            implementation(project(":composedialogs:core"))
         }
     }
 }
