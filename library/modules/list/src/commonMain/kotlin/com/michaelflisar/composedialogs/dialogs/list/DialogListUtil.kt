@@ -53,9 +53,8 @@ internal object DialogListUtil {
             }
 
             is DialogList.SelectionMode.SingleClickAndClose -> { ->
-                if (selectionMode.onItemClicked(item)) {
-                    state.dismiss()
-                }
+                selectionMode.onItemClicked(item)
+                state.dismiss()
             }
 
             is DialogList.SelectionMode.SingleSelect -> {
