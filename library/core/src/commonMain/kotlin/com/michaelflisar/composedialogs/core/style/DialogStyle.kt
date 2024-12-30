@@ -141,18 +141,18 @@ internal class DialogStyle(
             }
         }
 
-        val shoudDismissOnBackPress by remember {
+        val shouldDismissOnBackPress by remember {
             derivedStateOf { dismissOnBackPress && state.interactionSource.dismissAllowed.value }
         }
-        val shoudDismissOnClickOutside by remember {
+        val shouldDismissOnClickOutside by remember {
             derivedStateOf { dismissOnClickOutside && state.interactionSource.dismissAllowed.value }
         }
 
         Dialog(
             state = dialogState,
             properties = DialogProperties(
-                dismissOnBackPress = shoudDismissOnBackPress,
-                dismissOnClickOutside = shoudDismissOnClickOutside
+                dismissOnBackPress = shouldDismissOnBackPress,
+                dismissOnClickOutside = shouldDismissOnClickOutside
             ),
             onDismiss = {
                 waitForDismissAnimationAndUpdateState()

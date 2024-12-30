@@ -31,6 +31,9 @@ internal fun ColumnScope.ComposeDialogButtons(
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
+    if (buttons.negative.text.isEmpty() && buttons.positive.text.isEmpty()) {
+        return
+    }
     Box(
         modifier = modifier.align(Alignment.End),
         contentAlignment = Alignment.BottomEnd

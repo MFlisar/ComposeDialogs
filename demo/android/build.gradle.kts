@@ -86,6 +86,7 @@ dependencies {
     implementation(project(":composedialogs:modules:color"))
     implementation(project(":composedialogs:modules:list"))
     implementation(project(":composedialogs:modules:billing"))
+    implementation(project(":composedialogs:modules:menu"))
 
     // ------------------------
     // Desugar

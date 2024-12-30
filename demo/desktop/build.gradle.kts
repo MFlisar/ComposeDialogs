@@ -31,6 +31,7 @@ kotlin {
                 implementation(project(":composedialogs:modules:input"))
                 implementation(project(":composedialogs:modules:number"))
                 implementation(project(":composedialogs:modules:list"))
+                implementation(project(":composedialogs:modules:menu"))
 
                 implementation(deps.toolbox.core)
                 implementation(deps.toolbox.ui)

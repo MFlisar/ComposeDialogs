@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +26,7 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
+import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
@@ -41,6 +45,9 @@ import com.michaelflisar.composedialogs.dialogs.input.rememberDialogInputNumber
 import com.michaelflisar.composedialogs.dialogs.input.styleWindowsInputDialog
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.composedialogs.dialogs.list.styleWindowsListDialog
+import com.michaelflisar.composedialogs.dialogs.menu.DialogMenu
+import com.michaelflisar.composedialogs.dialogs.menu.MenuItem
+import com.michaelflisar.composedialogs.dialogs.menu.styleWindowsMenuDialog
 import com.michaelflisar.composedialogs.dialogs.number.DialogNumberPicker
 import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.number.rememberDialogNumber
@@ -63,7 +70,8 @@ enum class Dialog {
     Input,
     Number,
     NumberPicker,
-    List
+    List,
+    Menu
 }
 
 @OptIn(ExperimentalStdlibApi::class, ExperimentalLayoutApi::class)
@@ -312,6 +320,68 @@ fun main() {
                                 infos.add("Event $it")
                             }
                         }
+                    )
+                }
+
+                Dialog.Menu -> {
+                    val style = getStyle {
+                        DialogDefaults.styleWindowsMenuDialog("Menu Dialog")
+                    }
+                    val items = listOf(
+                        MenuItem.Item("Item 1", "Description 1", { Icon(Icons.Default.Info, null) }) {
+                            infos.add("Item 1 clicked")
+                        },
+                        MenuItem.Item("Item 2", "Description 2", { Icon(Icons.Default.Info, null) }) {
+                            infos.add("Item 2 clicked")
+                        },
+                        MenuItem.Divider,
+                        MenuItem.SubMenu("Sub Menu 1", "Description", { Icon(Icons.Default.Info, null) },
+                            listOf(
+                                MenuItem.Item("Sub Item 1", "Description 1", { Icon(Icons.Default.Info, null) }) {
+                                    infos.add("Sub Item 1 clicked")
+                                },
+                                MenuItem.Item("Sub Item 2", "Description 2", { Icon(Icons.Default.Info, null) }) {
+                                    infos.add("Sub Item 2 clicked")
+                                },
+                                MenuItem.Item("Sub Item 3", "Description 3", { Icon(Icons.Default.Info, null) }) {
+                                    infos.add("Sub Item 3 clicked")
+                                },
+                                MenuItem.SubMenu("Sub Sub Menu 4", "Description", { Icon(Icons.Default.Info, null) },
+                                    listOf(
+                                        MenuItem.Item("Sub Sub Item 1", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 1 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 2", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 2 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 3", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 3 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 4", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 4 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 5", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 5 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 6", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 6 clicked")
+                                        },
+                                        MenuItem.Item("Sub Sub Item 7", "Description", { Icon(Icons.Default.Info, null) }) {
+                                            infos.add("Sub Sub Item 7 clicked")
+                                        },
+                                    )
+                                )
+                            )
+                        ),
+                        MenuItem.Custom {
+                            Text("Custom Content", color = Color.Red)
+                        }
+                    )
+                    DialogMenu(
+                        style = style,
+                        title = { Text("Menu Dialog") },
+                        items = items,
+                        state = dialog
                     )
                 }
 

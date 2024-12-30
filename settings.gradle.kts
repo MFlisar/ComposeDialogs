@@ -57,6 +57,8 @@ include(":composedialogs:modules:progress")
 project(":composedialogs:modules:progress").projectDir = file("library/modules/progress")
 include(":composedialogs:modules:billing")
 project(":composedialogs:modules:billing").projectDir = file("library/modules/billing")
+include(":composedialogs:modules:menu")
+project(":composedialogs:modules:menu").projectDir = file("library/modules/menu")
 
 include(":demo:android")
 include(":demo:desktop")
