@@ -349,9 +349,8 @@ object DialogList {
          * this mode will close the dialog as soon as a single item is selected
          *
          * @param onItemClicked the callback that will be used to emit the single item that was clicked before the dialog is dismissed
-         * @return true if the dialog should be closed, false otherwise
          */
-        class SingleClickAndClose<T>(val onItemClicked: (item: T) -> Boolean) :
+        class SingleClickAndClose<T>(val onItemClicked: (item: T) -> Unit) :
             SelectionMode<T>()
 
         /**
