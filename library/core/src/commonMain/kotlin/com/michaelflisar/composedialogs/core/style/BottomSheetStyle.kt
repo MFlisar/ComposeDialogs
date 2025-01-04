@@ -53,6 +53,7 @@ import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
@@ -84,10 +85,14 @@ internal class BottomSheetStyle(
     private val dragHandle: Boolean,
     private val peekHeight: ((containerHeight: Dp, sheetHeight: Dp) -> Dp)?,
     private val expandInitially: Boolean,
+    private val velocityThreshold: () -> Dp,
+    private val positionalThreshold: (totalDistance: Dp) -> Dp,
+    private val animateShow: Boolean = false,
     // DialogProperties
     private val dismissOnBackPress: Boolean,
     private val dismissOnClickOutside: Boolean,
     // Style
+    private val options: StyleOptions = StyleOptions(),
     private val shape: Shape,
     private val containerColor: Color,
     private val iconColor: Color,
@@ -120,8 +125,11 @@ internal class BottomSheetStyle(
             derivedStateOf { dismissOnClickOutside && state.interactionSource.dismissAllowed.value }
         }
 
+        val initialAnimationDone = remember { mutableStateOf(false) }
+        val initialDetent = if (expandInitially || peek == null) SheetDetent.FullyExpanded else peek
+
         val bottomSheetState = rememberModalBottomSheetState(
-            initialDetent = if (expandInitially || peek == null) SheetDetent.FullyExpanded else peek,
+            initialDetent = if (animateShow && !initialAnimationDone.value) SheetDetent.Hidden else initialDetent,
             detents = listOfNotNull(SheetDetent.Hidden, peek, SheetDetent.FullyExpanded),
             confirmDetentChange = {
                 val confirm = if (it == SheetDetent.Hidden) {
@@ -129,7 +137,9 @@ internal class BottomSheetStyle(
                 } else true
                 println("TEST - confirmDetentChange = $confirm | ${it.identifier}")
                 confirm
-            }
+            },
+            velocityThreshold = velocityThreshold,
+            positionalThreshold = positionalThreshold
         )
         val bottomSheetProperties = ModalSheetProperties(
             dismissOnBackPress = shouldDismissOnBackPress,
@@ -168,6 +178,13 @@ internal class BottomSheetStyle(
         //        bottomSheetState.currentDetent = SheetDetent.FullyExpanded
         //    }
         //}
+
+        LaunchedEffect(initialAnimationDone.value) {
+            if (!initialAnimationDone.value) {
+                bottomSheetState.currentDetent = initialDetent
+                initialAnimationDone.value = true
+            }
+        }
 
         // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
         var buttonPressed2 = false
@@ -253,32 +270,38 @@ internal class BottomSheetStyle(
 
                     // 2) Icon + Title
                     ComposeDialogTitle(
-                        title,
-                        icon,
-                        iconColor,
-                        titleColor,
-                        modifier = Modifier.padding(horizontal = 24.dp)
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        title = title,
+                        icon = icon,
+                        iconColor = iconColor,
+                        titleColor = titleColor,
+                        options = this@BottomSheetStyle.options,
                     )
 
                     // 3) Content
                     ComposeDialogContent(
-                        content,
-                        contentColor,
-                        modifier = Modifier.padding(horizontal = 24.dp)
+                        content = content,
+                        contentColor = contentColor,
+                        modifier = Modifier.weight(weight = 1f, fill = false).padding(horizontal = 24.dp)
                     )
 
                     // 4) Footer
                     Column(
                         modifier = Modifier
-                            .offset {
-                                IntOffset(
-                                    0,
-                                    (contentSize.value.height.roundToPx() - bottomSheetState.offset).roundToInt() * -1
-                                )
-                            }
+                            .then(
+                                if (buttons.enabled) {
+                                    Modifier.offset {
+                                        IntOffset(
+                                            0,
+                                            (contentSize.value.height.roundToPx() - bottomSheetState.offset).roundToInt() * -1
+                                        )
+                                    }
+                                } else Modifier
+                            )
                     ) {
                         ComposeDialogButtons(
                             modifier = Modifier
+                                .fillMaxWidth()
                                 .background(containerColor)
                                 .padding(horizontal = 24.dp),
                             buttons = buttons,

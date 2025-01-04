@@ -1,0 +1,173 @@
+package com.michaelflisar.composedialogs.core.style
+
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.composables.core.Dialog
+import com.composables.core.DialogPanel
+import com.composables.core.DialogProperties
+import com.composables.core.rememberDialogState
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogButton
+import com.michaelflisar.composedialogs.core.DialogButtons
+import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitleToolbar
+import com.michaelflisar.composedialogs.core.updateStatusbarColor
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+object FullscreenDialogStyleDefaults {
+
+    val toolbarColor: Color
+        @Composable get() = MaterialTheme.colorScheme.primary
+
+    val containerColor: Color
+        @Composable get() = MaterialTheme.colorScheme.background
+
+    val iconColor
+        @Composable get() = MaterialTheme.colorScheme.secondary
+
+    val titleColor
+        @Composable get() = MaterialTheme.colorScheme.onPrimary
+
+    val contentColor
+        @Composable get() = MaterialTheme.colorScheme.onBackground
+}
+
+internal class FullscreenDialogStyle(
+    private val darkStatusBar: Boolean,
+    // DialogProperties
+    private val dismissOnBackPress: Boolean,
+    // Style
+    private val toolbarColor: Color,
+    private val containerColor: Color,
+    private val iconColor: Color,
+    private val titleColor: Color,
+    private val contentColor: Color,
+) : ComposeDialogStyle {
+
+    override val type = ComposeDialogStyle.Type.Dialog
+
+    @Composable
+    override fun Show(
+        title: (@Composable () -> Unit)?,
+        icon: @Composable (() -> Unit)?,
+        buttons: DialogButtons,
+        options: Options,
+        state: DialogState,
+        onEvent: (event: DialogEvent) -> Unit,
+        content: @Composable () -> Unit,
+    ) {
+        val coroutineScope = rememberCoroutineScope()
+        val dialogState = rememberDialogState(initiallyVisible = true)
+
+        val animDurationEnter = 250
+        val animDurationExit = 150
+        val animEnter =
+            scaleIn(initialScale = 0.8f) + fadeIn(tween(durationMillis = animDurationEnter))
+        val animExit =
+            scaleOut(targetScale = 0.6f) + fadeOut(tween(durationMillis = animDurationExit))
+
+        val dismiss = { dialogState.visible = false }
+        var buttonPressed = false
+        val waitForDismissAnimationAndUpdateState = {
+            coroutineScope.launch {
+                delay(animDurationExit.toLong())
+                if (buttonPressed)
+                    state.dismiss()
+                else
+                    state.dismiss(onEvent)
+            }
+        }
+
+        val shouldDismissOnBackPress by remember {
+            derivedStateOf { dismissOnBackPress && state.interactionSource.dismissAllowed.value }
+        }
+
+        Dialog(
+            state = dialogState,
+            properties = DialogProperties(
+                dismissOnBackPress = shouldDismissOnBackPress
+            ),
+            onDismiss = {
+                waitForDismissAnimationAndUpdateState()
+            }
+        ) {
+
+            updateStatusbarColor(darkStatusBar)
+
+            DialogPanel(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .systemBarsPadding()
+                    .imePadding()
+                    .background(containerColor),
+                enter = animEnter,
+                exit = animExit
+            ) {
+                val dismissOnButtonPressed = {
+                    buttonPressed = true
+                    dismiss()
+                    waitForDismissAnimationAndUpdateState()
+                    Unit
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    // Icon + Title
+                    ComposeDialogTitleToolbar(
+                        modifier = Modifier,
+                        title = title,
+                        icon = icon,
+                        toolbarColor = toolbarColor,
+                        iconColor = iconColor,
+                        titleColor = titleColor,
+                        options = options,
+                        state = state,
+                        dismissOnButtonPressed = dismissOnButtonPressed,
+                        onEvent = onEvent
+                    )
+
+                    // Content
+                    ComposeDialogContent(
+                        content = content,
+                        contentColor = contentColor,
+                        modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                    )
+
+                    // Buttons
+                    ComposeDialogButtons(
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                        buttons = buttons,
+                        options = options,
+                        state = state,
+                        dismissOnButtonPressed = dismissOnButtonPressed,
+                        onEvent = onEvent
+                    )
+                }
+            }
+        }
+    }
+}

@@ -10,10 +10,13 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowInsetsControllerCompat
+import com.composables.core.LocalModalWindow
 
 @Composable
 actual fun isLandscape(): Boolean =
@@ -56,5 +59,20 @@ actual fun DialogContentScrollableLazyColumn(
         state = state
     ) {
         content()
+    }
+}
+
+@Composable
+actual fun updateStatusbarColor(darkStatusBar: Boolean) {
+    val window = LocalModalWindow.current
+    LaunchedEffect(darkStatusBar) {
+        // change system bars to transparent
+        //window.statusBarColor = titleBackground.toArgb()
+        //window.navigationBarColor = Color.Black.copy(0.33f).toArgb()
+
+        // don't forget to update the icons too
+        val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+        windowInsetsController.isAppearanceLightStatusBars = !darkStatusBar
+        //windowInsetsController.isAppearanceLightNavigationBars = false
     }
 }

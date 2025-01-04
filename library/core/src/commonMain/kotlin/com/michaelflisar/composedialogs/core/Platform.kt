@@ -24,3 +24,6 @@ expect fun DialogContentScrollableColumn(modifier: Modifier = Modifier, content:
 
 @Composable
 expect fun DialogContentScrollableLazyColumn(modifier: Modifier = Modifier, state: LazyListState = rememberLazyListState(), content: LazyListScope.() -> Unit)
+
+@Composable
+expect fun updateStatusbarColor(darkStatusBar: Boolean)

@@ -5,12 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -26,9 +27,9 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
-import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
@@ -57,7 +58,9 @@ import com.michaelflisar.composedialogs.dialogs.progress.styleWindowsProgressDia
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import com.michaelflisar.composedialogs.dialogs.time.styleWindowsTimeDialog
+import com.michaelflisar.toolbox.composables.MyCheckbox
 import com.michaelflisar.toolbox.composables.MyDropdown
+import com.michaelflisar.toolbox.composables.MyRow
 import com.michaelflisar.toolbox.composables.MyTitle
 import com.michaelflisar.toolbox.ui.MyScrollableLazyColumn
 
@@ -88,8 +91,10 @@ fun main() {
                 height = 600.dp
             )
         ) {
-            val styles = listOf("Dialog", "Bottom Sheet", "Windows Dialog")
+            val styles = listOf("Dialog", "Bottom Sheet", "Windows Dialog", "Fullscreen Dialog")
             val selectedStyle = remember { mutableStateOf(0) }
+            val selectedIconPosition = remember { mutableStateOf(StyleOptions.IconMode.Begin) }
+            val showIcon = remember { mutableStateOf(false) }
             val infos = remember { mutableStateListOf<String>() }
             val dialog = rememberDialogState<Dialog>(data = null)
             Column(
@@ -97,8 +102,12 @@ fun main() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 MyTitle("Dialogs")
-                MyDropdown(title = "Dialog Mode", items = styles, selected = selectedStyle)
-                FlowRow(
+                MyRow {
+                    MyDropdown(modifier = Modifier.weight(1f), title = "Dialog Mode", items = styles, selected = selectedStyle)
+                    MyCheckbox(modifier = Modifier.wrapContentWidth(), title = "Icon", checked = showIcon)
+                    MyDropdown<StyleOptions.IconMode>(modifier = Modifier.weight(1f), title = "Icon Position", items = StyleOptions.IconMode.entries, selected = selectedIconPosition, mapper = { item, dropdown -> item.name}, enabled = showIcon.value)
+                }
+               FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
                 ) {
@@ -125,12 +134,18 @@ fun main() {
             }
 
             val getStyle = @Composable { windowsDialogStyle: @Composable () -> ComposeDialogStyle ->
+                val options = StyleOptions(iconMode = selectedIconPosition.value)
                 when (selectedStyle.value) {
-                    0 -> DialogDefaults.styleDialog(swipeDismissable = false)
-                    1 -> DialogDefaults.styleBottomSheet()
-                    else -> windowsDialogStyle()
+                    0 -> DialogDefaults.styleDialog(swipeDismissable = false, options = options)
+                    1 -> DialogDefaults.styleBottomSheet(options = options, animateShow = true)
+                    2 -> windowsDialogStyle()
+                    3 -> DialogDefaults.styleFullscreenDialog()
+                    else -> error("Invalid style")
                 }
             }
+            val getIcon: (@Composable () -> Unit)? = if (showIcon.value) {
+                { Icon(Icons.Default.Info, null) }
+            } else null
 
             when (dialog.data) {
                 Dialog.Color -> {
@@ -141,6 +156,7 @@ fun main() {
                     DialogColor(
                         style = style,
                         title = { Text("Color Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         color = color,
                         alphaSupported = true,
@@ -162,6 +178,7 @@ fun main() {
                     DialogDate(
                         style = style,
                         title = { Text("Select Date") },
+                        icon = getIcon,
                         state = dialog,
                         date = date,
                         onEvent = {
@@ -182,6 +199,7 @@ fun main() {
                     DialogTime(
                         style = style,
                         title = { Text("Select Time") },
+                        icon = getIcon,
                         state = dialog,
                         time = time,
                         //setup = DialogTimeDefaults.setup(is24Hours = true),
@@ -202,6 +220,7 @@ fun main() {
                     DialogInfo(
                         style = style,
                         title = { Text("Info Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         info = "Information",
                         infoLabel = "Important",
@@ -218,6 +237,7 @@ fun main() {
                     DialogProgress(
                         style = style,
                         title = { Text("Progress Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         content = {
                             Text("Loading...")
@@ -236,6 +256,7 @@ fun main() {
                     DialogInput(
                         style = style,
                         title = { Text("Input Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         label = "Enter some text...",
                         value = input,
@@ -257,6 +278,7 @@ fun main() {
                     DialogInputNumber(
                         style = style,
                         title = { Text("Number Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         label = "Enter a valid Integer...",
                         value = input,
@@ -278,6 +300,7 @@ fun main() {
                     DialogNumberPicker(
                         style = style,
                         title = { Text("Number Picker Dialog") },
+                        icon = getIcon,
                         state = dialog,
                         value = value,
                         setup = NumberPickerSetup(
@@ -302,6 +325,7 @@ fun main() {
                     DialogList(
                         style = style,
                         title = { Text("List Dialog") },
+                        icon = getIcon,
                         description = "Some optional description",
                         state = dialog,
                         items = items,
@@ -328,45 +352,85 @@ fun main() {
                         DialogDefaults.styleWindowsMenuDialog("Menu Dialog")
                     }
                     val items = listOf(
-                        MenuItem.Item("Item 1", "Description 1", { Icon(Icons.Default.Info, null) }) {
+                        MenuItem.Item(
+                            "Item 1",
+                            "Description 1",
+                            { Icon(Icons.Default.Info, null) }) {
                             infos.add("Item 1 clicked")
                         },
-                        MenuItem.Item("Item 2", "Description 2", { Icon(Icons.Default.Info, null) }) {
+                        MenuItem.Item(
+                            "Item 2",
+                            "Description 2",
+                            { Icon(Icons.Default.Info, null) }) {
                             infos.add("Item 2 clicked")
                         },
                         MenuItem.Divider,
-                        MenuItem.SubMenu("Sub Menu 1", "Description", { Icon(Icons.Default.Info, null) },
+                        MenuItem.SubMenu("Sub Menu 1",
+                            "Description",
+                            { Icon(Icons.Default.Info, null) },
                             listOf(
-                                MenuItem.Item("Sub Item 1", "Description 1", { Icon(Icons.Default.Info, null) }) {
+                                MenuItem.Item(
+                                    "Sub Item 1",
+                                    "Description 1",
+                                    { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 1 clicked")
                                 },
-                                MenuItem.Item("Sub Item 2", "Description 2", { Icon(Icons.Default.Info, null) }) {
+                                MenuItem.Item(
+                                    "Sub Item 2",
+                                    "Description 2",
+                                    { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 2 clicked")
                                 },
-                                MenuItem.Item("Sub Item 3", "Description 3", { Icon(Icons.Default.Info, null) }) {
+                                MenuItem.Item(
+                                    "Sub Item 3",
+                                    "Description 3",
+                                    { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 3 clicked")
                                 },
-                                MenuItem.SubMenu("Sub Sub Menu 4", "Description", { Icon(Icons.Default.Info, null) },
+                                MenuItem.SubMenu("Sub Sub Menu 4",
+                                    "Description",
+                                    { Icon(Icons.Default.Info, null) },
                                     listOf(
-                                        MenuItem.Item("Sub Sub Item 1", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 1",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 1 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 2", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 2",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 2 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 3", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 3",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 3 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 4", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 4",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 4 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 5", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 5",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 5 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 6", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 6",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 6 clicked")
                                         },
-                                        MenuItem.Item("Sub Sub Item 7", "Description", { Icon(Icons.Default.Info, null) }) {
+                                        MenuItem.Item(
+                                            "Sub Sub Item 7",
+                                            "Description",
+                                            { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 7 clicked")
                                         },
                                     )
@@ -380,6 +444,7 @@ fun main() {
                     DialogMenu(
                         style = style,
                         title = { Text("Menu Dialog") },
+                        icon = getIcon,
                         items = items,
                         state = dialog
                     )

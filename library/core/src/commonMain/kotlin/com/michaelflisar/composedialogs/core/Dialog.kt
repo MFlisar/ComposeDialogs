@@ -4,10 +4,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyleDefaults
 import com.michaelflisar.composedialogs.core.style.DialogStyle
 import com.michaelflisar.composedialogs.core.style.DialogStyleDefaults
+import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyle
+import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
 
 // ------------------
 // defaults functions
@@ -80,6 +83,7 @@ object DialogDefaults {
      * @param swipeDismissable if true, the dialog can be swiped away by an up/down swipe
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param options provides custom style options of the dialog
      * @param shape the [Shape] of the dialog
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
@@ -93,6 +97,7 @@ object DialogDefaults {
         dismissOnBackPress: Boolean = true,
         dismissOnClickOutside: Boolean = true,
         // Style
+        options: StyleOptions = StyleOptions(),
         shape: Shape = DialogStyleDefaults.shape,
         containerColor: Color = DialogStyleDefaults.containerColor,
         iconColor: Color = DialogStyleDefaults.iconColor,
@@ -104,6 +109,7 @@ object DialogDefaults {
         dismissOnBackPress,
         dismissOnClickOutside,
         // Style
+        options,
         shape,
         containerColor,
         iconColor,
@@ -117,8 +123,12 @@ object DialogDefaults {
      * @param dragHandle if true, a drag handle will be shown
      * @param peekHeight the peek height calculation of the bottom sheet
      * @param expandInitially if true, the bottom sheet is initially displayed in expanded state (even if it has a peek height)
+     * @param velocityThreshold the velocity threshold of the bottom sheet
+     * @param positionalThreshold the positional threshold of the bottom sheet
+     * @param animateShow if true, the sheet will be animated on first show
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param options provides custom style options of the dialog
      * @param shape the [Shape] of the dialog
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
@@ -130,10 +140,14 @@ object DialogDefaults {
         dragHandle: Boolean = true,
         peekHeight: ((containerHeight: Dp, sheetHeight: Dp) -> Dp)? = BottomSheetStyleDefaults.peekHeight,
         expandInitially: Boolean = false,
+        velocityThreshold: () -> Dp = { 125.dp },
+        positionalThreshold: (totalDistance: Dp) -> Dp = { 56.dp },
+        animateShow: Boolean = false,
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         dismissOnClickOutside: Boolean = true,
         // Style
+        options: StyleOptions = StyleOptions(),
         shape: Shape = BottomSheetStyleDefaults.shape,
         containerColor: Color = BottomSheetStyleDefaults.containerColor,
         iconColor: Color = BottomSheetStyleDefaults.iconColor,
@@ -143,11 +157,48 @@ object DialogDefaults {
         dragHandle,
         peekHeight,
         expandInitially,
+        velocityThreshold,
+        positionalThreshold,
+        animateShow,
         // DialogProperties
         dismissOnBackPress,
         dismissOnClickOutside,
         // Style
+        options,
         shape,
+        containerColor,
+        iconColor,
+        titleColor,
+        contentColor
+    )
+
+    /**
+     * the setup of a dialog that shows as a normal dialog popup
+     *
+     * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
+     * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
+     * @param toolbarColor the [Color] of the toolbar
+     * @param containerColor the [Color] of the container
+     * @param iconColor the content [Color] of the icon
+     * @param titleColor the content [Color] of the title
+     */
+    @Composable
+    fun styleFullscreenDialog(
+        darkStatusBar: Boolean = false,
+        // DialogProperties
+        dismissOnBackPress: Boolean = true,
+        // Style
+        toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
+        containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
+        iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
+        titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
+        contentColor: Color = FullscreenDialogStyleDefaults.contentColor
+    ): ComposeDialogStyle = FullscreenDialogStyle(
+        darkStatusBar,
+        // DialogProperties
+        dismissOnBackPress,
+        // Style
+        toolbarColor,
         containerColor,
         iconColor,
         titleColor,
@@ -338,8 +389,11 @@ class DialogStateWithData<T : Any> internal constructor(
  * @param text the text of the button
  */
 class DialogButton(
-    val text: String
-)
+    val text: String = ""
+) {
+    val enabled: Boolean
+        get() = text.isNotEmpty()
+}
 
 /**
  * see [DialogDefaults.buttons] and [DialogDefaults.buttonsDisabled]
@@ -351,6 +405,8 @@ class DialogButtons internal constructor(
     companion object {
         val DISABLED = DialogButtons(DialogButton(""), DialogButton(""))
     }
+
+    val enabled = positive.enabled || negative.enabled
 }
 
 /**
@@ -365,3 +421,12 @@ data class Options(
     val dismissOnBackPress: Boolean = true,
     val dismissOnClickOutside: Boolean = true,
 )
+
+data class StyleOptions(
+    val iconMode: IconMode = IconMode.CenterTop,
+) {
+    enum class IconMode {
+        CenterTop,
+        Begin
+    }
+}

@@ -13,38 +13,22 @@ import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.snapTo
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -66,6 +50,7 @@ import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
@@ -100,11 +85,12 @@ internal class DialogStyle(
     private val dismissOnBackPress: Boolean,
     private val dismissOnClickOutside: Boolean,
     // Style
+    private val options: StyleOptions = StyleOptions(),
     private val shape: Shape,
     private val containerColor: Color,
     private val iconColor: Color,
     private val titleColor: Color,
-    private val contentColor: Color
+    private val contentColor: Color,
 ) : ComposeDialogStyle {
 
     override val type = ComposeDialogStyle.Type.Dialog
@@ -117,7 +103,7 @@ internal class DialogStyle(
         options: Options,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
-        content: @Composable () -> Unit
+        content: @Composable () -> Unit,
     ) {
         val coroutineScope = rememberCoroutineScope()
         val dialogState = rememberDialogState(initiallyVisible = true)
@@ -168,7 +154,9 @@ internal class DialogStyle(
             //}
 
             val density = LocalDensity.current
-            val modifierSwipeDismiss = getSwipeDismissModifier(swipeDismissable, with(density) { scrimSize.value.height.toPx() } / 2f) {
+            val modifierSwipeDismiss = getSwipeDismissModifier(
+                swipeDismissable,
+                with(density) { scrimSize.value.height.toPx() } / 2f) {
                 if (state.interactionSource.dismissAllowed.value) {
                     waitForDismissAnimationAndUpdateState()
                     true
@@ -199,24 +187,31 @@ internal class DialogStyle(
                     .shadow(6.dp /* L3 */, shape)
                     .clip(shape)
                     .background(containerColor)
-                    .padding(24.dp)
-                   ,
+                    .padding(24.dp),
                 enter = animEnter,
                 exit = animExit
             ) {
                 Column(
                     modifier = Modifier
                         .widthIn(min = 280.dp, max = 560.dp)
-                        .wrapContentWidth()
-                    ,
-                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
                     // Icon + Title
-                    ComposeDialogTitle(title, icon, iconColor, titleColor)
+                    ComposeDialogTitle(
+                        modifier = Modifier,
+                        title = title,
+                        icon = icon,
+                        iconColor = iconColor,
+                        titleColor = titleColor,
+                        options = this@DialogStyle.options
+                    )
 
                     // Content
-                    ComposeDialogContent(content, contentColor)
+                    ComposeDialogContent(
+                        content = content,
+                        contentColor = contentColor,
+                        modifier = Modifier.weight(weight = 1f, fill = false)
+                    )
 
                     // Buttons
                     ComposeDialogButtons(
@@ -241,7 +236,7 @@ internal class DialogStyle(
 private fun getSwipeDismissModifier(
     swipeDismissable: Boolean,
     maxSwipeDistance: Float,
-    dismiss: () -> Boolean
+    dismiss: () -> Boolean,
 ): Modifier {
     return if (swipeDismissable && maxSwipeDistance > 0f) {
 
@@ -254,7 +249,8 @@ private fun getSwipeDismissModifier(
                 }
 
                 DragValue.Start,
-                DragValue.End -> {
+                DragValue.End,
+                    -> {
                     if (!dismiss()) {
                         dragState.snapTo(DragValue.Center)
                     }
@@ -283,7 +279,7 @@ private fun getSwipeDismissModifier(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun createDraggableState(
-    maxSwipeDistance: Float
+    maxSwipeDistance: Float,
 ): AnchoredDraggableState<DragValue> {
 
     val anchors = remember(maxSwipeDistance) {

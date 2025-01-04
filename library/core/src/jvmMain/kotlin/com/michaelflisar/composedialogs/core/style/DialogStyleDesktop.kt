@@ -14,6 +14,7 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyleDesktopOtions
 import com.michaelflisar.composedialogs.core.Options
+import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
@@ -23,7 +24,7 @@ class DialogStyleDesktop(
     // Style
     private val iconColor: Color,
     private val titleColor: Color,
-    private val contentColor: Color
+    private val contentColor: Color,
 ) : ComposeDialogStyle {
 
     override val type = ComposeDialogStyle.Type.Dialog
@@ -36,7 +37,7 @@ class DialogStyleDesktop(
         options: Options,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
-        content: @Composable () -> Unit
+        content: @Composable () -> Unit,
     ) {
         val dialogState = androidx.compose.ui.window.rememberDialogState(
             position = desktopOptions.position,
@@ -56,10 +57,21 @@ class DialogStyleDesktop(
                 ) {
 
                     // Icon + Title
-                    ComposeDialogTitle(null, icon, iconColor = iconColor, titleColor = titleColor)
+                    ComposeDialogTitle(
+                        modifier = Modifier,
+                        title = null,
+                        icon = icon,
+                        iconColor = iconColor,
+                        titleColor = titleColor,
+                        options = StyleOptions(StyleOptions.IconMode.CenterTop)
+                    )
 
                     // Content
-                    ComposeDialogContent(content, contentColor, fill = true)
+                    ComposeDialogContent(
+                        content = content,
+                        contentColor = contentColor,
+                        modifier = Modifier.weight(weight = 1f, fill = true)
+                    )
 
                     // Buttons
                     ComposeDialogButtons(

@@ -2,17 +2,13 @@ package com.michaelflisar.composedialogs.core.internal
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -21,6 +17,7 @@ import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.ButtonsCrossAxisSpacing
 import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
 import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
 
 @Composable
 internal fun ColumnScope.ComposeDialogButtons(
@@ -70,28 +67,3 @@ internal fun ColumnScope.ComposeDialogButtons(
     }
 }
 
-@Composable
-private fun ComposeDialogButton(
-    button: DialogButton,
-    buttonType: DialogButtonType,
-    options: Options,
-    state: DialogState,
-    dismissOnButtonPressed: () -> Unit,
-    onEvent: (event: DialogEvent) -> Unit
-) {
-    if (button.text.isNotEmpty()) {
-        val enabled = state.isButtonEnabled(buttonType)
-        TextButton(
-            enabled = enabled,
-            onClick = {
-                val dismiss = options.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
-                state.onButtonPressed(onEvent, buttonType, dismiss)
-                if (dismiss) {
-                    dismissOnButtonPressed()
-                }
-            }
-        ) {
-            Text(button.text)
-        }
-    }
-}

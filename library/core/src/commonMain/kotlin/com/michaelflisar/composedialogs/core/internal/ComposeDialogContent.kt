@@ -18,18 +18,16 @@ import androidx.compose.ui.unit.dp
 internal fun ColumnScope.ComposeDialogContent(
     content: @Composable () -> Unit,
     contentColor: Color,
-    fill: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         val textStyle = MaterialTheme.typography.bodyMedium
         ProvideTextStyle(textStyle) {
             Box(
                 modifier
-                    .weight(weight = 1f, fill = fill)
                     .padding(bottom = 24.dp)
-                    .align(Alignment.Start)
-                    .wrapContentHeight()
+                    .align(Alignment.Start),
+                contentAlignment = Alignment.TopStart
             ) {
                 content()
             }

@@ -100,3 +100,6 @@ actual fun DialogContentScrollableLazyColumn(
         )
     }
 }
+
+@Composable
+actual fun updateStatusbarColor(darkStatusBar: Boolean) {}
