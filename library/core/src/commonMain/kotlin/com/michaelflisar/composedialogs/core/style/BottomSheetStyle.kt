@@ -48,6 +48,7 @@ import com.composables.core.Scrim
 import com.composables.core.Sheet
 import com.composables.core.SheetDetent
 import com.composables.core.rememberModalBottomSheetState
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -108,7 +109,7 @@ internal class BottomSheetStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        state: DialogState,
+        state: BaseDialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit
     ) {
@@ -135,7 +136,6 @@ internal class BottomSheetStyle(
                 val confirm = if (it == SheetDetent.Hidden) {
                     state.interactionSource.dismissAllowed.value
                 } else true
-                println("TEST - confirmDetentChange = $confirm | ${it.identifier}")
                 confirm
             },
             velocityThreshold = velocityThreshold,
@@ -147,20 +147,16 @@ internal class BottomSheetStyle(
         )
 
         val onDismiss = { buttonPressed: Boolean ->
-            println("TEST - onDismiss - 1")
             if (state.interactionSource.dismissAllowed.value) {
                 coroutineScope.launch {
                     bottomSheetState.animateTo(SheetDetent.Hidden)
-                    println("TEST - onDismiss - 2")
                     if (buttonPressed)
                         state.dismiss()
                     else
                         state.dismiss(onEvent)
-                    println("TEST - onDismiss - 3")
                 }
                 true
             } else {
-                println("TEST - show again from onDismiss")
                 bottomSheetState.currentDetent = SheetDetent.FullyExpanded
                 false
             }
@@ -201,7 +197,6 @@ internal class BottomSheetStyle(
             state = bottomSheetState,
             properties = bottomSheetProperties,
             onDismiss = {
-                println("TEST - onDismiss callback...")
                 onDismiss(false)
             }
         ) {

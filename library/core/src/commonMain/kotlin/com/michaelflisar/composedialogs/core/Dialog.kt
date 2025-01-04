@@ -1,5 +1,6 @@
 package com.michaelflisar.composedialogs.core
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -19,7 +20,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
 /**
  * Shows a dialog containing some arbitrary [content]
  *
- * @param state the [DialogState] of the dialog
+ * @param state the [BaseDialogState] of the dialog
  * @param title the optional title of the dialog
  * @param icon the optional icon of the dialog
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
@@ -30,7 +31,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
  */
 @Composable
 fun Dialog(
-    state: DialogState,
+    state: BaseDialogState,
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
@@ -176,8 +177,10 @@ object DialogDefaults {
      * the setup of a dialog that shows as a normal dialog popup
      *
      * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
+     * @param menuActions if provided, it replaces the the default close menu action
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param toolbarColor the [Color] of the toolbar
+     * @param toolbarActionColor the [Color] of the actions in the toolbar
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
      * @param titleColor the content [Color] of the title
@@ -185,20 +188,24 @@ object DialogDefaults {
     @Composable
     fun styleFullscreenDialog(
         darkStatusBar: Boolean = false,
+        menuActions: @Composable (RowScope.() -> Unit)? = null,
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         // Style
         toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
+        toolbarActionColor: Color = FullscreenDialogStyleDefaults.toolbarActionColor,
         containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
         iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
         titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor
     ): ComposeDialogStyle = FullscreenDialogStyle(
         darkStatusBar,
+        menuActions,
         // DialogProperties
         dismissOnBackPress,
         // Style
         toolbarColor,
+        toolbarActionColor,
         containerColor,
         iconColor,
         titleColor,
@@ -267,23 +274,15 @@ class DialogInteractionSource internal constructor(
 /**
  * a dialog state holding the current showing state and the some additional state [DialogInteractionSource] of the dialog
  *
- * @param showing the showing state of the dialog
+ * @param visible the showing state of the dialog
  * @param interactionSource the [DialogInteractionSource] holding other states for this dialog
  */
-open class DialogState internal constructor(
-    showing: MutableState<Boolean>,
-    interactionSource: MutableState<DialogInteractionSource>
-) {
+abstract class BaseDialogState {
 
-    var showing by showing
-    var interactionSource by interactionSource
+    abstract val visible: Boolean
+    abstract val interactionSource: DialogInteractionSource
 
-    /**
-     * this will show this dialog
-     */
-    fun show() {
-        showing = true
-    }
+    abstract fun onDismiss()
 
     /**
      * this will dismiss this dialog (if the [interactionSource] ([DialogInteractionSource.dismissAllowed]) does allow this)
@@ -292,9 +291,9 @@ open class DialogState internal constructor(
      */
     fun dismiss(): Boolean {
         if (interactionSource.dismissAllowed.value) {
-            showing = false
+            onDismiss()
         }
-        return !showing
+        return !visible
     }
 
     internal fun dismiss(
@@ -302,7 +301,7 @@ open class DialogState internal constructor(
     ): Boolean {
         if (dismiss())
             onEvent(DialogEvent.Dismissed)
-        return !showing
+        return !visible
     }
 
     internal fun onButtonPressed(
@@ -352,35 +351,70 @@ open class DialogState internal constructor(
 /**
  * a dialog state holding the current showing state and the some additional state [DialogInteractionSource] of the dialog
  *
- * in this case, the showing state is derived from the holded data state and if state holds some data this means, that this dialog is visible
- *
- * @param showing the showing state of the dialog
- * @param d the data state
+ * @param state the visibility state of the dialog
  * @param interactionSource the [DialogInteractionSource] holding other states for this dialog
  */
-class DialogStateWithData<T : Any> internal constructor(
-    showing: MutableState<Boolean>,
-    private val d: MutableState<T?>,
+class DialogState(
+    private val state: MutableState<Boolean>,
     interactionSource: MutableState<DialogInteractionSource>
-) : DialogState(showing, interactionSource) {
+) : BaseDialogState() {
 
+    override val visible by state
+    override val interactionSource by interactionSource
+
+    override fun onDismiss() {
+        state.value = false
+    }
+
+    /**
+     * this will show this dialog
+     */
+    fun show() {
+        state.value = true
+    }
+
+}
+
+/**
+ * a dialog state holding the current state and the some additional state [DialogInteractionSource] of the dialog
+ *
+ * @param visible the visibility state of the dialog - must be derived from the state!
+ * @param state the state of the dialog - if not null, the dialog is visible, otherwise not
+ * @param interactionSource the [DialogInteractionSource] holding other states for this dialog
+ */
+class DialogStateWithData<T>(
+    visible: State<Boolean>,
+    private val state: MutableState<T?>,
+    interactionSource: MutableState<DialogInteractionSource>,
+) : BaseDialogState() {
+
+    override val visible by visible
+    override val interactionSource by interactionSource
+
+    override fun onDismiss() {
+        state.value = null
+    }
+
+    /**
+     * this will show this dialog
+     */
+    fun show(data: T) {
+        state.value = data
+    }
+
+    /**
+     * this will return the currently holded data
+     */
     val data: T?
-        get() = d.value
+        get() = state.value
 
     /**
      * this will return the currently holded data
      *
      * should only be called if the dialog is shown because of a forcefully cast to a non null value!
      */
-    fun requireData() = d.value!!
+    fun requireData() = state.value!!
 
-    /**
-     * this will show this dialog
-     */
-    fun show(data: T) {
-        this.d.value = data
-        show()
-    }
 }
 
 /**

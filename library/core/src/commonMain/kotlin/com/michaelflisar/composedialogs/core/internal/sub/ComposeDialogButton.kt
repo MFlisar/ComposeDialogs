@@ -1,12 +1,14 @@
 package com.michaelflisar.composedialogs.core.internal.sub
 
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
 
 @Composable
@@ -14,7 +16,8 @@ internal fun ComposeDialogButton(
     button: DialogButton,
     buttonType: DialogButtonType,
     options: Options,
-    state: DialogState,
+    state: BaseDialogState,
+    colors: ButtonColors = ButtonDefaults.textButtonColors(),
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
@@ -22,6 +25,7 @@ internal fun ComposeDialogButton(
         val enabled = state.isButtonEnabled(buttonType)
         TextButton(
             enabled = enabled,
+            colors = colors,
             onClick = {
                 val dismiss =
                     options.dismissOnButtonClick && state.interactionSource.dismissAllowed.value

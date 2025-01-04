@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.BackHandler
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
@@ -68,7 +69,7 @@ import org.jetbrains.compose.resources.stringResource
  */
 @Composable
 fun DialogDate(
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     date: MutableState<LocalDate>,
     // Custom - Optional

@@ -45,6 +45,7 @@ import com.composables.core.DialogPanel
 import com.composables.core.DialogProperties
 import com.composables.core.Scrim
 import com.composables.core.rememberDialogState
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -101,7 +102,7 @@ internal class DialogStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        state: DialogState,
+        state: BaseDialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {

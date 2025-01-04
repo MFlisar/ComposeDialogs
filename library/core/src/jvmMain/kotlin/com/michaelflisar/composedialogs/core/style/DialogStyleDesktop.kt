@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogWindow
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -35,7 +36,7 @@ class DialogStyleDesktop(
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        state: DialogState,
+        state: BaseDialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {
@@ -45,7 +46,7 @@ class DialogStyleDesktop(
             height = desktopOptions.height
         )
         DialogWindow(
-            visible = state.showing,
+            visible = state.visible,
             onCloseRequest = {
                 state.dismiss(onEvent)
             },

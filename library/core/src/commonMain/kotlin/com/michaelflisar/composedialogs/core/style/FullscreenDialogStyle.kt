@@ -5,8 +5,12 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -24,13 +28,11 @@ import com.composables.core.Dialog
 import com.composables.core.DialogPanel
 import com.composables.core.DialogProperties
 import com.composables.core.rememberDialogState
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
-import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Options
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitleToolbar
 import com.michaelflisar.composedialogs.core.updateStatusbarColor
@@ -40,6 +42,9 @@ import kotlinx.coroutines.launch
 object FullscreenDialogStyleDefaults {
 
     val toolbarColor: Color
+        @Composable get() = MaterialTheme.colorScheme.background
+
+    val toolbarActionColor: Color
         @Composable get() = MaterialTheme.colorScheme.primary
 
     val containerColor: Color
@@ -49,7 +54,7 @@ object FullscreenDialogStyleDefaults {
         @Composable get() = MaterialTheme.colorScheme.secondary
 
     val titleColor
-        @Composable get() = MaterialTheme.colorScheme.onPrimary
+        @Composable get() = MaterialTheme.colorScheme.onBackground
 
     val contentColor
         @Composable get() = MaterialTheme.colorScheme.onBackground
@@ -57,10 +62,12 @@ object FullscreenDialogStyleDefaults {
 
 internal class FullscreenDialogStyle(
     private val darkStatusBar: Boolean,
+    private val menuActions: @Composable (RowScope.() -> Unit)?,
     // DialogProperties
     private val dismissOnBackPress: Boolean,
     // Style
     private val toolbarColor: Color,
+    private val toolbarActionColor: Color,
     private val containerColor: Color,
     private val iconColor: Color,
     private val titleColor: Color,
@@ -75,7 +82,7 @@ internal class FullscreenDialogStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        state: DialogState,
+        state: BaseDialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {
@@ -85,9 +92,9 @@ internal class FullscreenDialogStyle(
         val animDurationEnter = 250
         val animDurationExit = 150
         val animEnter =
-            scaleIn(initialScale = 0.8f) + fadeIn(tween(durationMillis = animDurationEnter))
+            slideInVertically(initialOffsetY = { it }) + fadeIn(tween(durationMillis = animDurationEnter))
         val animExit =
-            scaleOut(targetScale = 0.6f) + fadeOut(tween(durationMillis = animDurationExit))
+            slideOutVertically(targetOffsetY = { it }) + fadeOut(tween(durationMillis = animDurationExit))
 
         val dismiss = { dialogState.visible = false }
         var buttonPressed = false
@@ -142,9 +149,12 @@ internal class FullscreenDialogStyle(
                         title = title,
                         icon = icon,
                         toolbarColor = toolbarColor,
+                        toolbarActionColor = toolbarActionColor,
                         iconColor = iconColor,
                         titleColor = titleColor,
+                        menuActions = menuActions,
                         options = options,
+                        buttons = buttons,
                         state = state,
                         dismissOnButtonPressed = dismissOnButtonPressed,
                         onEvent = onEvent
@@ -154,18 +164,18 @@ internal class FullscreenDialogStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(1f).padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                        modifier = Modifier.weight(1f).padding(all = 16.dp)
                     )
 
                     // Buttons
-                    ComposeDialogButtons(
-                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                        buttons = buttons,
-                        options = options,
-                        state = state,
-                        dismissOnButtonPressed = dismissOnButtonPressed,
-                        onEvent = onEvent
-                    )
+                    //ComposeDialogButtons(
+                    //    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    //    buttons = buttons,
+                    //    options = options,
+                    //    state = state,
+                    //    dismissOnButtonPressed = dismissOnButtonPressed,
+                    //    onEvent = onEvent
+                    //)
                 }
             }
         }

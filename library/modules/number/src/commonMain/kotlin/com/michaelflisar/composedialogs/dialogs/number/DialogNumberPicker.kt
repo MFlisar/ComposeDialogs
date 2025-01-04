@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
@@ -47,7 +48,7 @@ import com.michaelflisar.composedialogs.dialogs.number.utils.NumberUtil
 @Composable
 fun <T : Number> DialogNumberPicker(
     // Base Dialog - State
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     value: MutableState<T>,
     setup: NumberPickerSetup<T>,

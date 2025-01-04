@@ -38,7 +38,7 @@ import com.michaelflisar.composedialogs.core.*
  */
 @Composable
 fun DialogMenu(
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     items: List<MenuItem>,
     // Base Dialog - Optional

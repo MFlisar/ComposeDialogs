@@ -6,7 +6,7 @@ interface ComposeDialogStyle {
 
     val type: Type
 
-    private fun a() = {}
+    //private fun a() = {}
 
     @Composable
     fun Show(
@@ -14,7 +14,7 @@ interface ComposeDialogStyle {
         icon: (@Composable () -> Unit)? = null,
         buttons: DialogButtons,
         options: Options,
-        state: DialogState,
+        state: BaseDialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit
     )

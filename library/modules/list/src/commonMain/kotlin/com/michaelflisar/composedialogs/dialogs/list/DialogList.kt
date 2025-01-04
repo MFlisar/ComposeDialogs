@@ -29,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogContentScrollableLazyColumn
@@ -61,7 +62,7 @@ import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListTrail
  */
 @Composable
 fun <T> DialogList(
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     items: List<T>,
     itemIdProvider: (item: T) -> Int,
@@ -118,7 +119,7 @@ fun <T> DialogList(
  */
 @Composable
 fun <T> DialogList(
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     itemsLoader: suspend () -> List<T>,
     itemIdProvider: (item: T) -> Int,
@@ -162,7 +163,7 @@ fun <T> DialogList(
 
 @Composable
 private fun <T> DialogList(
-    state: DialogState,
+    state: BaseDialogState,
     // Custom - Required
     itemsProvider: DialogList.ItemProvider<T>,
     itemIdProvider: (item: T) -> Int,
