@@ -39,7 +39,7 @@ private fun RowScope.DemoDialogProgress1(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         DialogProgress(
             state = state,
             content = {
@@ -76,7 +76,7 @@ private fun RowScope.DemoDialogProgress2(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         DialogProgress(
             state = state,
             content = {
@@ -116,7 +116,7 @@ private fun RowScope.DemoDialogProgress3(
         dismissAllowed = false,
         buttonPositiveEnabled = false
     )
-    if (state.showing) {
+    if (state.visible) {
         var time by rememberSaveable { mutableStateOf(10) }
         LaunchedEffect(Unit) {
             launch {

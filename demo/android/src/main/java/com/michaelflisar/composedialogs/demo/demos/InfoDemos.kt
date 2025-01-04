@@ -34,7 +34,7 @@ fun InfoDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         DialogInfo(
             state = state,
             title = { Text("Dialog") },
@@ -58,11 +58,11 @@ private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composab
 private fun RowScope.DemoDialogInfo2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState(
-        showing = false,
+        visible = false,
         buttonPositiveEnabled = false,
         dismissAllowed = false
     )
-    if (state.showing) {
+    if (state.visible) {
         var currentIcon by remember { mutableStateOf(icon) }
         var time by rememberSaveable { mutableStateOf(10) }
         val iconDone = @Composable {

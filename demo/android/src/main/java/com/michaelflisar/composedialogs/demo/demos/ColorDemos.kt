@@ -32,7 +32,7 @@ fun ColorDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
         DialogColor(
             state = state,
@@ -62,7 +62,7 @@ private fun RowScope.DemoDialogColor1(style: ComposeDialogStyle, icon: (@Composa
 private fun RowScope.DemoDialogColor2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         val color = rememberDialogColor(Color.Red)
         DialogColor(
             state = state,

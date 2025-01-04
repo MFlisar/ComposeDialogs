@@ -31,7 +31,7 @@ fun BillingDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 private fun RowScope.DemoDialogBilling(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         DialogBilling(
             state = state,
             title = { Text("Dialog") },

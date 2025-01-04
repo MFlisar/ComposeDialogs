@@ -134,7 +134,7 @@ implementation("io.github.mflisar.composedialogs:dialog-time:$composedialogs")
 val state = rememberDialogState()
 
 // show a dialog if necessary
-if (state.showing)
+if (state.visible)
 {
     DialogInfo(
         state = state,
@@ -167,7 +167,7 @@ Alternatively, if you want to use one dialog with many items (e.g. for list item
 val state = rememberDialogState<Int>(data = null)
 
 // show a dialog if necessary
-if (state.showing)
+if (state.visible)
 {
     val data = state.requireData()
     DialogInfo(

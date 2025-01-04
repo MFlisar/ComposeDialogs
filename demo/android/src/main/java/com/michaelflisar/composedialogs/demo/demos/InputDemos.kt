@@ -50,11 +50,11 @@ private fun RowScope.DemoDialogInput1(style: ComposeDialogStyle, icon: (@Composa
 
     val text = "Hello"
     val state = rememberDialogState(
-        showing = false,
+        visible = false,
         buttonPositiveEnabled = text.isNotEmpty(),
         dismissAllowed = text.isNotEmpty()
     )
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for input dialog
         val input = rememberDialogInput(text)
@@ -103,7 +103,7 @@ private fun RowScope.DemoDialogInput2(style: ComposeDialogStyle, icon: (@Composa
 
     val text = "123"
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for input dialog
         val input = rememberDialogInput(text)
@@ -143,7 +143,7 @@ private fun RowScope.DemoDialogInput3(style: ComposeDialogStyle, icon: (@Composa
     // would work with Int, Long, Double and Float (all options of Number!)
     val number = 123
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for input dialog
         val value = rememberDialogInputNumber(number)
@@ -186,7 +186,7 @@ private fun RowScope.DemoDialogInput4(
     // would work with Int, Long, Double and Float (all options of Number!)
     val number = 5
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for input dialog
         val value = rememberDialogNumber(number)

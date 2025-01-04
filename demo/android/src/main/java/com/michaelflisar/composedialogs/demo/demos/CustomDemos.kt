@@ -39,7 +39,7 @@ fun CustomDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         Dialog(
             state = state,
             style = style,
@@ -79,7 +79,7 @@ private fun RowScope.DemoDialogCustom1(style: ComposeDialogStyle, icon: (@Compos
 private fun RowScope.DemoDialogCustom2(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         Dialog(
             state = state,
             style = style,

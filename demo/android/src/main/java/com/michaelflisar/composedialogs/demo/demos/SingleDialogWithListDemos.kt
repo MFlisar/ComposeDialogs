@@ -60,7 +60,7 @@ private fun ListDialog(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?
 ) {
-    if (stateWithData.showing) {
+    if (stateWithData.visible) {
         val context = LocalContext.current
         val data = stateWithData.requireData()
         DialogInfo(

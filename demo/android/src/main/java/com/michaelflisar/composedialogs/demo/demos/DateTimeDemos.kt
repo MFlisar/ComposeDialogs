@@ -55,7 +55,7 @@ private fun RowScope.DemoDialogDate1(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for date dialog
         val date = rememberDialogDate()
@@ -133,7 +133,7 @@ private fun RowScope.DemoDialogTime1(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
 
         // special state for time dialog
         val time = rememberDialogTime()

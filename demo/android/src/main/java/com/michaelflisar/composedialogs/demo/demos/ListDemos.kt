@@ -242,7 +242,7 @@ private fun <T> RowScope.DemoList(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
-    if (state.showing) {
+    if (state.visible) {
         val eventHandler = { event: DialogEvent ->
             if (event is DialogEvent.Button && event.button == DialogButtonType.Positive) {
                 // we should probably handle the selected values in this case
