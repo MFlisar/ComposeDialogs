@@ -41,5 +41,5 @@ There are 2 ways to show a list, one by providing a list of items and one by pro
 
 | | | | |
 |-|-|-|-|
-| ![Screenshot](../screenshots/dark/demo_list1.jpg) | ![Screenshot](../screenshots/dark/demo_list2.jpg) | ![Screenshot](../screenshots/dark/demo_list3.jpg) | ![Screenshot](../screenshots/dark/demo_list4.jpg) |
-| ![Screenshot](../screenshots/dark/demo_list5.jpg) | ![Screenshot](../screenshots/dark/demo_list6.jpg) | ![Screenshot](../screenshots/dark/demo_list7.jpg) | |
+| ![Screenshot](../screenshots/demo_list1.jpg) | ![Screenshot](../screenshots/demo_list2.jpg) | ![Screenshot](../screenshots/demo_list3.jpg) | ![Screenshot](../screenshots/demo_list4.jpg) |
+| ![Screenshot](../screenshots/demo_list5.jpg) | ![Screenshot](../screenshots/demo_list6.jpg) | ![Screenshot](../screenshots/demo_list7.jpg) | |

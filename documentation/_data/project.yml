@@ -12,49 +12,49 @@ library:
   screenshots:
     - name: Info Dialog
       images:
-        - ./screenshots/dark/demo_info1.jpg
-        - ./screenshots/dark/demo_info2.jpg
-        - ./screenshots/dark/demo_info3.jpg
-        - ./screenshots/dark/demo_info4.jpg
+        - ./screenshots/demo_info1.jpg
+        - ./screenshots/demo_info2.jpg
+        - ./screenshots/demo_info3.jpg
+        - ./screenshots/demo_info4.jpg
     - name: Input Dialog
       images:
-        - ./screenshots/dark/demo_input1.jpg
-        - ./screenshots/dark/demo_input2.jpg
+        - ./screenshots/demo_input1.jpg
+        - ./screenshots/demo_input2.jpg
     - name: Number Dialog
       images:
-        - ./screenshots/dark/demo_number1.jpg
-        - ./screenshots/dark/demo_number2.jpg
-        - ./screenshots/dark/demo_number3.jpg
+        - ./screenshots/demo_number1.jpg
+        - ./screenshots/demo_number2.jpg
+        - ./screenshots/demo_number3.jpg
     - name: Date Dialog
       images:
-        - ./screenshots/dark/demo_calendar1.jpg
-        - ./screenshots/dark/demo_calendar2.jpg
-        - ./screenshots/dark/demo_calendar3.jpg
+        - ./screenshots/demo_calendar1.jpg
+        - ./screenshots/demo_calendar2.jpg
+        - ./screenshots/demo_calendar3.jpg
     - name: Time Dialog
       images:
-        - ./screenshots/dark/demo_time1.jpg
-        - ./screenshots/dark/demo_time2.jpg
+        - ./screenshots/demo_time1.jpg
+        - ./screenshots/demo_time2.jpg
     - name: Color Dialog
       images:
-        - ./screenshots/dark/demo_color1.jpg
-        - ./screenshots/dark/demo_color2.jpg
-        - ./screenshots/dark/demo_color3.jpg
+        - ./screenshots/demo_color1.jpg
+        - ./screenshots/demo_color2.jpg
+        - ./screenshots/demo_color3.jpg
     - name: List Dialog
       images:
-        - ./screenshots/dark/demo_list1.jpg
-        - ./screenshots/dark/demo_list2.jpg
-        - ./screenshots/dark/demo_list3.jpg
-        - ./screenshots/dark/demo_list4.jpg
-        - ./screenshots/dark/demo_list5.jpg
-        - ./screenshots/dark/demo_list6.jpg
-        - ./screenshots/dark/demo_list7.jpg
+        - ./screenshots/demo_list1.jpg
+        - ./screenshots/demo_list2.jpg
+        - ./screenshots/demo_list3.jpg
+        - ./screenshots/demo_list4.jpg
+        - ./screenshots/demo_list5.jpg
+        - ./screenshots/demo_list6.jpg
+        - ./screenshots/demo_list7.jpg
     - name: Menu Dialog
       images:
-        - ./screenshots/dark/demo_menu1.jpg
+        - ./screenshots/demo_menu1.jpg
     - name: Progress Dialog
       images:
-        - ./screenshots/dark/demo_progress1.jpg
-        - ./screenshots/dark/demo_progress2.jpg
+        - ./screenshots/demo_progress1.jpg
+        - ./screenshots/demo_progress2.jpg
   branch: master
   demo: true
 

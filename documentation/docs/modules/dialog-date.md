@@ -29,4 +29,4 @@ Generally following can be adjusted:
 
 | | | |
 |-|-|-|
-| ![Screenshot](../screenshots/dark/demo_calendar1.jpg) | ![Screenshot](../screenshots/dark/demo_calendar2.jpg) | ![Screenshot](../screenshots/dark/demo_calendar3.jpg) |
+| ![Screenshot](../screenshots/demo_calendar1.jpg) | ![Screenshot](../screenshots/demo_calendar2.jpg) | ![Screenshot](../screenshots/demo_calendar3.jpg) |

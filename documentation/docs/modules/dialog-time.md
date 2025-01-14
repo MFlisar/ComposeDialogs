@@ -26,4 +26,4 @@ Generally following can be adjusted:
 
 | | |
 |-|-|
-| ![Screenshot](../screenshots/dark/demo_time1.jpg) | ![Screenshot](../screenshots/dark/demo_time2.jpg) |
+| ![Screenshot](../screenshots/demo_time1.jpg) | ![Screenshot](../screenshots/demo_time2.jpg) |

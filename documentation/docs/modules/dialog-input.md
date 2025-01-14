@@ -29,4 +29,4 @@ Generally following can be adjusted:
 
 | | |
 |-|-|
-| ![Screenshot](../screenshots/dark/demo_input1.jpg) | ![Screenshot](../screenshots/dark/demo_input2.jpg) |
+| ![Screenshot](../screenshots/demo_input1.jpg) | ![Screenshot](../screenshots/demo_input2.jpg) |

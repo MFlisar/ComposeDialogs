@@ -34,4 +34,4 @@ Here's a full example of a menu that can be rendered:
 
 | |
 |-|
-| ![Screenshot](../screenshots/dark/demo_menu1.jpg) |
+| ![Screenshot](../screenshots/demo_menu1.jpg) |
