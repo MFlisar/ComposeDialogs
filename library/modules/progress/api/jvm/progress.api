@@ -1,0 +1,35 @@
+public final class com/michaelflisar/composedialogs/dialogs/progress/DialogDefaultsExtensionKt {
+	public static final fun styleWindowsProgressDialog-xUkhVMw (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Ljava/lang/String;Landroidx/compose/ui/window/WindowPosition;FFJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/progress/DialogProgress {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/progress/DialogProgress;
+}
+
+public abstract class com/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style {
+	public static final field $stable I
+	public abstract fun getLinear ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style$Determinate : com/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style {
+	public static final field $stable I
+	public fun <init> (ZII)V
+	public synthetic fun <init> (ZIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getLinear ()Z
+	public final fun getMax ()I
+	public final fun getProgress ()I
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style$Indeterminate : com/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Z)V
+	public synthetic fun <init> (ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getLinear ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/progress/DialogProgressKt {
+	public static final fun DialogProgress (Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function3;Lcom/michaelflisar/composedialogs/dialogs/progress/DialogProgress$Style;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+

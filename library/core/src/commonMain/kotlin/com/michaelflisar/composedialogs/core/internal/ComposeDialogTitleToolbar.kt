@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -16,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.BaseDialogState
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -39,7 +38,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
     menuActions: @Composable (RowScope.() -> Unit)?,
     options: Options,
     buttons: DialogButtons,
-    state: BaseDialogState,
+    state: DialogState,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit,
 ) {

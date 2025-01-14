@@ -1,11 +1,12 @@
 [versions]
 
-gradle = 				        "8.7.3"
-kotlin = 				        "2.1.0"
-dokka =                         "1.9.20"
-gradle-maven-publish-plugin =   "0.30.0"
-compose =                       "1.7.1"
-desugar =                       "2.1.4"
+gradle = 				            "8.7.3"
+kotlin = 				            "2.1.0"
+dokka =                             "1.9.20"
+gradle-maven-publish-plugin =       "0.30.0"
+compose =                           "1.7.3"
+desugar =                           "2.1.4"
+binary-compatibility-validator =    "0.17.0"
 
 [plugins]
 
@@ -27,6 +28,9 @@ compose =                           { id = "org.jetbrains.compose",             
 # github release (dokka + maven)
 dokka =                             { id = "org.jetbrains.dokka",                       version.ref = "dokka" }
 gradle-maven-publish-plugin =       { id = "com.vanniktech.maven.publish.base",         version.ref = "gradle-maven-publish-plugin" }
+
+# binary compatibility
+binary-compatibility-validator =    { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
 
 [libraries]
 

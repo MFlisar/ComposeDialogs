@@ -4,7 +4,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.michaelflisar.composedialogs.core.BaseDialogState
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.Options
@@ -14,7 +14,7 @@ internal fun ComposeDialogImageButton(
     buttonType: DialogButtonType,
     icon: ImageVector,
     options: Options,
-    state: BaseDialogState,
+    state: DialogState,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {

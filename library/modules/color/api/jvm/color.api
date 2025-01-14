@@ -1,0 +1,58 @@
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColor {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle : java/lang/Enum {
+	public static final field Percent Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;
+	public static final field Value Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColor$Texts {
+	public static final field $stable I
+	public final fun getCustom ()Ljava/lang/String;
+	public final fun getPresets ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/DialogColorDefaults;
+	public final fun texts (Lcom/michaelflisar/composedialogs/dialogs/color/DialogColorDefaults;Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$Texts;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorKt {
+	public static final fun DialogColor (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$Texts;ZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun rememberDialogColor-ek8zF_U (JLandroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorUtil {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/DialogColorUtil;
+	public final fun drawCheckerboard (Landroidx/compose/ui/graphics/drawscope/DrawScope;Landroidx/compose/ui/unit/Density;)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/DialogDefaultsExtensionKt {
+	public static final fun styleWindowsColorDialog-xUkhVMw (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Ljava/lang/String;Landroidx/compose/ui/window/WindowPosition;FFJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaver : androidx/compose/runtime/saveable/Saver {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaver;
+	public fun restore (I)Landroidx/compose/runtime/MutableState;
+	public synthetic fun restore (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun save (Landroidx/compose/runtime/saveable/SaverScope;Landroidx/compose/runtime/MutableState;)Ljava/lang/Integer;
+	public synthetic fun save (Landroidx/compose/runtime/saveable/SaverScope;Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaverNullable : androidx/compose/runtime/saveable/Saver {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaverNullable;
+	public synthetic fun restore (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun restore (Ljava/lang/String;)Landroidx/compose/runtime/MutableState;
+	public fun save (Landroidx/compose/runtime/saveable/SaverScope;Landroidx/compose/runtime/MutableState;)Ljava/lang/String;
+	public synthetic fun save (Landroidx/compose/runtime/saveable/SaverScope;Ljava/lang/Object;)Ljava/lang/Object;
+}
+

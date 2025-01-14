@@ -21,15 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.BaseDialogState
-import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogState
+import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.composedialogs.dialogs.list.DialogListUtil
 
 @Composable
 internal fun <T> DialogListItem(
-    state: BaseDialogState,
+    state: DialogState,
     item: T,
     itemId: Int,
     selectionMode: DialogList.SelectionMode<T>,
@@ -56,7 +55,7 @@ internal fun <T> DialogListItem(
 private fun <T> DialogListItem(
     item: T,
     itemId: Int,
-    state: BaseDialogState,
+    state: DialogState,
     selectionMode: DialogList.SelectionMode<T>,
     content: @Composable ColumnScope.() -> Unit,
     icon: @Composable (() -> Unit)? = null,

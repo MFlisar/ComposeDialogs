@@ -1,0 +1,41 @@
+public final class com/michaelflisar/composedialogs/dialogs/billing/DialogBilling {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/billing/DialogBilling$BillingProduct {
+	public static final field $stable I
+	public fun <init> (Lcom/michaelflisar/kotbilling/classes/Product;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Lcom/michaelflisar/kotbilling/classes/Product;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/michaelflisar/kotbilling/classes/Product;
+	public final fun component2 ()Lkotlin/jvm/functions/Function2;
+	public final fun copy (Lcom/michaelflisar/kotbilling/classes/Product;Lkotlin/jvm/functions/Function2;)Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling$BillingProduct;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling$BillingProduct;Lcom/michaelflisar/kotbilling/classes/Product;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling$BillingProduct;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIcon ()Lkotlin/jvm/functions/Function2;
+	public final fun getProduct ()Lcom/michaelflisar/kotbilling/classes/Product;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/billing/DialogBilling$Texts {
+	public static final field $stable I
+	public final fun getButtonBack ()Ljava/lang/String;
+	public final fun getButtonBuySingle ()Ljava/lang/String;
+	public final fun getInfo ()Ljava/lang/String;
+	public final fun getTextErrorQueringProducts ()Ljava/lang/String;
+	public final fun getTextItemAlreadyOwned ()Ljava/lang/String;
+	public final fun getTextNoProductFound ()Ljava/lang/String;
+	public final fun getTextSingleAlreadyOwned ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/billing/DialogBillingDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBillingDefaults;
+	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling$Texts;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/billing/DialogBillingKt {
+	public static final fun DialogBilling (Lcom/michaelflisar/composedialogs/core/DialogState;Ljava/util/List;Lcom/michaelflisar/composedialogs/dialogs/billing/DialogBilling$Texts;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+

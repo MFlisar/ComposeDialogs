@@ -33,13 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.BaseDialogState
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
@@ -71,7 +70,7 @@ import kotlinx.coroutines.withContext
  */
 @Composable
 fun DialogBilling(
-    state: BaseDialogState,
+    state: DialogState,
     // custom settings
     products: List<DialogBilling.BillingProduct>,
     texts: DialogBilling.Texts = DialogBillingDefaults.texts(),

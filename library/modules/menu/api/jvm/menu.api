@@ -1,0 +1,71 @@
+public final class com/michaelflisar/composedialogs/dialogs/menu/ComposableSingletons$DialogMenuKt {
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/menu/ComposableSingletons$DialogMenuKt;
+	public fun <init> ()V
+	public final fun getLambda-1$menu ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$menu ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/DialogDefaultsExtensionKt {
+	public static final fun styleWindowsMenuDialog-xUkhVMw (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Ljava/lang/String;Landroidx/compose/ui/window/WindowPosition;FFJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/DialogMenuKt {
+	public static final fun DialogMenu (Lcom/michaelflisar/composedialogs/core/DialogState;Ljava/util/List;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
+public abstract class com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Custom : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function2;)V
+	public final fun getContent ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Divider : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Divider;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lkotlin/jvm/functions/Function2;
+	public final fun component4 ()Lkotlin/jvm/functions/Function0;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getIcon ()Lkotlin/jvm/functions/Function2;
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$SubMenu : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lkotlin/jvm/functions/Function2;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Ljava/util/List;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$SubMenu;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$SubMenu;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Ljava/util/List;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$SubMenu;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getIcon ()Lkotlin/jvm/functions/Function2;
+	public final fun getItems ()Ljava/util/List;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

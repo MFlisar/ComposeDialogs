@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
 
 /**
- * Shows a dialog with an info text and an optional label for that info
+ * Shows a dialog holdinh a list of menu items
  *
  * &nbsp;
  *
@@ -38,7 +38,7 @@ import com.michaelflisar.composedialogs.core.*
  */
 @Composable
 fun DialogMenu(
-    state: BaseDialogState,
+    state: DialogState,
     // Custom - Required
     items: List<MenuItem>,
     // Base Dialog - Optional

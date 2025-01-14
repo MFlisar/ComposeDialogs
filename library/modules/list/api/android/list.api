@@ -1,0 +1,84 @@
+public final class com/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListKt {
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListKt;
+	public fun <init> ()V
+	public final fun getLambda-1$list_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$list_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/DialogList;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$Filter {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function4;ZZ)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function4;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFilter ()Lkotlin/jvm/functions/Function2;
+	public final fun getInfoText ()Lkotlin/jvm/functions/Function4;
+	public final fun getKeepSelectionForInvisibleItems ()Z
+	public final fun getShowClearIcon ()Z
+}
+
+public abstract interface class com/michaelflisar/composedialogs/dialogs/list/DialogList$ItemContents {
+	public abstract fun getContent ()Lkotlin/jvm/functions/Function4;
+	public abstract fun getIconContent ()Lkotlin/jvm/functions/Function3;
+	public abstract fun getTrailingContent ()Lkotlin/jvm/functions/Function4;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$ItemDefaultContent : com/michaelflisar/composedialogs/dialogs/list/DialogList$ItemContents {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getContent ()Lkotlin/jvm/functions/Function4;
+	public fun getIconContent ()Lkotlin/jvm/functions/Function3;
+	public fun getTrailingContent ()Lkotlin/jvm/functions/Function4;
+}
+
+public abstract class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$MultiClick : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final fun getOnItemClicked ()Lkotlin/jvm/functions/Function1;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$MultiSelect : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/runtime/MutableState;ZZ)V
+	public synthetic fun <init> (Landroidx/compose/runtime/MutableState;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getSelectOnCheckboxClickOnly ()Z
+	public final fun getSelected ()Landroidx/compose/runtime/MutableState;
+	public final fun getShowSelectionCounter ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$SingleClickAndClose : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final fun getOnItemClicked ()Lkotlin/jvm/functions/Function1;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$SingleSelect : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/runtime/MutableState;ZZ)V
+	public synthetic fun <init> (Landroidx/compose/runtime/MutableState;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCloseOnSelect ()Z
+	public final fun getSelectOnRadioButtonClickOnly ()Z
+	public final fun getSelected ()Landroidx/compose/runtime/MutableState;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogListKt {
+	public static final fun DialogList (Lcom/michaelflisar/composedialogs/core/DialogState;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$ItemContents;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode;ZLjava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$Filter;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun DialogList (Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$ItemContents;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode;Landroidx/compose/runtime/saveable/Saver;Lkotlin/jvm/functions/Function2;ZLjava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$Filter;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/composables/DialogListContentKt {
+	public static final fun DialogListContent (Ljava/lang/String;Ljava/lang/String;IILandroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/composables/DialogListTrailingContentKt {
+	public static final fun DialogListTrailingContent (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+}
+

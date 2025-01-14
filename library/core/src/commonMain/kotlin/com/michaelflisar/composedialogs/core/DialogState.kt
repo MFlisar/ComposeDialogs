@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.core
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -90,9 +89,9 @@ fun <T : Any> rememberDialogState(
 // ------------------------
 
 /**
- * returns a [DialogState] object holding all necessary states for the dialog
+ * returns a [DialogStateNoData] object holding all necessary states for the dialog
  *
- * Consider using [rememberDialogState] if you do need some data inside the dialog if it is shown
+ * Consider using [rememberDialogState] with the data field overload if you do need some data inside the dialog if it is shown
  *
  * @param visible the initial visibility state
  * @param buttonPositiveEnabled define if the positive button should be enabled initially or not
@@ -107,7 +106,7 @@ fun rememberDialogState(
     buttonNegativeEnabled: Boolean = true,
     dismissAllowed: Boolean = true,
     swipeAllowed: Boolean = true
-): DialogState {
+): DialogStateNoData {
 
     // showing should survive, even screen rotations and activity recreations
     val visible = rememberSaveable { mutableStateOf(visible) }
@@ -123,5 +122,5 @@ fun rememberDialogState(
             )
         )
     }
-    return DialogState(visible, interaction)
+    return DialogStateNoData(visible, interaction)
 }

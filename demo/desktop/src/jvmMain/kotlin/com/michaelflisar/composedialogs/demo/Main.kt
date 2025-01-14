@@ -11,8 +11,6 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -28,7 +26,6 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
-import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -440,9 +437,9 @@ fun main() {
                                 )
                             )
                         ),
-                        MenuItem.Custom {
-                            Text("Custom Content", color = Color.Red)
-                        }
+                        //MenuItem.Custom {
+                        //    Text("Custom Content", color = Color.Red)
+                        //}
                     )
                     DialogMenu(
                         style = style,

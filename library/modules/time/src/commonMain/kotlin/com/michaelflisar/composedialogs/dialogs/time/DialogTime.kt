@@ -31,7 +31,7 @@ import kotlinx.datetime.LocalTime
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DialogTime(
-    state: BaseDialogState,
+    state: DialogState,
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional

@@ -20,7 +20,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
 /**
  * Shows a dialog containing some arbitrary [content]
  *
- * @param state the [BaseDialogState] of the dialog
+ * @param state the [DialogState] of the dialog
  * @param title the optional title of the dialog
  * @param icon the optional icon of the dialog
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
@@ -31,7 +31,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
  */
 @Composable
 fun Dialog(
-    state: BaseDialogState,
+    state: DialogState,
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
@@ -273,13 +273,17 @@ class DialogInteractionSource internal constructor(
 
 /**
  * a dialog state holding the current showing state and the some additional state [DialogInteractionSource] of the dialog
- *
- * @param visible the showing state of the dialog
- * @param interactionSource the [DialogInteractionSource] holding other states for this dialog
  */
-abstract class BaseDialogState {
+abstract class DialogState {
 
+    /**
+     * the showing state of the dialog
+     */
     abstract val visible: Boolean
+
+    /**
+     * the [DialogInteractionSource] holding other states for this dialog
+     */
     abstract val interactionSource: DialogInteractionSource
 
     abstract fun onDismiss()
@@ -354,10 +358,10 @@ abstract class BaseDialogState {
  * @param state the visibility state of the dialog
  * @param interactionSource the [DialogInteractionSource] holding other states for this dialog
  */
-class DialogState(
+class DialogStateNoData(
     private val state: MutableState<Boolean>,
     interactionSource: MutableState<DialogInteractionSource>
-) : BaseDialogState() {
+) : DialogState() {
 
     override val visible by state
     override val interactionSource by interactionSource
@@ -386,7 +390,7 @@ class DialogStateWithData<T>(
     visible: State<Boolean>,
     private val state: MutableState<T?>,
     interactionSource: MutableState<DialogInteractionSource>,
-) : BaseDialogState() {
+) : DialogState() {
 
     override val visible by visible
     override val interactionSource by interactionSource

@@ -8,11 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogWindow
-import com.michaelflisar.composedialogs.core.BaseDialogState
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogStyleDesktopOtions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.StyleOptions
@@ -36,7 +35,7 @@ class DialogStyleDesktop(
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
         options: Options,
-        state: BaseDialogState,
+        state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {

@@ -1,0 +1,47 @@
+public final class com/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt {
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt;
+	public fun <init> ()V
+	public final fun getLambda-1$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-3$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-4$number_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/number/DialogNumberPickerKt {
+	public static final fun DialogNumberPicker (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/number/NumberPickerSetup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun rememberDialogNumber (Ljava/lang/Number;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/number/NumberPickerSetup {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Lcom/michaelflisar/composedialogs/dialogs/number/RepeatingButton;)V
+	public synthetic fun <init> (Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Lcom/michaelflisar/composedialogs/dialogs/number/RepeatingButton;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMax ()Ljava/lang/Number;
+	public final fun getMin ()Ljava/lang/Number;
+	public final fun getRepeatingButton ()Lcom/michaelflisar/composedialogs/dialogs/number/RepeatingButton;
+	public final fun getStepSize ()Ljava/lang/Number;
+	public final fun getStepSize2 ()Ljava/lang/Number;
+}
+
+public abstract class com/michaelflisar/composedialogs/dialogs/number/RepeatingButton {
+	public static final field $stable I
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/number/RepeatingButton$Disabled : com/michaelflisar/composedialogs/dialogs/number/RepeatingButton {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/number/RepeatingButton$Disabled;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/number/RepeatingButton$Enabled : com/michaelflisar/composedialogs/dialogs/number/RepeatingButton {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (JJF)V
+	public synthetic fun <init> (JJFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDelayDecayFactor ()F
+	public final fun getMaxDelayMillis ()J
+	public final fun getMinDelayMillis ()J
+}
+

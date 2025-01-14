@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
+    alias(libs.plugins.binary.compatibility.validator)
 }
 
 // -------------------

@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.BaseDialogState
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -17,7 +17,6 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.ButtonsCrossAxisSpacing
 import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
 
 @Composable
@@ -25,7 +24,7 @@ internal fun ColumnScope.ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
     options: Options,
-    state: BaseDialogState,
+    state: DialogState,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
