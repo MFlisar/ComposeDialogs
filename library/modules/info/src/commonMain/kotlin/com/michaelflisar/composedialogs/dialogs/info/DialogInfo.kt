@@ -10,6 +10,8 @@ import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 
+/* --8<-- [start: full-constructor] */
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with an info text and an optional label for that info
  *
@@ -34,7 +36,9 @@ fun DialogInfo(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         Column {
             if (infoLabel.isNotEmpty()) {
@@ -44,3 +48,4 @@ fun DialogInfo(
         }
     }
 }
+/* --8<-- [end: full-constructor] */

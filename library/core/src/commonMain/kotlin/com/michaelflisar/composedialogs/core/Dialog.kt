@@ -78,6 +78,7 @@ object DialogDefaults {
     @Composable
     fun buttonsDisabled() = DialogButtons.DISABLED
 
+    /* --8<-- [start: style-dialog] */
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -104,20 +105,24 @@ object DialogDefaults {
         iconColor: Color = DialogStyleDefaults.iconColor,
         titleColor: Color = DialogStyleDefaults.titleColor,
         contentColor: Color = DialogStyleDefaults.contentColor
-    ): ComposeDialogStyle = DialogStyle(
-        swipeDismissable,
-        // DialogProperties
-        dismissOnBackPress,
-        dismissOnClickOutside,
-        // Style
-        options,
-        shape,
-        containerColor,
-        iconColor,
-        titleColor,
-        contentColor
-    )
+    ): ComposeDialogStyle
+            /* --8<-- [end: style-dialog] */ {
+        return DialogStyle(
+            swipeDismissable,
+            // DialogProperties
+            dismissOnBackPress,
+            dismissOnClickOutside,
+            // Style
+            options,
+            shape,
+            containerColor,
+            iconColor,
+            titleColor,
+            contentColor
+        )
+    }
 
+    /* --8<-- [start: style-bottom-sheet] */
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -154,25 +159,29 @@ object DialogDefaults {
         iconColor: Color = BottomSheetStyleDefaults.iconColor,
         titleColor: Color = BottomSheetStyleDefaults.titleColor,
         contentColor: Color = BottomSheetStyleDefaults.contentColor
-    ): ComposeDialogStyle = BottomSheetStyle(
-        dragHandle,
-        peekHeight,
-        expandInitially,
-        velocityThreshold,
-        positionalThreshold,
-        animateShow,
-        // DialogProperties
-        dismissOnBackPress,
-        dismissOnClickOutside,
-        // Style
-        options,
-        shape,
-        containerColor,
-        iconColor,
-        titleColor,
-        contentColor
-    )
+    ): ComposeDialogStyle
+            /* --8<-- [end: style-bottom-sheet] */ {
+        return BottomSheetStyle(
+            dragHandle,
+            peekHeight,
+            expandInitially,
+            velocityThreshold,
+            positionalThreshold,
+            animateShow,
+            // DialogProperties
+            dismissOnBackPress,
+            dismissOnClickOutside,
+            // Style
+            options,
+            shape,
+            containerColor,
+            iconColor,
+            titleColor,
+            contentColor
+        )
+    }
 
+    /* --8<-- [start: style-full-screen-dialog] */
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -198,19 +207,23 @@ object DialogDefaults {
         iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
         titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor
-    ): ComposeDialogStyle = FullscreenDialogStyle(
-        darkStatusBar,
-        menuActions,
-        // DialogProperties
-        dismissOnBackPress,
-        // Style
-        toolbarColor,
-        toolbarActionColor,
-        containerColor,
-        iconColor,
-        titleColor,
-        contentColor
-    )
+    ): ComposeDialogStyle
+            /* --8<-- [end: style-full-screen-dialog] */
+    {
+        return FullscreenDialogStyle(
+            darkStatusBar,
+            menuActions,
+            // DialogProperties
+            dismissOnBackPress,
+            // Style
+            toolbarColor,
+            toolbarActionColor,
+            containerColor,
+            iconColor,
+            titleColor,
+            contentColor
+        )
+    }
 }
 
 // ------------------
@@ -447,6 +460,7 @@ class DialogButtons internal constructor(
     val enabled = positive.enabled || negative.enabled
 }
 
+/* --8<-- [start: class-options] */
 /**
  * the main options for a dialog
  *
@@ -459,6 +473,7 @@ data class Options(
     val dismissOnBackPress: Boolean = true,
     val dismissOnClickOutside: Boolean = true,
 )
+/* --8<-- [end: class-options] */
 
 data class StyleOptions(
     val iconMode: IconMode = IconMode.CenterTop,

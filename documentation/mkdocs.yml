@@ -3,6 +3,12 @@ site_url: https://mflisar.github.io/ComposeDialogs/
 repo_url: https://github.com/MFlisar/ComposeDialogs
 repo_name: mflisar/ComposeDialogs
 
+# TODO
+# - variablen oben anpassen + nav unten
+# - _data/project.yml anpassen
+# - md files in docs anpassen
+# FERTIG
+
 copyright: Copyright &copy; 2024 Michael Flisar
 
 theme:
@@ -70,6 +76,7 @@ markdown_extensions:
   - pymdownx.snippets:
       url_download: true
       restrict_base_path: false
+      dedent_subsections: true
       #base_path: ["docs/"]
   - pymdownx.superfences
   - pymdownx.tabbed:
@@ -99,7 +106,7 @@ plugins:
   - glightbox:
       skip_classes:
          - exclude-glightbox
-        
+
 # Additional configuration
 extra:
   social:

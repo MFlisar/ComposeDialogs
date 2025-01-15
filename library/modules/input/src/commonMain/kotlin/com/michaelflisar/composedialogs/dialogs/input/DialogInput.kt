@@ -21,6 +21,7 @@ import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with an input field
  *
@@ -74,7 +75,9 @@ fun DialogInput(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val modifier = when (style.type) {
             ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()

@@ -58,6 +58,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with prices of purchaseable products => clicking an item will launch the buy process
  *
@@ -81,7 +82,9 @@ fun DialogBilling(
     //buttons: DialogButtons = DialogDefaults.buttons(),
     //options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     var result by remember { mutableStateOf<LoadedData?>(null) }
     LaunchedEffect(products) {
         withContext(Dispatchers.IO) {

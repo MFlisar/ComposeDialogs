@@ -55,6 +55,7 @@ private fun RowScope.DemoDialogDate1(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
+    /* --8<-- [start: demo-date] */
     if (state.visible) {
 
         // special state for date dialog
@@ -115,6 +116,7 @@ private fun RowScope.DemoDialogDate1(
             }
         )
     }
+    /* --8<-- [end: demo-date] */
     DemoDialogButton(
         state,
         Icons.Default.CalendarMonth,
@@ -133,6 +135,7 @@ private fun RowScope.DemoDialogTime1(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
+    /* --8<-- [start: demo-time] */
     if (state.visible) {
 
         // special state for time dialog
@@ -156,6 +159,7 @@ private fun RowScope.DemoDialogTime1(
             }
         )
     }
+    /* --8<-- [end: demo-time] */
     DemoDialogButton(
         state,
         Icons.Default.Schedule,

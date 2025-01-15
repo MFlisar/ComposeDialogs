@@ -18,6 +18,7 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.time.utils.TimeUtil
 import kotlinx.datetime.LocalTime
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with a time input
  *
@@ -43,7 +44,9 @@ fun DialogTime(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     //if (!setup.seconds) {
     //    time.seconds.value = 0
     //}

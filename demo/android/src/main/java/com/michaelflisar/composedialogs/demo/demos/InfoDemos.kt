@@ -34,6 +34,7 @@ fun InfoDemos(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
 private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composable () -> Unit)?) {
     val context = LocalContext.current
     val state = rememberDialogState()
+    /* --8<-- [start: demo] */
     if (state.visible) {
         DialogInfo(
             state = state,
@@ -46,6 +47,7 @@ private fun RowScope.DemoDialogInfo1(style: ComposeDialogStyle, icon: (@Composab
             }
         )
     }
+    /* --8<-- [end: demo] */
     DemoDialogButton(
         state,
         Icons.Default.Info,

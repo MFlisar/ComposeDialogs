@@ -55,6 +55,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 import org.jetbrains.compose.resources.stringResource
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with an input field
  *
@@ -81,7 +82,9 @@ fun DialogDate(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     val landscape = isLandscape()
     Dialog(
         state,

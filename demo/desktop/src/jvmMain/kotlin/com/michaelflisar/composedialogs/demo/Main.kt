@@ -320,6 +320,7 @@ fun main() {
                     val style = getStyle {
                         DialogDefaults.styleWindowsListDialog("List Dialog")
                     }
+                    /* --8<-- [start: demo-list] */
                     val selected = remember { mutableStateOf<Int?>(null) }
                     val items = List(100) { "Item $it" }
                     DialogList(
@@ -345,12 +346,14 @@ fun main() {
                             }
                         }
                     )
+                    /* --8<-- [end: demo-list] */
                 }
 
                 Dialog.Menu -> {
                     val style = getStyle {
                         DialogDefaults.styleWindowsMenuDialog("Menu Dialog")
                     }
+                    /* --8<-- [start: demo-menu-items] */
                     val items = listOf(
                         MenuItem.Item(
                             "Item 1",
@@ -441,6 +444,8 @@ fun main() {
                         //    Text("Custom Content", color = Color.Red)
                         //}
                     )
+                    /* --8<-- [end: demo-menu-items] */
+                    /* --8<-- [start: demo-menu] */
                     DialogMenu(
                         style = style,
                         title = { Text("Menu Dialog") },
@@ -448,6 +453,7 @@ fun main() {
                         items = items,
                         state = dialog
                     )
+                    /* --8<-- [end: demo-menu] */
                 }
 
                 null -> {

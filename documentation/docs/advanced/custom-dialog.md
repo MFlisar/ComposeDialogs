@@ -5,7 +5,7 @@ icon: material/pencil
 In general a custom dialog is made is simple as following (info dialog is exactly the following):
 
 ```kotlin
---8<-- "../library/modules/info/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt:23:46"
+--8<-- "../library/modules/info/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt:full-constructor"
 ```
 
 So in the end following is the base structure for a new dialog:

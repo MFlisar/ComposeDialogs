@@ -43,6 +43,7 @@ import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_c
 import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_color_label_presets
 import org.jetbrains.compose.resources.stringResource
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a color dialog
  *
@@ -76,7 +77,9 @@ fun DialogColor(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     // saved dialog state
     val selectedSubColor =
         rememberSaveable(saver = ColorStateSaverNullable) { mutableStateOf(null) }

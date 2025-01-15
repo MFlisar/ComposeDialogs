@@ -24,6 +24,7 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with an optional label and a progress indicator
  *
@@ -49,7 +50,9 @@ fun DialogProgress(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     Dialog(state, title, icon, style, buttons, options, onEvent) {
         Column {
             if (content != null) {

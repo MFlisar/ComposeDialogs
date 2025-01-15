@@ -76,6 +76,7 @@ private fun RowScope.DemoDialogProgress2(
 ) {
     val context = LocalContext.current
     val state = rememberDialogState()
+    /* --8<-- [start: demo] */
     if (state.visible) {
         DialogProgress(
             state = state,
@@ -98,6 +99,7 @@ private fun RowScope.DemoDialogProgress2(
             }
         )
     }
+    /* --8<-- [end: demo] */
     DemoDialogButton(
         state,
         Icons.Default.Downloading,

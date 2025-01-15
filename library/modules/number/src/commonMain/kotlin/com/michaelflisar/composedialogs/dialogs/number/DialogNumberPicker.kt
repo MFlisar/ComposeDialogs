@@ -29,6 +29,7 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.number.composables.PickerIcon
 import com.michaelflisar.composedialogs.dialogs.number.utils.NumberUtil
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog with a number picker
  *
@@ -74,7 +75,9 @@ fun <T : Number> DialogNumberPicker(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-) {
+)
+/* --8<-- [end: constructor] */
+{
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
 
         val modifier = when (style.type) {

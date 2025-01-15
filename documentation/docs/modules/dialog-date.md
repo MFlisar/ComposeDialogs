@@ -16,13 +16,13 @@ Generally following can be adjusted:
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/date/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/date/DialogDate.kt:58:84"
+--8<-- "../library/modules/date/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/date/DialogDate.kt:constructor"
 ```
 
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:57:117"
+--8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-date"
 ```
 
 #### Screenshots

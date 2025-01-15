@@ -14,13 +14,13 @@ Generally following can be adjusted:
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/number/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/number/DialogNumberPicker.kt:32:77"
+--8<-- "../library/modules/number/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/number/DialogNumberPicker.kt:constructor"
 ```
 
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/NumberDemos.kt:59:76"
+--8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/NumberDemos.kt:demo"
 ```
 
 #### Screenshots

@@ -68,7 +68,7 @@ dependencies:
     cmp: 1.7.3
     compose: 1.7.5
     material3: 1.3.1
-    experimantal: true
+    experimental: true
 
 # -------------
 # Module

@@ -22,19 +22,19 @@ There are 2 ways to show a list, one by providing a list of items and one by pro
 === "List"
 
     ```kotlin
-    --8<-- "../library/modules/list/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt:45:81"
+    --8<-- "../library/modules/list/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt:constructor"
     ```
 
 === "Loader"
 
     ```kotlin
-    --8<-- "../library/modules/list/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt:100:144"
+    --8<-- "../library/modules/list/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt:constructor2"
     ```
 
 #### Example
 
 ```kotlin
---8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:325:347"
+--8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-list"
 ```
 
 #### Screenshots

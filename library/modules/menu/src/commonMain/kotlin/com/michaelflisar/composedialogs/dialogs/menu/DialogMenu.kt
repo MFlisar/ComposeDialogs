@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
 
+/* --8<-- [start: constructor] */
 /**
  * Shows a dialog holdinh a list of menu items
  *
@@ -48,7 +49,9 @@ fun DialogMenu(
     buttons: DialogButtons = DialogButtons.DISABLED,
     options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-) {
+)
+/* --8<-- [end: constructor] */
+{
     val selectedSubMenu = remember { mutableStateOf<List<MenuItem.SubMenu>>(emptyList()) }
     val visibleItems = remember(selectedSubMenu.value) {
         derivedStateOf {

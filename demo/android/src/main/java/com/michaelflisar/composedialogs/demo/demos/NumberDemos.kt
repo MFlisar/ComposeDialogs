@@ -47,6 +47,7 @@ private fun RowScope.DemoDialogInput1(
 
     val context = LocalContext.current
 
+    /* --8<-- [start: demo] */
     // would work with Int, Long, Double and Float (all options of Number!)
     val number = 5
     val state = rememberDialogState()
@@ -75,6 +76,7 @@ private fun RowScope.DemoDialogInput1(
             )
         )
     }
+    /* --8<-- [end: demo] */
     DemoDialogButton(
         state,
         Icons.Default.Numbers,

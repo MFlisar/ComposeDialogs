@@ -29,31 +29,31 @@ libraries:
   Compose:
     - name: ComposeChangelog
       link: https://mflisar.github.io/ComposeChangelog
-      image: https://raw.githubusercontent.com/MFlisar/ComposeChangelog/main/screenshots/overview.jpg
+      image: https://raw.githubusercontent.com/MFlisar/ComposeChangelog/main/documentation/docs/screenshots/overview.jpg
       maven: io.github.mflisar.composechangelog/core
       description: This library offers you a a <b>changelog dialog</b> for compose including the ability to show new logs on app start only as well as filtering and customisation.
     - name: ComposeColors
       link: https://mflisar.github.io/ComposeColors
-      image: https://raw.githubusercontent.com/MFlisar/ComposeColors/main/screenshots/material.png
+      image: https://raw.githubusercontent.com/MFlisar/ComposeColors/main/documentation/docs/screenshots/material.png
       maven: io.github.mflisar.composecolors/core
-      description: A simple collection of colors that can be used inside any KMP Compose project.
+      description: A simple collection of colors that can be used inside any KMP compose project.
     - name: ComposeDebugDrawer
       link: https://mflisar.github.io/ComposeDebugDrawer
-      image: https://raw.githubusercontent.com/MFlisar/ComposeDebugDrawer/main/screenshots/demo2.jpg
+      image: https://raw.githubusercontent.com/MFlisar/ComposeDebugDrawer/main/documentation/docs/screenshots/demo2.jpg
       maven: io.github.mflisar.composedebugdrawer/core
       description: This library offers you a <b>simple</b> and easily extendable <b>debug drawer</b>.
     - name: ComposeDialogs
       link: https://mflisar.github.io/ComposeDialogs
-      image: https://raw.githubusercontent.com/MFlisar/ComposeDialogs/main/screenshots/overview.jpg
+      image: https://raw.githubusercontent.com/MFlisar/ComposeDialogs/main/documentation/docs/screenshots/overview.jpg
       maven: io.github.mflisar.composedialogs/core
       description: A compose framework for <b>modal dialogs</b>.
     - name: ComposePreferences
       link: https://mflisar.github.io/ComposePreferences
-      image: https://raw.githubusercontent.com/MFlisar/ComposePreferences/main/screenshots/overview.jpg
+      image: https://raw.githubusercontent.com/MFlisar/ComposePreferences/main/documentation/docs/screenshots/overview.jpg
       maven: io.github.mflisar.composepreferences/core
       description: This library offers you <b>preference screens</b> for compose including the ability of endless nesting subscreens as well as simple integration of custom preferences.
     - name: ComposeThemer
       link: https://mflisar.github.io/ComposeThemer
-      image: https://raw.githubusercontent.com/MFlisar/ComposeThemer/main/screenshots/demo.gif
+      image: https://raw.githubusercontent.com/MFlisar/ComposeThemer/main/documentation/docs/screenshots/demo.gif
       maven: io.github.mflisar.composethemer/core
       description: This is a <b>full compose theme engine</b> that handles applying a theme as well as updating the system ui elements. Extendible and allows to simply apply user selected themes inside your app.
