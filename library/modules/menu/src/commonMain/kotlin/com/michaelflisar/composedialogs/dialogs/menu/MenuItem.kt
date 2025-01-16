@@ -9,6 +9,7 @@ sealed class MenuItem {
     data class Item(
         val title: String,
         val description: String? = null,
+        val dismissOnClick: Boolean = true,
         val icon: @Composable (() -> Unit)? = null,
         val onClick: () -> Unit
     ) : MenuItem()

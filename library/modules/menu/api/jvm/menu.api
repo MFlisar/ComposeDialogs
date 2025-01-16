@@ -33,16 +33,18 @@ public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Divide
 
 public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
 	public static final field $stable I
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
-	public final fun component3 ()Lkotlin/jvm/functions/Function2;
-	public final fun component4 ()Lkotlin/jvm/functions/Function0;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
-	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
+	public final fun component3 ()Z
+	public final fun component4 ()Lkotlin/jvm/functions/Function2;
+	public final fun component5 ()Lkotlin/jvm/functions/Function0;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDescription ()Ljava/lang/String;
+	public final fun getDismissOnClick ()Z
 	public final fun getIcon ()Lkotlin/jvm/functions/Function2;
 	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
 	public final fun getTitle ()Ljava/lang/String;

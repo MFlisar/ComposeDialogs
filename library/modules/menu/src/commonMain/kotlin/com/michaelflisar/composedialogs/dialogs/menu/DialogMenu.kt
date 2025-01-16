@@ -108,7 +108,9 @@ fun DialogMenu(
                             icon = it.icon,
                             onMenuClicked = {
                                 it.onClick()
-                                state.dismiss()
+                                if (it.dismissOnClick) {
+                                    state.dismiss()
+                                }
                             }
                         )
                     }
