@@ -356,84 +356,86 @@ fun main() {
                     /* --8<-- [start: demo-menu-items] */
                     val items = listOf(
                         MenuItem.Item(
-                            "Item 1",
-                            "Description 1",
-                            { Icon(Icons.Default.Info, null) }) {
+                            title = "Item 1",
+                            description = "Description 1",
+                            icon = { Icon(Icons.Default.Info, null) }) {
                             infos.add("Item 1 clicked")
                         },
                         MenuItem.Item(
-                            "Item 2",
-                            "Description 2",
-                            { Icon(Icons.Default.Info, null) }) {
+                            title = "Item 2",
+                            description = "Description 2",
+                            icon = { Icon(Icons.Default.Info, null) }) {
                             infos.add("Item 2 clicked")
                         },
                         MenuItem.Divider,
-                        MenuItem.SubMenu("Sub Menu 1",
-                            "Description",
-                            { Icon(Icons.Default.Info, null) },
-                            listOf(
+                        MenuItem.SubMenu(
+                            title = "Sub Menu 1",
+                            description = "Description",
+                            icon = { Icon(Icons.Default.Info, null) },
+                            items = listOf(
                                 MenuItem.Item(
-                                    "Sub Item 1",
-                                    "Description 1",
-                                    { Icon(Icons.Default.Info, null) }) {
+                                    title = "Sub Item 1",
+                                    description = "Description 1",
+                                    icon = { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 1 clicked")
                                 },
                                 MenuItem.Item(
-                                    "Sub Item 2",
-                                    "Description 2",
-                                    { Icon(Icons.Default.Info, null) }) {
+                                    title = "Sub Item 2",
+                                    description = "Description 2",
+                                    icon = { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 2 clicked")
                                 },
                                 MenuItem.Item(
-                                    "Sub Item 3",
-                                    "Description 3",
-                                    { Icon(Icons.Default.Info, null) }) {
+                                    title = "Sub Item 3",
+                                    description = "Description 3",
+                                    icon =  { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 3 clicked")
                                 },
-                                MenuItem.SubMenu("Sub Sub Menu 4",
-                                    "Description",
-                                    { Icon(Icons.Default.Info, null) },
-                                    listOf(
+                                MenuItem.SubMenu(
+                                    title = "Sub Sub Menu 4",
+                                    description = "Description",
+                                    icon = { Icon(Icons.Default.Info, null) },
+                                    items = listOf(
                                         MenuItem.Item(
-                                            "Sub Sub Item 1",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 1",
+                                            description = "Description",
+                                            icon = { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 1 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 2",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 2",
+                                            description = "Description",
+                                            icon =  { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 2 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 3",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 3",
+                                            description = "Description",
+                                            icon =  { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 3 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 4",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 4",
+                                            description = "Description",
+                                            icon = { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 4 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 5",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 5",
+                                            description = "Description",
+                                            icon =  { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 5 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 6",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 6",
+                                            description = "Description",
+                                            icon = { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 6 clicked")
                                         },
                                         MenuItem.Item(
-                                            "Sub Sub Item 7",
-                                            "Description",
-                                            { Icon(Icons.Default.Info, null) }) {
+                                            title = "Sub Sub Item 7",
+                                            description = "Description",
+                                            icon =  { Icon(Icons.Default.Info, null) }) {
                                             infos.add("Sub Sub Item 7 clicked")
                                         },
                                     )
