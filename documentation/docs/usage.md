@@ -51,7 +51,7 @@ LazyColumn {
 }
 ```
 
-#### Dialog styling/customisation and events
+#### Styling/Customisation and events
 
 All dialog (also custom ones) do support styling like:
 
@@ -59,7 +59,7 @@ All dialog (also custom ones) do support styling like:
 * dialog style (dialog, bottom sheet, fullscreen)
 * custom buttons (zero, one or two) with custom texts
 * a options variable to set up features like `dismissOnButtonClick`, `dismissOnBackPress` and `dismissOnClickOutside`
-* a event callback for the close event and button click event
+* an event callback for the close event and button click event
 
 Check out the advanced region on the side for more details.
 

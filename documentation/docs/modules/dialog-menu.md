@@ -32,6 +32,6 @@ Here's a full example of a menu that can be rendered:
 
 #### Screenshots
 
-| |
-|-|
-| ![Screenshot](../screenshots/demo_menu1.jpg) |
+|                                                   |
+|---------------------------------------------------|
+| ![Screenshot](../screenshots/menu/demo_menu1.jpg) |

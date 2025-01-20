@@ -27,6 +27,6 @@ Generally following can be adjusted:
 
 #### Screenshots
 
-| | | | |
-|-|-|-|-|
-| ![Screenshot](../screenshots/demo_color1.jpg) | ![Screenshot](../screenshots/demo_color2.jpg) | ![Screenshot](../screenshots/demo_color3.jpg) | ![Screenshot](../screenshots/demo_color4.jpg) |
+|                                                     | | | |
+|-----------------------------------------------------|-|-|-|
+| ![Screenshot](../screenshots/color/demo_color1.jpg) | ![Screenshot](../screenshots/color/demo_color2.jpg) | ![Screenshot](../screenshots/color/demo_color3.jpg) | ![Screenshot](../screenshots/color/demo_color4.jpg) |

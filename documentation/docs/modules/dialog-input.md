@@ -45,6 +45,6 @@ There are 2 main composables for this dialog, one for a string and for a numeric
 
 #### Screenshots
 
-| | |
-|-|-|
-| ![Screenshot](../screenshots/demo_input1.jpg) | ![Screenshot](../screenshots/demo_input2.jpg) |
+| |                                                     |
+|-|-----------------------------------------------------|
+| ![Screenshot](../screenshots/input/demo_input1.jpg) | ![Screenshot](../screenshots/input/demo_input2.jpg) |

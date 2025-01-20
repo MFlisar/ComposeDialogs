@@ -1,7 +1,6 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -18,18 +17,36 @@ plugins {
 // Informations
 // -------------------
 
+val description = "provides all the basic dialog classes and styles"
+
 // Module
 val artifactId = "core"
 val androidNamespace = "com.michaelflisar.composedialogs.core"
 
 // Library
 val libraryName = "ComposeDialogs"
-val libraryDescription = "ComposeDialogs - $artifactId module"
+val libraryDescription = "ComposeDialogs - $artifactId module - $description"
 val groupID = "io.github.mflisar.composedialogs"
 val release = 2023
 val github = "https://github.com/MFlisar/ComposeDialogs"
 val license = "Apache License 2.0"
 val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Variables for Documentation Generator
+// -------------------
+
+// # DEP + GROUP are optional arrays!
+
+// OPTIONAL = "false"               // defines if this module is optional or not
+// GROUP_ID = "core"                // defines the "grouping" in the documentation this module belongs to
+// DEP = "deps.composables.core|Compose Unstyled (core)|https://github.com/composablehorizons/compose-unstyled/"
+// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
+
+// GLOBAL DATA
+// BRANCH = "master"        // defines the branch on github (master/main)
+// GROUP = "core|Core|core"
+// GROUP = "modules|Modules|dialog modules"
 
 // -------------------
 // Setup
@@ -43,7 +60,6 @@ kotlin {
     // Android
     androidTarget {
         publishLibraryVariants("release")
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }

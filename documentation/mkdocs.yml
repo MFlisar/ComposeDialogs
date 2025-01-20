@@ -3,12 +3,6 @@ site_url: https://mflisar.github.io/ComposeDialogs/
 repo_url: https://github.com/MFlisar/ComposeDialogs
 repo_name: mflisar/ComposeDialogs
 
-# TODO
-# - variablen oben anpassen + nav unten
-# - _data/project.yml anpassen
-# - md files in docs anpassen
-# FERTIG
-
 copyright: Copyright &copy; 2024 Michael Flisar
 
 theme:
@@ -99,7 +93,7 @@ plugins:
   #- privacy
   #- typeset
   - macros:
-      include_dir: _include
+      include_dir: _includes
       include_yaml:
         - project: _data/project.yml
         - other_projects: _data/other-projects.yml

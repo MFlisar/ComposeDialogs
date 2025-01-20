@@ -27,6 +27,6 @@ Generally following can be adjusted:
 
 #### Screenshots
 
-| | | |
-|-|-|-|
-| ![Screenshot](../screenshots/demo_calendar1.jpg) | ![Screenshot](../screenshots/demo_calendar2.jpg) | ![Screenshot](../screenshots/demo_calendar3.jpg) |
+| | |                                                       |
+|-|-|-------------------------------------------------------|
+| ![Screenshot](../screenshots/date/demo_calendar1.jpg) | ![Screenshot](../screenshots/date/demo_calendar2.jpg) | ![Screenshot](../screenshots/date/demo_calendar3.jpg) |

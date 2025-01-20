@@ -18,18 +18,31 @@ plugins {
 // Informations
 // -------------------
 
+val description = "provides an info dialog"
+
 // Module
 val artifactId = "dialog-info"
 val androidNamespace = "com.michaelflisar.composedialogs.dialogs.info"
 
 // Library
 val libraryName = "ComposeDialogs"
-val libraryDescription = "ComposeDialogs - $artifactId module"
+val libraryDescription = "ComposeDialogs - $artifactId module - $description"
 val groupID = "io.github.mflisar.composedialogs"
 val release = 2023
 val github = "https://github.com/MFlisar/ComposeDialogs"
 val license = "Apache License 2.0"
 val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Variables for Documentation Generator
+// -------------------
+
+// # DEP is an optional arrays!
+
+// OPTIONAL = "true"                // defines if this module is optional or not
+// GROUP_ID = "modules"             // defines the "grouping" in the documentation this module belongs to
+// #DEP = "deps.kotbilling|KotBilling|https://github.com/MFlisar/Kotbilling"
+// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
 
 // -------------------
 // Setup

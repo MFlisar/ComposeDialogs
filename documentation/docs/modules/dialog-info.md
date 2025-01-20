@@ -24,6 +24,6 @@ Generally following can be adjusted:
 
 #### Screenshots
 
-| | | | |
-|-|-|-|-|
-| ![Screenshot](../screenshots/demo_info1.jpg) | ![Screenshot](../screenshots/demo_info2.jpg) | ![Screenshot](../screenshots/demo_info3.jpg) | ![Screenshot](../screenshots/demo_info4.jpg) |
+| | | |                                                   |
+|-|-|-|---------------------------------------------------|
+| ![Screenshot](../screenshots/info/demo_info1.jpg) | ![Screenshot](../screenshots/info/demo_info2.jpg) | ![Screenshot](../screenshots/info/demo_info3.jpg) | ![Screenshot](../screenshots/info/demo_info4.jpg) |

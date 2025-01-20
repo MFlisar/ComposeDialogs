@@ -10,6 +10,9 @@
     <tbody>
         <tr>
         {% for image in screenshot["images"] %}
+		    {% if (loop.index - 1) % 3 == 0 %}
+			</tr><tr>
+		    {% endif %}
             <td><img src="{{ image }}" alt="{{ image }}" height="400"></td>
         {% endfor %}
         </tr>
