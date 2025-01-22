@@ -11,16 +11,16 @@ Generally following can be adjusted:
 * min/max/step values
 * custom formatter
 
-#### Composable
-
-```kotlin
---8<-- "../library/modules/number/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/number/DialogNumberPicker.kt:constructor"
-```
-
 #### Example
 
 ```kotlin
 --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/NumberDemos.kt:demo"
+```
+
+#### Composable
+
+```kotlin
+--8<-- "../library/modules/number/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/number/DialogNumberPicker.kt:constructor"
 ```
 
 #### Screenshots

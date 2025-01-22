@@ -13,16 +13,16 @@ Generally following can be adjusted:
 * cel height of the calendar
 * optional next/previous month buttons
 
-#### Composable
-
-```kotlin
---8<-- "../library/modules/date/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/date/DialogDate.kt:constructor"
-```
-
 #### Example
 
 ```kotlin
 --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-date"
+```
+
+#### Composable
+
+```kotlin
+--8<-- "../library/modules/date/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/date/DialogDate.kt:constructor"
 ```
 
 #### Screenshots

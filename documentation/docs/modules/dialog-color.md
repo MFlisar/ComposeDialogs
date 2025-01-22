@@ -13,16 +13,16 @@ Generally following can be adjusted:
 * the number of columns in the color grid
 * the style of how RGB(A) values are displayed (either as a number in the range of [0, 255] or as a percentage value [0%, 100%])
 
-#### Composable
-
-```kotlin
---8<-- "../library/modules/color/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt:constructor"
-```
-
 #### Example
 
 ```kotlin
 --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/ColorDemos.kt:demo"
+```
+
+#### Composable
+
+```kotlin
+--8<-- "../library/modules/color/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt:constructor"
 ```
 
 #### Screenshots

@@ -10,16 +10,16 @@ Generally following can be adjusted:
 
 * 12h/24h mode
 
-#### Composable
-
-```kotlin
---8<-- "../library/modules/time/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/time/DialogTime.kt:constructor"
-```
-
 #### Example
 
 ```kotlin
 --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-time"
+```
+
+#### Composable
+
+```kotlin
+--8<-- "../library/modules/time/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/time/DialogTime.kt:constructor"
 ```
 
 #### Screenshots

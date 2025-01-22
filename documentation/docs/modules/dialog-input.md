@@ -13,6 +13,20 @@ Generally following can be adjusted:
 * `TextField` options like number of lines, keyboard options, selection state...
 * an optional `DialogInputValidator` can be provided
 
+#### Example
+
+=== "DialogInput"
+
+    ```kotlin
+    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
+    ```
+
+=== "DialogInputNumber"
+
+    ```kotlin
+    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
+    ```
+	
 #### Composable
 
 There are 2 main composables for this dialog, one for a string and for a numerical input.
@@ -27,20 +41,6 @@ There are 2 main composables for this dialog, one for a string and for a numeric
 
     ```kotlin
     --8<-- "../library/modules/input/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/input/DialogInputNumber.kt:constructor"
-    ```
-
-#### Example
-
-=== "DialogInput"
-
-    ```kotlin
-    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
-    ```
-
-=== "DialogInputNumber"
-
-    ```kotlin
-    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
     ```
 
 #### Screenshots

@@ -12,12 +12,6 @@ Generally following can be adjusted:
 * unlimited level of nesting
 * also supports divider items and custom items
 
-#### Composable
-
-```kotlin
---8<-- "../library/modules/menu/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/menu/DialogMenu.kt:constructor"
-```
-
 #### Example
 
 ```kotlin
@@ -28,6 +22,12 @@ Here's a full example of a menu that can be rendered:
 
 ```kotlin
 --8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-menu-items"
+```
+
+#### Composable
+
+```kotlin
+--8<-- "../library/modules/menu/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/menu/DialogMenu.kt:constructor"
 ```
 
 #### Screenshots

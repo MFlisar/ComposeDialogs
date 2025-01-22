@@ -14,10 +14,15 @@ Generally following can be adjusted:
 * filter and search functionality
 * custom items
 
+#### Example
+
+```kotlin
+--8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-list"
+```
+
 #### Composable
 
 There are 2 ways to show a list, one by providing a list of items and one by providing an asynchronous item loader function.
-
 
 === "List"
 
@@ -30,12 +35,6 @@ There are 2 ways to show a list, one by providing a list of items and one by pro
     ```kotlin
     --8<-- "../library/modules/list/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/list/DialogList.kt:constructor2"
     ```
-
-#### Example
-
-```kotlin
---8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-list"
-```
 
 #### Screenshots
 
