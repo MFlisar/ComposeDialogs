@@ -202,10 +202,7 @@ private fun <T> DialogList(
             mutableStateOf("")
         }
 
-        val filteredItemsLoaded =
-            if (itemsProvider is DialogList.ItemProvider.Loader && itemsProvider.itemSaver != null) {
-                rememberSaveable { mutableStateOf(false) }
-            } else remember { mutableStateOf(true) }
+        val filteredItemsLoaded = rememberSaveable { mutableStateOf(itemsProvider is DialogList.ItemProvider.List) }
 
         val filteredItems = remember(items.value, filterText, filter) {
             derivedStateOf {
