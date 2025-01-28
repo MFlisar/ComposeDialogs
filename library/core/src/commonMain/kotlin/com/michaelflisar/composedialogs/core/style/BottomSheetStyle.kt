@@ -145,6 +145,21 @@ internal class BottomSheetStyle(
             dismissOnClickOutside = shouldDismissOnClickOutside
         )
 
+        // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
+        // workaround for close bug
+        var buttonPressed2 = false
+        LaunchedEffect(bottomSheetState.progress == 1f,bottomSheetState.currentDetent, bottomSheetState.targetDetent) {
+            if (bottomSheetState.progress == 1f &&
+                bottomSheetState.targetDetent == SheetDetent.Hidden &&
+                state.interactionSource.dismissAllowed.value
+            ) {
+                if (buttonPressed2)
+                    state.dismiss()
+                else
+                    state.dismiss(onEvent)
+            }
+        }
+
         val onDismiss = { buttonPressed: Boolean ->
             if (state.interactionSource.dismissAllowed.value) {
                 coroutineScope.launch {
@@ -181,16 +196,7 @@ internal class BottomSheetStyle(
             }
         }
 
-        // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
-        var buttonPressed2 = false
-        LaunchedEffect(bottomSheetState.progress == 1f) {
-            if (!state.interactionSource.dismissAllowed.value) {
-                if (buttonPressed2)
-                    state.dismiss()
-                else
-                    state.dismiss(onEvent)
-            }
-        }
+
 
         ModalBottomSheet(
             state = bottomSheetState,
