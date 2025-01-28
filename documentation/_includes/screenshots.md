@@ -5,7 +5,7 @@
 {% for screenshot in project["library"]["screenshots"] %}
 <table> 
     <thead>
-        <tr><th>{{ screenshot["name"] }}</th><th></th></tr>
+        <tr><th>{{ screenshot["name"] }}</th><th></th><th></th></tr>
     </thead>
     <tbody>
         <tr>
