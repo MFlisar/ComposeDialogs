@@ -17,11 +17,16 @@ public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$Type
 
 public final class com/michaelflisar/composedialogs/core/DialogButton {
 	public static final field $stable I
+	public static final field Companion Lcom/michaelflisar/composedialogs/core/DialogButton$Companion;
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/String;)V
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getEnabled ()Z
 	public final fun getText ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/core/DialogButton$Companion {
+	public final fun getDISABLED ()Lcom/michaelflisar/composedialogs/core/DialogButton;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogButtonType : java/lang/Enum {

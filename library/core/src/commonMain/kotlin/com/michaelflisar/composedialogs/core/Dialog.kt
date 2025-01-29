@@ -450,6 +450,7 @@ class DialogButton(
     companion object {
         val DISABLED = DialogButton("")
     }
+
     val enabled: Boolean
         get() = text.isNotEmpty()
 }
