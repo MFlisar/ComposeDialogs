@@ -27,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 
+internal actual val useBottomsheetWorkaround: Boolean = false
+
 @Composable
 actual fun isLandscape() = false
 

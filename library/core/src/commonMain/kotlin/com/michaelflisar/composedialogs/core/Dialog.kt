@@ -60,6 +60,11 @@ object DialogDefaults {
     /**
      * the setup of the dialog buttons
      *
+     * use [buttonsDisabled] if you do not want to show any buttons
+     * use [DialogButton.DISABLED] as button if you do not want to show the respective button
+     *
+     * Info: Buttons with an empty text will be disabled!
+     *
      * @param positive positive [DialogButton]
      * @param negative negative [DialogButton]
      */
@@ -442,19 +447,23 @@ class DialogStateWithData<T>(
 class DialogButton(
     val text: String = ""
 ) {
+    companion object {
+        val DISABLED = DialogButton("")
+    }
     val enabled: Boolean
         get() = text.isNotEmpty()
 }
 
 /**
  * see [DialogDefaults.buttons] and [DialogDefaults.buttonsDisabled]
+ *
  */
 class DialogButtons internal constructor(
     val positive: DialogButton,
     val negative: DialogButton
 ) {
     companion object {
-        val DISABLED = DialogButtons(DialogButton(""), DialogButton(""))
+        val DISABLED = DialogButtons(DialogButton.DISABLED, DialogButton.DISABLED)
     }
 
     val enabled = positive.enabled || negative.enabled

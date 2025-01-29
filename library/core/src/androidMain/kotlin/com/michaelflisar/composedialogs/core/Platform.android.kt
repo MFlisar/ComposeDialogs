@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowInsetsControllerCompat
 import com.composables.core.LocalModalWindow
 
+internal actual val useBottomsheetWorkaround: Boolean = true
+
 @Composable
 actual fun isLandscape(): Boolean =
     LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE

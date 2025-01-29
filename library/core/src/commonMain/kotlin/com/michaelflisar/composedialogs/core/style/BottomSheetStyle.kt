@@ -57,6 +57,7 @@ import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
+import com.michaelflisar.composedialogs.core.useBottomsheetWorkaround
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -146,19 +147,62 @@ internal class BottomSheetStyle(
         )
 
         // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
-        // workaround for close bug
+        // workaround for close bug - not needed on windows!
+        val wasShown = remember { mutableStateOf(false) }
         var buttonPressed2 = false
-        LaunchedEffect(bottomSheetState.progress == 1f,bottomSheetState.currentDetent, bottomSheetState.targetDetent) {
-            if (bottomSheetState.progress == 1f &&
-                bottomSheetState.targetDetent == SheetDetent.Hidden &&
-                state.interactionSource.dismissAllowed.value
+        if (useBottomsheetWorkaround) {
+            LaunchedEffect(
+                bottomSheetState.progress == 1f,
+                //bottomSheetState.isIdle,
+                bottomSheetState.targetDetent,
+                initialAnimationDone.value,
+                wasShown.value
             ) {
-                if (buttonPressed2)
-                    state.dismiss()
-                else
-                    state.dismiss(onEvent)
+                if (bottomSheetState.progress == 1f &&
+                    initialAnimationDone.value &&
+                    wasShown.value &&
+                    //bottomSheetState.isIdle &&
+                    bottomSheetState.targetDetent == SheetDetent.Hidden &&
+                    state.interactionSource.dismissAllowed.value
+                ) {
+                    if (buttonPressed2)
+                        state.dismiss()
+                    else
+                        state.dismiss(onEvent)
+                }
+            }
+            LaunchedEffect(
+                bottomSheetState.targetDetent
+            ) {
+                if (bottomSheetState.targetDetent != SheetDetent.Hidden) {
+                    wasShown.value = true
+                }
             }
         }
+
+/*
+        LaunchedEffect(
+            bottomSheetState.progress == 0f,
+            bottomSheetState.progress == 1f,
+            bottomSheetState.currentDetent,
+            bottomSheetState.targetDetent,
+            bottomSheetState.isIdle,
+            initialAnimationDone.value,
+            wasShown.value
+        ) {
+            println("BOTTOMSHEET")
+            println(" - progress = ${bottomSheetState.progress}")
+            println(" - currentDetent = ${bottomSheetState.currentDetent.identifier}")
+            println(" - targetDetent = ${bottomSheetState.targetDetent.identifier}")
+            println(" - isIdle = ${bottomSheetState.isIdle}")
+            println(" - initialAnimationDone = ${initialAnimationDone.value}")
+            println(" - wasShown = ${wasShown.value}")
+
+            if (bottomSheetState.targetDetent != SheetDetent.Hidden) {
+                wasShown.value = true
+            }
+        }
+*/
 
         val onDismiss = { buttonPressed: Boolean ->
             if (state.interactionSource.dismissAllowed.value) {
@@ -195,8 +239,6 @@ internal class BottomSheetStyle(
                 initialAnimationDone.value = true
             }
         }
-
-
 
         ModalBottomSheet(
             state = bottomSheetState,
@@ -260,8 +302,8 @@ internal class BottomSheetStyle(
                                 .align(Alignment.CenterHorizontally)
                                 .padding(vertical = 22.dp)
                                 .background(
-                                    MaterialTheme.colorScheme.onSurfaceVariant,
-                                    RoundedCornerShape(percent = 50)
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    shape = RoundedCornerShape(percent = 50)
                                 )
                                 .width(32.dp)
                                 .height(4.dp)

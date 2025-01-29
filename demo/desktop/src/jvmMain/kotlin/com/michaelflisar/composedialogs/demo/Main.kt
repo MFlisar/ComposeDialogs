@@ -59,6 +59,7 @@ import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import com.michaelflisar.composedialogs.dialogs.time.styleWindowsTimeDialog
 import com.michaelflisar.toolbox.composables.MyCheckbox
+import com.michaelflisar.toolbox.composables.MyColumn
 import com.michaelflisar.toolbox.composables.MyDropdown
 import com.michaelflisar.toolbox.composables.MyRow
 import com.michaelflisar.toolbox.composables.MyTitle
@@ -95,6 +96,7 @@ fun main() {
             val selectedStyle = remember { mutableStateOf(0) }
             val selectedIconPosition = remember { mutableStateOf(StyleOptions.IconMode.Begin) }
             val showIcon = remember { mutableStateOf(false) }
+            val showButtons = remember { mutableStateOf(true) }
             val infos = remember { mutableStateListOf<String>() }
             val dialog = rememberDialogState<Dialog>(data = null)
             Column(
@@ -105,6 +107,7 @@ fun main() {
                 MyRow {
                     MyDropdown(modifier = Modifier.weight(1f), title = "Dialog Mode", items = styles, selected = selectedStyle)
                     MyCheckbox(modifier = Modifier.wrapContentWidth(), title = "Icon", checked = showIcon)
+                    MyCheckbox(modifier = Modifier.wrapContentWidth(), title = "Buttons", checked = showButtons)
                     MyDropdown<StyleOptions.IconMode>(modifier = Modifier.weight(1f), title = "Icon Position", items = StyleOptions.IconMode.entries, selected = selectedIconPosition, mapper = { item, dropdown -> item.name}, enabled = showIcon.value)
                 }
                FlowRow(
@@ -134,7 +137,9 @@ fun main() {
             }
 
             val getStyle = @Composable { windowsDialogStyle: @Composable () -> ComposeDialogStyle ->
-                val options = StyleOptions(iconMode = selectedIconPosition.value)
+                val options = StyleOptions(
+                    iconMode = selectedIconPosition.value
+                )
                 when (selectedStyle.value) {
                     0 -> DialogDefaults.styleDialog(swipeDismissable = false, options = options)
                     1 -> DialogDefaults.styleBottomSheet(options = options, animateShow = true)
@@ -146,6 +151,9 @@ fun main() {
             val getIcon: (@Composable () -> Unit)? = if (showIcon.value) {
                 { Icon(Icons.Default.Info, null) }
             } else null
+            val buttons = if (showButtons.value) {
+                DialogDefaults.buttons()
+            } else DialogDefaults.buttonsDisabled()
 
             when (dialog.data) {
                 Dialog.Color -> {
@@ -157,6 +165,7 @@ fun main() {
                         style = style,
                         title = { Text("Color Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         color = color,
                         alphaSupported = true,
@@ -179,6 +188,7 @@ fun main() {
                         style = style,
                         title = { Text("Select Date") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         date = date,
                         onEvent = {
@@ -200,6 +210,7 @@ fun main() {
                         style = style,
                         title = { Text("Select Time") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         time = time,
                         //setup = DialogTimeDefaults.setup(is24Hours = true),
@@ -221,6 +232,7 @@ fun main() {
                         style = style,
                         title = { Text("Info Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         info = "Information",
                         infoLabel = "Important",
@@ -238,6 +250,7 @@ fun main() {
                         style = style,
                         title = { Text("Progress Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         content = {
                             Text("Loading...")
@@ -257,6 +270,7 @@ fun main() {
                         style = style,
                         title = { Text("Input Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         label = "Enter some text...",
                         value = input,
@@ -279,6 +293,7 @@ fun main() {
                         style = style,
                         title = { Text("Number Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         label = "Enter a valid Integer...",
                         value = input,
@@ -301,6 +316,7 @@ fun main() {
                         style = style,
                         title = { Text("Number Picker Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         state = dialog,
                         value = value,
                         setup = NumberPickerSetup(
@@ -327,6 +343,7 @@ fun main() {
                         style = style,
                         title = { Text("List Dialog") },
                         icon = getIcon,
+                        buttons = buttons,
                         description = "Some optional description",
                         state = dialog,
                         items = items,

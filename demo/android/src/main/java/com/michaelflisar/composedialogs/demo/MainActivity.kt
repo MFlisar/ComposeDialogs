@@ -61,7 +61,8 @@ class MainActivity : DemoActivity(
 
         val s = if (style.value == DemoStyle.BottomSheet) {
             DialogDefaults.styleBottomSheet(
-                dragHandle = true
+                dragHandle = true,
+                animateShow = true
                 // ...
             )
         } else {

@@ -28,7 +28,7 @@ internal fun ColumnScope.ComposeDialogButtons(
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
-    if (buttons.negative.text.isEmpty() && buttons.positive.text.isEmpty()) {
+    if (!buttons.enabled) {
         return
     }
     Box(

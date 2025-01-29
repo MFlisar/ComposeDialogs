@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+internal expect val useBottomsheetWorkaround: Boolean
+
 @Composable
 expect fun stringOk() : String
 
