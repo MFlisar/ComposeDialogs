@@ -402,6 +402,9 @@ fun main() {
                                     icon = { Icon(Icons.Default.Info, null) }) {
                                     infos.add("Sub Item 2 clicked")
                                 },
+                                MenuItem.Region(
+                                    "Region X"
+                                ),
                                 MenuItem.Item(
                                     title = "Sub Item 3",
                                     description = "Description 3",

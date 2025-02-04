@@ -14,6 +14,11 @@ sealed class MenuItem {
         val onClick: () -> Unit
     ) : MenuItem()
 
+    data class Region(
+        val title: String,
+        val description: String? = null
+    ) : MenuItem()
+
     data class SubMenu(
         val title: String,
         val description: String? = null,

@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.modifier.modifierLocalMapOf
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
 
@@ -113,7 +115,19 @@ fun DialogMenu(
                                 if (it.dismissOnClick) {
                                     state.dismiss()
                                 }
+                                Unit
                             }
+                        )
+                    }
+
+                    is MenuItem.Region -> {
+                        MenuRow(
+                            title = it.title,
+                            description = it.description,
+                            icon = null,
+                            textStyleTitle = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            textStyleDescription = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                            onMenuClicked = null
                         )
                     }
 
@@ -146,7 +160,9 @@ private fun MenuRow(
     description: String?,
     icon: @Composable (() -> Unit)?,
     endIcon: @Composable (() -> Unit)? = null,
-    onMenuClicked: () -> Unit,
+    textStyleTitle: TextStyle = MaterialTheme.typography.bodyLarge,
+    textStyleDescription: TextStyle = MaterialTheme.typography.bodyMedium,
+    onMenuClicked: (() -> Unit?)?
 ) {
     val paddingVertical = 8.dp
     val paddingHorizontal = 16.dp
@@ -160,9 +176,11 @@ private fun MenuRow(
             .defaultMinSize(minHeight = 48.dp)
             .height(IntrinsicSize.Min)
             .clip(MaterialTheme.shapes.small)
-            .clickable {
-                onMenuClicked()
-            }
+            .then(
+                if (onMenuClicked != null) {
+                    Modifier.clickable { onMenuClicked() }
+                } else Modifier
+            )
             .padding(horizontal = paddingHorizontal),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -178,14 +196,14 @@ private fun MenuRow(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.bodyLarge,
+                style = textStyleTitle,
                 maxLines = maxLinesText,
                 color = MaterialTheme.colorScheme.onSurface
             )
             if (description?.isNotEmpty() == true) {
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = textStyleDescription,
                     maxLines = maxLinesSupportingText,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
