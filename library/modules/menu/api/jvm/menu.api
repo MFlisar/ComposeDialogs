@@ -52,6 +52,21 @@ public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Item :
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$Region : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Region;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Region;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/menu/MenuItem$Region;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/menu/MenuItem$SubMenu : com/michaelflisar/composedialogs/dialogs/menu/MenuItem {
 	public static final field $stable I
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Ljava/util/List;)V
