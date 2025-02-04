@@ -22,6 +22,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
@@ -38,6 +39,7 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListItem
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListTrailingContent
@@ -77,7 +79,7 @@ fun <T> DialogList(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -143,7 +145,7 @@ fun <T> DialogList(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor2] */
@@ -186,7 +188,8 @@ private fun <T> DialogList(
     options: Options,
     onEvent: (event: DialogEvent) -> Unit
 ) {
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = onEvent) {
         val items = when (itemsProvider) {
             is DialogList.ItemProvider.List -> remember(itemsProvider) { mutableStateOf(itemsProvider.items) }
             is DialogList.ItemProvider.Loader -> {

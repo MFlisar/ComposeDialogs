@@ -12,6 +12,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.DialogStyleDesktopOtions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.StyleOptions
@@ -35,6 +36,7 @@ class DialogStyleDesktop(
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
         options: Options,
+        dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
@@ -70,7 +72,8 @@ class DialogStyleDesktop(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(weight = 1f, fill = true)
+                        modifier = Modifier.weight(weight = 1f, fill = true),
+                        bottomPadding = dialogOptions.contentPadding(buttons)
                     )
 
                     // Buttons

@@ -2,6 +2,9 @@ package com.michaelflisar.composedialogs.core
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -77,6 +80,12 @@ actual fun DialogContentScrollableColumn(
 actual fun DialogContentScrollableLazyColumn(
     modifier: Modifier,
     state: LazyListState,
+    contentPadding: PaddingValues,
+    reverseLayout: Boolean,
+    verticalArrangement: Arrangement.Vertical,
+    horizontalAlignment: Alignment.Horizontal,
+    flingBehavior: FlingBehavior,
+    userScrollEnabled: Boolean,
     content: LazyListScope.() -> Unit
 ) {
     val contentHeight = remember { mutableStateOf(0) }
@@ -92,7 +101,13 @@ actual fun DialogContentScrollableLazyColumn(
                 .onSizeChanged {
                     contentHeight.value = it.height
                 },
-            state = state
+            state = state,
+            contentPadding = contentPadding,
+            reverseLayout = reverseLayout,
+            verticalArrangement = verticalArrangement,
+            horizontalAlignment = horizontalAlignment,
+            flingBehavior = flingBehavior,
+            userScrollEnabled = userScrollEnabled
         ) {
             content()
         }

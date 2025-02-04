@@ -52,6 +52,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
@@ -109,6 +110,7 @@ internal class BottomSheetStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
+        dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit
@@ -274,7 +276,11 @@ internal class BottomSheetStyle(
                             with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
                     }
                     .padding(top = 12.dp)
-                    .let { if (isCompact) it else it.padding(horizontal = 56.dp) }
+                    .then(
+                        if (isCompact) {
+                            Modifier
+                        } else Modifier.padding(horizontal = 56.dp)
+                    )
                     .statusBarsPadding()
                     .padding(
                         WindowInsets.navigationBars
@@ -324,7 +330,8 @@ internal class BottomSheetStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(weight = 1f, fill = false).padding(horizontal = 24.dp)
+                        modifier = Modifier.weight(weight = 1f, fill = false).padding(horizontal = 24.dp),
+                        bottomPadding = dialogOptions.contentPadding(buttons)
                     )
 
                     // 4) Footer

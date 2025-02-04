@@ -49,6 +49,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
@@ -101,6 +102,7 @@ internal class DialogStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
+        dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
@@ -210,7 +212,8 @@ internal class DialogStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(weight = 1f, fill = false)
+                        modifier = Modifier.weight(weight = 1f, fill = false),
+                        bottomPadding = dialogOptions.contentPadding(buttons)
                     )
 
                     // Buttons

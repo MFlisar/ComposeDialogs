@@ -11,20 +11,22 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun ColumnScope.ComposeDialogContent(
     content: @Composable () -> Unit,
     contentColor: Color,
-    modifier: Modifier
+    modifier: Modifier,
+    bottomPadding: Dp
 ) {
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         val textStyle = MaterialTheme.typography.bodyMedium
         ProvideTextStyle(textStyle) {
             Box(
                 modifier
-                    .padding(bottom = 24.dp)
+                    .padding(bottom = bottomPadding)
                     .align(Alignment.Start),
                 contentAlignment = Alignment.TopStart
             ) {

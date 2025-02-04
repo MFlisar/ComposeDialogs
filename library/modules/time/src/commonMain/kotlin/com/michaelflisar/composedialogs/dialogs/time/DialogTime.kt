@@ -42,7 +42,7 @@ fun DialogTime(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -51,7 +51,8 @@ fun DialogTime(
     //    time.seconds.value = 0
     //}
 
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = onEvent) {
         val state = rememberTimePickerState(
             time.value.hour,
             time.value.minute,

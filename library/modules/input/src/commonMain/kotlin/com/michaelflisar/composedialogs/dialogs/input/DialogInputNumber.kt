@@ -20,6 +20,7 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /* --8<-- [start: constructor] */
@@ -73,12 +74,13 @@ fun <T : Number> DialogInputNumber(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = onEvent) {
         val modifier = when (style.type) {
             ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()
             ComposeDialogStyle.Type.Dialog -> DialogStyleModifier

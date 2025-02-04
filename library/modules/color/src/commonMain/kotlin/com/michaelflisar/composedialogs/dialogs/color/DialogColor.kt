@@ -33,6 +33,7 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.color.DialogColorDefaults.texts
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
@@ -75,7 +76,7 @@ fun DialogColor(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -92,7 +93,8 @@ fun DialogColor(
     val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
     val colorState = rememberSaveable { mutableStateOf(DialogColor.Page.Presets) }
 
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = onEvent) {
 
         val landscape = isLandscape()
 

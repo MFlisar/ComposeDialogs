@@ -34,12 +34,13 @@ fun DialogInfo(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = onEvent) {
         Column {
             if (infoLabel.isNotEmpty()) {
                 Text(modifier = Modifier.padding(bottom = 8.dp), text = infoLabel, style = MaterialTheme.typography.titleSmall)

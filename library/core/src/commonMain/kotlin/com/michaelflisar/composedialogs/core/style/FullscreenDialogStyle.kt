@@ -29,6 +29,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitleToolbar
@@ -79,6 +80,7 @@ internal class FullscreenDialogStyle(
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
         options: Options,
+        dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
@@ -161,7 +163,8 @@ internal class FullscreenDialogStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(1f).padding(all = 16.dp)
+                        modifier = Modifier.weight(1f).padding(all = 16.dp),
+                        bottomPadding = dialogOptions.spacingContentToBottom // we don't have buttons in this style!
                     )
 
                     // Buttons

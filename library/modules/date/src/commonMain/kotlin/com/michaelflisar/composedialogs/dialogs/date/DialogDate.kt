@@ -39,6 +39,7 @@ import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarHeader
@@ -80,12 +81,13 @@ fun DialogDate(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
     val landscape = isLandscape()
+    val dialogOptions = DialogOptions.create(style)
     Dialog(
         state,
         title?.takeIf { !landscape },
@@ -93,6 +95,7 @@ fun DialogDate(
         style,
         buttons,
         options,
+        dialogOptions = dialogOptions,
         onEvent = onEvent
     ) {
         val pages = (dateRange.years.last - dateRange.years.first + 1) * 12

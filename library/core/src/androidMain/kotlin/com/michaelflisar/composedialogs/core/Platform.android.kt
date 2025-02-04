@@ -1,8 +1,11 @@
 package com.michaelflisar.composedialogs.core
 
 import android.content.res.Configuration
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -11,6 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
@@ -53,12 +57,24 @@ actual fun DialogContentScrollableColumn(
 actual fun DialogContentScrollableLazyColumn(
     modifier: Modifier,
     state: LazyListState,
+    contentPadding: PaddingValues,
+    reverseLayout: Boolean,
+    verticalArrangement: Arrangement.Vertical,
+    horizontalAlignment: Alignment.Horizontal,
+    flingBehavior: FlingBehavior,
+    userScrollEnabled: Boolean,
     content: LazyListScope.() -> Unit
 ) {
     LazyColumn(
         modifier = modifier
             .padding(end = 4.dp),
-        state = state
+        state = state,
+        contentPadding = contentPadding,
+        reverseLayout = reverseLayout,
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+        flingBehavior = flingBehavior,
+        userScrollEnabled = userScrollEnabled
     ) {
         content()
     }

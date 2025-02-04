@@ -43,6 +43,7 @@ import com.michaelflisar.composedialogs.core.DialogUtil
 import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.kotbilling.KotBilling
 import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
@@ -107,7 +108,7 @@ fun DialogBilling(
         mutableStateOf(buttons1)
     }
 
-    val options = Options(
+    val options = DialogDefaults.options(
         dismissOnButtonClick = false
     )
 
@@ -123,7 +124,8 @@ fun DialogBilling(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    Dialog(state, title, icon, style, buttons, options, onEvent = {
+    val dialogOptions = DialogOptions.create(style)
+    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = {
         var handled = false
         if (it.isPositiveButton) {
             if (purchasing.value is Purchasing.None && products.size == 1) {

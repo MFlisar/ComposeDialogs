@@ -26,6 +26,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
  * @param options the [Options] of the dialog
+ * @param dialogOptions the [DialogOptions] of the dialog - should be used by custom dialogs only
  * @param onEvent the callback for all [DialogEvent] - this can be a button click [DialogEvent.Button] or the dismiss information [DialogEvent.Dismissed]
  * @param content the content of this dialog
  */
@@ -36,7 +37,8 @@ fun Dialog(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = Options(),
+    options: Options = DialogDefaults.options(),
+    dialogOptions: DialogOptions = DialogOptions.create(style),
     onEvent: (event: DialogEvent) -> Unit = {},
     content: @Composable () -> Unit
 ) {
@@ -45,6 +47,7 @@ fun Dialog(
         icon,
         buttons,
         options,
+        dialogOptions,
         state,
         onEvent,
         content
@@ -213,8 +216,7 @@ object DialogDefaults {
         titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor
     ): ComposeDialogStyle
-            /* --8<-- [end: style-full-screen-dialog] */
-    {
+            /* --8<-- [end: style-full-screen-dialog] */ {
         return FullscreenDialogStyle(
             darkStatusBar,
             menuActions,
@@ -229,6 +231,23 @@ object DialogDefaults {
             contentColor
         )
     }
+
+    /* --8<-- [start: options] */
+    /**
+     * the main options for a dialog
+     *
+     * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
+     * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
+     * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
+     */
+    fun options(
+        dismissOnButtonClick: Boolean = true,
+        dismissOnBackPress: Boolean = true,
+        dismissOnClickOutside: Boolean = true
+    ): Options
+            /* --8<-- [end: options] */ {
+        return Options(dismissOnButtonClick, dismissOnBackPress, dismissOnClickOutside)
+    }
 }
 
 // ------------------
@@ -242,6 +261,7 @@ object DialogDefaults {
  * [DialogEvent.isPositiveButton] a convenient value to determine, if this is the event of the positive dialog button
  */
 sealed class DialogEvent {
+
     abstract val dismissed: Boolean
     abstract val isPositiveButton: Boolean // most interesting attribute so we make it easily accessible
 
@@ -251,8 +271,10 @@ sealed class DialogEvent {
      * @param button the [DialogButtonType] of the button that was clicked
      * @param dismissed the information if this button will dismiss the dialog or not
      */
-    data class Button(val button: DialogButtonType, override val dismissed: Boolean) :
-        DialogEvent() {
+    class Button(
+        val button: DialogButtonType,
+        override val dismissed: Boolean
+    ) : DialogEvent() {
         override val isPositiveButton = button == DialogButtonType.Positive
     }
 
@@ -470,26 +492,59 @@ class DialogButtons internal constructor(
     val enabled = positive.enabled || negative.enabled
 }
 
-/* --8<-- [start: class-options] */
 /**
- * the main options for a dialog
+ * see [DialogDefaults.options]
  *
- * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
- * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
- * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
  */
-data class Options(
-    val dismissOnButtonClick: Boolean = true,
-    val dismissOnBackPress: Boolean = true,
-    val dismissOnClickOutside: Boolean = true,
-)
-/* --8<-- [end: class-options] */
+class Options internal constructor(
+    val dismissOnButtonClick: Boolean,
+    val dismissOnBackPress: Boolean,
+    val dismissOnClickOutside: Boolean
+) {
+    fun copy(
+        dismissOnButtonClick: Boolean = this.dismissOnButtonClick,
+        dismissOnBackPress: Boolean = this.dismissOnBackPress,
+        dismissOnClickOutside: Boolean = this.dismissOnClickOutside
+    ) = Options(
+        dismissOnButtonClick,
+        dismissOnBackPress,
+        dismissOnClickOutside
+    )
+}
 
-data class StyleOptions(
-    val iconMode: IconMode = IconMode.CenterTop,
+class StyleOptions(
+    val iconMode: IconMode = IconMode.CenterTop
 ) {
     enum class IconMode {
         CenterTop,
         Begin
     }
+
+    fun copy(
+        iconMode: IconMode = this.iconMode
+    ) = StyleOptions(iconMode)
+}
+
+class DialogOptions(
+    val spacingContentToButtons: Dp,
+    val spacingContentToBottom: Dp
+) {
+    companion object {
+
+        @Composable
+        fun create(style: ComposeDialogStyle): DialogOptions {
+            return if (style.type == ComposeDialogStyle.Type.BottomSheet) {
+                DialogOptions(24.dp, 8.dp)
+            } else DialogOptions(24.dp, 24.dp)
+        }
+
+    }
+
+    fun copy(
+        spacingContentToButtons: Dp = this.spacingContentToButtons,
+        spacingContentToBottom: Dp = this.spacingContentToBottom
+    ) = DialogOptions(spacingContentToButtons, spacingContentToBottom)
+
+    fun contentPadding(buttons: DialogButtons) =
+        if (buttons.enabled) spacingContentToButtons else spacingContentToBottom
 }
