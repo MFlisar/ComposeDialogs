@@ -3,6 +3,7 @@ package com.michaelflisar.composedialogs.core.style
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -58,7 +59,6 @@ import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
-import com.michaelflisar.composedialogs.core.useBottomsheetWorkaround
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -152,6 +152,7 @@ internal class BottomSheetStyle(
         // workaround for close bug - not needed on windows!
         val wasShown = remember { mutableStateOf(false) }
         var buttonPressed2 = false
+        val useBottomsheetWorkaround = false
         if (useBottomsheetWorkaround) {
             LaunchedEffect(
                 bottomSheetState.progress == 1f,
@@ -269,12 +270,8 @@ internal class BottomSheetStyle(
                             with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
                     }
             )
-            Sheet(
+            Box(
                 modifier = Modifier
-                    .onSizeChanged {
-                        contentSize.value =
-                            with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
-                    }
                     .padding(top = 12.dp)
                     .then(
                         if (isCompact) {
@@ -287,89 +284,98 @@ internal class BottomSheetStyle(
                             .only(WindowInsetsSides.Horizontal)
                             .asPaddingValues()
                     )
-                    .shadow(4.dp, shape)
-                    .clip(shape)
-                    .background(containerColor)
-                    .widthIn(max = 640.dp)
-                    .fillMaxWidth()
-                    .imePadding()
             ) {
-
-                Column(
-                    Modifier
+                Sheet(
+                    modifier = Modifier
+                        .onSizeChanged {
+                            contentSize.value =
+                                with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
+                        }
+                        .shadow(4.dp, shape)
+                        .clip(shape)
+                        .background(containerColor)
+                        .widthIn(max = 640.dp)
                         .fillMaxWidth()
-
+                        .imePadding()
                 ) {
 
-                    // 1) Drag Header On Top
-                    if (dragHandle) {
-                        DragIndication(
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(vertical = 22.dp)
-                                .background(
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    shape = RoundedCornerShape(percent = 50)
-                                )
-                                .width(32.dp)
-                                .height(4.dp)
-                        )
-                    }
-
-                    // 2) Icon + Title
-                    ComposeDialogTitle(
-                        modifier = Modifier.padding(horizontal = 24.dp),
-                        title = title,
-                        icon = icon,
-                        iconColor = iconColor,
-                        titleColor = titleColor,
-                        options = this@BottomSheetStyle.options,
-                    )
-
-                    // 3) Content
-                    ComposeDialogContent(
-                        content = content,
-                        contentColor = contentColor,
-                        modifier = Modifier.weight(weight = 1f, fill = false).padding(horizontal = 24.dp),
-                        bottomPadding = dialogOptions.contentPadding(buttons)
-                    )
-
-                    // 4) Footer
                     Column(
-                        modifier = Modifier
-                            .then(
-                                if (buttons.enabled) {
-                                    Modifier.offset {
-                                        IntOffset(
-                                            0,
-                                            (contentSize.value.height.roundToPx() - bottomSheetState.offset).roundToInt() * -1
-                                        )
-                                    }
-                                } else Modifier
-                            )
+                        Modifier
+                            .fillMaxWidth()
+
                     ) {
-                        ComposeDialogButtons(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(containerColor)
-                                .padding(horizontal = 24.dp),
-                            buttons = buttons,
-                            options = options,
-                            state = state,
-                            dismissOnButtonPressed = {
-                                buttonPressed2 = true
-                                onDismiss(true)
-                            },
-                            onEvent = onEvent
+
+                        // 1) Drag Header On Top
+                        if (dragHandle) {
+                            DragIndication(
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .padding(vertical = 22.dp)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        shape = RoundedCornerShape(percent = 50)
+                                    )
+                                    .width(32.dp)
+                                    .height(4.dp)
+                            )
+                        }
+
+                        // 2) Icon + Title
+                        ComposeDialogTitle(
+                            modifier = Modifier.padding(horizontal = 24.dp),
+                            title = title,
+                            icon = icon,
+                            iconColor = iconColor,
+                            titleColor = titleColor,
+                            options = this@BottomSheetStyle.options,
                         )
 
-                        // 5) Spacer behind nav bar
-                        Spacer(
-                            Modifier
-                                .fillMaxWidth()
-                                .windowInsetsBottomHeight(WindowInsets.navigationBars)
-                                .background(containerColor)
+                        // 3) Content
+                        ComposeDialogContent(
+                            content = content,
+                            contentColor = contentColor,
+                            modifier = Modifier.weight(weight = 1f, fill = false)
+                                .padding(horizontal = 24.dp),
+                            bottomPadding = dialogOptions.contentPadding(buttons)
                         )
+
+                        // 4) Footer
+                        Column(
+                            modifier = Modifier
+                                .then(
+                                    if (buttons.enabled) {
+                                        Modifier.offset {
+                                            IntOffset(
+                                                0,
+                                                (contentSize.value.height.toPx() - bottomSheetState.offset).roundToInt() * -1 + 1 // +1 for rounding errors? otherwise it sometimes does show a pixel row below the bottom that is not overlayed by the buttons...
+                                            )
+                                        }
+                                    } else Modifier
+                                )
+                        ) {
+                            ComposeDialogButtons(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(containerColor)
+                                    .padding(horizontal = 24.dp),
+                                buttons = buttons,
+                                options = options,
+                                state = state,
+                                dismissOnButtonPressed = {
+                                    buttonPressed2 = true
+                                    onDismiss(true)
+                                },
+                                onEvent = onEvent
+                            )
+
+                            // 5) Spacer behind nav bar
+                            Spacer(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .windowInsetsBottomHeight(WindowInsets.navigationBars)
+                                    .background(containerColor)
+                            )
+                        }
                     }
                 }
             }

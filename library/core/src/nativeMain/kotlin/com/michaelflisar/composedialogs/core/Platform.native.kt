@@ -16,8 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-internal actual val useBottomsheetWorkaround: Boolean = true
-
 @Composable
 actual fun isLandscape() = false
 

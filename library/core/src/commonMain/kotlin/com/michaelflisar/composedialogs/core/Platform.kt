@@ -13,8 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-internal expect val useBottomsheetWorkaround: Boolean
-
 @Composable
 expect fun stringOk() : String
 
