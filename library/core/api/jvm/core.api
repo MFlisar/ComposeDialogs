@@ -54,8 +54,8 @@ public final class com/michaelflisar/composedialogs/core/DialogDefaults {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/DialogDefaults;
 	public final fun buttons (Lcom/michaelflisar/composedialogs/core/DialogButton;Lcom/michaelflisar/composedialogs/core/DialogButton;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogButtons;
 	public final fun buttonsDisabled (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogButtons;
-	public final fun options (ZZZ)Lcom/michaelflisar/composedialogs/core/Options;
-	public static synthetic fun options$default (Lcom/michaelflisar/composedialogs/core/DialogDefaults;ZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
+	public final fun options (ZZZZ)Lcom/michaelflisar/composedialogs/core/Options;
+	public static synthetic fun options$default (Lcom/michaelflisar/composedialogs/core/DialogDefaults;ZZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
 	public final fun styleBottomSheet-cN2ds20 (ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleDialog-zTql3dQ (ZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleFullscreenDialog-mjZQz9k (ZLkotlin/jvm/functions/Function3;ZJJJJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
@@ -102,7 +102,6 @@ public final class com/michaelflisar/composedialogs/core/DialogKt {
 public final class com/michaelflisar/composedialogs/core/DialogOptions {
 	public static final field $stable I
 	public static final field Companion Lcom/michaelflisar/composedialogs/core/DialogOptions$Companion;
-	public synthetic fun <init> (FFLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun contentPadding-u2uoSUM (Lcom/michaelflisar/composedialogs/core/DialogButtons;)F
 	public final fun copy-YgX7TsA (FF)Lcom/michaelflisar/composedialogs/core/DialogOptions;
 	public static synthetic fun copy-YgX7TsA$default (Lcom/michaelflisar/composedialogs/core/DialogOptions;FFILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/DialogOptions;
@@ -171,11 +170,12 @@ public final class com/michaelflisar/composedialogs/core/DialogStyleDesktopOtion
 
 public final class com/michaelflisar/composedialogs/core/Options {
 	public static final field $stable I
-	public final fun copy (ZZZ)Lcom/michaelflisar/composedialogs/core/Options;
-	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/core/Options;ZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
+	public final fun copy (ZZZZ)Lcom/michaelflisar/composedialogs/core/Options;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/core/Options;ZZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
 	public final fun getDismissOnBackPress ()Z
 	public final fun getDismissOnButtonClick ()Z
 	public final fun getDismissOnClickOutside ()Z
+	public final fun getScrim ()Z
 }
 
 public final class com/michaelflisar/composedialogs/core/Platform_jvmKt {

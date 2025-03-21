@@ -165,17 +165,20 @@ internal class DialogStyle(
                 } else false
             }
 
-            Scrim(
-                enter = fadeIn(),
-                exit = fadeOut(),
-                scrimColor = MaterialTheme.colorScheme.scrim.copy(0.3f),
-                modifier = Modifier
-                    .fillMaxSize()
-                    .onSizeChanged {
-                        scrimSize.value =
-                            with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
-                    }
-            )
+            if (options.scrim) {
+                Scrim(
+                    enter = fadeIn(),
+                    exit = fadeOut(),
+                    scrimColor = MaterialTheme.colorScheme.scrim.copy(0.3f),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .onSizeChanged {
+                            scrimSize.value =
+                                with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
+                        }
+                )
+            }
+
             DialogPanel(
                 modifier = Modifier
                     .onSizeChanged {

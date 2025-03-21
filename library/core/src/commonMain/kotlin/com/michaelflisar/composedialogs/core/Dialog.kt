@@ -239,14 +239,16 @@ object DialogDefaults {
      * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
      * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
      * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
+     * @param scrim if true, the dialog will be show a scrim
      */
     fun options(
         dismissOnButtonClick: Boolean = true,
         dismissOnBackPress: Boolean = true,
-        dismissOnClickOutside: Boolean = true
+        dismissOnClickOutside: Boolean = true,
+        scrim: Boolean = true,
     ): Options
             /* --8<-- [end: options] */ {
-        return Options(dismissOnButtonClick, dismissOnBackPress, dismissOnClickOutside)
+        return Options(dismissOnButtonClick, dismissOnBackPress, dismissOnClickOutside, scrim)
     }
 }
 
@@ -499,16 +501,19 @@ class DialogButtons internal constructor(
 class Options internal constructor(
     val dismissOnButtonClick: Boolean,
     val dismissOnBackPress: Boolean,
-    val dismissOnClickOutside: Boolean
+    val dismissOnClickOutside: Boolean,
+    val scrim: Boolean
 ) {
     fun copy(
         dismissOnButtonClick: Boolean = this.dismissOnButtonClick,
         dismissOnBackPress: Boolean = this.dismissOnBackPress,
-        dismissOnClickOutside: Boolean = this.dismissOnClickOutside
+        dismissOnClickOutside: Boolean = this.dismissOnClickOutside,
+        scrim: Boolean = this.scrim
     ) = Options(
         dismissOnButtonClick,
         dismissOnBackPress,
-        dismissOnClickOutside
+        dismissOnClickOutside,
+        scrim
     )
 }
 
@@ -525,7 +530,7 @@ class StyleOptions(
     ) = StyleOptions(iconMode)
 }
 
-class DialogOptions(
+class DialogOptions internal constructor(
     val spacingContentToButtons: Dp,
     val spacingContentToBottom: Dp
 ) {
