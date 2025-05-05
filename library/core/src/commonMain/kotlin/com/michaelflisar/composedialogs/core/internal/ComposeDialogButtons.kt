@@ -13,7 +13,6 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.ButtonsCrossAxisSpacing
 import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
@@ -23,7 +22,6 @@ import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
 internal fun ColumnScope.ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
-    options: Options,
     state: DialogState,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
@@ -47,7 +45,6 @@ internal fun ColumnScope.ComposeDialogButtons(
                         ComposeDialogButton(
                             button = buttons.negative,
                             buttonType = DialogButtonType.Negative,
-                            options = options,
                             state = state,
                             dismissOnButtonPressed = dismissOnButtonPressed,
                             onEvent = onEvent
@@ -55,7 +52,6 @@ internal fun ColumnScope.ComposeDialogButtons(
                         ComposeDialogButton(
                             button = buttons.positive,
                             buttonType = DialogButtonType.Positive,
-                            options = options,
                             state = state,
                             dismissOnButtonPressed = dismissOnButtonPressed,
                             onEvent = onEvent

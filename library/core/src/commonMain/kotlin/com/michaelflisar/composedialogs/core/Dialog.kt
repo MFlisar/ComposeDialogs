@@ -25,7 +25,6 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
  * @param icon the optional icon of the dialog
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
- * @param options the [Options] of the dialog
  * @param dialogOptions the [DialogOptions] of the dialog - should be used by custom dialogs only
  * @param onEvent the callback for all [DialogEvent] - this can be a button click [DialogEvent.Button] or the dismiss information [DialogEvent.Dismissed]
  * @param content the content of this dialog
@@ -37,7 +36,6 @@ fun Dialog(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = DialogDefaults.options(),
     dialogOptions: DialogOptions = DialogOptions.create(style),
     onEvent: (event: DialogEvent) -> Unit = {},
     content: @Composable () -> Unit
@@ -46,7 +44,6 @@ fun Dialog(
         title,
         icon,
         buttons,
-        options,
         dialogOptions,
         state,
         onEvent,
@@ -93,12 +90,13 @@ object DialogDefaults {
      * @param swipeDismissable if true, the dialog can be swiped away by an up/down swipe
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param scrim if true, the dialog will a show a scrim behind it
      * @param options provides custom style options of the dialog
      * @param shape the [Shape] of the dialog
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
      * @param titleColor the content [Color] of the title
-     * @param textColor the content [Color] of the text
+     * @param contentColor the content [Color] of the text
      */
     @Composable
     fun styleDialog(
@@ -106,6 +104,7 @@ object DialogDefaults {
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         dismissOnClickOutside: Boolean = true,
+        scrim: Boolean = true,
         // Style
         options: StyleOptions = StyleOptions(),
         shape: Shape = DialogStyleDefaults.shape,
@@ -120,6 +119,7 @@ object DialogDefaults {
             // DialogProperties
             dismissOnBackPress,
             dismissOnClickOutside,
+            scrim,
             // Style
             options,
             shape,
@@ -142,12 +142,13 @@ object DialogDefaults {
      * @param animateShow if true, the sheet will be animated on first show
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param dismissOnClickOutside if true, the dialog can be dismissed by clicking outside of its borders
+     * @param scrim if true, the dialog will a show a scrim behind it
      * @param options provides custom style options of the dialog
      * @param shape the [Shape] of the dialog
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
      * @param titleColor the content [Color] of the title
-     * @param textColor the content [Color] of the text
+     * @param contentColor the content [Color] of the text
      */
     @Composable
     fun styleBottomSheet(
@@ -160,6 +161,7 @@ object DialogDefaults {
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         dismissOnClickOutside: Boolean = true,
+        scrim: Boolean = true,
         // Style
         options: StyleOptions = StyleOptions(),
         shape: Shape = BottomSheetStyleDefaults.shape,
@@ -179,6 +181,7 @@ object DialogDefaults {
             // DialogProperties
             dismissOnBackPress,
             dismissOnClickOutside,
+            scrim,
             // Style
             options,
             shape,
@@ -230,25 +233,6 @@ object DialogDefaults {
             titleColor,
             contentColor
         )
-    }
-
-    /* --8<-- [start: options] */
-    /**
-     * the main options for a dialog
-     *
-     * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
-     * @param dismissOnBackPress if true, the dialog will be dismissed if the user pressed the back button
-     * @param dismissOnClickOutside if true, the dialog will be dismissed if the user clicks outside of the dialog
-     * @param scrim if true, the dialog will be show a scrim
-     */
-    fun options(
-        dismissOnButtonClick: Boolean = true,
-        dismissOnBackPress: Boolean = true,
-        dismissOnClickOutside: Boolean = true,
-        scrim: Boolean = true,
-    ): Options
-            /* --8<-- [end: options] */ {
-        return Options(dismissOnButtonClick, dismissOnBackPress, dismissOnClickOutside, scrim)
     }
 }
 
@@ -305,12 +289,14 @@ enum class DialogButtonType {
  * @param buttonNegativeEnabled the negative button is only enabled if this state is true
  * @param dismissAllowed the dialog can only be dismissed if this state is true
  * @param swipeAllowed the dialog can only be swiped away if this state is true
+ * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
  */
 class DialogInteractionSource internal constructor(
     val buttonPositiveEnabled: MutableState<Boolean>,
     val buttonNegativeEnabled: MutableState<Boolean>,
     val dismissAllowed: MutableState<Boolean>,
-    val swipeAllowed: MutableState<Boolean>
+    val swipeAllowed: MutableState<Boolean>,
+    val dismissOnButtonClick: MutableState<Boolean>
 )
 
 /**
@@ -391,6 +377,15 @@ abstract class DialogState {
      */
     fun dismissable(enabled: Boolean) {
         interactionSource.dismissAllowed.value = enabled
+    }
+
+    /**
+     * this will make the dialog auto dismiss if a button is presed
+     *
+     * @param enabled if true, the dialog will be dismissed if a button is pressed
+     */
+    fun dismissOnButtonClick(enabled: Boolean) {
+        interactionSource.dismissOnButtonClick.value = enabled
     }
 }
 
@@ -492,29 +487,6 @@ class DialogButtons internal constructor(
     }
 
     val enabled = positive.enabled || negative.enabled
-}
-
-/**
- * see [DialogDefaults.options]
- *
- */
-class Options internal constructor(
-    val dismissOnButtonClick: Boolean,
-    val dismissOnBackPress: Boolean,
-    val dismissOnClickOutside: Boolean,
-    val scrim: Boolean
-) {
-    fun copy(
-        dismissOnButtonClick: Boolean = this.dismissOnButtonClick,
-        dismissOnBackPress: Boolean = this.dismissOnBackPress,
-        dismissOnClickOutside: Boolean = this.dismissOnClickOutside,
-        scrim: Boolean = this.scrim
-    ) = Options(
-        dismissOnButtonClick,
-        dismissOnBackPress,
-        dismissOnClickOutside,
-        scrim
-    )
 }
 
 class StyleOptions(

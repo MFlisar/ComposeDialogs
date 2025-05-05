@@ -50,6 +50,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
  * @param buttonNegativeEnabled define if the negative button should be enabled initially or not
  * @param dismissAllowed define if the dialog can be initially dismissed or not
  * @param swipeAllowed define if the dialog can be initially swiped away or not
+ * @param dismissOnButtonClick define if the dialog should be automatically be dismissed when a button is clicked
  */
 @Composable
 fun <T : Any> rememberDialogState(
@@ -58,7 +59,8 @@ fun <T : Any> rememberDialogState(
     buttonPositiveEnabled: Boolean = true,
     buttonNegativeEnabled: Boolean = true,
     dismissAllowed: Boolean = true,
-    swipeAllowed: Boolean = true
+    swipeAllowed: Boolean = true,
+    dismissOnButtonClick: Boolean = true
 ): DialogStateWithData<T> {
 
     // extra data - should survice screen rotations and activity recreates BUT must be reset if dialog is dismissed
@@ -76,7 +78,8 @@ fun <T : Any> rememberDialogState(
                 buttonPositiveEnabled = mutableStateOf(buttonPositiveEnabled),
                 buttonNegativeEnabled = mutableStateOf(buttonNegativeEnabled),
                 dismissAllowed = mutableStateOf(dismissAllowed),
-                swipeAllowed = mutableStateOf(swipeAllowed)
+                swipeAllowed = mutableStateOf(swipeAllowed),
+                dismissOnButtonClick = mutableStateOf(dismissOnButtonClick)
             )
         )
     }
@@ -98,6 +101,7 @@ fun <T : Any> rememberDialogState(
  * @param buttonNegativeEnabled define if the negative button should be enabled initially or not
  * @param dismissAllowed define if the dialog can be initially dismissed or not
  * @param swipeAllowed define if the dialog can be initially swiped away or not
+ * @param dismissOnButtonClick define if the dialog should be automatically be dismissed when a button is clicked
  */
 @Composable
 fun rememberDialogState(
@@ -105,7 +109,8 @@ fun rememberDialogState(
     buttonPositiveEnabled: Boolean = true,
     buttonNegativeEnabled: Boolean = true,
     dismissAllowed: Boolean = true,
-    swipeAllowed: Boolean = true
+    swipeAllowed: Boolean = true,
+    dismissOnButtonClick: Boolean = true
 ): DialogStateNoData {
 
     // showing should survive, even screen rotations and activity recreations
@@ -118,7 +123,8 @@ fun rememberDialogState(
                 buttonPositiveEnabled = mutableStateOf(buttonPositiveEnabled),
                 buttonNegativeEnabled = mutableStateOf(buttonNegativeEnabled),
                 dismissAllowed = mutableStateOf(dismissAllowed),
-                swipeAllowed = mutableStateOf(swipeAllowed)
+                swipeAllowed = mutableStateOf(swipeAllowed),
+                dismissOnButtonClick = mutableStateOf(dismissOnButtonClick)
             )
         )
     }

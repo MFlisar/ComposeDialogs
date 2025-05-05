@@ -30,7 +30,6 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
-import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitleToolbar
 import com.michaelflisar.composedialogs.core.updateStatusbarColor
@@ -79,7 +78,6 @@ internal class FullscreenDialogStyle(
         title: (@Composable () -> Unit)?,
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
-        options: Options,
         dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
@@ -152,7 +150,6 @@ internal class FullscreenDialogStyle(
                         iconColor = iconColor,
                         titleColor = titleColor,
                         menuActions = menuActions,
-                        options = options,
                         buttons = buttons,
                         state = state,
                         dismissOnButtonPressed = dismissOnButtonPressed,

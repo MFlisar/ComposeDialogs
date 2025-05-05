@@ -20,7 +20,6 @@ import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogOptions
@@ -49,13 +48,12 @@ fun DialogProgress(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
     val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent) {
+    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent) {
         Column {
             if (content != null) {
                 content()

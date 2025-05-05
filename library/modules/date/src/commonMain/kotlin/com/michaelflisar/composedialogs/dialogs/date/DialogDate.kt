@@ -35,7 +35,6 @@ import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.isLandscape
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
@@ -81,7 +80,6 @@ fun DialogDate(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    options: Options = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -94,7 +92,6 @@ fun DialogDate(
         icon?.takeIf { !landscape },
         style,
         buttons,
-        options,
         dialogOptions = dialogOptions,
         onEvent = onEvent
     ) {

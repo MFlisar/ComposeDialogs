@@ -40,7 +40,6 @@ import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogUtil
-import com.michaelflisar.composedialogs.core.Options
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogOptions
@@ -81,7 +80,6 @@ fun DialogBilling(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     //buttons: DialogButtons = DialogDefaults.buttons(),
-    //options: Options = Options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -108,9 +106,9 @@ fun DialogBilling(
         mutableStateOf(buttons1)
     }
 
-    val options = DialogDefaults.options(
-        dismissOnButtonClick = false
-    )
+    LaunchedEffect(Unit) {
+        state.dismissOnButtonClick(false)
+    }
 
     val purchasing = remember { mutableStateOf<Purchasing>(Purchasing.None) }
     LaunchedEffect(purchasing.value) {
@@ -125,7 +123,7 @@ fun DialogBilling(
     val scope = rememberCoroutineScope()
 
     val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, options, dialogOptions = dialogOptions, onEvent = {
+    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = {
         var handled = false
         if (it.isPositiveButton) {
             if (purchasing.value is Purchasing.None && products.size == 1) {

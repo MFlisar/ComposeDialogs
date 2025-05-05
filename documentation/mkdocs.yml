@@ -134,7 +134,6 @@ nav:
     - Dialog Styles: advanced/styles.md
     - Events: advanced/events.md
     - Buttons: advanced/buttons.md
-    - Options: advanced/options.md
     - Custom Dialog: advanced/custom-dialog.md
   - Migration:
     - Version 2: migration/v2.md

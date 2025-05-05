@@ -13,7 +13,6 @@ interface ComposeDialogStyle {
         title: (@Composable () -> Unit)? = null,
         icon: (@Composable () -> Unit)? = null,
         buttons: DialogButtons,
-        options: Options,
         dialogOptions: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
