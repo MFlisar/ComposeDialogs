@@ -7,12 +7,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 
 @Composable
 internal fun ComposeDialogImageButton(
     buttonType: DialogButtonType,
     icon: ImageVector,
     state: DialogState,
+    dialogOptions: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
@@ -20,7 +22,7 @@ internal fun ComposeDialogImageButton(
     IconButton(
         enabled = enabled,
         onClick = {
-            val dismiss = state.interactionSource.dismissOnButtonClick.value && state.interactionSource.dismissAllowed.value
+            val dismiss = dialogOptions.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
             state.onButtonPressed(onEvent, buttonType, dismiss)
             if (dismiss) {
                 dismissOnButtonPressed()

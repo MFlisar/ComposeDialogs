@@ -222,6 +222,7 @@ internal class DialogStyle(
                     ComposeDialogButtons(
                         buttons = buttons,
                         state = state,
+                        dialogOptions = dialogOptions,
                         dismissOnButtonPressed = {
                             buttonPressed = true
                             dismiss()

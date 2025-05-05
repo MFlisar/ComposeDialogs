@@ -19,6 +19,7 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
 import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogImageButton
 import com.michaelflisar.composedialogs.core.internal.sub.TitleIcon
@@ -37,6 +38,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
     menuActions: @Composable (RowScope.() -> Unit)?,
     buttons: DialogButtons,
     state: DialogState,
+    dialogOptions: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit,
 ) {
@@ -50,6 +52,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
                     buttonType = DialogButtonType.Negative,
                     icon = Icons.Default.Close,
                     state = state,
+                    dialogOptions = dialogOptions,
                     dismissOnButtonPressed = dismissOnButtonPressed,
                     onEvent = onEvent
                 )
@@ -69,6 +72,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
                         contentColor = toolbarActionColor
                     ),
                     state = state,
+                    dialogOptions = dialogOptions,
                     dismissOnButtonPressed = dismissOnButtonPressed,
                     onEvent = onEvent
                 )

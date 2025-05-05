@@ -106,10 +106,6 @@ fun DialogBilling(
         mutableStateOf(buttons1)
     }
 
-    LaunchedEffect(Unit) {
-        state.dismissOnButtonClick(false)
-    }
-
     val purchasing = remember { mutableStateOf<Purchasing>(Purchasing.None) }
     LaunchedEffect(purchasing.value) {
         if (products.size == 1) {
@@ -122,7 +118,7 @@ fun DialogBilling(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val dialogOptions = DialogOptions.create(style)
+    val dialogOptions = DialogOptions.create(style, dismissOnButtonClick = false)
     Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = {
         var handled = false
         if (it.isPositiveButton) {

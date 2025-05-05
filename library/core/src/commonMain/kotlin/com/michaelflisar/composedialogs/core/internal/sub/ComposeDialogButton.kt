@@ -9,12 +9,14 @@ import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.DialogButton
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
+import com.michaelflisar.composedialogs.core.DialogOptions
 
 @Composable
 internal fun ComposeDialogButton(
     button: DialogButton,
     buttonType: DialogButtonType,
     state: DialogState,
+    dialogOptions: DialogOptions,
     colors: ButtonColors = ButtonDefaults.textButtonColors(),
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
@@ -26,7 +28,7 @@ internal fun ComposeDialogButton(
             colors = colors,
             onClick = {
                 val dismiss =
-                    state.interactionSource.dismissOnButtonClick.value && state.interactionSource.dismissAllowed.value
+                    dialogOptions.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
                 state.onButtonPressed(onEvent, buttonType, dismiss)
                 if (dismiss) {
                     dismissOnButtonPressed()

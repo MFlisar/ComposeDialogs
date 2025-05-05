@@ -361,6 +361,7 @@ internal class BottomSheetStyle(
                                     .padding(horizontal = 24.dp),
                                 buttons = buttons,
                                 state = state,
+                                dialogOptions = dialogOptions,
                                 dismissOnButtonPressed = {
                                     buttonPressed2 = true
                                     onDismiss(true)

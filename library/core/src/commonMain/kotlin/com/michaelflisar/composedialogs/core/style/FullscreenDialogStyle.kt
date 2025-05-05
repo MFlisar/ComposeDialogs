@@ -152,6 +152,7 @@ internal class FullscreenDialogStyle(
                         menuActions = menuActions,
                         buttons = buttons,
                         state = state,
+                        dialogOptions = dialogOptions,
                         dismissOnButtonPressed = dismissOnButtonPressed,
                         onEvent = onEvent
                     )

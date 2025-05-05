@@ -78,6 +78,7 @@ class DialogStyleDesktop(
                     ComposeDialogButtons(
                         buttons = buttons,
                         state = state,
+                        dialogOptions = dialogOptions,
                         dismissOnButtonPressed = {
                             state.dismiss()
                         },

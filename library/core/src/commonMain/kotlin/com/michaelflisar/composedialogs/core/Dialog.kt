@@ -289,14 +289,12 @@ enum class DialogButtonType {
  * @param buttonNegativeEnabled the negative button is only enabled if this state is true
  * @param dismissAllowed the dialog can only be dismissed if this state is true
  * @param swipeAllowed the dialog can only be swiped away if this state is true
- * @param dismissOnButtonClick if true, the dialog will be automatically dismissed if a dialog button is clicked
  */
 class DialogInteractionSource internal constructor(
     val buttonPositiveEnabled: MutableState<Boolean>,
     val buttonNegativeEnabled: MutableState<Boolean>,
     val dismissAllowed: MutableState<Boolean>,
-    val swipeAllowed: MutableState<Boolean>,
-    val dismissOnButtonClick: MutableState<Boolean>
+    val swipeAllowed: MutableState<Boolean>
 )
 
 /**
@@ -377,15 +375,6 @@ abstract class DialogState {
      */
     fun dismissable(enabled: Boolean) {
         interactionSource.dismissAllowed.value = enabled
-    }
-
-    /**
-     * this will make the dialog auto dismiss if a button is presed
-     *
-     * @param enabled if true, the dialog will be dismissed if a button is pressed
-     */
-    fun dismissOnButtonClick(enabled: Boolean) {
-        interactionSource.dismissOnButtonClick.value = enabled
     }
 }
 
@@ -504,23 +493,25 @@ class StyleOptions(
 
 class DialogOptions internal constructor(
     val spacingContentToButtons: Dp,
-    val spacingContentToBottom: Dp
+    val spacingContentToBottom: Dp,
+    val dismissOnButtonClick: Boolean
 ) {
     companion object {
 
         @Composable
-        fun create(style: ComposeDialogStyle): DialogOptions {
+        fun create(style: ComposeDialogStyle, dismissOnButtonClick: Boolean = true): DialogOptions {
             return if (style.type == ComposeDialogStyle.Type.BottomSheet) {
-                DialogOptions(24.dp, 8.dp)
-            } else DialogOptions(24.dp, 24.dp)
+                DialogOptions(24.dp, 8.dp, dismissOnButtonClick)
+            } else DialogOptions(24.dp, 24.dp, dismissOnButtonClick)
         }
 
     }
 
     fun copy(
         spacingContentToButtons: Dp = this.spacingContentToButtons,
-        spacingContentToBottom: Dp = this.spacingContentToBottom
-    ) = DialogOptions(spacingContentToButtons, spacingContentToBottom)
+        spacingContentToBottom: Dp = this.spacingContentToBottom,
+        dismissOnButtonClick: Boolean = this.dismissOnButtonClick
+    ) = DialogOptions(spacingContentToButtons, spacingContentToBottom, dismissOnButtonClick)
 
     fun contentPadding(buttons: DialogButtons) =
         if (buttons.enabled) spacingContentToButtons else spacingContentToBottom
