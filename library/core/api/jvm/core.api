@@ -90,7 +90,6 @@ public final class com/michaelflisar/composedialogs/core/DialogInteractionSource
 	public final fun getButtonNegativeEnabled ()Landroidx/compose/runtime/MutableState;
 	public final fun getButtonPositiveEnabled ()Landroidx/compose/runtime/MutableState;
 	public final fun getDismissAllowed ()Landroidx/compose/runtime/MutableState;
-	public final fun getDismissOnButtonClick ()Landroidx/compose/runtime/MutableState;
 	public final fun getSwipeAllowed ()Landroidx/compose/runtime/MutableState;
 }
 
@@ -102,21 +101,21 @@ public final class com/michaelflisar/composedialogs/core/DialogOptions {
 	public static final field $stable I
 	public static final field Companion Lcom/michaelflisar/composedialogs/core/DialogOptions$Companion;
 	public final fun contentPadding-u2uoSUM (Lcom/michaelflisar/composedialogs/core/DialogButtons;)F
-	public final fun copy-YgX7TsA (FF)Lcom/michaelflisar/composedialogs/core/DialogOptions;
-	public static synthetic fun copy-YgX7TsA$default (Lcom/michaelflisar/composedialogs/core/DialogOptions;FFILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/DialogOptions;
+	public final fun copy-Md-fbLM (FFZ)Lcom/michaelflisar/composedialogs/core/DialogOptions;
+	public static synthetic fun copy-Md-fbLM$default (Lcom/michaelflisar/composedialogs/core/DialogOptions;FFZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/DialogOptions;
+	public final fun getDismissOnButtonClick ()Z
 	public final fun getSpacingContentToBottom-D9Ej5fM ()F
 	public final fun getSpacingContentToButtons-D9Ej5fM ()F
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogOptions$Companion {
-	public final fun create (Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogOptions;
+	public final fun create (Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;ZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogOptions;
 }
 
 public abstract class com/michaelflisar/composedialogs/core/DialogState {
 	public static final field $stable I
 	public fun <init> ()V
 	public final fun dismiss ()Z
-	public final fun dismissOnButtonClick (Z)V
 	public final fun dismissable (Z)V
 	public final fun enableButton (Lcom/michaelflisar/composedialogs/core/DialogButtonType;Z)V
 	public abstract fun getInteractionSource ()Lcom/michaelflisar/composedialogs/core/DialogInteractionSource;
@@ -126,8 +125,8 @@ public abstract class com/michaelflisar/composedialogs/core/DialogState {
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogStateKt {
-	public static final fun rememberDialogState (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;ZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateWithData;
-	public static final fun rememberDialogState (ZZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateNoData;
+	public static final fun rememberDialogState (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;ZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateWithData;
+	public static final fun rememberDialogState (ZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateNoData;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogStateNoData : com/michaelflisar/composedialogs/core/DialogState {
