@@ -1,10 +1,10 @@
 public abstract interface class com/michaelflisar/composedialogs/core/ComposeDialogStyle {
-	public abstract fun Show (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Show (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun getType ()Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle$Type;
 }
 
 public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$ComposeDefaultImpls {
-	public static final fun Show$default (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Show$default (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$Type : java/lang/Enum {
@@ -54,10 +54,8 @@ public final class com/michaelflisar/composedialogs/core/DialogDefaults {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/DialogDefaults;
 	public final fun buttons (Lcom/michaelflisar/composedialogs/core/DialogButton;Lcom/michaelflisar/composedialogs/core/DialogButton;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogButtons;
 	public final fun buttonsDisabled (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogButtons;
-	public final fun options (ZZZZ)Lcom/michaelflisar/composedialogs/core/Options;
-	public static synthetic fun options$default (Lcom/michaelflisar/composedialogs/core/DialogDefaults;ZZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
-	public final fun styleBottomSheet-cN2ds20 (ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
-	public final fun styleDialog-zTql3dQ (ZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+	public final fun styleBottomSheet-o6X0Ruk (ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+	public final fun styleDialog-3F3v-eo (ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleFullscreenDialog-mjZQz9k (ZLkotlin/jvm/functions/Function3;ZJJJJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 }
 
@@ -88,11 +86,12 @@ public final class com/michaelflisar/composedialogs/core/DialogInteractionSource
 	public final fun getButtonNegativeEnabled ()Landroidx/compose/runtime/MutableState;
 	public final fun getButtonPositiveEnabled ()Landroidx/compose/runtime/MutableState;
 	public final fun getDismissAllowed ()Landroidx/compose/runtime/MutableState;
+	public final fun getDismissOnButtonClick ()Landroidx/compose/runtime/MutableState;
 	public final fun getSwipeAllowed ()Landroidx/compose/runtime/MutableState;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogKt {
-	public static final fun Dialog (Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/Options;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Dialog (Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogOptions {
@@ -113,6 +112,7 @@ public abstract class com/michaelflisar/composedialogs/core/DialogState {
 	public static final field $stable I
 	public fun <init> ()V
 	public final fun dismiss ()Z
+	public final fun dismissOnButtonClick (Z)V
 	public final fun dismissable (Z)V
 	public final fun enableButton (Lcom/michaelflisar/composedialogs/core/DialogButtonType;Z)V
 	public abstract fun getInteractionSource ()Lcom/michaelflisar/composedialogs/core/DialogInteractionSource;
@@ -122,8 +122,8 @@ public abstract class com/michaelflisar/composedialogs/core/DialogState {
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogStateKt {
-	public static final fun rememberDialogState (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;ZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateWithData;
-	public static final fun rememberDialogState (ZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateNoData;
+	public static final fun rememberDialogState (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;ZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateWithData;
+	public static final fun rememberDialogState (ZZZZZZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogStateNoData;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogStateNoData : com/michaelflisar/composedialogs/core/DialogState {
@@ -150,16 +150,6 @@ public final class com/michaelflisar/composedialogs/core/DialogUtil {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/DialogUtil;
 	public final fun findActivity (Landroid/content/Context;)Landroid/app/Activity;
-}
-
-public final class com/michaelflisar/composedialogs/core/Options {
-	public static final field $stable I
-	public final fun copy (ZZZZ)Lcom/michaelflisar/composedialogs/core/Options;
-	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/core/Options;ZZZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/Options;
-	public final fun getDismissOnBackPress ()Z
-	public final fun getDismissOnButtonClick ()Z
-	public final fun getDismissOnClickOutside ()Z
-	public final fun getScrim ()Z
 }
 
 public final class com/michaelflisar/composedialogs/core/Platform_androidKt {
