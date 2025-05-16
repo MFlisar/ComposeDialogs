@@ -20,7 +20,7 @@ public final class com/michaelflisar/composedialogs/dialogs/time/DialogTimeDefau
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/time/DialogTimeKt {
-	public static final fun DialogTime (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime$Setup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun DialogTime (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime$Setup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 	public static final fun rememberDialogTime (Lkotlinx/datetime/LocalTime;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
 }
 

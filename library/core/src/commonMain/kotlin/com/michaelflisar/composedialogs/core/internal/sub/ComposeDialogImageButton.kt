@@ -14,7 +14,7 @@ internal fun ComposeDialogImageButton(
     buttonType: DialogButtonType,
     icon: ImageVector,
     state: DialogState,
-    dialogOptions: DialogOptions,
+    options: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
@@ -22,7 +22,7 @@ internal fun ComposeDialogImageButton(
     IconButton(
         enabled = enabled,
         onClick = {
-            val dismiss = dialogOptions.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
+            val dismiss = options.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
             state.onButtonPressed(onEvent, buttonType, dismiss)
             if (dismiss) {
                 dismissOnButtonPressed()

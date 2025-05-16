@@ -1,10 +1,15 @@
 public abstract interface class com/michaelflisar/composedialogs/core/ComposeDialogStyle {
 	public abstract fun Show (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun getType ()Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle$Type;
+	public abstract fun spacing (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogSpacing;
 }
 
 public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$ComposeDefaultImpls {
 	public static final fun Show$default (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$DefaultImpls {
+	public static fun spacing (Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogSpacing;
 }
 
 public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$Type : java/lang/Enum {
@@ -54,6 +59,7 @@ public final class com/michaelflisar/composedialogs/core/DialogDefaults {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/DialogDefaults;
 	public final fun buttons (Lcom/michaelflisar/composedialogs/core/DialogButton;Lcom/michaelflisar/composedialogs/core/DialogButton;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogButtons;
 	public final fun buttonsDisabled (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogButtons;
+	public final fun options (ZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogOptions;
 	public final fun styleBottomSheet-o6X0Ruk (ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleDialog-3F3v-eo (ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleFullscreenDialog-mjZQz9k (ZLkotlin/jvm/functions/Function3;ZJJJJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
@@ -95,17 +101,14 @@ public final class com/michaelflisar/composedialogs/core/DialogKt {
 
 public final class com/michaelflisar/composedialogs/core/DialogOptions {
 	public static final field $stable I
-	public static final field Companion Lcom/michaelflisar/composedialogs/core/DialogOptions$Companion;
-	public final fun contentPadding-u2uoSUM (Lcom/michaelflisar/composedialogs/core/DialogButtons;)F
-	public final fun copy-Md-fbLM (FFZ)Lcom/michaelflisar/composedialogs/core/DialogOptions;
-	public static synthetic fun copy-Md-fbLM$default (Lcom/michaelflisar/composedialogs/core/DialogOptions;FFZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/core/DialogOptions;
 	public final fun getDismissOnButtonClick ()Z
-	public final fun getSpacingContentToBottom-D9Ej5fM ()F
-	public final fun getSpacingContentToButtons-D9Ej5fM ()F
 }
 
-public final class com/michaelflisar/composedialogs/core/DialogOptions$Companion {
-	public final fun create (Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;ZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogOptions;
+public final class com/michaelflisar/composedialogs/core/DialogSpacing {
+	public static final field $stable I
+	public final fun contentPadding-u2uoSUM (Lcom/michaelflisar/composedialogs/core/DialogButtons;)F
+	public final fun getSpacingContentToBottom-D9Ej5fM ()F
+	public final fun getSpacingContentToButtons-D9Ej5fM ()F
 }
 
 public abstract class com/michaelflisar/composedialogs/core/DialogState {

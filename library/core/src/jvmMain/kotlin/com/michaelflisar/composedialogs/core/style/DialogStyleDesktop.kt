@@ -34,7 +34,7 @@ class DialogStyleDesktop(
         title: (@Composable () -> Unit)?,
         icon: (@Composable () -> Unit)?,
         buttons: DialogButtons,
-        dialogOptions: DialogOptions,
+        options: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
@@ -44,6 +44,7 @@ class DialogStyleDesktop(
             width = desktopOptions.width,
             height = desktopOptions.height
         )
+        val spacing = spacing()
         DialogWindow(
             visible = state.visible,
             onCloseRequest = {
@@ -71,14 +72,14 @@ class DialogStyleDesktop(
                         content = content,
                         contentColor = contentColor,
                         modifier = Modifier.weight(weight = 1f, fill = true),
-                        bottomPadding = dialogOptions.contentPadding(buttons)
+                        bottomPadding = spacing.contentPadding(buttons)
                     )
 
                     // Buttons
                     ComposeDialogButtons(
                         buttons = buttons,
                         state = state,
-                        dialogOptions = dialogOptions,
+                        options = options,
                         dismissOnButtonPressed = {
                             state.dismiss()
                         },

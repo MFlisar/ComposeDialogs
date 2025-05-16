@@ -77,6 +77,7 @@ fun <T> DialogList(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
@@ -94,6 +95,7 @@ fun <T> DialogList(
         icon,
         style,
         buttons,
+        options,
         onEvent
     )
 }
@@ -141,6 +143,7 @@ fun <T> DialogList(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor2] */
@@ -158,6 +161,7 @@ fun <T> DialogList(
         icon,
         style,
         buttons,
+        options,
         onEvent
     )
 }
@@ -179,10 +183,10 @@ private fun <T> DialogList(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle,
     buttons: DialogButtons,
+    options: DialogOptions,
     onEvent: (event: DialogEvent) -> Unit
 ) {
-    val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val items = when (itemsProvider) {
             is DialogList.ItemProvider.List -> remember(itemsProvider) { mutableStateOf(itemsProvider.items) }
             is DialogList.ItemProvider.Loader -> {

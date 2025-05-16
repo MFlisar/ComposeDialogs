@@ -38,7 +38,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
     menuActions: @Composable (RowScope.() -> Unit)?,
     buttons: DialogButtons,
     state: DialogState,
-    dialogOptions: DialogOptions,
+    options: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit,
 ) {
@@ -52,7 +52,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
                     buttonType = DialogButtonType.Negative,
                     icon = Icons.Default.Close,
                     state = state,
-                    dialogOptions = dialogOptions,
+                    options = options,
                     dismissOnButtonPressed = dismissOnButtonPressed,
                     onEvent = onEvent
                 )
@@ -72,7 +72,7 @@ internal fun ColumnScope.ComposeDialogTitleToolbar(
                         contentColor = toolbarActionColor
                     ),
                     state = state,
-                    dialogOptions = dialogOptions,
+                    options = options,
                     dismissOnButtonPressed = dismissOnButtonPressed,
                     onEvent = onEvent
                 )

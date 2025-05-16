@@ -80,19 +80,19 @@ fun DialogDate(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
     val landscape = isLandscape()
-    val dialogOptions = DialogOptions.create(style)
     Dialog(
         state,
         title?.takeIf { !landscape },
         icon?.takeIf { !landscape },
         style,
         buttons,
-        dialogOptions = dialogOptions,
+        options,
         onEvent = onEvent
     ) {
         val pages = (dateRange.years.last - dateRange.years.first + 1) * 12

@@ -78,13 +78,15 @@ internal class FullscreenDialogStyle(
         title: (@Composable () -> Unit)?,
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
-        dialogOptions: DialogOptions,
+        options: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {
         val coroutineScope = rememberCoroutineScope()
         val dialogState = rememberDialogState(initiallyVisible = true)
+
+        val spacing = spacing()
 
         val animDurationEnter = 250
         val animDurationExit = 150
@@ -152,7 +154,7 @@ internal class FullscreenDialogStyle(
                         menuActions = menuActions,
                         buttons = buttons,
                         state = state,
-                        dialogOptions = dialogOptions,
+                        options = options,
                         dismissOnButtonPressed = dismissOnButtonPressed,
                         onEvent = onEvent
                     )
@@ -162,7 +164,7 @@ internal class FullscreenDialogStyle(
                         content = content,
                         contentColor = contentColor,
                         modifier = Modifier.weight(1f).padding(all = 16.dp),
-                        bottomPadding = dialogOptions.spacingContentToBottom // we don't have buttons in this style!
+                        bottomPadding = spacing.spacingContentToBottom // we don't have buttons in this style!
                     )
 
                     // Buttons

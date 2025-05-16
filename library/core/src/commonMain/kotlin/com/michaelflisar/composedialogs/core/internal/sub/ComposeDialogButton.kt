@@ -16,7 +16,7 @@ internal fun ComposeDialogButton(
     button: DialogButton,
     buttonType: DialogButtonType,
     state: DialogState,
-    dialogOptions: DialogOptions,
+    options: DialogOptions,
     colors: ButtonColors = ButtonDefaults.textButtonColors(),
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
@@ -28,7 +28,7 @@ internal fun ComposeDialogButton(
             colors = colors,
             onClick = {
                 val dismiss =
-                    dialogOptions.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
+                    options.dismissOnButtonClick && state.interactionSource.dismissAllowed.value
                 state.onButtonPressed(onEvent, buttonType, dismiss)
                 if (dismiss) {
                     dismissOnButtonPressed()

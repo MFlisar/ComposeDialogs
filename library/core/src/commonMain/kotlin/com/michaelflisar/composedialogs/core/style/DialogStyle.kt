@@ -101,13 +101,15 @@ internal class DialogStyle(
         title: (@Composable () -> Unit)?,
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
-        dialogOptions: DialogOptions,
+        options: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit,
     ) {
         val coroutineScope = rememberCoroutineScope()
         val dialogState = rememberDialogState(initiallyVisible = true)
+
+        val spacing = spacing()
 
         val animDurationEnter = 250
         val animDurationExit = 150
@@ -215,14 +217,14 @@ internal class DialogStyle(
                         content = content,
                         contentColor = contentColor,
                         modifier = Modifier.weight(weight = 1f, fill = false),
-                        bottomPadding = dialogOptions.contentPadding(buttons)
+                        bottomPadding = spacing.contentPadding(buttons)
                     )
 
                     // Buttons
                     ComposeDialogButtons(
                         buttons = buttons,
                         state = state,
-                        dialogOptions = dialogOptions,
+                        options = options,
                         dismissOnButtonPressed = {
                             buttonPressed = true
                             dismiss()

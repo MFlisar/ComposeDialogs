@@ -25,7 +25,7 @@ import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
  * @param icon the optional icon of the dialog
  * @param style the [ComposeDialogStyle] of the dialog - use [DialogDefaults.styleDialog] or [DialogDefaults.styleBottomSheet]
  * @param buttons the [DialogButtons] of the dialog - use [DialogDefaults.buttons] here [DialogDefaults.buttonsDisabled]
- * @param dialogOptions the [DialogOptions] of the dialog - should be used by custom dialogs only
+ * @param options the [DialogOptions] of the dialog - use [DialogDefaults.options] here
  * @param onEvent the callback for all [DialogEvent] - this can be a button click [DialogEvent.Button] or the dismiss information [DialogEvent.Dismissed]
  * @param content the content of this dialog
  */
@@ -36,7 +36,7 @@ fun Dialog(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
-    dialogOptions: DialogOptions = DialogOptions.create(style),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
     content: @Composable () -> Unit
 ) {
@@ -44,7 +44,7 @@ fun Dialog(
         title,
         icon,
         buttons,
-        dialogOptions,
+        options,
         state,
         onEvent,
         content
@@ -82,6 +82,18 @@ object DialogDefaults {
      */
     @Composable
     fun buttonsDisabled() = DialogButtons.DISABLED
+
+    /**
+     * some additional options for the dialog
+     *
+     * @param dismissOnButtonClick if true, the dialog will be dismissed on button click
+     */
+    @Composable
+    fun options(
+        dismissOnButtonClick: Boolean = true
+    ) = DialogOptions(
+        dismissOnButtonClick
+    )
 
     /* --8<-- [start: style-dialog] */
     /**
@@ -492,27 +504,13 @@ class StyleOptions(
 }
 
 class DialogOptions internal constructor(
-    val spacingContentToButtons: Dp,
-    val spacingContentToBottom: Dp,
     val dismissOnButtonClick: Boolean
+)
+
+class DialogSpacing internal constructor(
+    val spacingContentToButtons: Dp,
+    val spacingContentToBottom: Dp
 ) {
-    companion object {
-
-        @Composable
-        fun create(style: ComposeDialogStyle, dismissOnButtonClick: Boolean = true): DialogOptions {
-            return if (style.type == ComposeDialogStyle.Type.BottomSheet) {
-                DialogOptions(24.dp, 8.dp, dismissOnButtonClick)
-            } else DialogOptions(24.dp, 24.dp, dismissOnButtonClick)
-        }
-
-    }
-
-    fun copy(
-        spacingContentToButtons: Dp = this.spacingContentToButtons,
-        spacingContentToBottom: Dp = this.spacingContentToBottom,
-        dismissOnButtonClick: Boolean = this.dismissOnButtonClick
-    ) = DialogOptions(spacingContentToButtons, spacingContentToBottom, dismissOnButtonClick)
-
     fun contentPadding(buttons: DialogButtons) =
         if (buttons.enabled) spacingContentToButtons else spacingContentToBottom
 }

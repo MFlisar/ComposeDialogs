@@ -67,7 +67,7 @@ import kotlinx.coroutines.withContext
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param products the products to show inside the list
- * @param textAlreadyOwned the text that is shown if a product is already owned
+ * @param texts localised texts for this dialog
  */
 @Composable
 fun DialogBilling(
@@ -118,8 +118,8 @@ fun DialogBilling(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val dialogOptions = DialogOptions.create(style, dismissOnButtonClick = false)
-    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = {
+    val options = DialogDefaults.options(dismissOnButtonClick = false)
+    Dialog(state, title, icon, style, buttons, options = options, onEvent = {
         var handled = false
         if (it.isPositiveButton) {
             if (purchasing.value is Purchasing.None && products.size == 1) {

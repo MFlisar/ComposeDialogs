@@ -48,12 +48,12 @@ fun DialogProgress(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
-    val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent) {
         Column {
             if (content != null) {
                 content()

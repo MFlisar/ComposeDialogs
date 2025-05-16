@@ -24,7 +24,7 @@ internal fun ColumnScope.ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
     state: DialogState,
-    dialogOptions: DialogOptions,
+    options: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit
 ) {
@@ -48,7 +48,7 @@ internal fun ColumnScope.ComposeDialogButtons(
                             button = buttons.negative,
                             buttonType = DialogButtonType.Negative,
                             state = state,
-                            dialogOptions = dialogOptions,
+                            options = options,
                             dismissOnButtonPressed = dismissOnButtonPressed,
                             onEvent = onEvent
                         )
@@ -56,7 +56,7 @@ internal fun ColumnScope.ComposeDialogButtons(
                             button = buttons.positive,
                             buttonType = DialogButtonType.Positive,
                             state = state,
-                            dialogOptions = dialogOptions,
+                            options = options,
                             dismissOnButtonPressed = dismissOnButtonPressed,
                             onEvent = onEvent
                         )

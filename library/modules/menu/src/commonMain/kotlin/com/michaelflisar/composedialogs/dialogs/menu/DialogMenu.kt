@@ -52,6 +52,7 @@ fun DialogMenu(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogButtons.DISABLED,
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
 )
 /* --8<-- [end: constructor] */
@@ -70,8 +71,7 @@ fun DialogMenu(
         selectedSubMenu.value = selectedSubMenu.value.dropLast(1)
     }
 
-    val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         DialogContentScrollableColumn {
             //Spacer(modifier = Modifier.height(8.dp))
             visibleItems.value.forEach {

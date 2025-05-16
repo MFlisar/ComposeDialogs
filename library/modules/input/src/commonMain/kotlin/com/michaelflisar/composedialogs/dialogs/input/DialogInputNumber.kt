@@ -73,12 +73,12 @@ fun <T : Number> DialogInputNumber(
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
 /* --8<-- [end: constructor] */
 {
-    val dialogOptions = DialogOptions.create(style)
-    Dialog(state, title, icon, style, buttons, dialogOptions = dialogOptions, onEvent = onEvent) {
+    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val modifier = when (style.type) {
             ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()
             ComposeDialogStyle.Type.Dialog -> DialogStyleModifier

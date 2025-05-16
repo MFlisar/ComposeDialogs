@@ -109,12 +109,14 @@ internal class BottomSheetStyle(
         title: (@Composable () -> Unit)?,
         icon: @Composable (() -> Unit)?,
         buttons: DialogButtons,
-        dialogOptions: DialogOptions,
+        options: DialogOptions,
         state: DialogState,
         onEvent: (event: DialogEvent) -> Unit,
         content: @Composable () -> Unit
     ) {
         val coroutineScope = rememberCoroutineScope()
+
+        val spacing = spacing()
 
         val peek: SheetDetent? = peekHeight?.let {
             SheetDetent("peek", it)
@@ -337,7 +339,7 @@ internal class BottomSheetStyle(
                             contentColor = contentColor,
                             modifier = Modifier.weight(weight = 1f, fill = false)
                                 .padding(horizontal = 24.dp),
-                            bottomPadding = dialogOptions.contentPadding(buttons)
+                            bottomPadding = spacing.contentPadding(buttons)
                         )
 
                         // 4) Footer
@@ -361,7 +363,7 @@ internal class BottomSheetStyle(
                                     .padding(horizontal = 24.dp),
                                 buttons = buttons,
                                 state = state,
-                                dialogOptions = dialogOptions,
+                                options = options,
                                 dismissOnButtonPressed = {
                                     buttonPressed2 = true
                                     onDismiss(true)
