@@ -68,9 +68,9 @@ library:
 # ------------
 
 dependencies:
-  compose-multiplatform: 1.7.3 # https://github.com/JetBrains/compose-multiplatform/releases
-  jetpack-compose-runtime: 1.7.6 # https://developer.android.com/jetpack/androidx/releases/compose-runtime
-  jetpack-compose-material3: 1.3.1 # https://developer.android.com/jetpack/androidx/releases/compose-material3
+  compose-multiplatform: 1.8.1 # https://github.com/JetBrains/compose-multiplatform/releases
+  jetpack-compose-runtime: 1.8.1 # https://developer.android.com/jetpack/androidx/releases/compose-runtime
+  jetpack-compose-material3: 1.3.2 # https://developer.android.com/jetpack/androidx/releases/compose-material3
   experimental: true
 
 # ------------
