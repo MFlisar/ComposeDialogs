@@ -6,7 +6,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
@@ -238,7 +237,6 @@ internal class DialogStyle(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun getSwipeDismissModifier(
     swipeDismissable: Boolean,
@@ -282,8 +280,6 @@ private fun getSwipeDismissModifier(
     } else Modifier
 }
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun createDraggableState(
     maxSwipeDistance: Float,
