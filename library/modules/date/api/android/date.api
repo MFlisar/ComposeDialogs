@@ -1,8 +1,8 @@
 public final class com/michaelflisar/composedialogs/dialogs/date/ComposableSingletons$DialogDateKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/ComposableSingletons$DialogDateKt;
 	public fun <init> ()V
-	public final fun getLambda-1$date_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-2$date_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-542080316$date_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1842322898$date_release ()Lkotlin/jvm/functions/Function4;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DialogDate {
@@ -63,7 +63,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/classes/DateVie
 public final class com/michaelflisar/composedialogs/dialogs/date/composables/ComposableSingletons$CalendarHeaderKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/composables/ComposableSingletons$CalendarHeaderKt;
 	public fun <init> ()V
-	public final fun getLambda-1$date_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-2$date_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-51348714$date_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$498934239$date_release ()Lkotlin/jvm/functions/Function2;
 }
 

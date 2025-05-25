@@ -1,8 +1,8 @@
 public final class com/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListKt;
 	public fun <init> ()V
-	public final fun getLambda-1$list ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-2$list ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1086586493$list ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$718925394$list ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/list/DialogDefaultsExtensionKt {

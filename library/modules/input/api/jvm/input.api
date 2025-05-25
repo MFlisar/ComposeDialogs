@@ -95,7 +95,7 @@ public final class com/michaelflisar/composedialogs/dialogs/input/DialogInputVal
 public final class com/michaelflisar/composedialogs/dialogs/input/composables/ComposableSingletons$DialogInputTextFieldKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/input/composables/ComposableSingletons$DialogInputTextFieldKt;
 	public fun <init> ()V
-	public final fun getLambda-1$input ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$768736215$input ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/input/composables/DialogInputTextFieldKt {

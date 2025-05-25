@@ -1,10 +1,10 @@
 public final class com/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt;
 	public fun <init> ()V
-	public final fun getLambda-1$number_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-2$number_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-3$number_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda-4$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1168388927$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1822716015$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2116220200$number_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$900353178$number_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/number/DialogNumberPickerKt {

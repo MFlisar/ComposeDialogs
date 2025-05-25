@@ -54,6 +54,6 @@ libraries:
       description: This library offers you <b>preference screens</b> for compose including the ability of endless nesting subscreens as well as simple integration of custom preferences.
     - name: ComposeThemer
       link: https://mflisar.github.io/ComposeThemer
-      image: https://raw.githubusercontent.com/MFlisar/ComposeThemer/main/documentation/docs/screenshots/core/demo.gif
+      image: https://mflisar.github.io/ComposeThemer/screenshots/defaultpicker/android1.png
       maven: io.github.mflisar.composethemer/core
       description: This is a <b>full compose theme engine</b> that handles applying a theme as well as updating the system ui elements. Extendible and allows to simply apply user selected themes inside your app.
