@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowInsetsControllerCompat
-import com.composables.core.LocalModalWindow
+import com.composeunstyled.LocalModalWindow
 
 @Composable
 actual fun isLandscape(): Boolean =
@@ -31,11 +31,6 @@ actual fun stringOk() = stringResource(android.R.string.ok)
 
 @Composable
 actual fun DialogDefaults.defaultDialogStyle() = styleDialog()
-
-@Composable
-actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
-    androidx.activity.compose.BackHandler(enabled, onBack)
-}
 
 @Composable
 actual fun DialogContentScrollableColumn(

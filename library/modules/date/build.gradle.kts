@@ -29,7 +29,7 @@ val buildTargets = Targets(
     iOS = true,
     // desktop
     windows = true,
-    macOS = true,
+    macOS = false, // because of compose unstyled dialogs
     // web
     wasm = true
 )
@@ -104,6 +104,7 @@ kotlin {
             // Compose
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
+            implementation(libs.compose.ui.backhandler)
             implementation(libs.compose.material.icons.core)
 
             // library

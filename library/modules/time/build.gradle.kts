@@ -29,7 +29,7 @@ val buildTargets = Targets(
     iOS = true,
     // desktop
     windows = true,
-    macOS = true,
+    macOS = false, // because of compose unstyled dialogs
     // web
     wasm = true
 )

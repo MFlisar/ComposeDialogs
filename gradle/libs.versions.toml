@@ -39,6 +39,7 @@ kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",     
 
 compose-runtime =                   { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "compose" }
 compose-ui =                        { module = "org.jetbrains.compose.ui:ui",                               version.ref = "compose" }
+compose-ui-backhandler =            { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "compose" }
 compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose" }
 compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose-icons" }
 compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose-icons" }

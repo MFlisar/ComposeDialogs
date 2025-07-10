@@ -26,11 +26,6 @@ actual fun stringOk(): String = "OK"
 actual fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle = TODO()
 
 @Composable
-actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
-    // empty
-}
-
-@Composable
 actual fun DialogContentScrollableColumn(
     modifier: Modifier,
     content: @Composable ColumnScope.() -> Unit

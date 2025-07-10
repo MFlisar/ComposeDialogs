@@ -19,11 +19,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.BackHandler
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
@@ -58,6 +59,7 @@ import org.jetbrains.compose.resources.stringResource
  * @param gridSize the size of the color grid
  * @param labelStyle the [DialogColor.LabelStyle] for the color picker
  */
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DialogColor(
     // Base Dialog - State

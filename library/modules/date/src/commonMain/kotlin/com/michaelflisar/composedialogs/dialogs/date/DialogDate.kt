@@ -26,10 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.BackHandler
 import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
@@ -67,6 +68,7 @@ import org.jetbrains.compose.resources.stringResource
  * @param dateRange the supported [DialogDate.Range] - use [DialogDateDefaults.dateRange] to provide your own data
  * @param setup the [DialogDate.Setup] - use [DialogDateDefaults.setup] to provide your own data
  */
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DialogDate(
     state: DialogState,

@@ -23,9 +23,6 @@ expect fun isLandscape(): Boolean
 expect fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle
 
 @Composable
-expect fun BackHandler(enabled: Boolean, onBack: () -> Unit)
-
-@Composable
 expect fun DialogContentScrollableColumn(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit)
 
 @Composable
