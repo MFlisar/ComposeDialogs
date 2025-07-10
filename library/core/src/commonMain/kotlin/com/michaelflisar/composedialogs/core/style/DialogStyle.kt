@@ -3,13 +3,14 @@ package com.michaelflisar.composedialogs.core.style
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.TargetedFlingBehavior
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.snapTo
 import androidx.compose.foundation.layout.Column
@@ -44,11 +45,11 @@ import com.composables.core.DialogPanel
 import com.composables.core.DialogProperties
 import com.composables.core.Scrim
 import com.composables.core.rememberDialogState
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
+import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.StyleOptions
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
@@ -157,8 +158,8 @@ internal class DialogStyle(
 
             val density = LocalDensity.current
             val modifierSwipeDismiss = getSwipeDismissModifier(
-                swipeDismissable,
-                with(density) { scrimSize.value.height.toPx() } / 2f) {
+                swipeDismissable = swipeDismissable,
+                maxSwipeDistance = with(density) { scrimSize.value.height.toPx() } / 2f) {
                 if (state.interactionSource.dismissAllowed.value) {
                     waitForDismissAnimationAndUpdateState()
                     true
@@ -274,7 +275,8 @@ private fun getSwipeDismissModifier(
             }
             .anchoredDraggable(
                 state = dragState,
-                orientation = Orientation.Vertical
+                orientation = Orientation.Vertical,
+                flingBehavior = createDraggableFlingState(dragState)
             )
             .alpha(alpha)
     } else Modifier
@@ -292,21 +294,24 @@ private fun createDraggableState(
             DragValue.End at maxSwipeDistance
         }
     }
-
-    val density = LocalDensity.current
-
-    val decayAnimSpec = rememberSplineBasedDecay<Float>()
     val dragState = remember {
         AnchoredDraggableState(
             initialValue = DragValue.Center,
-            anchors = anchors,
-            positionalThreshold = { distance: Float -> distance * .5f },
-            velocityThreshold = { with(density) { 100.dp.toPx() } },
-            snapAnimationSpec = tween(),
-            decayAnimationSpec = decayAnimSpec,
-            confirmValueChange = { true }
+            anchors = anchors
         )
     }
 
     return dragState
+}
+
+@Composable
+fun <T> createDraggableFlingState(
+    draggableState: AnchoredDraggableState<T>
+): TargetedFlingBehavior {
+
+    val positionalThreshold = { distance: Float -> distance * .5f }
+    return AnchoredDraggableDefaults.flingBehavior(
+        state = draggableState,
+        positionalThreshold = positionalThreshold
+    )
 }

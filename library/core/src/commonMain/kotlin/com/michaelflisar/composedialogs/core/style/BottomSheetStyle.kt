@@ -149,65 +149,6 @@ internal class BottomSheetStyle(
             dismissOnClickOutside = shouldDismissOnClickOutside
         )
 
-        // TODO: workaround for bug https://github.com/composablehorizons/compose-unstyled/issues/48
-        // workaround for close bug - not needed on windows!
-        val wasShown = remember { mutableStateOf(false) }
-        var buttonPressed2 = false
-        val useBottomsheetWorkaround = false
-        if (useBottomsheetWorkaround) {
-            LaunchedEffect(
-                bottomSheetState.progress == 1f,
-                //bottomSheetState.isIdle,
-                bottomSheetState.targetDetent,
-                initialAnimationDone.value,
-                wasShown.value
-            ) {
-                if (bottomSheetState.progress == 1f &&
-                    initialAnimationDone.value &&
-                    wasShown.value &&
-                    //bottomSheetState.isIdle &&
-                    bottomSheetState.targetDetent == SheetDetent.Hidden &&
-                    state.interactionSource.dismissAllowed.value
-                ) {
-                    if (buttonPressed2)
-                        state.dismiss()
-                    else
-                        state.dismiss(onEvent)
-                }
-            }
-            LaunchedEffect(
-                bottomSheetState.targetDetent
-            ) {
-                if (bottomSheetState.targetDetent != SheetDetent.Hidden) {
-                    wasShown.value = true
-                }
-            }
-        }
-
-/*
-        LaunchedEffect(
-            bottomSheetState.progress == 0f,
-            bottomSheetState.progress == 1f,
-            bottomSheetState.currentDetent,
-            bottomSheetState.targetDetent,
-            bottomSheetState.isIdle,
-            initialAnimationDone.value,
-            wasShown.value
-        ) {
-            println("BOTTOMSHEET")
-            println(" - progress = ${bottomSheetState.progress}")
-            println(" - currentDetent = ${bottomSheetState.currentDetent.identifier}")
-            println(" - targetDetent = ${bottomSheetState.targetDetent.identifier}")
-            println(" - isIdle = ${bottomSheetState.isIdle}")
-            println(" - initialAnimationDone = ${initialAnimationDone.value}")
-            println(" - wasShown = ${wasShown.value}")
-
-            if (bottomSheetState.targetDetent != SheetDetent.Hidden) {
-                wasShown.value = true
-            }
-        }
-*/
-
         val onDismiss = { buttonPressed: Boolean ->
             if (state.interactionSource.dismissAllowed.value) {
                 coroutineScope.launch {
@@ -219,7 +160,7 @@ internal class BottomSheetStyle(
                 }
                 true
             } else {
-                bottomSheetState.currentDetent = SheetDetent.FullyExpanded
+                bottomSheetState.targetDetent = SheetDetent.FullyExpanded
                 false
             }
         }
@@ -239,7 +180,7 @@ internal class BottomSheetStyle(
 
         LaunchedEffect(initialAnimationDone.value) {
             if (!initialAnimationDone.value) {
-                bottomSheetState.currentDetent = initialDetent
+                bottomSheetState.targetDetent = initialDetent
                 initialAnimationDone.value = true
             }
         }
@@ -365,7 +306,6 @@ internal class BottomSheetStyle(
                                 state = state,
                                 options = options,
                                 dismissOnButtonPressed = {
-                                    buttonPressed2 = true
                                     onDismiss(true)
                                 },
                                 onEvent = onEvent
