@@ -29,6 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+
+
+actual val DispatcherIO : CoroutineDispatcher = Dispatchers.IO
 
 @Composable
 actual fun isLandscape(): Boolean = false

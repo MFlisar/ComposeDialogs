@@ -1,7 +1,7 @@
 public abstract interface class com/michaelflisar/composedialogs/core/ComposeDialogStyle {
 	public abstract fun Show (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lcom/michaelflisar/composedialogs/core/DialogState;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun getType ()Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle$Type;
-	public abstract fun spacing (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogSpacing;
+	public fun spacing (Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/DialogSpacing;
 }
 
 public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$ComposeDefaultImpls {
@@ -155,10 +155,10 @@ public final class com/michaelflisar/composedialogs/core/DialogUtil {
 }
 
 public final class com/michaelflisar/composedialogs/core/Platform_androidKt {
-	public static final fun BackHandler (ZLkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
 	public static final fun DialogContentScrollableColumn (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun DialogContentScrollableLazyColumn (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/lazy/LazyListState;Landroidx/compose/foundation/layout/PaddingValues;ZLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/Alignment$Horizontal;Landroidx/compose/foundation/gestures/FlingBehavior;ZLkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 	public static final fun defaultDialogStyle (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+	public static final fun getDispatcherIO ()Lkotlinx/coroutines/CoroutineDispatcher;
 	public static final fun isLandscape (Landroidx/compose/runtime/Composer;I)Z
 	public static final fun stringOk (Landroidx/compose/runtime/Composer;I)Ljava/lang/String;
 	public static final fun updateStatusbarColor (ZLandroidx/compose/runtime/Composer;I)V

@@ -34,14 +34,6 @@ public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorUti
 	public final fun drawCheckerboard (Landroidx/compose/ui/graphics/drawscope/DrawScope;Landroidx/compose/ui/unit/Density;)V
 }
 
-public final class com/michaelflisar/composedialogs/dialogs/color/classes/Color$Creator : android/os/Parcelable$Creator {
-	public fun <init> ()V
-	public final fun createFromParcel (Landroid/os/Parcel;)Lcom/michaelflisar/composedialogs/dialogs/color/classes/Color;
-	public synthetic fun createFromParcel (Landroid/os/Parcel;)Ljava/lang/Object;
-	public final fun newArray (I)[Lcom/michaelflisar/composedialogs/dialogs/color/classes/Color;
-	public synthetic fun newArray (I)[Ljava/lang/Object;
-}
-
 public final class com/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaver : androidx/compose/runtime/saveable/Saver {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/classes/ColorStateSaver;
@@ -58,13 +50,5 @@ public final class com/michaelflisar/composedialogs/dialogs/color/classes/ColorS
 	public fun restore (Ljava/lang/String;)Landroidx/compose/runtime/MutableState;
 	public fun save (Landroidx/compose/runtime/saveable/SaverScope;Landroidx/compose/runtime/MutableState;)Ljava/lang/String;
 	public synthetic fun save (Landroidx/compose/runtime/saveable/SaverScope;Ljava/lang/Object;)Ljava/lang/Object;
-}
-
-public final class com/michaelflisar/composedialogs/dialogs/color/classes/GroupedColor$Creator : android/os/Parcelable$Creator {
-	public fun <init> ()V
-	public final fun createFromParcel (Landroid/os/Parcel;)Lcom/michaelflisar/composedialogs/dialogs/color/classes/GroupedColor;
-	public synthetic fun createFromParcel (Landroid/os/Parcel;)Ljava/lang/Object;
-	public final fun newArray (I)[Lcom/michaelflisar/composedialogs/dialogs/color/classes/GroupedColor;
-	public synthetic fun newArray (I)[Ljava/lang/Object;
 }
 

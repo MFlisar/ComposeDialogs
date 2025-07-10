@@ -68,6 +68,8 @@ kotlin {
         // e.g.:
         // val nativeMain by creating { dependsOn(commonMain.get()) }
 
+        val nativeMain by creating { dependsOn(commonMain.get()) }
+
         // ---------------------
         // target sources
         // ---------------------
@@ -88,6 +90,22 @@ kotlin {
         //         }
         //     }
         // }
+
+        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
+            when (target) {
+                Target.ANDROID, Target.WINDOWS, Target.WASM -> {
+
+                }
+                Target.IOS, Target.MACOS -> {
+                    groupMain.dependsOn(nativeMain)
+
+                }
+                Target.LINUX,
+                Target.JS -> {
+                    // not enabled
+                }
+            }
+        }
 
         // ---------------------
         // dependencies

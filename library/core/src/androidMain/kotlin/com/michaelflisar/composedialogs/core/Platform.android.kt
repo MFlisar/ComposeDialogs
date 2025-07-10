@@ -21,6 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowInsetsControllerCompat
 import com.composeunstyled.LocalModalWindow
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+
+actual val DispatcherIO : CoroutineDispatcher = Dispatchers.IO
 
 @Composable
 actual fun isLandscape(): Boolean =

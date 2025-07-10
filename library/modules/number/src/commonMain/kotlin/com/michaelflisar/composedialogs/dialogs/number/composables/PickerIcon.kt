@@ -5,7 +5,6 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,11 +13,10 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.input.pointer.pointerInput
+import com.michaelflisar.composedialogs.core.DispatcherIO
 import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.number.RepeatingButton
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -72,7 +70,7 @@ private fun Modifier.repeatingClickable(
     pointerInput(interactionSource, isEnabled) {
         awaitEachGesture {
             val down = awaitFirstDown(requireUnconsumed = false)
-            val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+            val scope = CoroutineScope(DispatcherIO + SupervisorJob())
             val heldButtonJob = scope.launch {
                 var currentDelayMillis = maxDelayMillis
                 while (isEnabled && down.pressed) {
