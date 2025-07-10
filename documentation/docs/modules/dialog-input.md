@@ -18,13 +18,13 @@ Generally following can be adjusted:
 === "DialogInput"
 
     ```kotlin
-    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
+    --8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
     ```
 
 === "DialogInputNumber"
 
     ```kotlin
-    --8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
+    --8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
     ```
 	
 #### Composable
@@ -34,13 +34,13 @@ There are 2 main composables for this dialog, one for a string and for a numeric
 === "DialogInput"
 
     ```kotlin
-    --8<-- "../library/modules/input/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt:constructor"
+    --8<-- "../../library/modules/input/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/input/DialogInput.kt:constructor"
     ```
 
 === "DialogInputNumber"
 
     ```kotlin
-    --8<-- "../library/modules/input/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/input/DialogInputNumber.kt:constructor"
+    --8<-- "../../library/modules/input/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/input/DialogInputNumber.kt:constructor"
     ```
 
 #### Screenshots

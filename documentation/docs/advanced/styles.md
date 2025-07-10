@@ -9,19 +9,19 @@ This library offers 3 styles (actually 4) for dialog. You can always provide the
 === "Dialog Style"
 
     ```kotlin
-    --8<-- "../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-dialog"
+    --8<-- "../../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-dialog"
     ```
 
 === "Bottom Sheet Style"
 
     ```kotlin
-    --8<-- "../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-bottom-sheet"
+    --8<-- "../../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-bottom-sheet"
     ```
 
 === "Full Screen Dialog Style"
 
     ```kotlin
-    --8<-- "../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-full-screen-dialog"
+    --8<-- "../../library/core/src/commonMain/kotlin/com/michaelflisar/composedialogs/core/Dialog.kt:style-full-screen-dialog"
     ```
 
 === "Desktop Dialog Style"
@@ -29,5 +29,5 @@ This library offers 3 styles (actually 4) for dialog. You can always provide the
     On windows you can also use a windows window based dialog style.
 
     ```kotlin
-    --8<-- "../library/core/src/jvmMain/kotlin/com/michaelflisar/composedialogs/core/DialogDefaultsExtensions.kt:style-windows-dialog"
+    --8<-- "../../library/core/src/jvmMain/kotlin/com/michaelflisar/composedialogs/core/DialogDefaultsExtensions.kt:style-windows-dialog"
     ```

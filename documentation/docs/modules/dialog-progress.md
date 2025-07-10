@@ -13,13 +13,13 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/ProgressDemos.kt:demo"
+--8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/ProgressDemos.kt:demo"
 ```
 
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/progress/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt:constructor"
+--8<-- "../../library/modules/progress/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/progress/DialogProgress.kt:constructor"
 ```
 
 #### Screenshots

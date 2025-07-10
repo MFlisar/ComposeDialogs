@@ -13,13 +13,13 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-time"
+--8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-time"
 ```
 
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/time/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/time/DialogTime.kt:constructor"
+--8<-- "../../library/modules/time/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/time/DialogTime.kt:constructor"
 ```
 
 #### Screenshots

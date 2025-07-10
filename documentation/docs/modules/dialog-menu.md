@@ -15,19 +15,19 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-menu"
+--8<-- "../../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-menu"
 ```
 
 Here's a full example of a menu that can be rendered:
 
 ```kotlin
---8<-- "../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-menu-items"
+--8<-- "../../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-menu-items"
 ```
 
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/menu/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/menu/DialogMenu.kt:constructor"
+--8<-- "../../library/modules/menu/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/menu/DialogMenu.kt:constructor"
 ```
 
 #### Screenshots

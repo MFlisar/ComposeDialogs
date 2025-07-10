@@ -13,13 +13,13 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InfoDemos.kt:demo"
+--8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InfoDemos.kt:demo"
 ```
   
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/info/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt:constructor"
+--8<-- "../../library/modules/info/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/info/DialogInfo.kt:constructor"
 ```
 
 #### Screenshots

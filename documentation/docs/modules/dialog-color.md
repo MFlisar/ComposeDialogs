@@ -16,13 +16,13 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/ColorDemos.kt:demo"
+--8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/ColorDemos.kt:demo"
 ```
 
 #### Composable
 
 ```kotlin
---8<-- "../library/modules/color/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt:constructor"
+--8<-- "../../library/modules/color/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/color/DialogColor.kt:constructor"
 ```
 
 #### Screenshots
