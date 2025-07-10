@@ -1,0 +1,131 @@
+# -----------
+# Module Groups
+# -----------
+
+# optional - remove it if you do not want to group your modules
+# each group has following properties:
+# - id...  the id - only needed to reference this group below inside the modules sections
+# - label... the label of the group - used in the docs tables
+# - gradle-comment... the comment on the gradle setup docs page for this group
+groups:
+  - id: core
+    label: Core
+    gradle-comment: core
+  - id: modules
+    label: Modules
+    gradle-comment: modules
+
+# -----------
+# Modules
+# -----------
+
+# REQUIRED! each module must define its meta data here!
+# each module has following properties:
+# relativePath... the relative path to the project root folder
+# artifact-id... the maven artifact id
+# group... the id of the group this module belongs to (defined above) [OPTIONAL]
+# platforms-info... a string that is displayed inside the docs in the "supported platforms" table in the info column [OPTIONAL]
+#                   IDEE: reference this info inside the parts/index_platform_comments.md
+# dependencies... a list of dependencies this module has (see below for details) [OPTIONAL]
+#    ... name: the name of the dependency - used in the docs tables
+#    ... versions-file... the toml file to load the version from (e.g. deps.versions.toml, ...)
+#    ... versions-key... the key for the versions table in the toml file
+#    ... link: a link to the dependency - used in the docs tables
+modules:
+  - relativePath: library\core
+    artifact-id: core
+    group: core
+    description: provides all the basic dialog classes and styles
+    optional: false
+    platforms-info: ""
+    dependencies:
+      - name: Compose Unstyled (core)
+        versions-file: deps.versions.toml
+        versions-key: composables
+        link: https://github.com/composablehorizons/compose-unstyled/
+  - relativePath: library\modules\billing
+    artifact-id: dialog-billing
+    group: modules
+    description: provides a simple list dialog to buy in app products
+    optional: true
+    platforms-info: "only exists for android as it is based on googles billing library"
+    dependencies:
+      - name: KotBilling
+        versions-file: deps.versions.toml
+        versions-key: kotbilling
+        link: https://github.com/MFlisar/Kotbilling
+  - relativePath: library\modules\color
+    artifact-id: dialog-color
+    group: modules
+    description: provides a color dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\date
+    artifact-id: dialog-date
+    group: modules
+    description: provides a date picker dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\info
+    artifact-id: dialog-info
+    group: modules
+    description: provides an info dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\input
+    artifact-id: dialog-input
+    group: modules
+    description: provides an input dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\list
+    artifact-id: dialog-list
+    group: modules
+    description: provides a list dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\menu
+    artifact-id: dialog-menu
+    group: modules
+    description: provides a menu dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\number
+    artifact-id: dialog-number
+    group: modules
+    description: provides a number picker dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\progress
+    artifact-id: dialog-progress
+    group: modules
+    description: provides a progress dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\time
+    artifact-id: dialog-time
+    group: modules
+    description: provides a time dialog
+    optional: true
+    platforms-info: ""
+    dependencies: []
+
+
+
+
+
+
+
+
+
+
+
+

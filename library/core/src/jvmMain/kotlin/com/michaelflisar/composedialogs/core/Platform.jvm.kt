@@ -31,10 +31,10 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 
 @Composable
-actual fun isLandscape() = false
+actual fun isLandscape(): Boolean = false
 
 @Composable
-actual fun stringOk() = "OK"
+actual fun stringOk(): String = "OK"
 
 @Composable
 actual fun DialogDefaults.defaultDialogStyle() = styleDialog()

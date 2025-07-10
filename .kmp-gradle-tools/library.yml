@@ -1,0 +1,34 @@
+# ------------
+# General Setup
+# ------------
+
+# Developer
+developer:
+  name: Michael Flisar
+  mail: mflisar.development@gmail.com
+  maven-id: mflisar
+  social-github: https://github.com/MFlisar
+
+# Java
+java-version: 17
+
+# -----------
+# Project
+# -----------
+
+library:
+  name: ComposeDialogs
+  release: 2023
+  link-docs: https://mflisar.github.io/ComposeDialogs/
+  link-repo: https://github.com/MFlisar/ComposeDialogs/
+  repo-name: mflisar/ComposeDialogs # the label of the repo link on the mkdocs homepage at the top right
+  # TODO: autom. detecten?
+  license:
+    name: Apache License 2.0
+    link: https://github.com/MFlisar/ComposeDialogs/blob/main/LICENSE
+  screenshots: []
+  about-me: true # set to true if you want to show the about me section on the homepage
+
+maven:
+  group-id: io.github.mflisar.composedialogs
+  primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)

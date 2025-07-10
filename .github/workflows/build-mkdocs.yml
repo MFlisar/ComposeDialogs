@@ -1,32 +1,53 @@
-name: build-mkdocs 
+name: build-mkdocs
 on:
   push:
     branches:
       - main
+      - master
+      -
 permissions:
   contents: write
+
+env:
+  FOLDER_GENERATED_DOCS: "gen/docs" # output folder for generated docs
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # if you do support macOS or iOS, you must change this to macos-latest!
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-      - uses: actions/cache@v4
+
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Run buildDocs task
+        run: ./gradlew buildDocs -PgeneratedDocsDir=${{ env.FOLDER_GENERATED_DOCS }}
+
+      - name: Setup cache
+        uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
+
       - run: pip install \
-            mkdocs-material \
-            mkdocs-minify-plugin \
-            "mkdocs-material[imaging]" \
-            mkdocs-macros-plugin \
-            mkdocs-glightbox \
-            mkdocs-badges
+          mkdocs-material \
+          mkdocs-minify-plugin \
+          "mkdocs-material[imaging]" \
+          mkdocs-macros-plugin \
+          mkdocs-glightbox \
+          mkdocs-badges
+
       - name: Deploy
         run: mkdocs gh-deploy --force
-        working-directory: documentation
+        working-directory: ${{ env.FOLDER_GENERATED_DOCS }}

@@ -1,7 +1,7 @@
 package com.michaelflisar.composedialogs.dialogs.color.classes
 
-import dev.icerock.moko.parcelize.Parcelable
-import dev.icerock.moko.parcelize.Parcelize
+import com.michaelflisar.parcelize.Parcelable
+import com.michaelflisar.parcelize.Parcelize
 
 @Parcelize
 internal class Color(
