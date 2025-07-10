@@ -140,6 +140,11 @@ kotlin {
 
 // android configuration
 android {
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+
     buildFilePlugin.setupAndroidLibrary(
         androidNamespace = androidNamespace,
         compileSdk = app.versions.compileSdk,
