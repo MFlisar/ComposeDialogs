@@ -39,7 +39,8 @@ fun InfoDemos(
 
 @Composable
 private fun RowScope.DemoDialogInfo1(
-    style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
+    style: ComposeDialogStyle,
+    icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
     val state = rememberDialogState()

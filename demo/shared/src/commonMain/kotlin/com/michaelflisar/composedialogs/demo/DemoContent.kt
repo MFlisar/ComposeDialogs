@@ -38,6 +38,7 @@ import com.michaelflisar.composedialogs.demo.demos.DateTimeDemos
 import com.michaelflisar.composedialogs.demo.demos.InfoDemos
 import com.michaelflisar.composedialogs.demo.demos.InputDemos
 import com.michaelflisar.composedialogs.demo.demos.ListDemos
+import com.michaelflisar.composedialogs.demo.demos.MenuDemos
 import com.michaelflisar.composedialogs.demo.demos.NumberDemos
 import com.michaelflisar.composedialogs.demo.demos.ProgressDemos
 import com.michaelflisar.composedialogs.demo.demos.SingleDialogWithListDemos
@@ -106,6 +107,7 @@ fun DemoContent(
                 6 -> ProgressDemos(style, icon, showInfo)
                 7 -> SingleDialogWithListDemos(style, icon, showInfo)
                 8 -> BillingDemos(style, icon, showInfo)
+                9 -> MenuDemos(style, icon, showInfo)
 
                 // Manually created custom demos
                 99 -> CustomDemos(style, icon, showInfo)
@@ -149,6 +151,7 @@ private fun ColumnScope.RootContent(
         MainButton(selectedDemoPage, 6, "Progress Demos")
         MainButton(selectedDemoPage, 7, "Single Dialog with List")
         MainButton(selectedDemoPage, 8, "Billing Demos")
+        MainButton(selectedDemoPage, 9, "Menu Demos")
         HorizontalDivider()
         MainButton(selectedDemoPage, 99, "Custom Demos")
     }

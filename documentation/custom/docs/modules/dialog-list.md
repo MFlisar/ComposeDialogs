@@ -17,7 +17,34 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/Main.kt:demo-list"
+val state = rememberDialogState()
+val selected = remember { mutableStateOf<Int?>(null) }
+val items = List(100) { "Item $it" }
+DialogList(
+    style = style,
+    title = { Text("List Dialog") },
+    icon = getIcon,
+    buttons = buttons,
+    description = "Some optional description",
+    state = state,
+    items = items,
+    itemIdProvider = { items.indexOf(it) },
+    selectionMode = DialogList.SelectionMode.SingleSelect(
+        selected = selected,
+        selectOnRadioButtonClickOnly = false
+    ),
+    itemContents = DialogList.ItemDefaultContent(
+        text = { it }
+    ),
+    onEvent = {
+        val info = if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+            "Selected list value: ${selected.value?.let { "Index = $it | Item = ${items[it]}" }}"
+        } else {
+            "Event $it"
+        }
+        // ...
+    }
+)
 ```
 
 #### Composable
