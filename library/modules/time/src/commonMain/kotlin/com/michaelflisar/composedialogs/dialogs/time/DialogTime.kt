@@ -88,14 +88,13 @@ object DialogTime {
 /**
  * convenient function for [DialogTime]
  *
- * @param initialHour the initial hour
- * @param initialMinute the initial minute
+ * @param time the initial time
  *
  * @return a state holding the current time values
  */
 @Composable
 fun rememberDialogTime(
-    time: LocalTime = TimeUtil.now()
+    time: LocalTime = TimeUtil.now().time
 ): MutableState<LocalTime> {
     return rememberSaveable(
         saver = DialogTime.LocalTimeSaver

@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.gradle.maven.publish.plugin) apply false
     alias(libs.plugins.dokka) apply false
     alias(libs.plugins.binary.compatibility.validator) apply false
-    alias(deps.plugins.kmp.gradle.tools.gradle.plugin) apply false
+    alias(deps.plugins.kmp.gradle.tools.build.gradle.plugin) apply false
 }
 
 allprojects {
@@ -50,7 +50,7 @@ tasks.register("buildDocs") {
         // read env from build-mkdocs.yml
         val generatedDocsDir = project.findProperty("generatedDocsDir") as String? ?: "gen/docs"
         com.michaelflisar.kmpgradletools.docs.buildDocs(
-            relativePathDocsCustom = "documentation",
+            relativePathDocsCustom = "documentation/custom",
             relativePathGeneratedDocsOutput = generatedDocsDir,
             relativeModulesPath = "library",
             relativeDemosPath = "demo",

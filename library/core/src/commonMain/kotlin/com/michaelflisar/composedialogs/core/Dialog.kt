@@ -274,6 +274,7 @@ sealed class DialogEvent {
         override val dismissed: Boolean
     ) : DialogEvent() {
         override val isPositiveButton = button == DialogButtonType.Positive
+        override fun toString() = "DialogEvent::Button(button=$button, dismissed=$dismissed)"
     }
 
     /**

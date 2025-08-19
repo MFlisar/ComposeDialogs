@@ -24,7 +24,7 @@ internal fun CalendarTodayButton(
         pagerState.currentPage,
         date.value.year,
         date.value.month,
-        date.value.dayOfMonth
+        date.value.day
     ) {
         derivedStateOf {
             pagerState.currentPage != todayPage || date.value != today

@@ -1,14 +1,17 @@
 package com.michaelflisar.composedialogs.dialogs.date.utils
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 internal object DateUtil {
 
@@ -22,16 +25,13 @@ internal object DateUtil {
         DayOfWeek.SUNDAY
     )
 
+    @OptIn(ExperimentalTime::class)
     fun now(): LocalDateTime {
         val now = Clock.System.now()
         return now.toLocalDateTime(TimeZone.currentSystemDefault())
     }
 
-    fun today(): LocalDate {
-        val now = Clock.System.now()
-        val dateTime = now.toLocalDateTime(TimeZone.currentSystemDefault())
-        return LocalDate(dateTime.year, dateTime.month, dateTime.dayOfMonth)
-    }
+    fun today() = now().date
 
     fun firstDateOfMonth(year: Int, month: Int): LocalDate {
         return LocalDate(year, month, 1)

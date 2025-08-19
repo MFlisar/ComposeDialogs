@@ -62,5 +62,6 @@ includeModule("library/modules/menu", ":composedialogs:modules:menu")
 // Demo
 // --------------
 
-include(":demo:android")
-include(":demo:desktop")
+include(":demo:shared")
+include(":demo:app:windows")
+include(":demo:app:android")

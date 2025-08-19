@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(deps.plugins.kmp.gradle.tools.gradle.plugin)
+    alias(deps.plugins.kmp.gradle.tools.build.gradle.plugin)
 }
 
 // get build file plugin
@@ -154,4 +154,5 @@ android {
 }
 
 // maven publish configuration
-buildFilePlugin.setupMavenPublish()
+if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
+    buildFilePlugin.setupMavenPublish()

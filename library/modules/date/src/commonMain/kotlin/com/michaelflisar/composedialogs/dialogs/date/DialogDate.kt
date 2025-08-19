@@ -54,6 +54,7 @@ import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
+import kotlinx.datetime.number
 import org.jetbrains.compose.resources.stringResource
 
 /* --8<-- [start: constructor] */
@@ -98,10 +99,10 @@ fun DialogDate(
         onEvent = onEvent
     ) {
         val pages = (dateRange.years.last - dateRange.years.first + 1) * 12
-        val currentPage = remember(date.value.year, date.value.monthNumber) {
+        val currentPage = remember(date.value.year, date.value.month.number) {
             derivedStateOf {
                 val offsetInYears = date.value.year - dateRange.years.first
-                val offsetMonths = date.value.monthNumber - 1
+                val offsetMonths = date.value.month.number - 1
                 offsetInYears * 12 + offsetMonths
             }
         }
@@ -111,7 +112,7 @@ fun DialogDate(
         val todayPage by remember(pages, today) {
             derivedStateOf {
                 val offsetInYears = today.year - dateRange.years.first
-                val offsetMonths = today.monthNumber - 1
+                val offsetMonths = today.month.number - 1
                 val offset = offsetInYears * 12 + offsetMonths
                 offset.takeIf { it in 0..<pages }
             }
@@ -294,7 +295,7 @@ object DialogDate {
         val years: IntRange
     )
 
-    val LocalDateSaver = Saver<MutableState<LocalDate>, Int>(
+    val LocalDateSaver = Saver<MutableState<LocalDate>, Long>(
         save = { it.value.toEpochDays() },
         restore = { mutableStateOf(LocalDate.fromEpochDays(it)) }
     )
@@ -354,7 +355,6 @@ object DialogDateDefaults {
         },
         formatterSelectedMonth: (month: Month) -> String = {
             defaultFormatterSelectedMonth(it)
-
         },
         formatterSelectedYear: (year: Int) -> String = { it.toString() },
         formatterMonthSelectorList: (month: Month) -> String = {

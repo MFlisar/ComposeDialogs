@@ -59,7 +59,7 @@ internal fun CalendarMonth(
             repeat(colIndexOfFirstDay) {
                 items.add(null)
             }
-            repeat(lastDayOfMonth.value.dayOfMonth) {
+            repeat(lastDayOfMonth.value.day) {
                 val date = LocalDate(
                     firstDayOfMonth.value.year,
                     firstDayOfMonth.value.month,
@@ -137,7 +137,7 @@ private fun CalendarCell(
                     .clip(MaterialTheme.shapes.small)
                     .background(MaterialTheme.colorScheme.primary)
             ) {
-                Text(date.dayOfMonth.toString(), color = MaterialTheme.colorScheme.onPrimary)
+                Text(date.day.toString(), color = MaterialTheme.colorScheme.onPrimary)
             }
         } else {
             val isToday = today == date
@@ -153,7 +153,7 @@ private fun CalendarCell(
                         state.value = date
                     }
             ) {
-                Text(date.dayOfMonth.toString())
+                Text(date.day.toString())
             }
         }
     }

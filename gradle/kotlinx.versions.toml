@@ -1,7 +1,7 @@
 [versions]
 
-coroutines = 	    "1.9.0"
-datetime = 	        "0.6.1"
+coroutines = 	    "1.10.2"
+datetime = 	        "0.7.1"
 
 [libraries]
 
