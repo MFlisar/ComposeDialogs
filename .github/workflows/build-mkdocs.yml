@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # if you do support macOS or iOS, you must change this to macos-latest!
+    runs-on: ubuntu-latest
     steps:
 
       - name: Checkout repository

@@ -77,6 +77,7 @@ public final class com/michaelflisar/composedialogs/core/DialogEvent$Button : co
 	public final fun getButton ()Lcom/michaelflisar/composedialogs/core/DialogButtonType;
 	public fun getDismissed ()Z
 	public fun isPositiveButton ()Z
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogEvent$Dismissed : com/michaelflisar/composedialogs/core/DialogEvent {

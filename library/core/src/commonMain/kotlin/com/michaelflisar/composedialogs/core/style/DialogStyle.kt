@@ -305,7 +305,7 @@ private fun createDraggableState(
 }
 
 @Composable
-fun <T> createDraggableFlingState(
+private fun <T> createDraggableFlingState(
     draggableState: AnchoredDraggableState<T>
 ): TargetedFlingBehavior {
 

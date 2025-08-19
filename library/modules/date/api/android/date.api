@@ -20,7 +20,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DialogDate$Setu
 	public static final field $stable I
 	public final fun getButtonToday ()Lkotlin/jvm/functions/Function4;
 	public final fun getDateCellHeight-D9Ej5fM ()F
-	public final fun getFirstDayOfWeek ()Ljava/time/DayOfWeek;
+	public final fun getFirstDayOfWeek ()Lkotlinx/datetime/DayOfWeek;
 	public final fun getFormatterMonthSelectorList ()Lkotlin/jvm/functions/Function1;
 	public final fun getFormatterSelectedDate ()Lkotlin/jvm/functions/Function1;
 	public final fun getFormatterSelectedMonth ()Lkotlin/jvm/functions/Function1;
@@ -36,7 +36,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DialogDateDefau
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/DialogDateDefaults;
 	public final fun dateRange (Lkotlin/ranges/IntRange;)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Range;
 	public static synthetic fun dateRange$default (Lcom/michaelflisar/composedialogs/dialogs/date/DialogDateDefaults;Lkotlin/ranges/IntRange;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Range;
-	public final fun setup-Wu8B24Y (Lkotlin/jvm/functions/Function4;Ljava/time/DayOfWeek;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Setup;
+	public final fun setup-Wu8B24Y (Lkotlin/jvm/functions/Function4;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Setup;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DialogDateKt {
@@ -46,9 +46,9 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DialogDateKt {
 
 public final class com/michaelflisar/composedialogs/dialogs/date/Platform_androidKt {
 	public static final fun defaultFormatterSelectedDate (Lkotlinx/datetime/LocalDate;)Ljava/lang/String;
-	public static final fun defaultFormatterSelectedMonth (Ljava/time/Month;)Ljava/lang/String;
-	public static final fun defaultFormatterSelectedMonthInSelectorList (Ljava/time/Month;)Ljava/lang/String;
-	public static final fun defaultFormatterWeekDayLabel (Ljava/time/DayOfWeek;)Ljava/lang/String;
+	public static final fun defaultFormatterSelectedMonth (Lkotlinx/datetime/Month;)Ljava/lang/String;
+	public static final fun defaultFormatterSelectedMonthInSelectorList (Lkotlinx/datetime/Month;)Ljava/lang/String;
+	public static final fun defaultFormatterWeekDayLabel (Lkotlinx/datetime/DayOfWeek;)Ljava/lang/String;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/classes/DateViewState : java/lang/Enum {
