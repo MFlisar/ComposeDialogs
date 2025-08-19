@@ -13,7 +13,7 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
-    --8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/ProgressDemos.kt:demo"
+--8<-- "../../demo/shared/src/commonMain/kotlin/com/michaelflisar/composedialogs/demo/demos/ProgressDemos.kt:demo"
 ```
 
 #### Composable
