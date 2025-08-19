@@ -18,13 +18,13 @@ Generally following can be adjusted:
 === "DialogInput"
 
     ```kotlin
-    --8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
+    --8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo"
     ```
 
 === "DialogInputNumber"
 
     ```kotlin
-    --8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
+    --8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/InputDemos.kt:demo-number"
     ```
 	
 #### Composable

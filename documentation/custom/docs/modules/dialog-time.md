@@ -13,7 +13,7 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../../demo/android/src/main/java/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-time"
+    --8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/DateTimeDemos.kt:demo-time"
 ```
 
 #### Composable

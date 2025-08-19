@@ -17,7 +17,7 @@ Generally following can be adjusted:
 #### Example
 
 ```kotlin
---8<-- "../../demo/desktop/src/jvmMain/kotlin/com/michaelflisar/composedialogs/demo/Main.kt:demo-list"
+--8<-- "../../demo/shared/commonMain/src/main/kotlin/com/michaelflisar/composedialogs/demo/demos/Main.kt:demo-list"
 ```
 
 #### Composable
