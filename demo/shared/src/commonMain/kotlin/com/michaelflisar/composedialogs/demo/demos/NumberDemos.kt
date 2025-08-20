@@ -12,9 +12,9 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.number.DialogNumberPicker
 import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.number.RepeatingButton
@@ -25,23 +25,23 @@ fun NumberDemos(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Number Picker Dialogs")
-    DemoDialogRow {
-        DemoDialogInput1(style, icon, showInfo)
+    DemoRegion("Number Picker Dialogs")
+    DemoRow {
+        DemoInput1(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogInput2(style, icon, showInfo)
+    DemoRow {
+        DemoInput2(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogInput3(style, icon, showInfo)
+    DemoRow {
+        DemoInput3(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogInput4(style, icon, showInfo)
+    DemoRow {
+        DemoInput4(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput1(
+private fun RowScope.DemoInput1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -76,16 +76,17 @@ private fun RowScope.DemoDialogInput1(
         )
     }
     /* --8<-- [end: demo] */
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput2(
+private fun RowScope.DemoInput2(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -119,16 +120,17 @@ private fun RowScope.DemoDialogInput2(
             )
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5 + repeat button clicks on long press + custom value formatter"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput3(
+private fun RowScope.DemoInput3(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -166,17 +168,18 @@ private fun RowScope.DemoDialogInput3(
             )
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number PICKER Dialog",
         "Shows a number picker for Float values in [0, 10f] with a step size of .5f + custom icons"
-    )
+    ) {
+        state.show()
+    }
 }
 
 
 @Composable
-private fun RowScope.DemoDialogInput4(
+private fun RowScope.DemoInput4(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -208,10 +211,11 @@ private fun RowScope.DemoDialogInput4(
             )
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number PICKER Dialog",
         "Shows a number picker for Int values in [0, 1000] with a step size of 10 + a second step size of 100 for faster buttons."
-    )
+    ) {
+        state.show()
+    }
 }

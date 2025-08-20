@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogStateWithData
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
+import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.composedialogs.dialogs.info.DialogInfo
 
 @Composable
@@ -26,7 +26,7 @@ fun ColumnScope.SingleDialogWithListDemos(
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Clicking any item in the list below will open its dialog")
+    DemoRegion("Clicking any item in the list below will open its dialog")
     val items = 1..100
     val showDialog = rememberDialogState<Int>(data = null)
     ListDialog(showDialog, style, icon, showInfo)

@@ -27,9 +27,9 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +41,7 @@ fun ListDemos(
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("List Dialogs (Simple Layouts)")
+    DemoRegion("List Dialogs (Simple Layouts)")
 
     val simpleItems = (1..500).toList()
 
@@ -63,7 +63,7 @@ fun ListDemos(
 
     val selectedSingle = rememberSaveable { mutableStateOf<Int?>(null) }
     val selectedMulti = rememberSaveable { mutableStateOf<List<Int>>(emptyList()) }
-    DemoDialogRow {
+    DemoRow {
         DemoList(
             style,
             icon,
@@ -83,7 +83,7 @@ fun ListDemos(
             selectionMode = DialogList.SelectionMode.MultiSelect(selectedMulti)
         )
     }
-    DemoDialogRow {
+    DemoRow {
         DemoList(
             style,
             icon,
@@ -107,8 +107,8 @@ fun ListDemos(
             }
         )
     }
-    DemoDialogRegion("List Dialogs (Other Options)")
-    DemoDialogRow {
+    DemoRegion("List Dialogs (Other Options)")
+    DemoRow {
         DemoList(
             style,
             icon,
@@ -137,7 +137,7 @@ fun ListDemos(
             infos = "Divider + Icons"
         )
     }
-    DemoDialogRow {
+    DemoRow {
         DemoList(
             style,
             icon,
@@ -167,7 +167,7 @@ fun ListDemos(
         )
     }
 
-    DemoDialogRow {
+    DemoRow {
         DemoList(
             style,
             icon,
@@ -291,10 +291,11 @@ fun <T> RowScope.DemoList(
             )
         }
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.TextFields,
         "List Dialog",
         "\"${selectionMode::class.simpleName}\" list dialog" + (if (infos.isNotEmpty()) " - $infos" else "")
-    )
+    ) {
+        state.show()
+    }
 }

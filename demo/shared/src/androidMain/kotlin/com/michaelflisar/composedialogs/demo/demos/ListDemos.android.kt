@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.demo.classes.AppItem
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
 import kotlinx.coroutines.Dispatchers
@@ -51,7 +51,7 @@ actual fun DemoListAppSelector(
     }
     val customItemIdProvider = { item: AppItem -> item.id }
 
-    DemoDialogRow {
+    DemoRow {
         DemoList(
             style,
             icon,

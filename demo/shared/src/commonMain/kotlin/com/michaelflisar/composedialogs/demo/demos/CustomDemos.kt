@@ -21,9 +21,9 @@ import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 
 @Composable
 fun CustomDemos(
@@ -31,15 +31,15 @@ fun CustomDemos(
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Custom Dialogs")
-    DemoDialogRow {
-        DemoDialogCustom1(style, icon, showInfo)
-        DemoDialogCustom2(style, icon, showInfo)
+    DemoRegion("Custom Dialogs")
+    DemoRow {
+        DemoCustom1(style, icon, showInfo)
+        DemoCustom2(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom1(
+private fun RowScope.DemoCustom1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -73,16 +73,17 @@ private fun RowScope.DemoDialogCustom1(
             }
         }
     }
-    DemoDialogButton(
-        state,
-        Icons.Default.Build,
-        "Show Custom Dialog (Resizing)",
-        "Shows a custom dialog with resizeable content"
-    )
+    DemoButton(
+        icon = Icons.Default.Build,
+        label = "Show Custom Dialog (Resizing)",
+        description = "Shows a custom dialog with resizeable content"
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogCustom2(
+private fun RowScope.DemoCustom2(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -106,10 +107,11 @@ private fun RowScope.DemoDialogCustom2(
             }
         }
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Build,
         "Show Custom Dialog (Nested Scrolling)",
         "Shows a custom dialog with scrollable content"
-    )
+    ) {
+        state.show()
+    }
 }

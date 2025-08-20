@@ -12,9 +12,9 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.input.DialogInput
 import com.michaelflisar.composedialogs.dialogs.input.DialogInputNumber
 import com.michaelflisar.composedialogs.dialogs.input.DialogInputValidator
@@ -31,21 +31,21 @@ fun InputDemos(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Text Input Dialogs")
-    DemoDialogRow {
-        DemoDialogInput1(style, icon, showInfo)
+    DemoRegion("Text Input Dialogs")
+    DemoRow {
+        DemoInput1(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogInput2(style, icon, showInfo)
+    DemoRow {
+        DemoInput2(style, icon, showInfo)
     }
-    DemoDialogRegion("Number Input Dialogs")
-    DemoDialogRow {
-        DemoDialogInput3(style, icon, showInfo)
+    DemoRegion("Number Input Dialogs")
+    DemoRow {
+        DemoInput3(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput1(
+private fun RowScope.DemoInput1(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -91,16 +91,17 @@ private fun RowScope.DemoDialogInput1(
         )
     }
     /* --8<-- [end: demo] */
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.TextFields,
         "Input Dialog",
         "Shows an input dialog that does not accept an empty input"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput2(
+private fun RowScope.DemoInput2(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -131,16 +132,17 @@ private fun RowScope.DemoDialogInput2(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.TextFields,
         "Text Input Dialog which only allows numeric characters as input values",
         "Shows an input dialog that does only accept numeric characters"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput3(
+private fun RowScope.DemoInput3(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -173,16 +175,17 @@ private fun RowScope.DemoDialogInput3(
         )
     }
     /* --8<-- [end: demo-number] */
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number INPUT Dialog",
         "Shows a number dialog that does only accept a valid Integer"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInput4(
+private fun RowScope.DemoInput4(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit,
@@ -216,10 +219,11 @@ private fun RowScope.DemoDialogInput4(
             )
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Numbers,
         "Number PICKER Dialog",
         "Shows a number picker for Integer values in [0, 100] with a step size of 5 (repeat button clicks on long press = $enableButtonLongPress)"
-    )
+    ) {
+        state.show()
+    }
 }

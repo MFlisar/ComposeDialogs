@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
 
@@ -20,17 +20,17 @@ fun ColorDemos(
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Color Dialogs")
-    DemoDialogRow {
-        DemoDialogColor1(style, icon, showInfo)
+    DemoRegion("Color Dialogs")
+    DemoRow {
+        DemoColor1(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogColor2(style, icon, showInfo)
+    DemoRow {
+        DemoColor2(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogColor1(
+private fun RowScope.DemoColor1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -57,16 +57,17 @@ private fun RowScope.DemoDialogColor1(
         )
     }
     /* --8<-- [end: demo] */
-    DemoDialogButton(
-        state,
-        Icons.Default.ColorLens,
-        "Show Color Dialog",
-        "Shows a color dialog (alpha supported)"
-    )
+    DemoButton(
+        icon = Icons.Default.ColorLens,
+        label = "Show Color Dialog",
+        description = "Shows a color dialog (alpha supported)"
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogColor2(
+private fun RowScope.DemoColor2(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -92,10 +93,11 @@ private fun RowScope.DemoDialogColor2(
             }
         )
     }
-    DemoDialogButton(
-        state,
-        Icons.Default.ColorLens,
-        "Show Color Dialog",
-        "Shows a color dialog (alpha NOT supported + RGB values are shown in percentages in all sliders)"
-    )
+    DemoButton(
+        icon = Icons.Default.ColorLens,
+        label = "Show Color Dialog",
+        description = "Shows a color dialog (alpha NOT supported + RGB values are shown in percentages in all sliders)"
+    ) {
+        state.show()
+    }
 }

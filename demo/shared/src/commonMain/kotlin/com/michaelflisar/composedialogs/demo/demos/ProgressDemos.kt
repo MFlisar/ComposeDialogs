@@ -21,9 +21,9 @@ import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.progress.DialogProgress
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,18 +33,18 @@ fun ProgressDemos(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Progress Dialogs")
-    DemoDialogRow {
-        DemoDialogProgress1(style, icon, showInfo)
-        DemoDialogProgress2(style, icon, showInfo)
+    DemoRegion("Progress Dialogs")
+    DemoRow {
+        DemoProgress1(style, icon, showInfo)
+        DemoProgress2(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogProgress3(style, icon, showInfo)
+    DemoRow {
+        DemoProgress3(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress1(
+private fun RowScope.DemoProgress1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -72,16 +72,17 @@ private fun RowScope.DemoDialogProgress1(
             }
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Downloading,
         "Progress Dialog",
         "Shows an endless LINEAR progress dialog"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress2(
+private fun RowScope.DemoProgress2(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -111,16 +112,17 @@ private fun RowScope.DemoDialogProgress2(
         )
     }
     /* --8<-- [end: demo] */
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Downloading,
         "Progress Dialog",
         "Shows an endless CIRCULAR progress dialog"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogProgress3(
+private fun RowScope.DemoProgress3(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -177,10 +179,11 @@ private fun RowScope.DemoDialogProgress3(
             }
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Downloading,
         "Progress Dialog",
         "Shows an LINEAR progress dialog for 10 seconds (not cancelable)"
-    )
+    ) {
+        state.show()
+    }
 }

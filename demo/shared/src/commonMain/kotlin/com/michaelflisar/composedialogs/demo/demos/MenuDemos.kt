@@ -8,9 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.menu.DialogMenu
 import com.michaelflisar.composedialogs.dialogs.menu.MenuItem
 
@@ -19,14 +19,14 @@ fun MenuDemos(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Menu Dialogs")
-    DemoDialogRow {
-        DemoDialogMenu(style, icon, showInfo)
+    DemoRegion("Menu Dialogs")
+    DemoRow {
+        DemoMenu(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogMenu(
+private fun RowScope.DemoMenu(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -140,10 +140,11 @@ private fun RowScope.DemoDialogMenu(
         )
         /* --8<-- [end: demo-menu] */
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Info,
         "Simple Menu Dialog",
         "Shows a menu dialog"
-    )
+    ) {
+        state.show()
+    }
 }

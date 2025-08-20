@@ -16,9 +16,9 @@ import androidx.compose.runtime.setValue
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.info.DialogInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,17 +28,17 @@ fun InfoDemos(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Info Dialogs")
-    DemoDialogRow {
-        DemoDialogInfo1(style, icon, showInfo)
+    DemoRegion("Info Dialogs")
+    DemoRow {
+        DemoInfo1(style, icon, showInfo)
     }
-    DemoDialogRow {
-        DemoDialogInfo2(style, icon, showInfo)
+    DemoRow {
+        DemoInfo2(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo1(
+private fun RowScope.DemoInfo1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
@@ -58,16 +58,17 @@ private fun RowScope.DemoDialogInfo1(
         )
     }
     /* --8<-- [end: demo] */
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Info,
         "Simple Info Dialog",
         "Shows a basic info dialog"
-    )
+    ) {
+        state.show()
+    }
 }
 
 @Composable
-private fun RowScope.DemoDialogInfo2(
+private fun RowScope.DemoInfo2(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -104,10 +105,11 @@ private fun RowScope.DemoDialogInfo2(
             }
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Info,
         "Advanced Info Dialog",
         "Shows a simple dialog with updating text that can't be closed before 10s are over"
-    )
+    ) {
+        state.show()
+    }
 }

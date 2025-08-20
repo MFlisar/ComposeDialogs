@@ -4,14 +4,15 @@
 composecolors =             "1.0.1"
 kotbilling =                "0.8.1"
 kmp-parcelize =             "1.0.0"
-kmp-gradle-tools =          "1.5.0"
+kmp-library =               "1.7.2"
+kmp-democomposables =       "1.0.2"
 
 accompanist = 			    "0.37.3"
 composables =               "1.36.1"
 
 [plugins]
 
-kmp-gradle-tools-build-gradle-plugin =          { id = "io.github.mflisar.kmp-gradle-tools.build-gradle-plugin",                    version.ref = "kmp-gradle-tools" }
+kmplibrary-buildplugin =            { id = "io.github.mflisar.kmp-library.plugins-build-gradle",           version.ref = "kmp-library" }
 
 [libraries]
 
@@ -20,8 +21,8 @@ composecolors-material =			{ module = "io.github.mflisar.composecolors:material"
 composecolors-material-palette =    { module = "io.github.mflisar.composecolors:material-palette", 		    version.ref = "composecolors" }
 kotbilling =			        	{ module = "io.github.mflisar.kotbilling:library", 						version.ref = "kotbilling" }
 kmp-parcelize =                     { module = "io.github.mflisar.parcelize:library", 	                    version.ref = "kmp-parcelize" }
-kmp-gradle-tools-scripts =          { module = "io.github.mflisar.kmp-gradle-tools:scripts",                version.ref = "kmp-gradle-tools" }
-kmp-gradle-tools-docs =             { module = "io.github.mflisar.kmp-gradle-tools:docs",                   version.ref = "kmp-gradle-tools" }
+kmplibrary-docs =                   { module = "io.github.mflisar.kmp-library:docs",                        version.ref = "kmp-library" }
+kmp-democomposables =               { module = "io.github.mflisar.democomposables:library",                 version.ref = "kmp-democomposables" }
 
 drawablepainter = 		    	    { module = "com.google.accompanist:accompanist-drawablepainter", 		version.ref = "accompanist" }
 composables-core =                  { module = "com.composables:core", 		                                version.ref = "composables" }

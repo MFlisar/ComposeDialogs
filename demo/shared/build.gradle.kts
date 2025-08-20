@@ -1,6 +1,8 @@
-import com.michaelflisar.kmpgradletools.BuildFilePlugin
-import com.michaelflisar.kmpgradletools.Target
-import com.michaelflisar.kmpgradletools.Targets
+import com.michaelflisar.kmplibrary.BuildFilePlugin
+import com.michaelflisar.kmplibrary.dependencyOf
+import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.Target
+import com.michaelflisar.kmplibrary.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -8,7 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.parcelize)
-    alias(deps.plugins.kmp.gradle.tools.build.gradle.plugin)
+    alias(deps.plugins.kmplibrary.buildplugin)
 }
 
 // get build logic plugin
@@ -47,31 +49,16 @@ kotlin {
     sourceSets {
 
         // ---------------------
-        // custom shared sources
+        // custom source sets
         // ---------------------
+
+        // --
+        // e.g.:
+        // val nativeMain by creating { dependsOn(commonMain.get()) }
+        // nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
 
         val notAndroidMain by creating { dependsOn(commonMain.get()) }
-
-        // ---------------------
-        // target sources
-        // ---------------------
-
-        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
-            when (target) {
-                Target.ANDROID,  -> {
-                    // --
-                }
-
-                Target.WINDOWS, Target.IOS, Target.MACOS, Target.WASM -> {
-                    groupMain.dependsOn(notAndroidMain)
-                }
-
-                Target.LINUX,
-                Target.JS -> {
-                    // not enabled
-                }
-            }
-        }
+        notAndroidMain.dependencyOfAll(sourceSets,  buildTargets, exclusions = listOf(Target.ANDROID))
 
         // ---------------------
         // dependencies
@@ -102,6 +89,9 @@ kotlin {
             implementation(project(":composedialogs:modules:color"))
             implementation(project(":composedialogs:modules:list"))
             implementation(project(":composedialogs:modules:menu"))
+
+            // demo ui composables
+            api(deps.kmp.democomposables)
 
         }
 

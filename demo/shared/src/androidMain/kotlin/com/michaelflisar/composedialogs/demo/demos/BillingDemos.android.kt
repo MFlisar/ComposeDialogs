@@ -10,9 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogButton
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRegion
-import com.michaelflisar.composedialogs.demo.composables.DemoDialogRow
+import com.michaelflisar.democomposables.DemoButton
+import com.michaelflisar.democomposables.layout.DemoRegion
+import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.billing.DialogBilling
 import com.michaelflisar.kotbilling.classes.Product
 import com.michaelflisar.kotbilling.classes.ProductType
@@ -23,14 +23,14 @@ actual fun BillingDemos(
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
-    DemoDialogRegion("Billing Dialogs")
-    DemoDialogRow {
-        DemoDialogBilling(style, icon, showInfo)
+    DemoRegion("Billing Dialogs")
+    DemoRow {
+        DemoBilling(style, icon, showInfo)
     }
 }
 
 @Composable
-private fun RowScope.DemoDialogBilling(
+private fun RowScope.DemoBilling(
     style: ComposeDialogStyle, icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit
 ) {
@@ -68,10 +68,11 @@ private fun RowScope.DemoDialogBilling(
             }
         )
     }
-    DemoDialogButton(
-        state,
+    DemoButton(
         Icons.Default.Info,
         "Simple Billing Dialog",
         "Shows a list with prices (and purchase state if already owned) of items to buy (this will only return a non empty result in a real app with products!)"
-    )
+    ) {
+        state.show()
+    }
 }
