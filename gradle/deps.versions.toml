@@ -4,7 +4,7 @@
 composecolors =             "1.0.1"
 kotbilling =                "0.8.1"
 kmp-parcelize =             "1.0.0"
-kmp-library =               "1.7.2"
+kmp-library =               "1.7.3"
 kmp-democomposables =       "1.0.2"
 
 accompanist = 			    "0.37.3"
