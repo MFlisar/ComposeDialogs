@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.core.internal
+package com.michaelflisar.composedialogs.core.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.StyleOptions
-import com.michaelflisar.composedialogs.core.internal.sub.TitleIcon
-import com.michaelflisar.composedialogs.core.internal.sub.TitleTitle
+import com.michaelflisar.composedialogs.core.internal.TitleIcon
+import com.michaelflisar.composedialogs.core.internal.TitleTitle
 
 @Composable
-internal fun ColumnScope.ComposeDialogTitle(
+fun ColumnScope.ComposeDialogTitle(
     modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)?,
     icon: @Composable (() -> Unit)?,

@@ -30,8 +30,8 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitleToolbar
+import com.michaelflisar.composedialogs.core.composables.ComposeDialogContent
+import com.michaelflisar.composedialogs.core.composables.ComposeDialogTitleToolbar
 import com.michaelflisar.composedialogs.core.updateStatusbarColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

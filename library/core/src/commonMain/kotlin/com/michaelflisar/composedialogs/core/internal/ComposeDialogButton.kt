@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.core.internal.sub
+package com.michaelflisar.composedialogs.core.internal
 
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults

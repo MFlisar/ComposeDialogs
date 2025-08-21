@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.core.internal
+package com.michaelflisar.composedialogs.core.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
@@ -17,10 +17,10 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.copied.AlertDialogFlowRow
 import com.michaelflisar.composedialogs.core.copied.ButtonsCrossAxisSpacing
 import com.michaelflisar.composedialogs.core.copied.ButtonsMainAxisSpacing
-import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogButton
 
 @Composable
-internal fun ColumnScope.ComposeDialogButtons(
+fun ColumnScope.ComposeDialogButtons(
     modifier: Modifier = Modifier,
     buttons: DialogButtons,
     state: DialogState,

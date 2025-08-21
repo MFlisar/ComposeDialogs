@@ -199,6 +199,22 @@ public final class com/michaelflisar/composedialogs/core/StyleOptions$IconMode :
 	public static fun values ()[Lcom/michaelflisar/composedialogs/core/StyleOptions$IconMode;
 }
 
+public final class com/michaelflisar/composedialogs/core/composables/ComposeDialogButtonsKt {
+	public static final fun ComposeDialogButtons (Landroidx/compose/foundation/layout/ColumnScope;Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogState;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/core/composables/ComposeDialogContentKt {
+	public static final fun ComposeDialogContent-u6trifg (Landroidx/compose/foundation/layout/ColumnScope;Lkotlin/jvm/functions/Function2;JLandroidx/compose/ui/Modifier;FLandroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/michaelflisar/composedialogs/core/composables/ComposeDialogTitleKt {
+	public static final fun ComposeDialogTitle-nBX6wN0 (Landroidx/compose/foundation/layout/ColumnScope;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JJLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/core/composables/ComposeDialogTitleToolbarKt {
+	public static final fun ComposeDialogTitleToolbar-DCUeDmo (Landroidx/compose/foundation/layout/ColumnScope;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JJJJLkotlin/jvm/functions/Function3;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogState;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+}
+
 public final class com/michaelflisar/composedialogs/core/style/BottomSheetStyleDefaults {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/style/BottomSheetStyleDefaults;

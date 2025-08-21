@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.core.internal
+package com.michaelflisar.composedialogs.core.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,14 +20,14 @@ import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
-import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogButton
-import com.michaelflisar.composedialogs.core.internal.sub.ComposeDialogImageButton
-import com.michaelflisar.composedialogs.core.internal.sub.TitleIcon
-import com.michaelflisar.composedialogs.core.internal.sub.TitleTitle
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogButton
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogImageButton
+import com.michaelflisar.composedialogs.core.internal.TitleIcon
+import com.michaelflisar.composedialogs.core.internal.TitleTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ColumnScope.ComposeDialogTitleToolbar(
+fun ColumnScope.ComposeDialogTitleToolbar(
     modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)?,
     icon: @Composable (() -> Unit)?,

@@ -55,9 +55,9 @@ import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.StyleOptions
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogButtons
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogContent
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogTitle
+import com.michaelflisar.composedialogs.core.composables.ComposeDialogButtons
+import com.michaelflisar.composedialogs.core.composables.ComposeDialogContent
+import com.michaelflisar.composedialogs.core.composables.ComposeDialogTitle
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 

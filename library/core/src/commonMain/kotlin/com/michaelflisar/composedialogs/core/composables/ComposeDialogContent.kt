@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.core.internal
+package com.michaelflisar.composedialogs.core.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
@@ -12,10 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun ColumnScope.ComposeDialogContent(
+fun ColumnScope.ComposeDialogContent(
     content: @Composable () -> Unit,
     contentColor: Color,
     modifier: Modifier,
