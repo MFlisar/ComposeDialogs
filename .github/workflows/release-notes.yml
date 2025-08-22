@@ -1,0 +1,76 @@
+name: Update Release Notes
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_RELEASE_NOTES_TOKEN }}
+
+    steps:
+
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v5
+        with:
+          mode: "COMMIT"
+          ignorePreReleases: true
+          configurationJson: |
+            {
+              "template": "#{{CHANGELOG}}",
+              "categories": [
+                {
+                    "title": "## ➕ New",
+                    "labels": ["new"]
+                },
+                {
+                    "title": "## ❌ Removed",
+                    "labels": ["removed", "deleted", "rem", "del"]
+                },
+                {
+                    "title": "## ✅ Bugfixes",
+                    "labels": ["fix", "bug", "bugfix",]
+                },
+                {
+                    "title": "## 💀 Deprecated",
+                    "labels": ["deprecated", "depr"]
+                },
+                {
+                    "title": "## 📦 Dependencies",
+                    "labels": ["dependencies", "dep"]
+                },
+                {
+                    "title": "## ✏️ Changes",
+                    "labels": ["change"]
+                },
+                {
+                    "title": "## 📝 Documentation",
+                    "labels": ["docs", "documentation"]
+                },
+                {
+                    "title": "## 🧪 Tests",
+                    "labels": ["test"]
+                },
+                {
+                    "title": "## 🎨 UI",
+                    "labels": ["ui", "design"]
+                },
+                {
+                    "title": "## ⚙️ Build",
+                    "labels": ["build", "ci", "cd"]
+                },
+                {
+                    "title": "## Others",
+                    "labels": [""]
+                }
+              ]
+            }
+
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03
+        with:
+          body: ${{steps.github_release.outputs.changelog}}

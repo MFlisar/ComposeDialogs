@@ -22,10 +22,7 @@ fun main() {
         ) {
             MaterialTheme {
                 DemoScaffold { modifier, showInfo ->
-                    DemoContent(
-                        modifier = modifier,
-                        showInfo = showInfo
-                    )
+                    DemoContent(modifier, showInfo)
                 }
             }
         }

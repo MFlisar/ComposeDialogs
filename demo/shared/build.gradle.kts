@@ -1,6 +1,5 @@
 import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.dependencyOf
-import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.setupDependencies
 import com.michaelflisar.kmplibrary.Target
 import com.michaelflisar.kmplibrary.Targets
 
@@ -52,13 +51,9 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        // --
-        // e.g.:
-        // val nativeMain by creating { dependsOn(commonMain.get()) }
-        // nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
-
         val notAndroidMain by creating { dependsOn(commonMain.get()) }
-        notAndroidMain.dependencyOfAll(sourceSets,  buildTargets, exclusions = listOf(Target.ANDROID))
+
+        notAndroidMain.setupDependencies(sourceSets,  buildTargets, listOf(Target.ANDROID), targetsNotSupported = true)
 
         // ---------------------
         // dependencies
@@ -117,3 +112,5 @@ android {
         buildConfig = false
     )
 }
+
+

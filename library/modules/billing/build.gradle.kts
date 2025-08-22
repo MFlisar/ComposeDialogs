@@ -1,7 +1,6 @@
 import com.michaelflisar.kmplibrary.BuildFilePlugin
 import com.michaelflisar.kmplibrary.Target
-import com.michaelflisar.kmplibrary.dependencyOf
-import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.setupDependencies
 import com.michaelflisar.kmplibrary.Targets
 import kotlin.jvm.java
 
@@ -59,9 +58,6 @@ kotlin {
         // ---------------------
 
         // --
-        // e.g.:
-        // val nativeMain by creating { dependsOn(commonMain.get()) }
-        // nativeMain.dependencyOf(sourceSets,  buildTargets, listOf(Target.IOS, Target.MACOS))
 
         // ---------------------
         // dependencies
@@ -108,3 +104,5 @@ android {
 // maven publish configuration
 if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
     buildFilePlugin.setupMavenPublish()
+
+
