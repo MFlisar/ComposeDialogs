@@ -77,8 +77,7 @@ kotlin {
 
             implementation(project(":composedialogs:core"))
 
-            val useLiveDependencies = providers.gradleProperty("useLiveDependencies").get().toBoolean()
-            if (useLiveDependencies) {
+            if (buildFilePlugin.useLiveDependencies()) {
                 api(deps.kotbilling)
             } else {
                 api(project(":kotbilling"))

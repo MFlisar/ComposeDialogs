@@ -21,7 +21,7 @@ library:
   release: 2023
   link-docs: https://mflisar.github.io/ComposeDialogs/
   link-repo: https://github.com/MFlisar/ComposeDialogs/
-  repo-name: mflisar/ComposeDialogs # the label of the repo link on the mkdocs homepage at the top right
+  repo-name: mflisar/composedialogs # the label of the repo link on the mkdocs homepage at the top right
   # TODO: autom. detecten?
   license:
     name: Apache License 2.0
