@@ -62,6 +62,7 @@ public final class com/michaelflisar/composedialogs/core/DialogDefaults {
 	public final fun options (ZLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/DialogOptions;
 	public final fun styleBottomSheet-o6X0Ruk (ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleDialog-3F3v-eo (ZZZZLcom/michaelflisar/composedialogs/core/StyleOptions;Landroidx/compose/ui/graphics/Shape;JJJJLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
+	public final fun styleFullscreenDialog-NoMzbS4 (ZLkotlin/jvm/functions/Function3;ZJJJJJJLkotlin/jvm/functions/Function2;ZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 	public final fun styleFullscreenDialog-mjZQz9k (ZLkotlin/jvm/functions/Function3;ZJJJJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 }
 
@@ -197,6 +198,7 @@ public final class com/michaelflisar/composedialogs/core/composables/ComposeDial
 
 public final class com/michaelflisar/composedialogs/core/composables/ComposeDialogTitleToolbarKt {
 	public static final fun ComposeDialogTitleToolbar-DCUeDmo (Landroidx/compose/foundation/layout/ColumnScope;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JJJJLkotlin/jvm/functions/Function3;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogState;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun ComposeDialogTitleToolbar-vgf7VN0 (Landroidx/compose/foundation/layout/ColumnScope;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JJJJLkotlin/jvm/functions/Function3;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogState;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;III)V
 }
 
 public final class com/michaelflisar/composedialogs/core/style/BottomSheetStyleDefaults {

@@ -59,6 +59,7 @@ object FullscreenDialogStyleDefaults {
 
 internal class FullscreenDialogStyle(
     private val darkStatusBar: Boolean,
+    private val navigationIcon: (@Composable () -> Unit)?,
     private val menuActions: @Composable (RowScope.() -> Unit)?,
     // DialogProperties
     private val dismissOnBackPress: Boolean,
@@ -69,6 +70,7 @@ internal class FullscreenDialogStyle(
     private val iconColor: Color,
     private val titleColor: Color,
     private val contentColor: Color,
+    private val applyContentPadding: Boolean
 ) : ComposeDialogStyle {
 
     override val type = ComposeDialogStyle.Type.Dialog
@@ -151,6 +153,7 @@ internal class FullscreenDialogStyle(
                         toolbarActionColor = toolbarActionColor,
                         iconColor = iconColor,
                         titleColor = titleColor,
+                        navigationIcon = navigationIcon,
                         menuActions = menuActions,
                         buttons = buttons,
                         state = state,
@@ -163,7 +166,7 @@ internal class FullscreenDialogStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(1f).padding(all = 16.dp),
+                        modifier = Modifier.weight(1f).padding(all = if (applyContentPadding) 16.dp else 0.dp),
                         bottomPadding = spacing.spacingContentToBottom // we don't have buttons in this style!
                     )
 

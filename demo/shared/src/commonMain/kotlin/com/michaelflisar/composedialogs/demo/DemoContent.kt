@@ -4,13 +4,19 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.luminance
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.demo.classes.DemoStyle
 import com.michaelflisar.composedialogs.demo.demos.BillingDemos
@@ -33,6 +39,7 @@ import com.michaelflisar.democomposables.examples.rememberSelectedDemo
 import com.michaelflisar.democomposables.layout.DemoCollapsibleRegion
 import com.michaelflisar.democomposables.layout.DemoColumn
 import com.michaelflisar.democomposables.layout.rememberDemoExpandedRegions
+import kotlin.collections.minusAssign
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -47,18 +54,42 @@ fun DemoContent(
     val demoStyle = rememberSaveable { mutableStateOf(DemoStyle.Dialog) }
     val swipeDismiss = rememberSaveable { mutableStateOf(false) }
     val showIcon = rememberSaveable { mutableStateOf(true) }
-    val style = if (demoStyle.value == DemoStyle.BottomSheet) {
-        DialogDefaults.styleBottomSheet(
+    //val testFullscreenLevel = remember { mutableStateOf(0) }
+    //val test: (@Composable () -> Unit)? = if (testFullscreenLevel.value > 0) {
+    //    {
+    //        IconButton(
+    //            onClick = { testFullscreenLevel.value -= 1 }
+    //        ) {
+    //            Icon(Icons.Default.ArrowBack, null)
+    //        }
+    //    }
+    //} else null
+
+    val style = when (demoStyle.value) {
+        DemoStyle.Dialog -> DialogDefaults.styleDialog(
+            swipeDismissable = swipeDismiss.value
+            // ...
+        )
+        DemoStyle.Fullscreen -> DialogDefaults.styleFullscreenDialog(
+            darkStatusBar = MaterialTheme.colorScheme.primary.luminance() < .5f, // demo has a primary toolbar...
+            //navigationIcon = test,
+            //menuActions = {
+            //    IconButton(
+            //        onClick = {
+            //            testFullscreenLevel.value += 1
+            //        }
+            //    ) {
+            //        Icon(Icons.Default.Add, null)
+            //    }
+            //}
+        )
+        DemoStyle.BottomSheet -> DialogDefaults.styleBottomSheet(
             dragHandle = true,
             animateShow = true
             // ...
         )
-    } else {
-        DialogDefaults.styleDialog(
-            swipeDismissable = swipeDismiss.value
-            // ...
-        )
     }
+
     val icon: @Composable (() -> Unit)? = if (showIcon.value) {
         { Icon(Icons.Default.Home, null) }
     } else null

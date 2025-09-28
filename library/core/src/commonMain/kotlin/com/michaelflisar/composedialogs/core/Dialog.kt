@@ -216,6 +216,57 @@ object DialogDefaults {
      * @param containerColor the [Color] of the container
      * @param iconColor the content [Color] of the icon
      * @param titleColor the content [Color] of the title
+     * @param contentColor the content [Color]
+     * @param navigationIcon provides the navigation icon - a close icon by default but you can provide a custom one here (that toggles between close and back arrow depending on your custom logic)
+     * @param applyContentPadding if true, the content padding will be applied
+     */
+    @Composable
+    fun styleFullscreenDialog(
+        darkStatusBar: Boolean = false,
+        menuActions: @Composable (RowScope.() -> Unit)? = null,
+        // DialogProperties
+        dismissOnBackPress: Boolean = true,
+        // Style
+        toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
+        toolbarActionColor: Color = FullscreenDialogStyleDefaults.toolbarActionColor,
+        containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
+        iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
+        titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
+        contentColor: Color = FullscreenDialogStyleDefaults.contentColor,
+        // added in 3.0.1
+        navigationIcon: (@Composable () -> Unit)? = null,
+        applyContentPadding: Boolean = true
+    ): ComposeDialogStyle
+            /* --8<-- [end: style-full-screen-dialog] */ {
+        return FullscreenDialogStyle(
+            darkStatusBar,
+            navigationIcon,
+            menuActions,
+            // DialogProperties
+            dismissOnBackPress,
+            // Style
+            toolbarColor,
+            toolbarActionColor,
+            containerColor,
+            iconColor,
+            titleColor,
+            contentColor,
+            applyContentPadding
+        )
+    }
+
+    /**
+     * the setup of a dialog that shows as a normal dialog popup
+     *
+     * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
+     * @param menuActions if provided, it replaces the the default close menu action
+     * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
+     * @param toolbarColor the [Color] of the toolbar
+     * @param toolbarActionColor the [Color] of the actions in the toolbar
+     * @param containerColor the [Color] of the container
+     * @param iconColor the content [Color] of the icon
+     * @param titleColor the content [Color] of the title
+     * @param contentColor the content [Color]
      */
     @Composable
     fun styleFullscreenDialog(
@@ -230,9 +281,8 @@ object DialogDefaults {
         iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
         titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor
-    ): ComposeDialogStyle
-            /* --8<-- [end: style-full-screen-dialog] */ {
-        return FullscreenDialogStyle(
+    ): ComposeDialogStyle {
+        return styleFullscreenDialog(
             darkStatusBar,
             menuActions,
             // DialogProperties
@@ -243,7 +293,9 @@ object DialogDefaults {
             containerColor,
             iconColor,
             titleColor,
-            contentColor
+            contentColor,
+            navigationIcon = null,
+            applyContentPadding = true
         )
     }
 }

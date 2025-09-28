@@ -41,6 +41,8 @@ fun ColumnScope.ComposeDialogTitleToolbar(
     options: DialogOptions,
     dismissOnButtonPressed: () -> Unit,
     onEvent: (event: DialogEvent) -> Unit,
+    // added in 3.0.1
+    navigationIcon: (@Composable () -> Unit)?
 ) {
     Column(modifier = modifier) {
         TopAppBar(
@@ -48,14 +50,18 @@ fun ColumnScope.ComposeDialogTitleToolbar(
                 TitleTitle(title, titleColor, Modifier)
             },
             navigationIcon = {
-                ComposeDialogImageButton(
-                    buttonType = DialogButtonType.Negative,
-                    icon = Icons.Default.Close,
-                    state = state,
-                    options = options,
-                    dismissOnButtonPressed = dismissOnButtonPressed,
-                    onEvent = onEvent
-                )
+                if (navigationIcon != null) {
+                    navigationIcon()
+                } else {
+                    ComposeDialogImageButton(
+                        buttonType = DialogButtonType.Negative,
+                        icon = Icons.Default.Close,
+                        state = state,
+                        options = options,
+                        dismissOnButtonPressed = dismissOnButtonPressed,
+                        onEvent = onEvent
+                    )
+                }
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = toolbarColor,
@@ -80,5 +86,40 @@ fun ColumnScope.ComposeDialogTitleToolbar(
         )
         TitleIcon(icon, iconColor, Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp))
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ColumnScope.ComposeDialogTitleToolbar(
+    modifier: Modifier = Modifier,
+    title: @Composable (() -> Unit)?,
+    icon: @Composable (() -> Unit)?,
+    toolbarColor: Color,
+    toolbarActionColor: Color,
+    iconColor: Color,
+    titleColor: Color,
+    menuActions: @Composable (RowScope.() -> Unit)?,
+    buttons: DialogButtons,
+    state: DialogState,
+    options: DialogOptions,
+    dismissOnButtonPressed: () -> Unit,
+    onEvent: (event: DialogEvent) -> Unit,
+) {
+    ComposeDialogTitleToolbar(
+        modifier = modifier,
+        title = title,
+        icon = icon,
+        toolbarColor = toolbarColor,
+        toolbarActionColor = toolbarActionColor,
+        iconColor = iconColor,
+        titleColor = titleColor,
+        menuActions = menuActions,
+        buttons = buttons,
+        state = state,
+        options = options,
+        dismissOnButtonPressed = dismissOnButtonPressed,
+        onEvent = onEvent,
+        navigationIcon = null
+    )
 
 }
