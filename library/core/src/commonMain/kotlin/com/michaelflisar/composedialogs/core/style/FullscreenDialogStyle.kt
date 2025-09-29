@@ -166,8 +166,13 @@ internal class FullscreenDialogStyle(
                     ComposeDialogContent(
                         content = content,
                         contentColor = contentColor,
-                        modifier = Modifier.weight(1f).padding(all = if (applyContentPadding) 16.dp else 0.dp),
-                        bottomPadding = spacing.spacingContentToBottom // we don't have buttons in this style!
+                        modifier = Modifier.weight(1f)
+                            .then(
+                                if (applyContentPadding) {
+                                    Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp) // not bottom padding => this is applied via bottomPadding directly below because we do not have buttons here!
+                                } else Modifier
+                            ),
+                        bottomPadding = if (applyContentPadding) spacing.spacingContentToBottom /* 16.dp */ else 0.dp // we don't have buttons in this style!
                     )
 
                     // Buttons
