@@ -21,6 +21,45 @@ import kotlin.time.ExperimentalTime
 @Immutable
 sealed class Frequency {
 
+    fun serialize() : String {
+        return when (this) {
+            is Frequency.Daily -> "D|${time}|${interval}"
+            is Frequency.Weekly -> "W|${dayOfWeek}|${time}|${interval}"
+            is Frequency.Monthly -> "M|${dayOfMonth}|${time}|${interval}"
+            is Frequency.Yearly -> "Y|${month}|${dayOfMonth}|${time}|${interval}"
+        }
+    }
+
+    companion object {
+
+        fun deserialize(value: String): Frequency {
+            val parts = value.split("|")
+            return when (parts[0]) {
+                "D" -> Daily(
+                    time = LocalTime.parse(parts[1]),
+                    interval = parts[2].toInt()
+                )
+                "W" -> Weekly(
+                    dayOfWeek = DayOfWeek.valueOf(parts[1]),
+                    time = LocalTime.parse(parts[2]),
+                    interval = parts[3].toInt()
+                )
+                "M" -> Monthly(
+                    dayOfMonth = parts[1].toInt(),
+                    time = LocalTime.parse(parts[2]),
+                    interval = parts[3].toInt()
+                )
+                "Y" -> Yearly(
+                    month = Month.valueOf(parts[1]),
+                    dayOfMonth = parts[2].toInt(),
+                    time = LocalTime.parse(parts[3]),
+                    interval = parts[4].toInt()
+                )
+                else -> error("Unknown Frequency type")
+            }
+        }
+    }
+
     /**
      * Represents the types of frequency intervals available for scheduling events.
      */

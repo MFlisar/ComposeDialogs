@@ -35,6 +35,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogFreq
 
 public abstract class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
+	public static final field Companion Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Companion;
 	public abstract fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
 	public static synthetic fun calcNextOccurrence$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;IILjava/lang/Object;)Lkotlinx/datetime/LocalDateTime;
 	public final fun calcNextOccurrences (Lkotlinx/datetime/LocalDate;IILkotlinx/datetime/TimeZone;)Ljava/util/List;
@@ -42,6 +43,11 @@ public abstract class com/michaelflisar/composedialogs/dialogs/frequency/classes
 	public abstract fun getInterval ()I
 	public abstract fun getTime ()Lkotlinx/datetime/LocalTime;
 	public abstract fun getType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Type;
+	public final fun serialize ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Companion {
+	public final fun deserialize (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Daily : com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
