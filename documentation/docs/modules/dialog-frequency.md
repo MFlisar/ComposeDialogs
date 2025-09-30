@@ -15,11 +15,11 @@ Check out the composable and it's documentation in the code snipplet below.
 #### Composable
 
 ```kotlin
---8<-- "../../library/modules/time/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency.kt:constructor"
+--8<-- "../../library/modules/frequency/src/commonMain/kotlin/com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency.kt:constructor"
 ```
 
 #### Screenshots
 
-|                                                        |                                                        |                                                             |                                                             |
-|--------------------------------------------------------|--------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
-| ![Screenshot](../screenshots/frequency/demo_frequency1.jpg) | ![Screenshot](../screenshots/frequency/demo_frequency2.jpg) | ![Screenshot](../screenshots/frequency/demo_frequency3.jpg) | ![Screenshot](../screenshots/frequency/demo_frequency4.jpg) |
+|                                                             |                                                        |                                                             |                                                             |
+|-------------------------------------------------------------|--------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| ![Screenshot](../screenshots/frequency/demo_frequency1.png) | ![Screenshot](../screenshots/frequency/demo_frequency2.png) | ![Screenshot](../screenshots/frequency/demo_frequency3.png) | ![Screenshot](../screenshots/frequency/demo_frequency4.png) |
