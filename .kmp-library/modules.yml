@@ -117,7 +117,13 @@ modules:
     optional: true
     platforms-info: ""
     dependencies: []
-
+  - relativePath: library\modules\frequency
+    artifact-id: dialog-frequency
+    group: modules
+    description: provides a frequency dialog (daily, weekly, monthly, yearly)
+    optional: true
+    platforms-info: ""
+    dependencies: []
 
 
 

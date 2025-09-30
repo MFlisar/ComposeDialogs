@@ -22,6 +22,7 @@ kotlin-multiplatform = 			    { id = "org.jetbrains.kotlin.multiplatform", 	    
 kotlin-compose = 				    { id = "org.jetbrains.kotlin.plugin.compose", 	    version.ref = "kotlin" }
 kotlin-serialization = 			    { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-jvm = 				        { id = "org.jetbrains.kotlin.jvm", 			        version.ref = "kotlin" }
+kotlin-test = 				        { id = "org.jetbrains.kotlin.test", 			    version.ref = "kotlin" }
 
 # compose
 compose =                           { id = "org.jetbrains.compose",                     version.ref = "compose" }

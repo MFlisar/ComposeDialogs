@@ -23,6 +23,7 @@ import com.michaelflisar.composedialogs.demo.demos.BillingDemos
 import com.michaelflisar.composedialogs.demo.demos.ColorDemos
 import com.michaelflisar.composedialogs.demo.demos.CustomDemos
 import com.michaelflisar.composedialogs.demo.demos.DateTimeDemos
+import com.michaelflisar.composedialogs.demo.demos.FrequencyDemos
 import com.michaelflisar.composedialogs.demo.demos.InfoDemos
 import com.michaelflisar.composedialogs.demo.demos.InputDemos
 import com.michaelflisar.composedialogs.demo.demos.ListDemos
@@ -115,6 +116,7 @@ fun DemoContent(
         },
         Demo.Example("Billing Demos") { BillingDemos(style, icon, showInfo) },
         Demo.Example("Menu Demos") { MenuDemos(style, icon, showInfo) },
+        Demo.Example("Frequency Demos") { FrequencyDemos(style, icon, showInfo) },
         Demo.Divider,
         Demo.Example("Custom Demos") { CustomDemos(style, icon, showInfo) },
     )

@@ -7,15 +7,22 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.gradle.maven.publish.plugin)
+    alias(libs.plugins.binary.compatibility.validator)
     alias(deps.plugins.kmplibrary.buildplugin)
 }
 
-// get build logic plugin
+// get build file plugin
 val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
 
-// targets
+// -------------------
+// Informations
+// -------------------
+
+val androidNamespace = "com.michaelflisar.composedialogs.dialogs.frequency"
+
 val buildTargets = Targets(
     // mobile
     android = true,
@@ -26,8 +33,6 @@ val buildTargets = Targets(
     // web
     wasm = true
 )
-
-val androidNamespace = "com.michaelflisar.composedialogs.demo.shared"
 
 // -------------------
 // Setup
@@ -51,9 +56,7 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        val notAndroidMain by creating { dependsOn(commonMain.get()) }
-
-        notAndroidMain.setupDependencies(sourceSets,  buildTargets, listOf(Target.ANDROID), targetsNotSupported = true)
+        // --
 
         // ---------------------
         // dependencies
@@ -63,41 +66,51 @@ kotlin {
 
             // Kotlin
             implementation(kotlinx.coroutines.core)
+            implementation(kotlinx.datetime)
 
             // Compose
             implementation(libs.compose.material3)
             implementation(libs.compose.material.icons.core)
-            implementation(libs.compose.material.icons.extended)
-            implementation(libs.compose.ui.backhandler)
 
-            // ------------------------
-            // Libraries
-            // ------------------------
-
+            // library
             implementation(project(":composedialogs:core"))
-            implementation(project(":composedialogs:modules:info"))
-            implementation(project(":composedialogs:modules:input"))
-            implementation(project(":composedialogs:modules:number"))
             implementation(project(":composedialogs:modules:time"))
-            implementation(project(":composedialogs:modules:date"))
-            implementation(project(":composedialogs:modules:progress"))
-            implementation(project(":composedialogs:modules:color"))
-            implementation(project(":composedialogs:modules:list"))
-            implementation(project(":composedialogs:modules:menu"))
-            implementation(project(":composedialogs:modules:frequency"))
-
-            // demo ui composables
-            api(deps.kmp.democomposables)
-
         }
 
-        androidMain.dependencies {
+        commonTest.dependencies {
 
-            implementation(deps.drawablepainter)
-
-            implementation(project(":composedialogs:modules:billing"))
+            implementation(libs.kotlin.test)
         }
     }
+}
+
+android {
+
+    namespace = androidNamespace
+
+    compileSdk = app.versions.compileSdk.get().toInt()
+
+    buildFeatures {
+        compose = true
+    }
+
+    defaultConfig {
+        minSdk = app.versions.minSdk.get().toInt()
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            consumerProguardFiles("proguard-rules.pro")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
 }
 
 // -------------------
@@ -113,5 +126,9 @@ android {
         buildConfig = false
     )
 }
+
+// maven publish configuration
+if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
+    buildFilePlugin.setupMavenPublish()
 
 

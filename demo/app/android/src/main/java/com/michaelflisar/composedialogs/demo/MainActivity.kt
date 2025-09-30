@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.res.stringResource
 import com.michaelflisar.democomposables.DemoScaffold
 
@@ -16,7 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MaterialTheme {
+            MaterialTheme(
+                colorScheme = darkColorScheme()
+            ) {
                 DemoScaffold(
                     appName = stringResource(R.string.app_name)
                 ) { modifier, showInfo ->

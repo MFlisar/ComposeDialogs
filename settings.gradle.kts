@@ -57,6 +57,7 @@ includeModule("library/modules/list", ":composedialogs:modules:list")
 includeModule("library/modules/progress", ":composedialogs:modules:progress")
 includeModule("library/modules/billing", ":composedialogs:modules:billing")
 includeModule("library/modules/menu", ":composedialogs:modules:menu")
+includeModule("library/modules/frequency", ":composedialogs:modules:frequency")
 
 // --------------
 // Demo
