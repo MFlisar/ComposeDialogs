@@ -77,7 +77,7 @@ kotlin {
             implementation(project(":composedialogs:modules:time"))
         }
 
-        commonTest.dependencies {
+        jvmTest.dependencies {
 
             implementation(libs.kotlin.test)
         }
