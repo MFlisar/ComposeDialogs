@@ -35,6 +35,7 @@ sealed class Frequency {
     abstract val time: LocalTime
     abstract val interval: Int
 
+    /* --8<-- [start: calcNextOccurrence] */
     /**
      * Calculates the next occurrence of the event based on the frequency settings.
      *
@@ -45,7 +46,9 @@ sealed class Frequency {
      */
     @OptIn(ExperimentalTime::class)
     abstract fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone = TimeZone.currentSystemDefault(), offset: Int = 0): LocalDateTime
+    /* --8<-- [end: calcNextOccurrence] */
 
+    /* --8<-- [start: calcNextOccurrence] */
     /**
      * Calculates the next [count] occurrences of the event based on the frequency settings.
      *
@@ -56,7 +59,9 @@ sealed class Frequency {
      * @return A list of the next occurrences as LocalDateTime objects.
      */
     @OptIn(ExperimentalTime::class)
-    fun calcNextOccurrences(from: LocalDate, count: Int, offset: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault()): List<LocalDateTime> {
+    fun calcNextOccurrences(from: LocalDate, count: Int, offset: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault()): List<LocalDateTime>
+    /* --8<-- [end: calcNextOccurrence] */
+    {
         val occurrences = mutableListOf<LocalDateTime>()
         while (occurrences.size < count) {
             val next = calcNextOccurrence(from, timeZone, offset + occurrences.size)
