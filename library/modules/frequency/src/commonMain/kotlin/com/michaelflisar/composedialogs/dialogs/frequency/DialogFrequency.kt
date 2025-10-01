@@ -101,6 +101,43 @@ fun DialogFrequency(
         }
         val selectedInterval = rememberSaveable { mutableStateOf<Int?>(frequency.value.interval) }
 
+        // update frequency if something changes
+        LaunchedEffect(
+            selectedType.value,
+            selectedTime.value,
+            selectedDayOfWeek.value,
+            selectedDayOfMonth.value,
+            selectedMonthOfYear.value,
+            selectedInterval.value
+        ) {
+            val interval = selectedInterval.value ?: 1
+            frequency.value = when (selectedType.value) {
+                Frequency.Type.Daily -> Frequency.Daily(
+                    interval = interval,
+                    time = selectedTime.value
+                )
+
+                Frequency.Type.Weekly -> Frequency.Weekly(
+                    interval = interval,
+                    dayOfWeek = selectedDayOfWeek.value,
+                    time = selectedTime.value
+                )
+
+                Frequency.Type.Monthly -> Frequency.Monthly(
+                    interval = interval,
+                    dayOfMonth = selectedDayOfMonth.value,
+                    time = selectedTime.value
+                )
+
+                Frequency.Type.Yearly -> Frequency.Yearly(
+                    interval = interval,
+                    month = selectedMonthOfYear.value,
+                    dayOfMonth = selectedDayOfMonth.value,
+                    time = selectedTime.value
+                )
+            }
+        }
+
         Dialog(
             state = state,
             title = title,
