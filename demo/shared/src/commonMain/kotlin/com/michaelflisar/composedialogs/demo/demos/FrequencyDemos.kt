@@ -44,7 +44,7 @@ private fun RowScope.DemoFrequency1(
             icon = icon,
             style = style,
             onEvent = { event ->
-                showInfo("Event $event")
+                showInfo("Event $event | frequency: ${frequency.value}")
             }
         )
     }
