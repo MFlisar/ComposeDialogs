@@ -305,15 +305,27 @@ object DialogDefaults {
 // ------------------
 
 /**
+ * an enum for the different dialog event types
+ */
+enum class DialogEventType {
+    ButtonPositive,
+    ButtonNegative,
+    Dismissed
+}
+
+/**
  * the sealed event for all dialog events (button click and dismissal)
  *
  * [DialogEvent.dismissed] the information if this event will dismiss the dialog or not
- * [DialogEvent.isPositiveButton] a convenient value to determine, if this is the event of the positive dialog button
+ * [DialogEvent.type] a convenient enum to determine, if this is the event is a positive button, negative button or a dismissal
  */
 sealed class DialogEvent {
 
     abstract val dismissed: Boolean
-    abstract val isPositiveButton: Boolean // most interesting attribute so we make it easily accessible
+    @Deprecated("use [DialogEvent::type] instead", replaceWith = ReplaceWith("type == DialogEventType.ButtonPositive"))
+    abstract val isPositiveButton: Boolean
+
+    abstract val type: DialogEventType
 
     /**
      * the event of a dialog button click
@@ -325,7 +337,12 @@ sealed class DialogEvent {
         val button: DialogButtonType,
         override val dismissed: Boolean
     ) : DialogEvent() {
+        @Deprecated("use [DialogEvent::type] instead", replaceWith = ReplaceWith("type == DialogEventType.ButtonPositive"))
         override val isPositiveButton = button == DialogButtonType.Positive
+        override val type = when (button) {
+            DialogButtonType.Positive -> DialogEventType.ButtonPositive
+            DialogButtonType.Negative -> DialogEventType.ButtonNegative
+        }
         override fun toString() = "DialogEvent::Button(button=$button, dismissed=$dismissed)"
     }
 
@@ -334,7 +351,9 @@ sealed class DialogEvent {
      */
     object Dismissed : DialogEvent() {
         override val dismissed = true
+        @Deprecated("use [DialogEvent::type] instead", replaceWith = ReplaceWith("type == DialogEventType.ButtonPositive"))
         override val isPositiveButton = false
+        override val type = DialogEventType.Dismissed
         override fun toString() = "DialogEvent::Dismissed"
     }
 }

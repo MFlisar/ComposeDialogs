@@ -1,5 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.date
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -190,7 +191,7 @@ fun DialogDate(
                     DateViewState.SelectMonth -> Modifier
                 }
                 Column(
-                    modifier = modifier
+                    modifier = modifier.animateContentSize()
                 ) {
                     CalendarHeader(pagerState, dateRange, setup, pageData, viewState)
                     when (viewState.value) {
@@ -218,7 +219,9 @@ fun DialogDate(
                 }
             }
         } else {
-            Column {
+            Column(
+                modifier = Modifier.animateContentSize()
+            ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {

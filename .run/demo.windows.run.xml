@@ -2,7 +2,7 @@
   <configuration default="false" name="demo.windows" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
-      <option name="externalProjectPath" value="$PROJECT_DIR$/demo/app/windows" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$/demo/app" />
       <option name="externalSystemIdString" value="GRADLE" />
       <option name="scriptParameters" value="" />
       <option name="taskDescriptions">

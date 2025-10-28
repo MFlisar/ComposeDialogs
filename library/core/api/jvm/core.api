@@ -73,6 +73,7 @@ public final class com/michaelflisar/composedialogs/core/DialogDefaultsExtension
 public abstract class com/michaelflisar/composedialogs/core/DialogEvent {
 	public static final field $stable I
 	public abstract fun getDismissed ()Z
+	public abstract fun getType ()Lcom/michaelflisar/composedialogs/core/DialogEventType;
 	public abstract fun isPositiveButton ()Z
 }
 
@@ -81,6 +82,7 @@ public final class com/michaelflisar/composedialogs/core/DialogEvent$Button : co
 	public fun <init> (Lcom/michaelflisar/composedialogs/core/DialogButtonType;Z)V
 	public final fun getButton ()Lcom/michaelflisar/composedialogs/core/DialogButtonType;
 	public fun getDismissed ()Z
+	public fun getType ()Lcom/michaelflisar/composedialogs/core/DialogEventType;
 	public fun isPositiveButton ()Z
 	public fun toString ()Ljava/lang/String;
 }
@@ -89,8 +91,18 @@ public final class com/michaelflisar/composedialogs/core/DialogEvent$Dismissed :
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/core/DialogEvent$Dismissed;
 	public fun getDismissed ()Z
+	public fun getType ()Lcom/michaelflisar/composedialogs/core/DialogEventType;
 	public fun isPositiveButton ()Z
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/core/DialogEventType : java/lang/Enum {
+	public static final field ButtonNegative Lcom/michaelflisar/composedialogs/core/DialogEventType;
+	public static final field ButtonPositive Lcom/michaelflisar/composedialogs/core/DialogEventType;
+	public static final field Dismissed Lcom/michaelflisar/composedialogs/core/DialogEventType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/core/DialogEventType;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/core/DialogEventType;
 }
 
 public final class com/michaelflisar/composedialogs/core/DialogInteractionSource {
