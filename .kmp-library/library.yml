@@ -31,7 +31,6 @@ library:
       images:
         - screenshots/info/demo_info1.jpg
         - screenshots/info/demo_info2.jpg
-        - screenshots/info/demo_info3.jpg
         - screenshots/info/demo_info4.jpg
     - name: Input
       images:
@@ -55,7 +54,6 @@ library:
       images:
         - screenshots/color/demo_color1.jpg
         - screenshots/color/demo_color2.jpg
-        - screenshots/color/demo_color3.jpg
         - screenshots/color/demo_color4.jpg
     - name: List
       images:
@@ -63,7 +61,6 @@ library:
         - screenshots/list/demo_list2.jpg
         - screenshots/list/demo_list3.jpg
         - screenshots/list/demo_list4.jpg
-        - screenshots/list/demo_list5.jpg
         - screenshots/list/demo_list6.jpg
         - screenshots/list/demo_list7.jpg
         - screenshots/list/demo_list8.jpg
@@ -74,12 +71,12 @@ library:
     - name: Menu
       images:
         - screenshots/menu/demo_menu1.jpg
-    - name: List
+    - name: Frequency
       images:
-        - screenshots/frequency/demo_frequency1.jpg
-        - screenshots/frequency/demo_frequency2.jpg
-        - screenshots/frequency/demo_frequency3.jpg
-        - screenshots/frequency/demo_frequency4.jpg
+        - screenshots/frequency/demo_frequency1.png
+        - screenshots/frequency/demo_frequency2.png
+        - screenshots/frequency/demo_frequency3.png
+        - screenshots/frequency/demo_frequency4.png
   about-me: true # set to true if you want to show the about me section on the homepage
 
 maven:
