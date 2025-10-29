@@ -63,7 +63,6 @@ library:
         - screenshots/list/demo_list4.jpg
         - screenshots/list/demo_list6.jpg
         - screenshots/list/demo_list7.jpg
-        - screenshots/list/demo_list8.jpg
     - name: Progress
       images:
         - screenshots/progress/demo_progress1.jpg
