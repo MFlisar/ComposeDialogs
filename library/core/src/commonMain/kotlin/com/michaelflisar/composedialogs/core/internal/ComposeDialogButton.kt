@@ -23,7 +23,7 @@ internal fun ComposeDialogButton(
 ) {
     if (button.text.isNotEmpty()) {
         val enabled = state.isButtonEnabled(buttonType)
-        TextButton(
+        button.Render(
             enabled = enabled,
             colors = colors,
             onClick = {
@@ -34,8 +34,6 @@ internal fun ComposeDialogButton(
                     dismissOnButtonPressed()
                 }
             }
-        ) {
-            Text(button.text)
-        }
+        )
     }
 }

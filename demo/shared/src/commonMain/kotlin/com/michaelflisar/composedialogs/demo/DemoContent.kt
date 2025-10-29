@@ -31,6 +31,7 @@ import com.michaelflisar.composedialogs.demo.demos.MenuDemos
 import com.michaelflisar.composedialogs.demo.demos.NumberDemos
 import com.michaelflisar.composedialogs.demo.demos.ProgressDemos
 import com.michaelflisar.composedialogs.demo.demos.SingleDialogWithListDemos
+import com.michaelflisar.composedialogs.demo.demos.VariousDemos
 import com.michaelflisar.democomposables.DemoCheckbox
 import com.michaelflisar.democomposables.DemoSegmentedControl
 import com.michaelflisar.democomposables.examples.Demo
@@ -118,6 +119,7 @@ fun DemoContent(
         Demo.Example("Menu Demos") { MenuDemos(style, icon, showInfo) },
         Demo.Example("Frequency Demos") { FrequencyDemos(style, icon, showInfo) },
         Demo.Divider,
+        Demo.Example("Various") { VariousDemos(style, icon, showInfo) },
         Demo.Example("Custom Demos") { CustomDemos(style, icon, showInfo) },
     )
 

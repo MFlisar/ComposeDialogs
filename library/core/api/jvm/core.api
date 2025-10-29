@@ -23,10 +23,12 @@ public final class com/michaelflisar/composedialogs/core/ComposeDialogStyle$Type
 public final class com/michaelflisar/composedialogs/core/DialogButton {
 	public static final field $stable I
 	public static final field Companion Lcom/michaelflisar/composedialogs/core/DialogButton$Companion;
-	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;JJLandroidx/compose/ui/graphics/Shape;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;JJLandroidx/compose/ui/graphics/Shape;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getContainerColor-0d7_KjU ()J
+	public final fun getContentColor-0d7_KjU ()J
 	public final fun getEnabled ()Z
+	public final fun getShape ()Landroidx/compose/ui/graphics/Shape;
 	public final fun getText ()Ljava/lang/String;
 }
 

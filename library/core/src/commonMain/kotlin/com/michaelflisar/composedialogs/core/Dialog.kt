@@ -1,11 +1,16 @@
 package com.michaelflisar.composedialogs.core
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composedialogs.core.internal.ComposeDialogButton
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyleDefaults
 import com.michaelflisar.composedialogs.core.style.DialogStyle
@@ -535,9 +540,15 @@ class DialogStateWithData<T>(
  * a dialog buttons
  *
  * @param text the text of the button
+ * @param contentColor the content color of the button
+ * @param containerColor the container color of the button
+ * @param shape the custom shape of the button
  */
 class DialogButton(
-    val text: String = ""
+    val text: String = "",
+    val contentColor: Color = Color.Unspecified,
+    val containerColor: Color = Color.Unspecified,
+    val shape: Shape? = null
 ) {
     companion object {
         val DISABLED = DialogButton("")
@@ -545,6 +556,27 @@ class DialogButton(
 
     val enabled: Boolean
         get() = text.isNotEmpty()
+
+    @Composable
+    internal fun Render(
+        enabled: Boolean,
+        colors: ButtonColors,
+        onClick: () -> Unit
+    ) {
+        TextButton(
+            enabled = enabled,
+            colors = colors.copy(
+                contentColor = contentColor.takeIf { it != Color.Unspecified } ?: colors.contentColor,
+                containerColor = containerColor.takeIf { it != Color.Unspecified } ?: colors.containerColor,
+                disabledContentColor = contentColor.takeIf { it != Color.Unspecified }?.copy(alpha = 0.38f) ?: colors.disabledContentColor,
+                disabledContainerColor = containerColor.takeIf { it != Color.Unspecified }?.copy(alpha = 0.38f) ?: colors.disabledContainerColor,
+            ),
+            onClick = onClick,
+            shape = shape ?: ButtonDefaults.textShape
+        ) {
+            Text(text)
+        }
+    }
 }
 
 /**
