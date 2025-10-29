@@ -77,11 +77,7 @@ kotlin {
 
             implementation(project(":composedialogs:core"))
 
-            if (buildFilePlugin.useLiveDependencies()) {
-                api(deps.kotbilling)
-            } else {
-                api(project(":kotbilling"))
-            }
+            api(deps.kotbilling)
         }
     }
 }

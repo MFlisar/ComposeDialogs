@@ -5,6 +5,7 @@ kotlin = 				            "2.2.10"
 dokka =                             "2.0.0"
 gradle-maven-publish-plugin =       "0.34.0"
 compose =                           "1.8.2"
+compose-material3 =                 "1.8.2"
 compose-icons =                     "1.7.3"
 desugar =                           "2.1.5"
 binary-compatibility-validator =    "0.18.1"
@@ -41,7 +42,7 @@ kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",     
 compose-runtime =                   { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "compose" }
 compose-ui =                        { module = "org.jetbrains.compose.ui:ui",                               version.ref = "compose" }
 compose-ui-backhandler =            { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "compose" }
-compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose" }
+compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose-material3" }
 compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose-icons" }
 compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose-icons" }
 
