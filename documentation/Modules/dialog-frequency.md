@@ -76,8 +76,11 @@ This class offers some helpful functions to calculate the next date based on a g
  * @param offset An optional offset to adjust the calculation (default is 0).
  * @return The next occurrence as a LocalDateTime.
  */
-@OptIn(ExperimentalTime::class)
-abstract fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone = TimeZone.currentSystemDefault(), offset: Int = 0): LocalDateTime
+abstract fun calcNextOccurrence(
+    from: LocalDate,
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
+    offset: Int = 0,
+): LocalDateTime
 ```
 <!-- endSnippet -->
 
@@ -92,8 +95,12 @@ abstract fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone = TimeZone.c
  * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
  * @return A list of the next occurrences as LocalDateTime objects.
  */
-@OptIn(ExperimentalTime::class)
-fun calcNextOccurrences(from: LocalDate, count: Int, offset: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault()): List<LocalDateTime>
+fun calcNextOccurrences(
+    from: LocalDate,
+    count: Int,
+    offset: Int = 0,
+    timeZone: TimeZone = TimeZone.currentSystemDefault(),
+): List<LocalDateTime>
 ```
 <!-- endSnippet -->
 
