@@ -23,7 +23,6 @@ internal object OutlinedDecoratedContainer {
     val MODIFIER_CORRECTION = Modifier.padding(vertical = 1.5.dp)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun OutlinedDecoratedContainer(
     title: String,

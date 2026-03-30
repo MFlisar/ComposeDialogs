@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.frequency.classes
 
 import androidx.compose.runtime.Immutable
-import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -13,7 +12,6 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import kotlin.time.ExperimentalTime
 
 /**
  * Represents different frequency types for scheduling events.
@@ -21,7 +19,7 @@ import kotlin.time.ExperimentalTime
 @Immutable
 sealed class Frequency {
 
-    fun serialize() : String {
+    fun serialize(): String {
         return when (this) {
             is Frequency.Daily -> "D|${time}|${interval}"
             is Frequency.Weekly -> "W|${dayOfWeek}|${time}|${interval}"
@@ -39,22 +37,26 @@ sealed class Frequency {
                     time = LocalTime.parse(parts[1]),
                     interval = parts[2].toInt()
                 )
+
                 "W" -> Weekly(
                     dayOfWeek = DayOfWeek.valueOf(parts[1]),
                     time = LocalTime.parse(parts[2]),
                     interval = parts[3].toInt()
                 )
+
                 "M" -> Monthly(
                     dayOfMonth = parts[1].toInt(),
                     time = LocalTime.parse(parts[2]),
                     interval = parts[3].toInt()
                 )
+
                 "Y" -> Yearly(
                     month = Month.valueOf(parts[1]),
                     dayOfMonth = parts[2].toInt(),
                     time = LocalTime.parse(parts[3]),
                     interval = parts[4].toInt()
                 )
+
                 else -> error("Unknown Frequency type")
             }
         }
@@ -83,8 +85,11 @@ sealed class Frequency {
      * @param offset An optional offset to adjust the calculation (default is 0).
      * @return The next occurrence as a LocalDateTime.
      */
-    @OptIn(ExperimentalTime::class)
-    abstract fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone = TimeZone.currentSystemDefault(), offset: Int = 0): LocalDateTime
+    abstract fun calcNextOccurrence(
+        from: LocalDate,
+        timeZone: TimeZone = TimeZone.currentSystemDefault(),
+        offset: Int = 0,
+    ): LocalDateTime
     // end-snippet
 
     // begin-snippet: Frequency::calcNextOccurrences
@@ -97,8 +102,12 @@ sealed class Frequency {
      * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
      * @return A list of the next occurrences as LocalDateTime objects.
      */
-    @OptIn(ExperimentalTime::class)
-    fun calcNextOccurrences(from: LocalDate, count: Int, offset: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault()): List<LocalDateTime>
+    fun calcNextOccurrences(
+        from: LocalDate,
+        count: Int,
+        offset: Int = 0,
+        timeZone: TimeZone = TimeZone.currentSystemDefault(),
+    ): List<LocalDateTime>
     // end-snippet
     {
         val occurrences = mutableListOf<LocalDateTime>()
@@ -121,8 +130,12 @@ sealed class Frequency {
         )
     }
 
-    @OptIn(ExperimentalTime::class)
-    internal fun calcDate(from: LocalDate, timeZone: TimeZone, unit: DateTimeUnit, offset: Int): LocalDateTime {
+    internal fun calcDate(
+        from: LocalDate,
+        timeZone: TimeZone,
+        unit: DateTimeUnit,
+        offset: Int,
+    ): LocalDateTime {
         val dateTime = updateTimeWithTime(from)
         val instant = dateTime.toInstant(timeZone)
         val instantNext = instant.plus(interval * (1 + offset), unit, timeZone)
@@ -139,13 +152,13 @@ sealed class Frequency {
     @Immutable
     data class Daily(
         override val time: LocalTime,
-        override val interval: Int
+        override val interval: Int,
     ) : Frequency() {
 
         override val type = Type.Daily
 
-        @OptIn(ExperimentalTime::class)
-        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) = calcDate(from, timeZone, DateTimeUnit.DAY, offset)
+        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) =
+            calcDate(from, timeZone, DateTimeUnit.DAY, offset)
     }
 
     /**
@@ -159,13 +172,16 @@ sealed class Frequency {
     data class Weekly(
         val dayOfWeek: DayOfWeek,
         override val time: LocalTime,
-        override val interval: Int
+        override val interval: Int,
     ) : Frequency() {
 
         override val type = Type.Weekly
 
-        @OptIn(ExperimentalTime::class)
-        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) : LocalDateTime {
+        override fun calcNextOccurrence(
+            from: LocalDate,
+            timeZone: TimeZone,
+            offset: Int,
+        ): LocalDateTime {
             var from = from
             while (from.dayOfWeek != dayOfWeek) {
                 from = from.minus(1, DateTimeUnit.DAY)
@@ -185,13 +201,16 @@ sealed class Frequency {
     data class Monthly(
         val dayOfMonth: Int,
         override val time: LocalTime,
-        override val interval: Int
+        override val interval: Int,
     ) : Frequency() {
 
         override val type = Type.Monthly
 
-        @OptIn(ExperimentalTime::class)
-        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) : LocalDateTime {
+        override fun calcNextOccurrence(
+            from: LocalDate,
+            timeZone: TimeZone,
+            offset: Int,
+        ): LocalDateTime {
             var from = from
             while (from.day != dayOfMonth) {
                 from = from.minus(1, DateTimeUnit.DAY)
@@ -213,13 +232,16 @@ sealed class Frequency {
         val month: Month,
         val dayOfMonth: Int,
         override val time: LocalTime,
-        override val interval: Int
+        override val interval: Int,
     ) : Frequency() {
 
         override val type = Type.Yearly
 
-        @OptIn(ExperimentalTime::class)
-        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) : LocalDateTime {
+        override fun calcNextOccurrence(
+            from: LocalDate,
+            timeZone: TimeZone,
+            offset: Int,
+        ): LocalDateTime {
             var from = from
             val targetInSameYear = LocalDate(from.year, month, dayOfMonth)
             if (from < targetInSameYear) {

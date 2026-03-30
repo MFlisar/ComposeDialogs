@@ -18,7 +18,7 @@ internal fun ColorSlider(
     label: String,
     value: Float,
     labelStyle: DialogColor.LabelStyle,
-    onValueChange: (value: Float) -> Unit
+    onValueChange: (value: Float) -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,

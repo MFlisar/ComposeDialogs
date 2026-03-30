@@ -4,14 +4,11 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
 internal object DateUtil {
 
@@ -25,7 +22,6 @@ internal object DateUtil {
         DayOfWeek.SUNDAY
     )
 
-    @OptIn(ExperimentalTime::class)
     fun now(): LocalDateTime {
         val now = Clock.System.now()
         return now.toLocalDateTime(TimeZone.currentSystemDefault())

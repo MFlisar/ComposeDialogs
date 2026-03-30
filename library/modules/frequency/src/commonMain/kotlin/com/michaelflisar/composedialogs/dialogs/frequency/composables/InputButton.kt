@@ -10,7 +10,6 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun InputButton(
     modifier: Modifier = Modifier.Companion,

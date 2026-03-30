@@ -34,7 +34,6 @@ import com.michaelflisar.composedialogs.dialogs.color.DialogColorUtil
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
 import com.michaelflisar.composedialogs.dialogs.color.classes.GroupedColor
 
-@OptIn(ExperimentalStdlibApi::class)
 @Composable
 internal fun Content(
     color: MutableState<Color>,
@@ -46,7 +45,7 @@ internal fun Content(
     alphaSupported: Boolean,
     shape: Shape,
     gridSize: Int,
-    labelStyle: DialogColor.LabelStyle
+    labelStyle: DialogColor.LabelStyle,
 ) {
     val density = LocalDensity.current
     val updateSelectedPresetColors = {
