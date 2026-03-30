@@ -11,11 +11,71 @@ Generally following can be adjusted:
 
 #### Example
 
-snippet: ColorDemos::demo
+<!-- snippet: ColorDemos::demo -->
+```kt
+if (state.visible) {
+    val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
+    DialogColor(
+        state = state,
+        color = color,
+        alphaSupported = true,
+        icon = icon,
+        title = { Text("Color Dialog") },
+        style = style,
+        onEvent = {
+            if (it is DialogEvent.Button && it.button == DialogButtonType.Positive) {
+                val hex = color.value.toArgb().toUInt().toString(16).padStart(8, '0')
+                showInfo("Selected color: #$hex")
+            } else {
+                showInfo("Event $it")
+            }
+        }
+    )
+}
+```
+<!-- endSnippet -->
 
 #### Composable
 
-snippet: DialogColor::constructor
+<!-- snippet: DialogColor::constructor -->
+```kt
+/**
+ * Shows a color dialog
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param color the selected color state
+ * @param texts the texts ([DialogColor.Texts]) that are used inside this dialog - use [DialogColorDefaults.texts] to provide your own data
+ * @param alphaSupported if true, the dialog supports color alpha values
+ * @param shape the shape of the color cells
+ * @param gridSize the size of the color grid
+ * @param labelStyle the [DialogColor.LabelStyle] for the color picker
+ */
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun DialogColor(
+    // Base Dialog - State
+    state: DialogState,
+    // Custom - Required
+    color: MutableState<Color>,
+    // Custom - Optional
+    texts: DialogColor.Texts = DialogColorDefaults.texts(),
+    alphaSupported: Boolean = true,
+    shape: Shape = MaterialTheme.shapes.small,
+    gridSize: Int = if (isLandscape()) 6 else 4,
+    labelStyle: DialogColor.LabelStyle = DialogColor.LabelStyle.Value,
+    // Base Dialog - Optional
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
+    onEvent: (event: DialogEvent) -> Unit = {}
+)
+```
+<!-- endSnippet -->
 
 #### Screenshots
 

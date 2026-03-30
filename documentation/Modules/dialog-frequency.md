@@ -8,19 +8,94 @@ Check out the composable and it's documentation in the code snipplet below.
 
 #### Example
 
-snippet: Demos::demo-frequency
+<!-- snippet: Demos::demo-frequency -->
+```kt
+if (state.visible) {
+    val frequency = rememberDialogFrequency(Frequency.Weekly(DayOfWeek.MONDAY, LocalTime(12, 0), 1))
+    DialogFrequency(
+        state = state,
+        frequency = frequency,
+        title = { Text("Frequency") },
+        icon = icon,
+        style = style,
+        onEvent = { event ->
+            showInfo("Event $event | frequency: ${frequency.value}")
+        }
+    )
+}
+```
+<!-- endSnippet -->
 
 #### Composable
 
-snippet: DialogFrequency::constructor
+<!-- snippet: DialogFrequency::constructor -->
+```kt
+/**
+ * Shows a frequency dialog
+ *
+ * &nbsp;
+ *
+ * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
+ *
+ * @param frequency the frequency state of the dialog
+ * @param texts the texts ([DialogFrequency.Texts]) that are used inside this dialog - use [DialogFrequencyDefaults.texts] to provide your own data
+ * @param supportedTypes the supported frequency types - default is all types
+ * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
+ */
+@Composable
+fun DialogFrequency(
+    state: DialogState,
+    // Custom - Required
+    frequency: MutableState<Frequency>,
+    // Custom - Optional
+    texts: DialogFrequency.Texts = DialogFrequencyDefaults.texts(),
+    supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
+    firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
+    // Base Dialog - Optional
+    title: (@Composable () -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
+    style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
+    buttons: DialogButtons = DialogDefaults.buttons(),
+    options: DialogOptions = DialogDefaults.options(),
+    onEvent: (event: DialogEvent) -> Unit = {}
+)
+```
+<!-- endSnippet -->
 
 #### Frequency class
 
 This class offers some helpful functions to calculate the next date based on a given start date.
 
-snippet: Frequency::calcNextOccurrence
+<!-- snippet: Frequency::calcNextOccurrence -->
+```kt
+/**
+ * Calculates the next occurrence of the event based on the frequency settings.
+ *
+ * @param from The starting point to calculate the next occurrence from.
+ * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
+ * @param offset An optional offset to adjust the calculation (default is 0).
+ * @return The next occurrence as a LocalDateTime.
+ */
+@OptIn(ExperimentalTime::class)
+abstract fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone = TimeZone.currentSystemDefault(), offset: Int = 0): LocalDateTime
+```
+<!-- endSnippet -->
 
-snippet: Frequency::calcNextOccurrences
+<!-- snippet: Frequency::calcNextOccurrences -->
+```kt
+/**
+ * Calculates the next [count] occurrences of the event based on the frequency settings.
+ *
+ * @param from The starting point to calculate the next occurrences from.
+ * @param offset An optional offset to adjust the calculation (default is 0).
+ * @param count The number of occurrences to calculate.
+ * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
+ * @return A list of the next occurrences as LocalDateTime objects.
+ */
+@OptIn(ExperimentalTime::class)
+fun calcNextOccurrences(from: LocalDate, count: Int, offset: Int = 0, timeZone: TimeZone = TimeZone.currentSystemDefault()): List<LocalDateTime>
+```
+<!-- endSnippet -->
 
 Here's a small example how to use it:
 
