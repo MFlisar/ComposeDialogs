@@ -42,7 +42,7 @@ import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListConte
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListItem
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListTrailingContent
 
-/* --8<-- [start: constructor] */
+// begin-snippet: DialogList::constructor1
 /**
  * Shows a dialog with a list and an optional filter option
  *
@@ -80,7 +80,7 @@ fun <T> DialogList(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     DialogList(
         state,
@@ -100,7 +100,7 @@ fun <T> DialogList(
     )
 }
 
-/* --8<-- [start: constructor2] */
+// begin-snippet: DialogList::constructor2
 /**
  * Shows a dialog with a list and an optional filter option
  *

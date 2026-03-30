@@ -1,10 +1,10 @@
 [versions]
 
 # mflisar
+kmp-parcelize =             "1.1.0-alpha01"
 composecolors =             "1.0.1"
-kotbilling =                "2.0.0"
-kmp-parcelize =             "1.0.0"
-kmp-library =               "2.2.5"
+
+kmpdevtools =               "7.4.2" # change via "updateDevToolsVersion" gradle task!
 kmp-democomposables =       "1.0.2"
 
 accompanist = 			    "0.37.3"
@@ -12,17 +12,16 @@ composables =               "1.36.1"
 
 [plugins]
 
-kmplibrary-buildplugin =            { id = "io.github.mflisar.kmp-library.plugins-build-gradle",           version.ref = "kmp-library" }
+# mflisar
+kmpdevtools-buildplugin =           { id = "io.github.mflisar.kmpdevtools.plugins-build-gradle",        version.ref = "kmpdevtools" }
 
 [libraries]
 
 # mflisar
-composecolors-material =			{ module = "io.github.mflisar.composecolors:material", 				    version.ref = "composecolors" }
-composecolors-material-palette =    { module = "io.github.mflisar.composecolors:material-palette", 		    version.ref = "composecolors" }
-kotbilling =			        	{ module = "io.github.mflisar.kotbilling:library", 						version.ref = "kotbilling" }
-kmp-parcelize =                     { module = "io.github.mflisar.parcelize:library", 	                    version.ref = "kmp-parcelize" }
-kmplibrary-docs =                   { module = "io.github.mflisar.kmp-library:docs",                        version.ref = "kmp-library" }
-kmp-democomposables =               { module = "io.github.mflisar.democomposables:library",                 version.ref = "kmp-democomposables" }
+kmp-parcelize =                                 { module = "io.github.mflisar.kmpparcelize:library", 	                            version.ref = "kmp-parcelize" }
+composecolors-material =			            { module = "io.github.mflisar.composecolors:material", 				                version.ref = "composecolors" }
+composecolors-material-palette =                { module = "io.github.mflisar.composecolors:material-palette", 		                version.ref = "composecolors" }
+kmp-democomposables =                           { module = "io.github.mflisar.democomposables:library",                             version.ref = "kmp-democomposables" }
 
-drawablepainter = 		    	    { module = "com.google.accompanist:accompanist-drawablepainter", 		version.ref = "accompanist" }
-composables-core =                  { module = "com.composables:core", 		                                version.ref = "composables" }
+drawablepainter = 		    	                { module = "com.google.accompanist:accompanist-drawablepainter", 		            version.ref = "accompanist" }
+composables-core =                              { module = "com.composables:core", 		                                            version.ref = "composables" }

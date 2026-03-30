@@ -1,0 +1,18 @@
+# This workflow uses MFlisar/kmp-devtools to handle documentation, release notes and publishing to Maven Central.
+# Link: https://github.com/MFlisar/kmp-devtools/
+name: devtools-on-release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+
+  kmp-devtools-on-release:
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools-on-release.yml@7.4.2
+    secrets: inherit

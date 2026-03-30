@@ -29,7 +29,7 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.number.composables.PickerIcon
 import com.michaelflisar.composedialogs.dialogs.number.utils.NumberUtil
 
-/* --8<-- [start: constructor] */
+// begin-snippet: DialogNumberPicker::constructor
 /**
  * Shows a dialog with a number picker
  *
@@ -76,7 +76,7 @@ fun <T : Number> DialogNumberPicker(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
 

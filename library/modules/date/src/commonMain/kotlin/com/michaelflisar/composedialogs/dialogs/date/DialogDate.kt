@@ -49,8 +49,8 @@ import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectL
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectListYear
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarSelectionHeader
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarTodayButton
-import com.michaelflisar.composedialogs.dialogs.date.resources.Res
-import com.michaelflisar.composedialogs.dialogs.date.resources.composedialogs_date_today
+import com.michaelflisar.composedialogs.date.resources.Res
+import com.michaelflisar.composedialogs.date.resources.composedialogs_date_today
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -58,7 +58,7 @@ import kotlinx.datetime.Month
 import kotlinx.datetime.number
 import org.jetbrains.compose.resources.stringResource
 
-/* --8<-- [start: constructor] */
+// begin-snippet: DialogDate::constructor
 /**
  * Shows a dialog with an input field
  *
@@ -87,7 +87,7 @@ fun DialogDate(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     val landscape = isLandscape()
     Dialog(

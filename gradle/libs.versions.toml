@@ -1,50 +1,124 @@
 [versions]
 
-gradle = 				            "8.12.1"
-kotlin = 				            "2.2.10"
-dokka =                             "2.0.0"
-gradle-maven-publish-plugin =       "0.34.0"
-compose =                           "1.8.2"
-compose-material3 =                 "1.8.2"
-compose-icons =                     "1.7.3"
-desugar =                           "2.1.5"
-binary-compatibility-validator =    "0.18.1"
+gradle = 				                "9.1.0"
+kotlin = 				                "2.3.20"
+
+# github release (dokka + maven + binary compatibility)
+dokka =                                 "2.2.0"
+vanniktech-maven-publish =              "0.36.0"
+binary-compatibility-validator =        "0.18.1"
+
+# org.jetbrains.compose
+jetbrains-compose =                     "1.10.3"
+jetbrains-compose-material3 =           "1.9.0"
+jetbrains-compose-material3-adaptive =  "1.2.0"
+jetbrains-compose-icons =               "1.7.3"
+jetbrains-compose-hot-reload =          "1.0.0"
+
+# org.jetbrains.androidx
+jetbrains-androidx-lifecycle =          "2.10.0"
+
+# androidx
+androidx-core =                         "1.18.0"
+androidx-activity =                     "1.13.0"
+androidx-startup =                      "1.2.0"
+androidx-datastore-preferences =        "1.2.1"
+androidx-browser =                      "1.10.0"
+androidx-work =          		        "2.11.2"
+androidx-room =      			        "2.8.4"
+androidx-sqlite =      			        "2.6.2"
+androidx-lifecycle = 	                "2.10.0"
+
+# org.jetbrains.kotlinx
+jetbrains-kotlinx-coroutines =          "1.10.2"
+jetbrains-kotlinx-serialization = 	    "1.10.0"
+jetbrains-kotlinx-datetime =            "0.7.1"
+jetbrains-kotlinx-io-core =             "0.9.0"
+jetbrains-kotlinx-browser =             "0.5.0"
+
+# others
+desugar =                               "2.1.5"
+buildkonfig =                           "0.17.1"
+easylauncher = 					        "6.4.1"
+launch4j =                              "4.0.0"
 
 [plugins]
 
 # android
-android-application = 			    { id = "com.android.application", 	                version.ref = "gradle" }
-android-library = 			        { id = "com.android.library", 	                    version.ref = "gradle" }
+android-application = 			                    { id = "com.android.application", 	                version.ref = "gradle" }
+android-library = 			                        { id = "com.android.kotlin.multiplatform.library", 	version.ref = "gradle" }
 
-# kotlin
-kotlin-android = 				    { id = "org.jetbrains.kotlin.android", 			    version.ref = "kotlin" }
-kotlin-parcelize =                  { id = "org.jetbrains.kotlin.plugin.parcelize",     version.ref = "kotlin"  }
-kotlin-multiplatform = 			    { id = "org.jetbrains.kotlin.multiplatform", 	    version.ref = "kotlin" }
-kotlin-compose = 				    { id = "org.jetbrains.kotlin.plugin.compose", 	    version.ref = "kotlin" }
-kotlin-serialization = 			    { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-jvm = 				        { id = "org.jetbrains.kotlin.jvm", 			        version.ref = "kotlin" }
-kotlin-test = 				        { id = "org.jetbrains.kotlin.test", 			    version.ref = "kotlin" }
+# org.jetbrains.kotlin
+jetbrains-kotlin-android = 				            { id = "org.jetbrains.kotlin.android", 			    version.ref = "kotlin" }
+jetbrains-kotlin-parcelize =                        { id = "org.jetbrains.kotlin.plugin.parcelize",     version.ref = "kotlin"  }
+jetbrains-kotlin-multiplatform = 			        { id = "org.jetbrains.kotlin.multiplatform", 	    version.ref = "kotlin" }
+jetbrains-kotlin-compose = 				            { id = "org.jetbrains.kotlin.plugin.compose", 	    version.ref = "kotlin" }
+jetbrains-kotlin-serialization = 			        { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = 				                { id = "org.jetbrains.kotlin.jvm", 			        version.ref = "kotlin" }
+jetbrains-kotlin-test = 				            { id = "org.jetbrains.kotlin.test", 			    version.ref = "kotlin" }
 
-# compose
-compose =                           { id = "org.jetbrains.compose",                     version.ref = "compose" }
+# github release (dokka + maven + binary compatibility)
+dokka =                                             { id = "org.jetbrains.dokka",                       version.ref = "dokka" }
+vanniktech-maven-publish-base =                     { id = "com.vanniktech.maven.publish.base",         version.ref = "vanniktech-maven-publish" }
+binary-compatibility-validator =                    { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
 
-# github release (dokka + maven)
-dokka =                             { id = "org.jetbrains.dokka",                       version.ref = "dokka" }
-gradle-maven-publish-plugin =       { id = "com.vanniktech.maven.publish.base",         version.ref = "gradle-maven-publish-plugin" }
+# org.jetbrains.compose
+jetbrains-compose =                                 { id = "org.jetbrains.compose",                     version.ref = "jetbrains-compose" }
+jetbrains-compose-hotreload =                       { id = "org.jetbrains.compose.hot-reload",          version.ref = "jetbrains-compose-hot-reload" }
 
-# binary compatibility
-binary-compatibility-validator =    { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
+# others
+buildkonfig =                                       { id = "com.codingfeline.buildkonfig",              version.ref = "buildkonfig" }
+easylauncher =                                      { id = "com.starter.easylauncher",                  version.ref = "easylauncher" }
+launch4j =                                          { id = "edu.sc.seis.launch4j",                      version.ref = "launch4j" }
 
 [libraries]
 
-kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",                          version.ref = "kotlin" }
+# kotlin
+jetbrains-kotlin-test = 			                { module = "org.jetbrains.kotlin:kotlin-test",                          version.ref = "kotlin" }
 
-compose-runtime =                   { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "compose" }
-compose-ui =                        { module = "org.jetbrains.compose.ui:ui",                               version.ref = "compose" }
-compose-ui-backhandler =            { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "compose" }
-compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose-material3" }
-compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose-icons" }
-compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose-icons" }
+# org.jetbrains.compose
+jetbrains-compose-runtime =                         { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "jetbrains-compose" }
+jetbrains-compose-components-resources =            { module = "org.jetbrains.compose.components:components-resources",     version.ref = "jetbrains-compose" }
+jetbrains-compose-foundation =                      { module = "org.jetbrains.compose.foundation:foundation",               version.ref = "jetbrains-compose" }
+jetbrains-compose-ui =                              { module = "org.jetbrains.compose.ui:ui",                               version.ref = "jetbrains-compose" }
+jetbrains-compose-ui-backhandler =                  { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "jetbrains-compose" }
+jetbrains-compose-ui-test-junit4 =                  { module = "org.jetbrains.compose.ui:ui-test-junit4",                   version.ref = "jetbrains-compose" }
+jetbrains-compose-material3 =                       { module = "org.jetbrains.compose.material3:material3",                 version.ref = "jetbrains-compose-material3" }
+jetbrains-compose-material3-adaptive =              { module = "org.jetbrains.compose.material3.adaptive:adaptive",         version.ref = "jetbrains-compose-material3-adaptive" }
+jetbrains-compose-material-icons-core = 	        { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "jetbrains-compose-icons" }
+jetbrains-compose-material-icons-extended = 	    { module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "jetbrains-compose-icons" }
 
-# desugar
-desugar =			        	    { module = "com.android.tools:desugar_jdk_libs", 						version.ref = "desugar" }
+# org.jetbrains.androidx
+jetbrains-androidx-lifecycle-runtime =              { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-ktx",    version.ref = "jetbrains-androidx-lifecycle" }
+jetbrains-androidx-lifecycle-runtime-compose =      { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",version.ref = "jetbrains-androidx-lifecycle" }
+
+# androidx
+androidx-core =                                     { module = "androidx.core:core-ktx",                                    version.ref = "androidx-core" }
+androidx-activity-compose =                         { module = "androidx.activity:activity-compose",                        version.ref = "androidx-activity" }
+androidx-startup-runtime =                          { module = "androidx.startup:startup-runtime",                          version.ref = "androidx-startup" }
+androidx-datastore-preferences =                    { module = "androidx.datastore:datastore-preferences",                  version.ref = "androidx-datastore-preferences" }
+androidx-browser =                                  { module = "androidx.browser:browser",                                  version.ref = "androidx-browser" }
+androidx-work-runtime =                             { module = "androidx.work:work-runtime-ktx",                            version.ref = "androidx-work" }
+androidx-room = 		                            { module = "androidx.room:room-ktx", 			            	        version.ref = "androidx-room" }
+androidx-room-compiler = 		                    { module = "androidx.room:room-compiler", 			        	        version.ref = "androidx-room" }
+androidx-room-runtime = 		                    { module = "androidx.room:room-runtime", 			        	        version.ref = "androidx-room" }
+androidx-sqlite = 		                            { module = "androidx.sqlite:sqlite-ktx", 			    		        version.ref = "androidx-sqlite" }
+androidx-sqlite-bundled = 		                    { module = "androidx.sqlite:sqlite-bundled", 			    	        version.ref = "androidx-sqlite" }
+androidx-lifecycle = 		                        { module = "androidx.lifecycle:lifecycle-runtime-ktx", 			        version.ref = "androidx-lifecycle" }
+androidx-lifecycle-compose =                        { module = "androidx.lifecycle:lifecycle-runtime-compose", 		        version.ref = "androidx-lifecycle" }
+androidx-lifecycle-process = 	                    { module = "androidx.lifecycle:lifecycle-process", 	        	        version.ref = "androidx-lifecycle" }
+androidx-lifecycle-service =                        { module = "androidx.lifecycle:lifecycle-service", 		    	        version.ref = "androidx-lifecycle" }
+
+# org.jetbrains.kotlinx
+jetbrains-kotlinx-coroutines-core =			        { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 	        version.ref = "jetbrains-kotlinx-coroutines" }
+jetbrains-kotlinx-coroutines-android =	            { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", 	        version.ref = "jetbrains-kotlinx-coroutines" }
+jetbrains-kotlinx-coroutines-swing =	            { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", 	        version.ref = "jetbrains-kotlinx-coroutines" }
+jetbrains-kotlinx-coroutines-test =			        { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", 	        version.ref = "jetbrains-kotlinx-coroutines" }
+jetbrains-kotlinx-serialization-core =	            { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", 	        version.ref = "jetbrains-kotlinx-serialization" }
+jetbrains-kotlinx-serialization-json =	            { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 	        version.ref = "jetbrains-kotlinx-serialization" }
+jetbrains-kotlinx-datetime =	                    { module = "org.jetbrains.kotlinx:kotlinx-datetime", 	                version.ref = "jetbrains-kotlinx-datetime" }
+jetbrains-kotlinx-io-core =			                { module = "org.jetbrains.kotlinx:kotlinx-io-core", 		            version.ref = "jetbrains-kotlinx-io-core" }
+jetbrains-kotlinx-browser =                         { module = "org.jetbrains.kotlinx:kotlinx-browser",                     version.ref = "jetbrains-kotlinx-browser" }
+
+# others
+desugar =			        	                    { module = "com.android.tools:desugar_jdk_libs", 	                    version.ref = "desugar" }

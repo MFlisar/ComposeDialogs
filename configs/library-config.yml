@@ -1,0 +1,52 @@
+# Github Library
+github:
+  name: ComposeDialogs
+  release: 2023
+  namespace: com.michaelflisar.composedialogs
+  license:
+    name: Apache License 2.0
+    path: blob/main/LICENSE
+
+# Maven
+maven:
+  group-id: io.github.mflisar.composechangelog
+  primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)
+
+# Modules - list of modules [artifact-id, description, path]
+modules:
+  - artifact-id: core
+    description: provides all the basic dialog classes and styles
+    path: library/core
+  - artifact-id: dialog-color
+    description: provides a color dialog
+    path: library/modules/color
+  - artifact-id: dialog-date
+    description: provides a date picker dialog
+    path: library/modules/date
+  - artifact-id: dialog-info
+    description: provides an info dialog
+    path: library/modules/info
+  - artifact-id: dialog-input
+    description: provides an input dialog
+    path: library/modules/input
+  - artifact-id: dialog-list
+    description: provides a list dialog
+    path: library/modules/list
+  - artifact-id: dialog-menu
+    description: provides a menu dialog
+    path: library/modules/menu
+  - artifact-id: dialog-number
+    description: provides a number picker dialog
+    path: library/modules/number
+  - artifact-id: dialog-progress
+    description: provides a progress dialog
+    path: library/modules/progress
+  - artifact-id: dialog-time
+    description: provides a time dialog
+    path: library/modules/time
+  - artifact-id: dialog-frequency
+    description: provides a frequency dialog (daily, weekly, monthly, yearly)
+    path: library/modules/frequency
+
+# XCFrameworks [name, path, targets (ios, macos)]
+xcframeworks: [ ]

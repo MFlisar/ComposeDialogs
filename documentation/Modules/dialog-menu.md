@@ -1,0 +1,31 @@
+---
+icon: material/puzzle
+---
+
+This shows a menu dialog that even supports unlimited nesting levels.
+
+Check out the composable and it's documentation in the code snipplet below.
+
+Generally following can be adjusted:
+
+* menu items with optional icons
+* unlimited level of nesting
+* also supports divider items and custom items
+
+#### Example
+
+snippet: Demos::demo-menu
+
+Here's a full example of a menu that can be rendered:
+
+snippet: Demos::demo-menu-items
+
+#### Composable
+
+snippet: DialogMenu::constructor
+
+#### Screenshots
+
+|                                                   |
+|---------------------------------------------------|
+| ![Screenshot](../screenshots/menu/demo_menu1.jpg) |

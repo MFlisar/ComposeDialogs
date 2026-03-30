@@ -39,12 +39,12 @@ import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
 import com.michaelflisar.composedialogs.dialogs.color.composables.Content
 import com.michaelflisar.composedialogs.dialogs.color.composables.TitleForPages
-import com.michaelflisar.composedialogs.dialogs.color.resources.Res
-import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_color_label_custom
-import com.michaelflisar.composedialogs.dialogs.color.resources.composedialogs_color_label_presets
+import com.michaelflisar.composedialogs.color.resources.Res
+import com.michaelflisar.composedialogs.color.resources.composedialogs_color_label_custom
+import com.michaelflisar.composedialogs.color.resources.composedialogs_color_label_presets
 import org.jetbrains.compose.resources.stringResource
 
-/* --8<-- [start: constructor] */
+// begin-snippet: ColorDemos::constructor
 /**
  * Shows a color dialog
  *
@@ -80,7 +80,7 @@ fun DialogColor(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     // saved dialog state
     val selectedSubColor =

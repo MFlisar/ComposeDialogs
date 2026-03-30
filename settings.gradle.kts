@@ -1,3 +1,5 @@
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
+
 dependencyResolutionManagement {
 
     repositories {
@@ -5,17 +7,15 @@ dependencyResolutionManagement {
         google()
         gradlePluginPortal()
         maven("https://jitpack.io")
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
+        // jewel + skiko
+        maven("https://www.jetbrains.com/intellij-repository/releases")
+        maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies/")
     }
 
     versionCatalogs {
         create("app") {
             from(files("gradle/app.versions.toml"))
-        }
-        create("androidx") {
-            from(files("gradle/androidx.versions.toml"))
-        }
-        create("kotlinx") {
-            from(files("gradle/kotlinx.versions.toml"))
         }
         create("deps") {
             from(files("gradle/deps.versions.toml"))
@@ -30,39 +30,36 @@ pluginManagement {
         google()
         gradlePluginPortal()
         maven("https://jitpack.io")
+        mavenLocal()
     }
 }
 
 // --------------
-// Functions
+// Settings Plugin
 // --------------
 
-fun includeModule(path: String, name: String) {
-    include(name)
-    project(name).projectDir = file(path)
+plugins {
+    // version catalogue does not work here!
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.4.2"
 }
+val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
 // --------------
 // Library
 // --------------
 
-includeModule("library/core", ":composedialogs:core")
-includeModule("library/modules/info", ":composedialogs:modules:info")
-includeModule("library/modules/input", ":composedialogs:modules:input")
-includeModule("library/modules/number", ":composedialogs:modules:number")
-includeModule("library/modules/color", ":composedialogs:modules:color")
-includeModule("library/modules/date", ":composedialogs:modules:date")
-includeModule("library/modules/time", ":composedialogs:modules:time")
-includeModule("library/modules/list", ":composedialogs:modules:list")
-includeModule("library/modules/progress", ":composedialogs:modules:progress")
-includeModule("library/modules/billing", ":composedialogs:modules:billing")
-includeModule("library/modules/menu", ":composedialogs:modules:menu")
-includeModule("library/modules/frequency", ":composedialogs:modules:frequency")
+val libraryConfig = LibraryConfig.read(rootProject)
+val libraryId = libraryConfig.libraryId()
+
+// Library Modules
+settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
 
 // --------------
-// Demo
+// App
 // --------------
 
-include(":demo:shared")
-include(":demo:app:windows")
-include(":demo:app:android")
+if (System.getenv("CI") != "true") {
+    include(":demo:shared")
+    include(":demo:app:android")
+    include(":demo:app:compose")
+}

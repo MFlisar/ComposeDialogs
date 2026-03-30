@@ -1,82 +1,60 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.michaelflisar.kmpdevtools.BuildFileUtil
+import com.michaelflisar.kmpdevtools.configs.app.AndroidAppConfig
+import com.michaelflisar.kmpdevtools.core.configs.AppConfig
+import com.michaelflisar.kmpdevtools.core.configs.Config
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 plugins {
+    // kmp + app/library
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    // org.jetbrains.kotlin
+    alias(libs.plugins.jetbrains.kotlin.compose)
+    // org.jetbrains.compose
+    // --
+    // docs, publishing, validation
+    // --
+    // build tools
+    alias(deps.plugins.kmpdevtools.buildplugin)
+    // others
+    // ...
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
+// ------------------------
+// Setup
+// ------------------------
+
+val config = Config.read(rootProject)
+val libraryConfig = LibraryConfig.read(rootProject)
+val appConfig = AppConfig.read(rootProject)
+
+val androidConfig = AndroidAppConfig(
+    compileSdk = app.versions.compileSdk,
+    minSdk = app.versions.minSdk,
+    targetSdk = app.versions.targetSdk
+)
+
+// -------------------
+// Configurations
+// -------------------
 
 android {
 
-    namespace = "com.michaelflisar.composedialogs.demo"
-
-    compileSdk = app.versions.compileSdk.get().toInt()
-
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
-
-    defaultConfig {
-        minSdk = app.versions.minSdk.get().toInt()
-        targetSdk = app.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-    }
-
-    // eventually use local custom signing
-    val debugKeyStore = providers.gradleProperty("debugKeyStore").orNull
-    if (debugKeyStore != null) {
-        signingConfigs {
-            getByName("debug") {
-                keyAlias = "androiddebugkey"
-                keyPassword = "android"
-                storeFile = File(debugKeyStore)
-                storePassword = "android"
-            }
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-        isCoreLibraryDesugaringEnabled = true
-    }
+    BuildFileUtil.setupAndroidApp(
+        project = project,
+        config = config,
+        appConfig = appConfig,
+        androidAppConfig = androidConfig,
+        generateResAppName = true,
+        buildConfig = true,
+        checkDebugKeyStoreProperty = true,
+        setupBuildTypesDebugAndRelease = true
+    )
 }
 
 dependencies {
 
-    // ------------------------
-    // AndroidX
-    // ------------------------
+    implementation(libs.androidx.activity.compose)
 
-    // Compose
-    implementation(libs.compose.material3)
-    implementation(libs.compose.material.icons.core)
-    implementation(libs.compose.material.icons.extended)
-
-    implementation(androidx.activity.compose)
-
-    // ------------------------
-    // Libraries
-    // ------------------------
-
-    implementation(project(":composedialogs:core"))
-    implementation(project(":demo:shared"))
-
-    // desugar
-    coreLibraryDesugaring(libs.desugar)
+    // Library
+    implementation(project(":demo:app:compose"))
 }

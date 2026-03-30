@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
 
-/* --8<-- [start: constructor] */
+// begin-snippet: DialogMenu::constructor
 /**
  * Shows a dialog holdinh a list of menu items
  *
@@ -55,7 +55,7 @@ fun DialogMenu(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     val selectedSubMenu = remember { mutableStateOf<List<MenuItem.SubMenu>>(emptyList()) }
     val visibleItems = remember(selectedSubMenu.value) {

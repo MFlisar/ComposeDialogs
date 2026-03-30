@@ -100,7 +100,7 @@ object DialogDefaults {
         dismissOnButtonClick
     )
 
-    /* --8<-- [start: style-dialog] */
+    // begin-snippet: Dialog::style-dialog
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -130,7 +130,8 @@ object DialogDefaults {
         titleColor: Color = DialogStyleDefaults.titleColor,
         contentColor: Color = DialogStyleDefaults.contentColor
     ): ComposeDialogStyle
-            /* --8<-- [end: style-dialog] */ {
+    // end-snippet
+    {
         return DialogStyle(
             swipeDismissable,
             // DialogProperties
@@ -147,7 +148,7 @@ object DialogDefaults {
         )
     }
 
-    /* --8<-- [start: style-bottom-sheet] */
+    // begin-snippet: Dialog::style-bottom-sheet
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -187,7 +188,8 @@ object DialogDefaults {
         titleColor: Color = BottomSheetStyleDefaults.titleColor,
         contentColor: Color = BottomSheetStyleDefaults.contentColor
     ): ComposeDialogStyle
-            /* --8<-- [end: style-bottom-sheet] */ {
+    // end-snippet
+    {
         return BottomSheetStyle(
             dragHandle,
             peekHeight,
@@ -209,7 +211,7 @@ object DialogDefaults {
         )
     }
 
-    /* --8<-- [start: style-full-screen-dialog] */
+    // begin-snippet: Dialog::style-full-screen-dialog
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
@@ -242,7 +244,8 @@ object DialogDefaults {
         navigationIcon: (@Composable () -> Unit)? = null,
         applyContentPadding: Boolean = true
     ): ComposeDialogStyle
-            /* --8<-- [end: style-full-screen-dialog] */ {
+    // end-snippet
+     {
         return FullscreenDialogStyle(
             darkStatusBar,
             navigationIcon,

@@ -22,7 +22,7 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
-/* --8<-- [start: constructor] */
+// begin-snippet: DialogInputNumber::constructor
 /**
  * Shows a dialog with an input field that only allows numeric characters and validates that the input holds a valid value for the desired data type
  *
@@ -76,7 +76,7 @@ fun <T : Number> DialogInputNumber(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor] */
+// end-snippet
 {
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
         val modifier = when (style.type) {

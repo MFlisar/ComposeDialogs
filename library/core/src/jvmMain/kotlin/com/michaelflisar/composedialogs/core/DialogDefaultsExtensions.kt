@@ -9,7 +9,7 @@ import androidx.compose.ui.window.WindowPosition
 import com.michaelflisar.composedialogs.core.style.DialogStyleDefaults
 import com.michaelflisar.composedialogs.core.style.DialogStyleDesktop
 
-/* --8<-- [start: style-windows-dialog] */
+// begin-snippet: Dialog::style-windows-dialog
 @Composable
 fun DialogDefaults.styleWindowsDialog(
     dialogTitle: String,
@@ -21,7 +21,7 @@ fun DialogDefaults.styleWindowsDialog(
     titleColor: Color = DialogStyleDefaults.titleColor,
     contentColor: Color = DialogStyleDefaults.contentColor
 ): ComposeDialogStyle
-/* --8<-- [end: style-windows-dialog] */
+// end-snippet
 {
     return DialogStyleDesktop(
         desktopOptions = DialogStyleDesktopOtions(dialogTitle, position, width, height),
