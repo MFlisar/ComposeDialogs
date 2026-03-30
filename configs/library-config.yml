@@ -9,7 +9,7 @@ github:
 
 # Maven
 maven:
-  group-id: io.github.mflisar.composechangelog
+  group-id: io.github.mflisar.composedialogs
   primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)
 
 # Modules - list of modules [artifact-id, description, path]
