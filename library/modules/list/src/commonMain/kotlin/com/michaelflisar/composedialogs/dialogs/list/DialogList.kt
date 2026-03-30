@@ -146,7 +146,7 @@ fun <T> DialogList(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
 )
-/* --8<-- [end: constructor2] */
+// end-snippet
 {
     DialogList(
         state,

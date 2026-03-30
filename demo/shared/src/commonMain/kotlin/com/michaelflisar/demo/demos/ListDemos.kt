@@ -1,13 +1,10 @@
 package com.michaelflisar.demo.demos
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.TextFields
@@ -18,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.autoSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,19 +23,16 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.rememberDialogState
+import com.michaelflisar.composedialogs.dialogs.list.DialogList
 import com.michaelflisar.democomposables.DemoButton
 import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.democomposables.layout.DemoRow
-import com.michaelflisar.composedialogs.dialogs.list.DialogList
-import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListContent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @Composable
 fun ListDemos(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
-    showInfo: (info: String) -> Unit
+    showInfo: (info: String) -> Unit,
 ) {
     DemoRegion("List Dialogs (Simple Layouts)")
 
@@ -202,7 +195,7 @@ fun ListDemos(
 expect fun DemoListAppSelector(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
-    showInfo: (info: String) -> Unit
+    showInfo: (info: String) -> Unit,
 )
 
 @Composable
@@ -219,7 +212,7 @@ fun <T> RowScope.DemoList(
     filter: DialogList.Filter<T>? = null,
     divider: Boolean = false,
     infos: String = "",
-    description: String = ""
+    description: String = "",
 ) {
     val state = rememberDialogState()
     if (state.visible) {
@@ -228,7 +221,8 @@ fun <T> RowScope.DemoList(
                 // we should probably handle the selected values in this case
                 when (selectionMode) {
                     is DialogList.SelectionMode.MultiClick,
-                    is DialogList.SelectionMode.SingleClickAndClose -> {
+                    is DialogList.SelectionMode.SingleClickAndClose,
+                        -> {
                         // Selection (Click) events are handled inside the selection mode callbacks directly!
                         showInfo("Event $event")
                     }
