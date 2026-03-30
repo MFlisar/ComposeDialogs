@@ -8,7 +8,7 @@ Check out the composable and it's documentation in the code snipplet below.
 
 #### Example
 
-snippet: Demos::demo
+snippet: Demos::demo-frequency
 
 #### Composable
 

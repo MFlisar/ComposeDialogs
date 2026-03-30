@@ -38,7 +38,7 @@ import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.Month
 
-// begin-snippet: DialogFrequency::demo
+// begin-snippet: DialogFrequency::constructor
 /**
  * Shows a frequency dialog
  *
