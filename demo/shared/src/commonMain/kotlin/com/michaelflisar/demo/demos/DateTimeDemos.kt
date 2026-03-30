@@ -56,7 +56,7 @@ private fun RowScope.DemoDate1(
     customSetup: Boolean
 ) {
     val state = rememberDialogState()
-    // begin-snippet: DateTimeDemos::demo-date
+    // begin-snippet: Demos::demo-date
     if (state.visible) {
 
         // special state for date dialog
