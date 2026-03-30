@@ -44,7 +44,7 @@ import com.michaelflisar.composedialogs.color.resources.composedialogs_color_lab
 import com.michaelflisar.composedialogs.color.resources.composedialogs_color_label_presets
 import org.jetbrains.compose.resources.stringResource
 
-// begin-snippet: ColorDemos::constructor
+// begin-snippet: DialogColor::constructor
 /**
  * Shows a color dialog
  *
