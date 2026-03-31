@@ -28,7 +28,7 @@ actual fun isLandscape(): Boolean = false
 actual fun stringOk(): String = "OK"
 
 @Composable
-actual fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle = TODO()
+actual fun DialogDefaults.defaultDialogStyle(): ComposeDialogStyle = styleDialog()
 
 @Composable
 actual fun DialogContentScrollableColumn(

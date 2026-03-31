@@ -35,6 +35,7 @@ jetbrains-kotlinx-serialization = 	    "1.10.0"
 jetbrains-kotlinx-datetime =            "0.7.1"
 jetbrains-kotlinx-io-core =             "0.9.0"
 jetbrains-kotlinx-browser =             "0.5.0"
+jetbrains-kotlinx-atomicfu =            "0.29.0"
 
 # others
 desugar =                               "2.1.5"
@@ -83,6 +84,8 @@ jetbrains-compose-foundation =                      { module = "org.jetbrains.co
 jetbrains-compose-ui =                              { module = "org.jetbrains.compose.ui:ui",                               version.ref = "jetbrains-compose" }
 jetbrains-compose-ui-backhandler =                  { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "jetbrains-compose" }
 jetbrains-compose-ui-test-junit4 =                  { module = "org.jetbrains.compose.ui:ui-test-junit4",                   version.ref = "jetbrains-compose" }
+jetbrains-compose-ui-tooling =                      { module = "org.jetbrains.compose.ui:ui-tooling",                       version.ref = "jetbrains-compose" }
+jetbrains-compose-ui-tooling-preview =              { module = "org.jetbrains.compose.ui:ui-tooling-preview",               version.ref = "jetbrains-compose" }
 jetbrains-compose-material3 =                       { module = "org.jetbrains.compose.material3:material3",                 version.ref = "jetbrains-compose-material3" }
 jetbrains-compose-material3-adaptive =              { module = "org.jetbrains.compose.material3.adaptive:adaptive",         version.ref = "jetbrains-compose-material3-adaptive" }
 jetbrains-compose-material-icons-core = 	        { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "jetbrains-compose-icons" }
@@ -119,6 +122,7 @@ jetbrains-kotlinx-serialization-json =	            { module = "org.jetbrains.kot
 jetbrains-kotlinx-datetime =	                    { module = "org.jetbrains.kotlinx:kotlinx-datetime", 	                version.ref = "jetbrains-kotlinx-datetime" }
 jetbrains-kotlinx-io-core =			                { module = "org.jetbrains.kotlinx:kotlinx-io-core", 		            version.ref = "jetbrains-kotlinx-io-core" }
 jetbrains-kotlinx-browser =                         { module = "org.jetbrains.kotlinx:kotlinx-browser",                     version.ref = "jetbrains-kotlinx-browser" }
+jetbrains-kotlinx-atomicfu =                        { module = "org.jetbrains.kotlinx:atomicfu", 	                        version.ref = "jetbrains-kotlinx-atomicfu" }
 
 # others
 desugar =			        	                    { module = "com.android.tools:desugar_jdk_libs", 	                    version.ref = "desugar" }
