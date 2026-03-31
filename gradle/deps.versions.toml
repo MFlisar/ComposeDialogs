@@ -4,7 +4,7 @@
 kmp-parcelize =             "1.1.0-alpha01"
 composecolors =             "1.0.1"
 
-kmpdevtools =               "7.4.2" # change via "updateDevToolsVersion" gradle task!
+kmpdevtools =               "7.5.0" # change via "updateDevToolsVersion" gradle task!
 kmp-democomposables =       "1.0.2"
 
 accompanist = 			    "0.37.3"

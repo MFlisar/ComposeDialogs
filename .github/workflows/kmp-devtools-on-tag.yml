@@ -15,5 +15,5 @@ permissions:
 jobs:
 
   kmp-devtools-on-tag:
-    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools-on-tag.yml@7.4.2
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools-on-tag.yml@7.5.0
     secrets: inherit

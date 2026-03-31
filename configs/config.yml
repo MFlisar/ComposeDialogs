@@ -7,3 +7,11 @@ developer:
   mail: mflisar.development@gmail.com
   maven-id: mflisar
   github-user-name: MFlisar
+
+# Readme
+readme:
+  screenshots:
+    exclude-root: true
+    group-by-folder: true
+    excluded-folders: []
+    excluded-images: []
