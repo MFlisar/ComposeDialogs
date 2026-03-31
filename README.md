@@ -22,39 +22,70 @@ This library offers you an easily extendible compose framework for modal dialogs
 
 # :camera: Screenshots
 
-![demo_color4](documentation/screenshots/color/demo_color4.jpg)
-![demo_color1](documentation/screenshots/color/demo_color1.jpg)
-![demo_color2](documentation/screenshots/color/demo_color2.jpg)
-![demo_color3](documentation/screenshots/color/demo_color3.jpg)
-![demo_calendar2](documentation/screenshots/date/demo_calendar2.jpg)
-![demo_calendar3](documentation/screenshots/date/demo_calendar3.jpg)
-![demo_calendar1](documentation/screenshots/date/demo_calendar1.jpg)
-![demo_time1](documentation/screenshots/time/demo_time1.jpg)
-![demo_time2](documentation/screenshots/time/demo_time2.jpg)
-![demo_list7](documentation/screenshots/list/demo_list7.jpg)
-![demo_list3](documentation/screenshots/list/demo_list3.jpg)
-![demo_list6](documentation/screenshots/list/demo_list6.jpg)
-![demo_list5](documentation/screenshots/list/demo_list5.jpg)
-![demo_list2](documentation/screenshots/list/demo_list2.jpg)
-![demo_list4](documentation/screenshots/list/demo_list4.jpg)
-![demo_list1](documentation/screenshots/list/demo_list1.jpg)
-![overview](documentation/screenshots/overview.jpg)
-![demo_menu1](documentation/screenshots/menu/demo_menu1.jpg)
-![demo_info4](documentation/screenshots/info/demo_info4.jpg)
-![demo_info2](documentation/screenshots/info/demo_info2.jpg)
-![demo_info3](documentation/screenshots/info/demo_info3.jpg)
-![demo_info1](documentation/screenshots/info/demo_info1.jpg)
-![demo_frequency4](documentation/screenshots/frequency/demo_frequency4.png)
-![demo_frequency3](documentation/screenshots/frequency/demo_frequency3.png)
-![demo_frequency1](documentation/screenshots/frequency/demo_frequency1.png)
-![demo_frequency2](documentation/screenshots/frequency/demo_frequency2.png)
-![demo_input2](documentation/screenshots/input/demo_input2.jpg)
-![demo_input1](documentation/screenshots/input/demo_input1.jpg)
-![demo_progress2](documentation/screenshots/progress/demo_progress2.jpg)
-![demo_progress1](documentation/screenshots/progress/demo_progress1.jpg)
-![demo_number2](documentation/screenshots/number/demo_number2.jpg)
-![demo_number3](documentation/screenshots/number/demo_number3.jpg)
-![demo_number1](documentation/screenshots/number/demo_number1.jpg)
+### color
+
+|  |  |  |
+|---|---|---|
+| ![demo_color1](documentation/screenshots/color/demo_color1.jpg) | ![demo_color2](documentation/screenshots/color/demo_color2.jpg) | ![demo_color3](documentation/screenshots/color/demo_color3.jpg) |
+| ![demo_color4](documentation/screenshots/color/demo_color4.jpg) |
+
+### date
+
+|  |  |  |
+|---|---|---|
+| ![demo_calendar1](documentation/screenshots/date/demo_calendar1.jpg) | ![demo_calendar2](documentation/screenshots/date/demo_calendar2.jpg) | ![demo_calendar3](documentation/screenshots/date/demo_calendar3.jpg) |
+
+### frequency
+
+|  |  |  |
+|---|---|---|
+| ![demo_frequency1](documentation/screenshots/frequency/demo_frequency1.png) | ![demo_frequency2](documentation/screenshots/frequency/demo_frequency2.png) | ![demo_frequency3](documentation/screenshots/frequency/demo_frequency3.png) |
+| ![demo_frequency4](documentation/screenshots/frequency/demo_frequency4.png) |
+
+### info
+
+|  |  |  |
+|---|---|---|
+| ![demo_info1](documentation/screenshots/info/demo_info1.jpg) | ![demo_info2](documentation/screenshots/info/demo_info2.jpg) | ![demo_info3](documentation/screenshots/info/demo_info3.jpg) |
+| ![demo_info4](documentation/screenshots/info/demo_info4.jpg) |
+
+### input
+
+|  |  |  |
+|---|---|---|
+| ![demo_input1](documentation/screenshots/input/demo_input1.jpg) | ![demo_input2](documentation/screenshots/input/demo_input2.jpg) |
+
+### list
+
+|  |  |  |
+|---|---|---|
+| ![demo_list1](documentation/screenshots/list/demo_list1.jpg) | ![demo_list2](documentation/screenshots/list/demo_list2.jpg) | ![demo_list3](documentation/screenshots/list/demo_list3.jpg) |
+| ![demo_list4](documentation/screenshots/list/demo_list4.jpg) | ![demo_list5](documentation/screenshots/list/demo_list5.jpg) | ![demo_list6](documentation/screenshots/list/demo_list6.jpg) |
+| ![demo_list7](documentation/screenshots/list/demo_list7.jpg) |
+
+### menu
+
+|  |  |  |
+|---|---|---|
+| ![demo_menu1](documentation/screenshots/menu/demo_menu1.jpg) |
+
+### number
+
+|  |  |  |
+|---|---|---|
+| ![demo_number1](documentation/screenshots/number/demo_number1.jpg) | ![demo_number2](documentation/screenshots/number/demo_number2.jpg) | ![demo_number3](documentation/screenshots/number/demo_number3.jpg) |
+
+### progress
+
+|  |  |  |
+|---|---|---|
+| ![demo_progress1](documentation/screenshots/progress/demo_progress1.jpg) | ![demo_progress2](documentation/screenshots/progress/demo_progress2.jpg) |
+
+### time
+
+|  |  |  |
+|---|---|---|
+| ![demo_time1](documentation/screenshots/time/demo_time1.jpg) | ![demo_time2](documentation/screenshots/time/demo_time2.jpg) |
 
 # :computer: Supported Platforms
 
