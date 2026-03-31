@@ -85,4 +85,24 @@ object DialogColorUtil {
         val pctDiffBlue = diffBlue.toDouble()
         return (pctDiffRed + pctDiffGreen + pctDiffBlue) / 3f
     }
+
+    internal fun parseColor(color: String, alphaSupported: Boolean) : Color? {
+        val hex = color.removePrefix("#")
+        if ((!alphaSupported && hex.length == 6) || (alphaSupported && hex.length == 8)) {
+            return try {
+                // format: color.value.toArgb().toHexString() .substring(if (alphaSupported) 0 else 2)
+                val argb = hex.toLong(16)
+                if (alphaSupported) {
+                    Color(argb.toInt())
+                } else {
+                    // if alpha is not supported, we assume it's FF (fully opaque)
+                    Color((argb or 0xFF000000).toInt())
+                }
+            } catch (e: NumberFormatException) {
+                null
+            }
+        } else {
+            return null
+        }
+    }
 }

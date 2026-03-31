@@ -17,9 +17,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,6 +48,7 @@ internal fun Content(
     selectedPresetsLevel: MutableState<Int>,
     selectedAlpha: MutableState<Float>,
     alphaSupported: Boolean,
+    directEditSupported: Boolean,
     shape: Shape,
     gridSize: Int,
     labelStyle: DialogColor.LabelStyle,
@@ -104,6 +110,13 @@ internal fun Content(
                                             .substring(if (alphaSupported) 0 else 2),
                                         style = MaterialTheme.typography.bodyMedium
                                     )
+                                    if (directEditSupported) {
+                                        DirectEditField(
+                                            color = color,
+                                            alphaSupported = alphaSupported,
+                                            updateSelectedPresetColors = updateSelectedPresetColors
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -182,4 +195,34 @@ internal fun Content(
             }
         }
     }
+}
+
+@Composable
+private fun DirectEditField(
+    color: MutableState<Color>,
+    alphaSupported: Boolean,
+    updateSelectedPresetColors: () -> Unit
+) {
+    val colorText = remember(color.value) {
+        mutableStateOf(
+            color.value.toArgb().toHexString()
+                .substring(if (alphaSupported) 0 else 2)
+        )
+    }
+    val parsedColorText = remember(colorText.value) { derivedStateOf {  DialogColorUtil.parseColor(colorText.value, alphaSupported) }  }
+    LaunchedEffect(parsedColorText) {
+        val c = parsedColorText.value
+        if (c != null) {
+            color.value = c
+            updateSelectedPresetColors()
+        }
+    }
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = colorText.value,
+        onValueChange = {
+            colorText.value = it
+        },
+        isError = parsedColorText.value == null
+    )
 }
