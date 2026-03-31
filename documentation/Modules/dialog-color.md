@@ -49,6 +49,7 @@ if (state.visible) {
  * @param color the selected color state
  * @param texts the texts ([DialogColor.Texts]) that are used inside this dialog - use [DialogColorDefaults.texts] to provide your own data
  * @param alphaSupported if true, the dialog supports color alpha values
+ * @param directEditSupported if true, the dialog allows direct editing of rgba values (in the custom color page)
  * @param shape the shape of the color cells
  * @param gridSize the size of the color grid
  * @param labelStyle the [DialogColor.LabelStyle] for the color picker
@@ -63,6 +64,7 @@ fun DialogColor(
     // Custom - Optional
     texts: DialogColor.Texts = DialogColorDefaults.texts(),
     alphaSupported: Boolean = true,
+    directEditSupported: Boolean = true,
     shape: Shape = MaterialTheme.shapes.small,
     gridSize: Int = if (isLandscape()) 6 else 4,
     labelStyle: DialogColor.LabelStyle = DialogColor.LabelStyle.Value,
