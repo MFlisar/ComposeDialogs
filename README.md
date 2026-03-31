@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composechangelog/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composechangelog/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeDialogs.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composedialogs/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composedialogs/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeDialogs.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
 # ComposeDialogs
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
@@ -104,17 +104,17 @@ composedialogs = "<LATEST-VERSION>"
 
 [libraries]
 
-composedialogs-core = { module = "io.github.mflisar.composechangelog:core", version.ref = "composedialogs" }
-composedialogs-dialog-color = { module = "io.github.mflisar.composechangelog:dialog-color", version.ref = "composedialogs" }
-composedialogs-dialog-date = { module = "io.github.mflisar.composechangelog:dialog-date", version.ref = "composedialogs" }
-composedialogs-dialog-info = { module = "io.github.mflisar.composechangelog:dialog-info", version.ref = "composedialogs" }
-composedialogs-dialog-input = { module = "io.github.mflisar.composechangelog:dialog-input", version.ref = "composedialogs" }
-composedialogs-dialog-list = { module = "io.github.mflisar.composechangelog:dialog-list", version.ref = "composedialogs" }
-composedialogs-dialog-menu = { module = "io.github.mflisar.composechangelog:dialog-menu", version.ref = "composedialogs" }
-composedialogs-dialog-number = { module = "io.github.mflisar.composechangelog:dialog-number", version.ref = "composedialogs" }
-composedialogs-dialog-progress = { module = "io.github.mflisar.composechangelog:dialog-progress", version.ref = "composedialogs" }
-composedialogs-dialog-time = { module = "io.github.mflisar.composechangelog:dialog-time", version.ref = "composedialogs" }
-composedialogs-dialog-frequency = { module = "io.github.mflisar.composechangelog:dialog-frequency", version.ref = "composedialogs" }
+composedialogs-core = { module = "io.github.mflisar.composedialogs:core", version.ref = "composedialogs" }
+composedialogs-dialog-color = { module = "io.github.mflisar.composedialogs:dialog-color", version.ref = "composedialogs" }
+composedialogs-dialog-date = { module = "io.github.mflisar.composedialogs:dialog-date", version.ref = "composedialogs" }
+composedialogs-dialog-info = { module = "io.github.mflisar.composedialogs:dialog-info", version.ref = "composedialogs" }
+composedialogs-dialog-input = { module = "io.github.mflisar.composedialogs:dialog-input", version.ref = "composedialogs" }
+composedialogs-dialog-list = { module = "io.github.mflisar.composedialogs:dialog-list", version.ref = "composedialogs" }
+composedialogs-dialog-menu = { module = "io.github.mflisar.composedialogs:dialog-menu", version.ref = "composedialogs" }
+composedialogs-dialog-number = { module = "io.github.mflisar.composedialogs:dialog-number", version.ref = "composedialogs" }
+composedialogs-dialog-progress = { module = "io.github.mflisar.composedialogs:dialog-progress", version.ref = "composedialogs" }
+composedialogs-dialog-time = { module = "io.github.mflisar.composedialogs:dialog-time", version.ref = "composedialogs" }
+composedialogs-dialog-frequency = { module = "io.github.mflisar.composedialogs:dialog-frequency", version.ref = "composedialogs" }
 ```
 
 And then use the definitions in your projects **build.gradle.kts** file like following:
@@ -146,17 +146,17 @@ Simply add the dependencies inside your **build.gradle.kts** file.
 ```kotlin
 val composedialogs = "<LATEST-VERSION>"
 
-implementation("io.github.mflisar.composechangelog:core:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-color:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-date:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-info:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-input:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-list:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-menu:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-number:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-progress:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-time:${composedialogs}")
-implementation("io.github.mflisar.composechangelog:dialog-frequency:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:core:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-color:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-date:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-info:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-input:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-list:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-menu:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-number:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-progress:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-time:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-frequency:${composedialogs}")
 ```
 
 </details>
