@@ -1,12 +1,8 @@
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
-import com.michaelflisar.kmpdevtools.configs.app.DesktopAppConfig
-import com.michaelflisar.kmpdevtools.configs.app.WasmAppConfig
-import com.michaelflisar.kmpdevtools.core.configs.AppConfig
-import com.michaelflisar.kmpdevtools.core.configs.Config
-import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
+import com.michaelflisar.kmpdevtools.configs.*
+import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
     // kmp + app/library
@@ -29,9 +25,7 @@ plugins {
 // Setup
 // ------------------------
 
-val config = Config.read(rootProject)
-val libraryConfig = LibraryConfig.read(rootProject)
-val appConfig = AppConfig.read(rootProject)
+val module = AppModuleConfig.readManual(project)
 
 val buildTargets = Targets(
     // mobile
@@ -44,11 +38,11 @@ val buildTargets = Targets(
     wasm = true
 )
 
-val androidConfig = AndroidLibraryConfig.createManualNamespace(
+val androidConfig = AndroidLibraryConfig.createFromPath(
+    appModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
-    enableAndroidResources = true,
-    namespaceAddon = "demo.app.compose"
+    enableAndroidResources = true
 )
 
 val desktopConfig = DesktopAppConfig(
@@ -79,9 +73,9 @@ kotlin {
     // Targets
     //-------------
 
-    buildTargets.setupTargetsApp(project, wasmAppConfig = wasmConfig)
+    buildTargets.setupTargetsApp(module, wasmAppConfig = wasmConfig)
     android {
-        buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
+        buildTargets.setupTargetsAndroidLibrary(module, androidConfig, this)
     }
 
     // -------
@@ -124,10 +118,8 @@ kotlin {
 compose.desktop {
     application {
         BuildFileUtil.setupWindowsApp(
-            project = project,
-            config = config,
+            appModuleConfig = module,
             application = this,
-            appConfig = appConfig,
             desktopAppConfig = desktopConfig
         )
     }

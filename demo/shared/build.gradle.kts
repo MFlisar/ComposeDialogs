@@ -1,11 +1,9 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.core.configs.AppConfig
-import com.michaelflisar.kmpdevtools.core.configs.Config
-import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
+import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.setupDependencies
+import com.michaelflisar.kmpdevtools.setupBuildKonfig
 
 plugins {
     // kmp + app/library
@@ -29,9 +27,7 @@ plugins {
 // Setup
 // ------------------------
 
-val config = Config.read(rootProject)
-val libraryConfig = LibraryConfig.read(rootProject)
-val appConfig = AppConfig.read(rootProject)
+val module = LibraryModuleConfig.readManual(project)
 
 val buildTargets = Targets(
     // mobile
@@ -44,11 +40,11 @@ val buildTargets = Targets(
     wasm = true
 )
 
-val androidConfig = AndroidLibraryConfig.createManualNamespace(
+val androidConfig = AndroidLibraryConfig.createFromPath(
+    libraryModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
-    enableAndroidResources = true,
-    namespaceAddon = "demo.shared"
+    enableAndroidResources = true
 )
 
 // ------------------------
@@ -56,14 +52,7 @@ val androidConfig = AndroidLibraryConfig.createManualNamespace(
 // ------------------------
 
 buildkonfig {
-    packageName = appConfig.packageName
-    exposeObjectWithName = "BuildKonfig"
-    defaultConfigs {
-        buildConfigField(Type.STRING, "versionName", appConfig.versionName)
-        buildConfigField(Type.INT, "versionCode", appConfig.versionCode.toString())
-        buildConfigField(Type.STRING, "packageName", appConfig.packageName)
-        buildConfigField(Type.STRING, "appName", appConfig.name)
-    }
+    setupBuildKonfig(module.appConfig)
 }
 
 kotlin {
@@ -72,9 +61,9 @@ kotlin {
     // Targets
     //-------------
 
-    buildTargets.setupTargetsLibrary(project)
+    buildTargets.setupTargetsLibrary(module)
     android {
-        buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
+        buildTargets.setupTargetsAndroidLibrary(module, androidConfig, this)
     }
 
     // -------

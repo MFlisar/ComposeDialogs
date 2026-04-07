@@ -1,6 +1,7 @@
+import com.michaelflisar.kmpdevtools.SettingsFileUtil
 import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
-dependencyResolutionManagement {
+dependencyResolutionManagement    {
 
     repositories {
         mavenCentral()
@@ -40,26 +41,24 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.5.0"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.8.0"
 }
-val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
 // --------------
 // Library
 // --------------
 
 val libraryConfig = LibraryConfig.read(rootProject)
-val libraryId = libraryConfig.libraryId()
+val libraryName = libraryConfig.libraryName()
 
 // Library Modules
-settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
+SettingsFileUtil.includeModules(settings, libraryName, libraryConfig)
+SettingsFileUtil.includeDokkaModule(settings)
 
 // --------------
 // App
 // --------------
 
 if (System.getenv("CI") != "true") {
-    include(":demo:shared")
-    include(":demo:app:android")
-    include(":demo:app:compose")
+    SettingsFileUtil.includeModulesInFolder(settings, "demo")
 }

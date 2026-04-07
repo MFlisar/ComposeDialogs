@@ -2,7 +2,6 @@
 github:
   name: ComposeDialogs
   release: 2023
-  namespace: com.michaelflisar.composedialogs
   license:
     name: Apache License 2.0
     path: blob/main/LICENSE

@@ -8,6 +8,10 @@ developer:
   maven-id: mflisar
   github-user-name: MFlisar
 
+# Project
+project:
+  namespace: com.michaelflisar.composedialogs
+
 # Readme
 readme:
   screenshots:

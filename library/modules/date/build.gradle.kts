@@ -1,9 +1,7 @@
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.core.configs.Config
-import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
@@ -29,8 +27,7 @@ plugins {
 // Setup
 // ------------------------
 
-val config = Config.read(rootProject)
-val libraryConfig = LibraryConfig.read(rootProject)
+val module = LibraryModuleConfig.read(project)
 
 val buildTargets = Targets(
     // mobile
@@ -44,6 +41,7 @@ val buildTargets = Targets(
 )
 
 val androidConfig = AndroidLibraryConfig.create(
+    libraryModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
     enableAndroidResources = true
@@ -54,7 +52,7 @@ val androidConfig = AndroidLibraryConfig.create(
 // -------------------
 
 compose.resources {
-    packageOfResClass = "${libraryConfig.library.namespace}.date.resources"
+    packageOfResClass = "${module.projectNamespace}.date.resources"
     publicResClass = true
 }
 
@@ -68,9 +66,9 @@ kotlin {
     // Targets
     //-------------
 
-    buildTargets.setupTargetsLibrary(project)
+    buildTargets.setupTargetsLibrary(module)
     android {
-        buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
+        buildTargets.setupTargetsAndroidLibrary(module, androidConfig, this)
     }
 
     // -------
@@ -124,4 +122,4 @@ kotlin {
 
 // maven publish configuration
 if (BuildFileUtil.checkGradleProperty(project, "publishToMaven") != false)
-    BuildFileUtil.setupMavenPublish(project, config, libraryConfig)
+    BuildFileUtil.setupMavenPublish(module)

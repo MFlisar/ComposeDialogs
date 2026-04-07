@@ -1,10 +1,13 @@
 package com.michaelflisar.demo.demos
 
-@androidx.compose.runtime.Composable
+import androidx.compose.runtime.Composable
+import com.michaelflisar.composedialogs.core.ComposeDialogStyle
+
+@Composable
 actual fun DemoListAppSelector(
-    style: com.michaelflisar.composedialogs.core.ComposeDialogStyle,
-    icon: @androidx.compose.runtime.Composable (() -> Unit)?,
-    showInfo: (String) -> Unit
+    style: ComposeDialogStyle,
+    icon: @Composable (() -> Unit)?,
+    showInfo: (String) -> Unit,
 ) {
     // empty - only implemented for Android
 }

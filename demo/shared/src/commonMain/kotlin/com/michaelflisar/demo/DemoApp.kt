@@ -5,15 +5,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.luminance
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.demo.BuildKonfig
 import com.michaelflisar.demo.classes.DemoStyle
@@ -56,7 +57,7 @@ fun DemoApp() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun DemoContent(
     modifier: Modifier,
@@ -87,17 +88,8 @@ private fun DemoContent(
         )
 
         DemoStyle.Fullscreen -> DialogDefaults.styleFullscreenDialog(
-            darkStatusBar = MaterialTheme.colorScheme.primary.luminance() < .5f, // demo has a primary toolbar...
-            //navigationIcon = test,
-            //menuActions = {
-            //    IconButton(
-            //        onClick = {
-            //            testFullscreenLevel.value += 1
-            //        }
-            //    ) {
-            //        Icon(Icons.Default.Add, null)
-            //    }
-            //}
+            //toolbarScrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior(),
+            //navigationIcon = null
         )
 
         DemoStyle.BottomSheet -> DialogDefaults.styleBottomSheet(

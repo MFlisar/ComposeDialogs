@@ -3,14 +3,15 @@ package com.michaelflisar.composedialogs.core
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.internal.ComposeDialogButton
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyle
 import com.michaelflisar.composedialogs.core.style.BottomSheetStyleDefaults
 import com.michaelflisar.composedialogs.core.style.DialogStyle
@@ -215,95 +216,63 @@ object DialogDefaults {
     /**
      * the setup of a dialog that shows as a normal dialog popup
      *
-     * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
+     * @param navigationIcon the optional navigation icon, if not provided, a default close icon will be shown (use null to not show any navigation icon)
      * @param menuActions if provided, it replaces the the default close menu action
+     * @param toolbarScrollBehaviour the optional scroll behaviour for the toolbar, if not provided, the toolbar will not react on scrolls
+     * @param showIconBelowToolbar if true, the icon will be shown below the toolbar, otherwise in the toolbar
      * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
      * @param toolbarColor the [Color] of the toolbar
-     * @param toolbarActionColor the [Color] of the actions in the toolbar
+     * @param toolbarColorExpanded the [Color] of the toolbar in expanded state (if a scroll behaviour is provided)
+     * @param toolbarActionColor the content [Color] of the toolbar actions
+     * @param toolbarActionColorExpanded the content [Color] of the toolbar actions in expanded state (if a scroll behaviour is provided)
+     * @param toolbarContentColor the content [Color] of the toolbar title and navigation icon
+     * @param toolbarContentColorExpanded the content [Color] of the toolbar title and navigation icon in expanded state (if a scroll behaviour is provided)
+     * @param iconColor the content [Color] of the icon (if shown below the toolbar)
      * @param containerColor the [Color] of the container
-     * @param iconColor the content [Color] of the icon
-     * @param titleColor the content [Color] of the title
-     * @param contentColor the content [Color]
-     * @param navigationIcon provides the navigation icon - a close icon by default but you can provide a custom one here (that toggles between close and back arrow depending on your custom logic)
-     * @param applyContentPadding if true, the content padding will be applied
+     * @param contentColor the content [Color] of the text
+     * @param applyContentPadding if true, the default content padding will be applied, otherwise the content will be shown edge to edge
      */
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun styleFullscreenDialog(
-        darkStatusBar: Boolean = false,
+        navigationIcon: (@Composable () -> Unit)? = { FullscreenDialogStyleDefaults.NavigationIcon() },
         menuActions: @Composable (RowScope.() -> Unit)? = null,
+        toolbarScrollBehaviour: TopAppBarScrollBehavior? = null,
+        showIconBelowToolbar: Boolean = true,
         // DialogProperties
         dismissOnBackPress: Boolean = true,
         // Style
         toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
+        toolbarColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarColorExpanded,
         toolbarActionColor: Color = FullscreenDialogStyleDefaults.toolbarActionColor,
-        containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
+        toolbarActionColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarActionColorExpanded,
+        toolbarContentColor: Color = FullscreenDialogStyleDefaults.toolbarContentColor,
+        toolbarContentColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarContentColorExpanded,
         iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
-        titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
+        containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor,
-        // added in 3.0.1
-        navigationIcon: (@Composable () -> Unit)? = null,
         applyContentPadding: Boolean = true
     ): ComposeDialogStyle
     // end-snippet
      {
         return FullscreenDialogStyle(
-            darkStatusBar,
             navigationIcon,
             menuActions,
+            toolbarScrollBehaviour,
+            showIconBelowToolbar,
             // DialogProperties
             dismissOnBackPress,
             // Style
             toolbarColor,
+            toolbarColorExpanded,
             toolbarActionColor,
-            containerColor,
+            toolbarActionColorExpanded,
+            toolbarContentColor,
+            toolbarContentColorExpanded,
             iconColor,
-            titleColor,
+            containerColor,
             contentColor,
             applyContentPadding
-        )
-    }
-
-    /**
-     * the setup of a dialog that shows as a normal dialog popup
-     *
-     * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
-     * @param menuActions if provided, it replaces the the default close menu action
-     * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
-     * @param toolbarColor the [Color] of the toolbar
-     * @param toolbarActionColor the [Color] of the actions in the toolbar
-     * @param containerColor the [Color] of the container
-     * @param iconColor the content [Color] of the icon
-     * @param titleColor the content [Color] of the title
-     * @param contentColor the content [Color]
-     */
-    @Composable
-    fun styleFullscreenDialog(
-        darkStatusBar: Boolean = false,
-        menuActions: @Composable (RowScope.() -> Unit)? = null,
-        // DialogProperties
-        dismissOnBackPress: Boolean = true,
-        // Style
-        toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
-        toolbarActionColor: Color = FullscreenDialogStyleDefaults.toolbarActionColor,
-        containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
-        iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
-        titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
-        contentColor: Color = FullscreenDialogStyleDefaults.contentColor
-    ): ComposeDialogStyle {
-        return styleFullscreenDialog(
-            darkStatusBar,
-            menuActions,
-            // DialogProperties
-            dismissOnBackPress,
-            // Style
-            toolbarColor,
-            toolbarActionColor,
-            containerColor,
-            iconColor,
-            titleColor,
-            contentColor,
-            navigationIcon = null,
-            applyContentPadding = true
         )
     }
 }

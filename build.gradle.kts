@@ -16,7 +16,7 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish.base) apply false
     alias(libs.plugins.binary.compatibility.validator) apply false
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(deps.plugins.kmpdevtools.buildplugin) // apply, because this plugin does register gradle tasks in the root project!
     alias(libs.plugins.buildkonfig) apply false
     // others
     // --
