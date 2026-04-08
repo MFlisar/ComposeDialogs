@@ -20,8 +20,8 @@
     <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
     <DebugAllEnabled>false</DebugAllEnabled>
     <RunAsTest>false</RunAsTest>
-    <GradleProfilingDisabled>false</GradleProfilingDisabled>
-    <GradleCoverageDisabled>false</GradleCoverageDisabled>
+    <GradleProfilingDisabled>true</GradleProfilingDisabled>
+    <GradleCoverageDisabled>true</GradleCoverageDisabled>
     <method v="2" />
   </configuration>
 </component>

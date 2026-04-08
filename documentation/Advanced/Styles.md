@@ -91,41 +91,33 @@ fun styleBottomSheet(
 /**
  * the setup of a dialog that shows as a normal dialog popup
  *
- * @param navigationIcon the optional navigation icon, if not provided, a default close icon will be shown (use null to not show any navigation icon)
+ * @param darkStatusBar if true, the dialog icons will be adjusted to a dark status bar
  * @param menuActions if provided, it replaces the the default close menu action
- * @param toolbarScrollBehaviour the optional scroll behaviour for the toolbar, if not provided, the toolbar will not react on scrolls
- * @param showIconBelowToolbar if true, the icon will be shown below the toolbar, otherwise in the toolbar
  * @param dismissOnBackPress if true, the dialog can be dismissed by a back press
  * @param toolbarColor the [Color] of the toolbar
- * @param toolbarColorExpanded the [Color] of the toolbar in expanded state (if a scroll behaviour is provided)
- * @param toolbarActionColor the content [Color] of the toolbar actions
- * @param toolbarActionColorExpanded the content [Color] of the toolbar actions in expanded state (if a scroll behaviour is provided)
- * @param toolbarContentColor the content [Color] of the toolbar title and navigation icon
- * @param toolbarContentColorExpanded the content [Color] of the toolbar title and navigation icon in expanded state (if a scroll behaviour is provided)
- * @param iconColor the content [Color] of the icon (if shown below the toolbar)
+ * @param toolbarActionColor the [Color] of the actions in the toolbar
  * @param containerColor the [Color] of the container
- * @param contentColor the content [Color] of the text
- * @param applyContentPadding if true, the default content padding will be applied, otherwise the content will be shown edge to edge
+ * @param iconColor the content [Color] of the icon
+ * @param titleColor the content [Color] of the title
+ * @param contentColor the content [Color]
+ * @param navigationIcon provides the navigation icon - a close icon by default but you can provide a custom one here (that toggles between close and back arrow depending on your custom logic)
+ * @param applyContentPadding if true, the content padding will be applied
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun styleFullscreenDialog(
-    navigationIcon: (@Composable () -> Unit)? = { FullscreenDialogStyleDefaults.NavigationIcon() },
+    darkStatusBar: Boolean = false,
     menuActions: @Composable (RowScope.() -> Unit)? = null,
-    toolbarScrollBehaviour: TopAppBarScrollBehavior? = null,
-    showIconBelowToolbar: Boolean = true,
     // DialogProperties
     dismissOnBackPress: Boolean = true,
     // Style
     toolbarColor: Color = FullscreenDialogStyleDefaults.toolbarColor,
-    toolbarColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarColorExpanded,
     toolbarActionColor: Color = FullscreenDialogStyleDefaults.toolbarActionColor,
-    toolbarActionColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarActionColorExpanded,
-    toolbarContentColor: Color = FullscreenDialogStyleDefaults.toolbarContentColor,
-    toolbarContentColorExpanded: Color = FullscreenDialogStyleDefaults.toolbarContentColorExpanded,
-    iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
     containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
+    iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
+    titleColor: Color = FullscreenDialogStyleDefaults.titleColor,
     contentColor: Color = FullscreenDialogStyleDefaults.contentColor,
+    // added in 3.0.1
+    navigationIcon: (@Composable () -> Unit)? = null,
     applyContentPadding: Boolean = true
 ): ComposeDialogStyle
 ```

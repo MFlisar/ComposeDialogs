@@ -164,11 +164,8 @@ internal class FullscreenDialogStyle(
             }
         ) {
 
-            val statusBarColor =
-                rememberColor(toolbarScrollBehaviour, toolbarColor, toolbarColorExpanded)
-            val darkStatusBar =
-                remember { derivedStateOf { statusBarColor.value.luminance() < .5f } }
-            updateStatusbarColor(darkStatusBar.value)
+            val statusBarColor = rememberColor(toolbarScrollBehaviour, toolbarColor, toolbarColorExpanded)
+            updateStatusbarColor(statusBarColor.value.luminance() < .5f)
 
             DialogPanel(
                 modifier = Modifier
