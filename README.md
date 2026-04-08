@@ -113,7 +113,7 @@ This library offers you an easily extendible compose framework for modal dialogs
 
 > :warning: Following experimental annotations are used:
 > - **OptIn**
->   - `androidx.compose.material3.ExperimentalMaterial3Api` (3x)
+>   - `androidx.compose.material3.ExperimentalMaterial3Api` (5x)
 >   - `androidx.compose.ui.ExperimentalComposeUiApi` (3x)
 >
 > I try to use as less experimental features as possible, but in this case the ones above are needed!
