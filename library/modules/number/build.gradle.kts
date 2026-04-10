@@ -18,7 +18,7 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
     // ...
 }
@@ -74,7 +74,7 @@ kotlin {
 
         val nativeMain by creating { dependsOn(commonMain.get()) }
 
-        setupDependencies(buildTargets, sourceSets) {
+        setupDependencies(module, buildTargets, sourceSets) {
 
             Platform.LIST_APPLE addSourceSet nativeMain
 

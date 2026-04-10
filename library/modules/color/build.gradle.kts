@@ -18,7 +18,7 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
     // ...
 }
@@ -95,13 +95,13 @@ kotlin {
             implementation(libs.jetbrains.compose.material.icons.core)
 
             // Color Palette
-            implementation(deps.composecolors.material)
-            implementation(deps.composecolors.material.palette)
+            implementation(mflisar.composecolors.material)
+            implementation(mflisar.composecolors.material.palette)
 
             // library
             implementation(project(":composedialogs:core"))
 
-            implementation(deps.kmp.parcelize)
+            implementation(mflisar.kmp.parcelize)
 
         }
     }

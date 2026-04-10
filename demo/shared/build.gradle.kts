@@ -17,7 +17,7 @@ plugins {
     // docs, publishing, validation
     // --
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
     alias(libs.plugins.buildkonfig)
     // others
     // ...
@@ -78,7 +78,7 @@ kotlin {
 
         val notAndroidMain by creating { dependsOn(commonMain.get()) }
 
-        setupDependencies(buildTargets, sourceSets) {
+        setupDependencies(module, buildTargets, sourceSets) {
 
             notAndroidMain supportedBy !Platform.ANDROID
 
@@ -116,7 +116,7 @@ kotlin {
             api(project(":composedialogs:modules:frequency"))
 
             // demo ui composables
-            api(deps.kmp.democomposables)
+            api(mflisar.democomposables)
 
         }
 

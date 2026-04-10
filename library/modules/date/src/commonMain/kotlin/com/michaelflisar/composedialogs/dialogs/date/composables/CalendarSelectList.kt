@@ -81,7 +81,7 @@ internal fun CalendarSelectListMonth(
 private fun CalendarSelectList(
     value: Int,
     range: IntRange,
-    itemFormatter: (value: Int) -> String,
+    itemFormatter: @Composable (value: Int) -> String,
     onClick: (value: Int) -> Unit
 ) {
     val state = rememberLazyListState(

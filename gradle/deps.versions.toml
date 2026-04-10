@@ -1,27 +1,15 @@
 [versions]
 
-# mflisar
-kmp-parcelize =             "1.1.0-alpha01"
-composecolors =             "1.0.1"
-
-kmpdevtools =               "7.8.0" # change via "updateDevToolsVersion" gradle task!
-kmp-democomposables =       "1.0.2"
+# --
 
 accompanist = 			    "0.37.3"
 composables =               "1.36.1"
 
 [plugins]
 
-# mflisar
-kmpdevtools-buildplugin =           { id = "io.github.mflisar.kmpdevtools.plugins-build-gradle",        version.ref = "kmpdevtools" }
+# -
 
 [libraries]
-
-# mflisar
-kmp-parcelize =                                 { module = "io.github.mflisar.kmpparcelize:library", 	                            version.ref = "kmp-parcelize" }
-composecolors-material =			            { module = "io.github.mflisar.composecolors:material", 				                version.ref = "composecolors" }
-composecolors-material-palette =                { module = "io.github.mflisar.composecolors:material-palette", 		                version.ref = "composecolors" }
-kmp-democomposables =                           { module = "io.github.mflisar.democomposables:library",                             version.ref = "kmp-democomposables" }
 
 drawablepainter = 		    	                { module = "com.google.accompanist:accompanist-drawablepainter", 		            version.ref = "accompanist" }
 composables-core =                              { module = "com.composables:core", 		                                            version.ref = "composables" }

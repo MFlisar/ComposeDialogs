@@ -16,7 +16,7 @@ plugins {
     // docs, publishing, validation
     // --
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
     // --
 }

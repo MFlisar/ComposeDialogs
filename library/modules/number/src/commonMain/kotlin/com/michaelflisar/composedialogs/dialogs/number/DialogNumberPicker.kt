@@ -64,7 +64,7 @@ fun <T : Number> DialogNumberPicker(
     iconUp2: @Composable () -> Unit = {
         Icon(imageVector = Icons.Default.KeyboardDoubleArrowRight, contentDescription = null)
     },
-    formatter: (value: T) -> String = { it.toString() },
+    formatter: @Composable (value: T) -> String = { it.toString() },
     // Custom - Optional
     textStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     onValueStateChanged: (value: T) -> Unit = { },

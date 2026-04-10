@@ -11,7 +11,7 @@ maven:
   group-id: io.github.mflisar.composedialogs
   primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)
 
-# Modules - list of modules [artifact-id, description, path]
+# Modules - list of modules [artifact-id, description, path, (plugin)]
 modules:
   - artifact-id: core
     description: provides all the basic dialog classes and styles

@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-    val libraryConfig = LibraryConfig.read(rootProject)
+    val libraryConfig = LibraryConfig.read(rootDir)
     val libraryId = libraryConfig.library.name.lowercase()
     libraryConfig.modules
         .filter { it.artifactId.isNotEmpty() }
@@ -18,6 +18,6 @@ dependencies {
 }
 
 dokka {
-    val libraryConfig = LibraryConfig.read(rootProject)
+    val libraryConfig = LibraryConfig.read(rootDir)
     moduleName.set(libraryConfig.library.name)
 }
