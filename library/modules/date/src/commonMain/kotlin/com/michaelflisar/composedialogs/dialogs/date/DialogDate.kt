@@ -278,12 +278,12 @@ object DialogDate {
     class Setup internal constructor(
         val buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)?,
         val firstDayOfWeek: DayOfWeek,
-        val formatterWeekDayLabel: (date: DayOfWeek) -> String,
-        val formatterSelectedDate: (date: LocalDate) -> String,
-        val formatterSelectedMonth: (month: Month) -> String,
-        val formatterSelectedYear: (year: Int) -> String,
-        val formatterMonthSelectorList: (month: Month) -> String,
-        val formatterYearSelectorList: (year: Int) -> String,
+        val formatterWeekDayLabel: @Composable (date: DayOfWeek) -> String,
+        val formatterSelectedDate: @Composable (date: LocalDate) -> String,
+        val formatterSelectedMonth: @Composable (month: Month) -> String,
+        val formatterSelectedYear: @Composable (year: Int) -> String,
+        val formatterMonthSelectorList: @Composable (month: Month) -> String,
+        val formatterYearSelectorList: @Composable (year: Int) -> String,
         val dateCellHeight: Dp,
         val showNextPreviousMonthButtons: Boolean,
         val showNextPreviousYearButtons: Boolean
@@ -336,7 +336,7 @@ object DialogDateDefaults {
      * @param showNextPreviousMonthButtons if true, the decrease/increase buttons next to the select month are shown
      * @param showNextPreviousYearButtons if true, the decrease/increase buttons next to the select year are shown
      *
-     * @return a [DialogDateSetup]
+     * @return a [DialogDate.Setup]
      *
      */
     @Composable
@@ -350,20 +350,20 @@ object DialogDateDefaults {
             }
         },
         firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
-        formatterWeekDayLabel: (dayOfWeek: DayOfWeek) -> String = {
+        formatterWeekDayLabel: @Composable (dayOfWeek: DayOfWeek) -> String = {
             defaultFormatterWeekDayLabel(it)
         },
-        formatterSelectedDate: (date: LocalDate) -> String = {
+        formatterSelectedDate: @Composable (date: LocalDate) -> String = {
             defaultFormatterSelectedDate(it)
         },
-        formatterSelectedMonth: (month: Month) -> String = {
+        formatterSelectedMonth: @Composable (month: Month) -> String = {
             defaultFormatterSelectedMonth(it)
         },
-        formatterSelectedYear: (year: Int) -> String = { it.toString() },
-        formatterMonthSelectorList: (month: Month) -> String = {
+        formatterSelectedYear: @Composable (year: Int) -> String = { it.toString() },
+        formatterMonthSelectorList: @Composable (month: Month) -> String = {
             defaultFormatterSelectedMonthInSelectorList(it)
         },
-        formatterYearSelectorList: (year: Int) -> String = { it.toString() },
+        formatterYearSelectorList: @Composable (year: Int) -> String = { it.toString() },
         dateCellHeight: Dp = 48.dp,
         showNextPreviousMonthButtons: Boolean = true,
         showNextPreviousYearButtons: Boolean = true
@@ -384,7 +384,7 @@ object DialogDateDefaults {
     /**
      * @param years the range that will be supported by the date picker
      *
-     * @return a [DialogDateRange]
+     * @return a [DialogDate.Range]
      */
     fun dateRange(
         years: IntRange = 1900..2100

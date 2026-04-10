@@ -28,3 +28,43 @@ public final class com/michaelflisar/composedialogs/dialogs/time/Platform_jvmKt 
 	public static final fun is24HourFormat (Landroidx/compose/runtime/Composer;I)Z
 }
 
+public final class com/michaelflisar/composedialogs/time/resources/ActualResourceCollectorsKt {
+	public static final fun getAllDrawableResources (Lcom/michaelflisar/composedialogs/time/resources/Res;)Ljava/util/Map;
+	public static final fun getAllFontResources (Lcom/michaelflisar/composedialogs/time/resources/Res;)Ljava/util/Map;
+	public static final fun getAllPluralStringResources (Lcom/michaelflisar/composedialogs/time/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringArrayResources (Lcom/michaelflisar/composedialogs/time/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringResources (Lcom/michaelflisar/composedialogs/time/resources/Res;)Ljava/util/Map;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res;
+	public final fun getUri (Ljava/lang/String;)Ljava/lang/String;
+	public final fun readBytes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res$array {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res$array;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res$drawable {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res$drawable;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res$font {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res$font;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res$plurals {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res$plurals;
+}
+
+public final class com/michaelflisar/composedialogs/time/resources/Res$string {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/time/resources/Res$string;
+}
+

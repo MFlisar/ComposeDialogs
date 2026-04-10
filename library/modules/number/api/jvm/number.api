@@ -1,10 +1,10 @@
 public final class com/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/number/ComposableSingletons$DialogNumberPickerKt;
 	public fun <init> ()V
-	public final fun getLambda$-1168388927$number ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1822716015$number ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-2116220200$number ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$900353178$number ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-398795026$number ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-967660475$number ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-997055609$number ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$398548414$number ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/number/DialogDefaultsExtensionKt {
@@ -12,7 +12,7 @@ public final class com/michaelflisar/composedialogs/dialogs/number/DialogDefault
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/number/DialogNumberPickerKt {
-	public static final fun DialogNumberPicker (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/number/NumberPickerSetup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun DialogNumberPicker (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/number/NumberPickerSetup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Landroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
 	public static final fun rememberDialogNumber (Ljava/lang/Number;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
 }
 

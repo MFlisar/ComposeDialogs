@@ -1,3 +1,48 @@
+public final class com/michaelflisar/composedialogs/color/resources/ActualResourceCollectorsKt {
+	public static final fun getAllDrawableResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllFontResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllPluralStringResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringArrayResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res;
+	public final fun getUri (Ljava/lang/String;)Ljava/lang/String;
+	public final fun readBytes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$array {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$array;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$drawable {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$drawable;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$font {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$font;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$plurals {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$plurals;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$string {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$string;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/String0_commonMainKt {
+	public static final fun getComposedialogs_color_label_custom (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_label_presets (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/color/DialogColor {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor;
@@ -24,7 +69,7 @@ public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorDef
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/DialogColorKt {
-	public static final fun DialogColor (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$Texts;ZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun DialogColor (Lcom/michaelflisar/composedialogs/core/DialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/DialogColor$Texts;ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/DialogColor$LabelStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
 	public static final fun rememberDialogColor-ek8zF_U (JLandroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
 }
 

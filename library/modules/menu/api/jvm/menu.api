@@ -2,7 +2,7 @@ public final class com/michaelflisar/composedialogs/dialogs/menu/ComposableSingl
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/menu/ComposableSingletons$DialogMenuKt;
 	public fun <init> ()V
 	public final fun getLambda$-295400877$menu ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$62927682$menu ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-378555197$menu ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/menu/DialogDefaultsExtensionKt {

@@ -1,8 +1,52 @@
+public final class com/michaelflisar/composedialogs/date/resources/ActualResourceCollectorsKt {
+	public static final fun getAllDrawableResources (Lcom/michaelflisar/composedialogs/date/resources/Res;)Ljava/util/Map;
+	public static final fun getAllFontResources (Lcom/michaelflisar/composedialogs/date/resources/Res;)Ljava/util/Map;
+	public static final fun getAllPluralStringResources (Lcom/michaelflisar/composedialogs/date/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringArrayResources (Lcom/michaelflisar/composedialogs/date/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringResources (Lcom/michaelflisar/composedialogs/date/resources/Res;)Ljava/util/Map;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res;
+	public final fun getUri (Ljava/lang/String;)Ljava/lang/String;
+	public final fun readBytes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res$array {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res$array;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res$drawable {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res$drawable;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res$font {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res$font;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res$plurals {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res$plurals;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/Res$string {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/date/resources/Res$string;
+}
+
+public final class com/michaelflisar/composedialogs/date/resources/String0_commonMainKt {
+	public static final fun getComposedialogs_date_today (Lcom/michaelflisar/composedialogs/date/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/date/ComposableSingletons$DialogDateKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/ComposableSingletons$DialogDateKt;
 	public fun <init> ()V
-	public final fun getLambda$-542080316$date ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda$1842322898$date ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-1446344416$date ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$298788626$date ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DialogDate {
@@ -21,12 +65,12 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DialogDate$Setu
 	public final fun getButtonToday ()Lkotlin/jvm/functions/Function4;
 	public final fun getDateCellHeight-D9Ej5fM ()F
 	public final fun getFirstDayOfWeek ()Lkotlinx/datetime/DayOfWeek;
-	public final fun getFormatterMonthSelectorList ()Lkotlin/jvm/functions/Function1;
-	public final fun getFormatterSelectedDate ()Lkotlin/jvm/functions/Function1;
-	public final fun getFormatterSelectedMonth ()Lkotlin/jvm/functions/Function1;
-	public final fun getFormatterSelectedYear ()Lkotlin/jvm/functions/Function1;
-	public final fun getFormatterWeekDayLabel ()Lkotlin/jvm/functions/Function1;
-	public final fun getFormatterYearSelectorList ()Lkotlin/jvm/functions/Function1;
+	public final fun getFormatterMonthSelectorList ()Lkotlin/jvm/functions/Function3;
+	public final fun getFormatterSelectedDate ()Lkotlin/jvm/functions/Function3;
+	public final fun getFormatterSelectedMonth ()Lkotlin/jvm/functions/Function3;
+	public final fun getFormatterSelectedYear ()Lkotlin/jvm/functions/Function3;
+	public final fun getFormatterWeekDayLabel ()Lkotlin/jvm/functions/Function3;
+	public final fun getFormatterYearSelectorList ()Lkotlin/jvm/functions/Function3;
 	public final fun getShowNextPreviousMonthButtons ()Z
 	public final fun getShowNextPreviousYearButtons ()Z
 }
@@ -36,7 +80,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DialogDateDefau
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/DialogDateDefaults;
 	public final fun dateRange (Lkotlin/ranges/IntRange;)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Range;
 	public static synthetic fun dateRange$default (Lcom/michaelflisar/composedialogs/dialogs/date/DialogDateDefaults;Lkotlin/ranges/IntRange;ILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Range;
-	public final fun setup-Wu8B24Y (Lkotlin/jvm/functions/Function4;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Setup;
+	public final fun setup-Wu8B24Y (Lkotlin/jvm/functions/Function4;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DialogDate$Setup;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DialogDateKt {
@@ -67,7 +111,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/classes/DateVie
 public final class com/michaelflisar/composedialogs/dialogs/date/composables/ComposableSingletons$CalendarHeaderKt {
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/composables/ComposableSingletons$CalendarHeaderKt;
 	public fun <init> ()V
-	public final fun getLambda$-51348714$date ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$498934239$date ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1951265193$date ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1721536864$date ()Lkotlin/jvm/functions/Function2;
 }
 
