@@ -89,19 +89,19 @@ This library offers you an easily extendible compose framework for modal dialogs
 
 # :computer: Supported Platforms
 
-| Module | android | iOS | windows | wasm |
-|---|---|---|---|---|
-| core | ✅ | ✅ | ✅ | ✅ |
-| dialog-color | ✅ | ✅ | ✅ | ✅ |
-| dialog-date | ✅ | ✅ | ✅ | ✅ |
-| dialog-info | ✅ | ✅ | ✅ | ✅ |
-| dialog-input | ✅ | ✅ | ✅ | ✅ |
-| dialog-list | ✅ | ✅ | ✅ | ✅ |
-| dialog-menu | ✅ | ✅ | ✅ | ✅ |
-| dialog-number | ✅ | ✅ | ✅ | ✅ |
-| dialog-progress | ✅ | ✅ | ✅ | ✅ |
-| dialog-time | ✅ | ✅ | ✅ | ✅ |
-| dialog-frequency | ✅ | ✅ | ✅ | ✅ |
+| Module | android | iOS | windows | wasm | Notes |
+|---|---|---|---|---|---|
+| core | ✅ | ✅ | ✅ | ✅ | provides all the basic dialog classes and styles |
+| dialog-color | ✅ | ✅ | ✅ | ✅ | provides a color dialog |
+| dialog-date | ✅ | ✅ | ✅ | ✅ | provides a date picker dialog |
+| dialog-info | ✅ | ✅ | ✅ | ✅ | provides an info dialog |
+| dialog-input | ✅ | ✅ | ✅ | ✅ | provides an input dialog |
+| dialog-list | ✅ | ✅ | ✅ | ✅ | provides a list dialog |
+| dialog-menu | ✅ | ✅ | ✅ | ✅ | provides a menu dialog |
+| dialog-number | ✅ | ✅ | ✅ | ✅ | provides a number picker dialog |
+| dialog-progress | ✅ | ✅ | ✅ | ✅ | provides a progress dialog |
+| dialog-time | ✅ | ✅ | ✅ | ✅ | provides a time dialog |
+| dialog-frequency | ✅ | ✅ | ✅ | ✅ | provides a frequency dialog (daily, weekly, monthly, yearly) |
 
 # :arrow_right: Versions
 
