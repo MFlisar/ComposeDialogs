@@ -1,14 +1,10 @@
 package com.michaelflisar.composedialogs.dialogs.input
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.LocalTextStyle
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import com.michaelflisar.composedialogs.core.BaseDialogState
@@ -20,7 +16,6 @@ import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogOptions
-import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 // begin-snippet: DialogInput::constructor
 /**
@@ -64,7 +59,7 @@ fun DialogInput(
     clearable: Boolean = true,
     prefix: String = "",
     suffix: String = "",
-    textStyle: TextStyle = LocalTextStyle.current,
+    textStyle: TextStyle = DialogInputDefaults.textStyle(),
     validator: DialogInputValidator = rememberDialogInputValidator(),
     requestFocus: Boolean = false,
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
@@ -80,71 +75,24 @@ fun DialogInput(
 // end-snippet
 {
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
-        val modifier = when (style.type) {
-            ComposeDialogStyle.Type.BottomSheet -> Modifier.fillMaxWidth()
-            ComposeDialogStyle.Type.Dialog -> DialogStyleModifier
-        }
-        DialogInputTextField(
-            modifier,
-            value,
-            label,
-            inputPlaceholder,
-            singleLine,
-            maxLines,
-            minLines,
-            keyboardOptions,
-            enabled,
-            clearable,
-            prefix,
-            suffix,
-            textStyle,
-            validator,
-            requestFocus,
-            selectionState,
-            onTextStateChanged
+        DialogInputContent(
+            value = value,
+            label = label,
+            inputPlaceholder = inputPlaceholder,
+            singleLine = singleLine,
+            maxLines = maxLines,
+            minLines = minLines,
+            keyboardOptions = keyboardOptions,
+            enabled = enabled,
+            clearable = clearable,
+            prefix = prefix,
+            suffix = suffix,
+            textStyle = textStyle,
+            validator = validator,
+            requestFocus = requestFocus,
+            selectionState = selectionState,
+            onTextStateChanged = onTextStateChanged,
+            modifier = Modifier.fillMaxWidth()
         )
-    }
-}
-
-/**
- * convenient function for [DialogInput]
- *
- * @param text the initial text for the input field
- *
- * @return a state holding the current input value
- */
-@Composable
-fun rememberDialogInput(
-    text: String
-): MutableState<String> {
-    return rememberSaveable { mutableStateOf(text) }
-}
-
-@Stable
-object DialogInput {
-
-    /**
-     * Selection State of the input field (selection, cursor position)
-     */
-    sealed class SelectionState {
-        /**
-         * default input field behaviour
-         */
-        data object Default : SelectionState()
-
-        /**
-         * if the input field is initially focused, cursor will be placed at the end
-         */
-        data object CursorEnd : SelectionState()
-
-        /**
-         * if the input field is initially focused the whole text will be selected
-         */
-        data object SelectAll : SelectionState()
-
-        /**
-         * if the input field is initially focused, the defined range of the text will be selected
-         */
-        class Selection(val start: Int, val end: Int) : SelectionState()
     }
 }

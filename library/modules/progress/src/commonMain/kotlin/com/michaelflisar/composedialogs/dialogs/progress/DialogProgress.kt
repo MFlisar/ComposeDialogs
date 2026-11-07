@@ -1,22 +1,8 @@
 package com.michaelflisar.composedialogs.dialogs.progress
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.BaseDialogState
-import com.michaelflisar.composedialogs.core.DialogState
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
@@ -55,72 +41,6 @@ fun DialogProgress(
 // end-snippet
 {
     Dialog(state, title, icon, style, buttons, options, onEvent) {
-        Column {
-            if (content != null) {
-                content()
-                Spacer(modifier = Modifier.height(8.dp))
-            }
-            when (progressStyle) {
-                is DialogProgress.Style.Indeterminate -> {
-                    if (progressStyle.linear) {
-                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                    } else Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.TopCenter
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-
-                is DialogProgress.Style.Determinate -> {
-                    val progress by animateFloatAsState(targetValue = progressStyle.progress.toFloat() / progressStyle.max.toFloat())
-                    if (progressStyle.linear) {
-                        LinearProgressIndicator(
-                            progress = { progress },
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                    } else Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.TopCenter
-                    ) {
-                        CircularProgressIndicator(progress = { progress })
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Stable
-object DialogProgress {
-
-    /**
-     * the progress style
-     */
-    sealed class Style {
-
-        abstract val linear: Boolean
-
-        /**
-         * indeterminate progress style
-         *
-         * @param linear if true, a linear progress indicator is used, otherwise a circular
-         */
-        class Indeterminate(
-            override val linear: Boolean = true
-        ) : Style()
-
-        /**
-         * determinate progress style
-         *
-         * @param linear if true, a linear progress indicator is used, otherwise a circular
-         * @param progress the current progress value
-         * @param max the maximum progress value
-         */
-        class Determinate(
-            override val linear: Boolean = true,
-            val progress: Int,
-            val max: Int
-        ) : Style()
+        DialogProgressContent(content, progressStyle)
     }
 }

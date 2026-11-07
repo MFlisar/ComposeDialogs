@@ -1,0 +1,28 @@
+name: Publish
+run-name: "Publish ${{ inputs.version }} (${{ contains(inputs.version, '-') && 'test / pre-release' || 'release' }}, target: ${{ inputs.target }})"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version: X.Y.Z = release (release-target), X.Y.Z-suffix = pre-release (test-target)"
+        required: true
+        type: string
+      target:
+        description: "Target: auto = from config (release-target / test-target)"
+        required: true
+        type: choice
+        options: [auto, maven-central, github]
+        default: auto
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-publish.yml@9.3.0
+    with:
+      version: ${{ inputs.version }}
+      target: ${{ inputs.target }}
+      config-file: .config.yml
+    secrets: inherit

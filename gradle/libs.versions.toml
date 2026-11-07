@@ -1,18 +1,18 @@
 [versions]
 
-gradle = 				                "9.2.1"
-kotlin = 				                "2.4.0"
+gradle = 				                "9.5.0"
+kotlin = 				                "2.4.21"
 
 # github release (dokka + maven + binary compatibility)
 dokka =                                 "2.2.0"
-vanniktech-maven-publish =              "0.36.0"
-binary-compatibility-validator =        "0.18.1"
+vanniktech-maven-publish =              "0.37.0"
+binary-compatibility-validator =        "0.18.2"
 
 # org.jetbrains.compose
-jetbrains-compose =                     "1.11.1"
+jetbrains-compose =                     "1.12.2"
 jetbrains-compose-material3 =           "1.9.0"
 jetbrains-compose-icons =               "1.7.3"
-jetbrains-compose-hot-reload =          "1.1.1"
+jetbrains-compose-hot-reload =          "1.2.0"
 
 # org.jetbrains.androidx
 # --
@@ -22,12 +22,13 @@ androidx-activity =                     "1.13.0"
 
 # org.jetbrains.kotlinx
 jetbrains-kotlinx-coroutines =          "1.11.0"
-jetbrains-kotlinx-serialization = 	    "1.11.0"
+jetbrains-kotlinx-serialization = 	    "1.12.0"
 jetbrains-kotlinx-datetime =            "0.8.0"
 
 # others
 desugar =                               "2.1.5"
-buildkonfig =                           "0.21.2"
+buildkonfig =                           "0.23.0"
+launch4j =                              "3.0.7"
 
 [plugins]
 
@@ -56,6 +57,7 @@ jetbrains-compose-hotreload =                       { id = "org.jetbrains.compos
 
 # others
 buildkonfig =                                       { id = "com.codingfeline.buildkonfig",              version.ref = "buildkonfig" }
+launch4j =                                          { id = "edu.sc.seis.launch4j",                      version.ref = "launch4j" }
 
 [libraries]
 
@@ -63,7 +65,10 @@ buildkonfig =                                       { id = "com.codingfeline.bui
 jetbrains-kotlin-test = 			                { module = "org.jetbrains.kotlin:kotlin-test",                          version.ref = "kotlin" }
 
 # org.jetbrains.compose
+jetbrains-compose-runtime =                           { module = "org.jetbrains.compose.runtime:runtime",                  version.ref = "jetbrains-compose" }
 jetbrains-compose-components-resources =            { module = "org.jetbrains.compose.components:components-resources",     version.ref = "jetbrains-compose" }
+jetbrains-compose-animation =                       { module = "org.jetbrains.compose.animation:animation",                  version.ref = "jetbrains-compose" }
+jetbrains-compose-foundation =                       { module = "org.jetbrains.compose.foundation:foundation",               version.ref = "jetbrains-compose" }
 jetbrains-compose-ui =                              { module = "org.jetbrains.compose.ui:ui",                               version.ref = "jetbrains-compose" }
 jetbrains-compose-ui-backhandler =                  { module = "org.jetbrains.compose.ui:ui-backhandler",                   version.ref = "jetbrains-compose" }
 jetbrains-compose-material3 =                       { module = "org.jetbrains.compose.material3:material3",                 version.ref = "jetbrains-compose-material3" }

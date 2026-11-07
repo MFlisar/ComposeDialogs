@@ -1,0 +1,15 @@
+name: Update Markdown Docs
+run-name: "[${{ github.event_name }}] Update Markdown Docs"
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  update-markdown-docs:
+    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-update-markdown-docs.yml@9.3.0
+    with:
+      config-file: .config.yml

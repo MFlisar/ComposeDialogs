@@ -1,8 +1,7 @@
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.configs.*
-import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.setupDependencies
+import com.michaelflisar.kmpdevtools.core.Target
 
 plugins {
     // kmp + app/library
@@ -10,7 +9,6 @@ plugins {
     alias(libs.plugins.android.library)
     // org.jetbrains.kotlin
     alias(libs.plugins.jetbrains.kotlin.compose)
-    alias(libs.plugins.jetbrains.kotlin.parcelize)
     // org.jetbrains.compose
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
@@ -30,14 +28,10 @@ plugins {
 val module = LibraryModuleConfig.read(project)
 
 val buildTargets = Targets(
-    // mobile
-    android = true,
-    iOS = true,
-    // desktop
-    windows = true,
-    macOS = false, // because of compose unstyled dialogs
-    // web
-    wasm = true
+    Target.ANDROID,
+    Target.IOS,
+    Target.JVM,
+    Target.WASM
 )
 
 val androidConfig = AndroidLibraryConfig.create(
@@ -72,39 +66,19 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        val nativeMain by creating { dependsOn(commonMain.get()) }
-
-        setupDependencies(module, buildTargets, sourceSets) {
-
-            Platform.LIST_APPLE addSourceSet nativeMain
-
-        }
+        // --
 
         // ---------------------
         // dependencies
         // ---------------------
 
-        commonMain.dependencies {
-
+        commonMain {
             // Kotlin
-            implementation(libs.jetbrains.kotlinx.coroutines.core)
-
-            // Compose
-            implementation(libs.jetbrains.compose.material3)
-            implementation(libs.jetbrains.compose.ui)
-            implementation(libs.jetbrains.compose.ui.backhandler)
-            implementation(libs.jetbrains.compose.material.icons.core)
-
-            // Compose Unstyled
-            implementation(deps.composables.dialog)
-            implementation(deps.composables.modal)
-            implementation(deps.composables.modal.bottom.sheet)
-        }
-
-        androidMain.dependencies {
-
-            implementation(libs.androidx.activity.compose)
-
+            dependencies {
+                api(libs.jetbrains.compose.foundation)
+                api(libs.jetbrains.compose.runtime)
+                api(libs.jetbrains.compose.ui)
+            }
         }
     }
 }
@@ -113,6 +87,4 @@ kotlin {
 // Publish
 // -------------------
 
-// maven publish configuration
-if (BuildFileUtil.checkGradleProperty(project, "publishToMaven") != false)
-    BuildFileUtil.setupMavenPublish(module)
+BuildFileUtil.setupMavenPublish(module)

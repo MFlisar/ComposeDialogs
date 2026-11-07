@@ -1,8 +1,7 @@
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.configs.*
-import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.setupDependencies
+import com.michaelflisar.kmpdevtools.core.Target
 
 plugins {
     // kmp + app/library
@@ -19,8 +18,6 @@ plugins {
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
     alias(mflisar.plugins.kmpdevtools.buildplugin)
-    // others
-    // ...
 }
 
 // ------------------------
@@ -30,14 +27,10 @@ plugins {
 val module = LibraryModuleConfig.read(project)
 
 val buildTargets = Targets(
-    // mobile
-    android = true,
-    iOS = true,
-    // desktop
-    windows = true,
-    macOS = false, // because of compose unstyled dialogs
-    // web
-    wasm = true
+    Target.ANDROID,
+    Target.IOS,
+    Target.JVM,
+    Target.WASM
 )
 
 val androidConfig = AndroidLibraryConfig.create(
@@ -69,33 +62,14 @@ kotlin {
     sourceSets {
 
         // ---------------------
-        // custom source sets
-        // ---------------------
-
-        val nativeMain by creating { dependsOn(commonMain.get()) }
-
-        setupDependencies(module, buildTargets, sourceSets) {
-
-            Platform.LIST_APPLE addSourceSet nativeMain
-
-        }
-
-        // ---------------------
         // dependencies
         // ---------------------
 
         commonMain.dependencies {
 
-            // Kotlin
-            implementation(libs.jetbrains.kotlinx.coroutines.core)
-
-            // Compose
-            implementation(libs.jetbrains.compose.material.icons.core)
-            implementation(libs.jetbrains.compose.material.icons.extended)
-            implementation(libs.jetbrains.compose.material3)
-
             // library
-            implementation(project(":composedialogs:core"))
+            api(project(":composedialogs:ui:number"))
+            api(project(":composedialogs:implementation:material3"))
         }
     }
 }
@@ -104,6 +78,4 @@ kotlin {
 // Publish
 // -------------------
 
-// maven publish configuration
-if (BuildFileUtil.checkGradleProperty(project, "publishToMaven") != false)
-    BuildFileUtil.setupMavenPublish(module)
+BuildFileUtil.setupMavenPublish(module)

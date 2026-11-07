@@ -1,0 +1,4 @@
+public final class com/michaelflisar/composedialogs/dialogs/info/DialogInfoContentKt {
+	public static final fun DialogInfoContent (Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+}
+

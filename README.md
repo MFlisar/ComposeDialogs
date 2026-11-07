@@ -126,6 +126,8 @@ This library offers you an easily extendible compose framework for modal dialogs
 
 <br>
 
+Each `dialog-*` module brings the toolkit-neutral core and Material 3 dialog framework transitively. The `core` artifact alone now contains only shared UI contracts and events; it does not provide the dialog framework.
+
 Define the dependencies inside your **libs.versions.toml** file.
 
 ```toml
@@ -135,7 +137,6 @@ composedialogs = "<LATEST-VERSION>"
 
 [libraries]
 
-composedialogs-core = { module = "io.github.mflisar.composedialogs:core", version.ref = "composedialogs" }
 composedialogs-dialog-color = { module = "io.github.mflisar.composedialogs:dialog-color", version.ref = "composedialogs" }
 composedialogs-dialog-date = { module = "io.github.mflisar.composedialogs:dialog-date", version.ref = "composedialogs" }
 composedialogs-dialog-info = { module = "io.github.mflisar.composedialogs:dialog-info", version.ref = "composedialogs" }
@@ -151,7 +152,6 @@ composedialogs-dialog-frequency = { module = "io.github.mflisar.composedialogs:d
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
-implementation(libs.composedialogs.core)
 implementation(libs.composedialogs.dialog.color)
 implementation(libs.composedialogs.dialog.date)
 implementation(libs.composedialogs.dialog.info)
@@ -174,10 +174,11 @@ implementation(libs.composedialogs.dialog.frequency)
 
 Simply add the dependencies inside your **build.gradle.kts** file.
 
+Each `dialog-*` module brings the toolkit-neutral core and Material 3 dialog framework transitively. The `core` artifact alone now contains only shared UI contracts and events; it does not provide the dialog framework.
+
 ```kotlin
 val composedialogs = "<LATEST-VERSION>"
 
-implementation("io.github.mflisar.composedialogs:core:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-color:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-date:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-info:${composedialogs}")

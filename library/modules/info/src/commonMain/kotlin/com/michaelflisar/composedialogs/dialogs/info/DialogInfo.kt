@@ -1,14 +1,7 @@
 package com.michaelflisar.composedialogs.dialogs.info
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.*
-import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 
 // begin-snippet: DialogInfo::full-constructor
 // begin-snippet: DialogInfo::constructor
@@ -40,12 +33,7 @@ fun DialogInfo(
 // end-snippet
 {
     Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
-        Column {
-            if (infoLabel.isNotEmpty()) {
-                Text(modifier = Modifier.padding(bottom = 8.dp), text = infoLabel, style = MaterialTheme.typography.titleSmall)
-            }
-            Text(text = info)
-        }
+        DialogInfoContent(info, infoLabel)
     }
 }
 // end-snippet

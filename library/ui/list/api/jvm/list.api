@@ -1,0 +1,76 @@
+public final class com/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListContentKt {
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/ComposableSingletons$DialogListContentKt;
+	public fun <init> ()V
+	public final fun getLambda$-661172053$ComposeDialogs_composedialogs_ui_list ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1361794224$ComposeDialogs_composedialogs_ui_list ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/DialogList;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$Filter {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function4;ZZ)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function4;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFilter ()Lkotlin/jvm/functions/Function2;
+	public final fun getInfoText ()Lkotlin/jvm/functions/Function4;
+	public final fun getKeepSelectionForInvisibleItems ()Z
+	public final fun getShowClearIcon ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$ItemContext {
+	public static final field $stable I
+	public final fun getPerformItemAction ()Lkotlin/jvm/functions/Function0;
+	public final fun getSelected ()Landroidx/compose/runtime/State;
+	public final fun getSelectionMode ()Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode;
+}
+
+public abstract class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$MultiClick : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final fun getOnItemClicked ()Lkotlin/jvm/functions/Function1;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$MultiSelect : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/runtime/MutableState;ZZ)V
+	public synthetic fun <init> (Landroidx/compose/runtime/MutableState;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getSelectOnCheckboxClickOnly ()Z
+	public final fun getSelected ()Landroidx/compose/runtime/MutableState;
+	public final fun getShowSelectionCounter ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$SingleClickAndClose : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final fun getOnItemClicked ()Lkotlin/jvm/functions/Function1;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode$SingleSelect : com/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/runtime/MutableState;ZZ)V
+	public synthetic fun <init> (Landroidx/compose/runtime/MutableState;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCloseOnSelect ()Z
+	public final fun getSelectOnRadioButtonClickOnly ()Z
+	public final fun getSelected ()Landroidx/compose/runtime/MutableState;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogListContentKt {
+	public static final fun DialogListContent (Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function4;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$Filter;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun DialogListContent (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function4;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$SelectionMode;Landroidx/compose/runtime/saveable/Saver;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/list/DialogList$Filter;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/list/DialogListDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/list/DialogListDefaults;
+	public final fun LoadingIndicator (Landroidx/compose/runtime/Composer;I)V
+	public final fun itemContent (Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;)Lkotlin/jvm/functions/Function4;
+	public static synthetic fun itemContent$default (Lcom/michaelflisar/composedialogs/dialogs/list/DialogListDefaults;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)Lkotlin/jvm/functions/Function4;
+}
+
