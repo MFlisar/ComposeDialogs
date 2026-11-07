@@ -12,7 +12,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.input.pointer.pointerInput
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.number.NumberPickerSetup
 import com.michaelflisar.composedialogs.dialogs.number.RepeatingButton
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +42,7 @@ internal fun PickerIcon(
         onClickForButton = {}
     }
 
-    ComposeDialogsUI.provider.IconButton(
+    DialogUI.provider.IconButton(
         onClick = onClickForButton,
         enabled = enabled,
         modifier = modifier

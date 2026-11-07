@@ -14,7 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.dialogs.frequency.composables.DayOfMonth
 import com.michaelflisar.composedialogs.dialogs.frequency.composables.Dropdown
@@ -102,9 +102,9 @@ fun DialogFrequencyContent(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = texts.every,
-                role = ComposeDialogsUI.TextRole.Body,
+                role = DialogUI.TextRole.Body,
                 modifier = Modifier
             )
             NumericInput(

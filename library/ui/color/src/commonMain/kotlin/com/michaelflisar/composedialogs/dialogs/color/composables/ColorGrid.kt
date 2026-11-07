@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.color.DialogColorUtil
 import kotlin.math.ceil
 
@@ -88,9 +88,9 @@ internal fun ColorGrid(
                             )
                             val label = labels?.getOrNull(index)
                             if (label != null && !selected) {
-                                ComposeDialogsUI.provider.Text(
+                                DialogUI.provider.Text(
                                     text = label,
-                                    role = ComposeDialogsUI.TextRole.BodySmall,
+                                    role = DialogUI.TextRole.BodySmall,
                                     modifier = Modifier,
                                     color = onColor,
                                     textAlign = null,
@@ -99,8 +99,8 @@ internal fun ColorGrid(
                             }
                         }
                         if (selected) {
-                            ComposeDialogsUI.provider.Icon(
-                                icon = ComposeDialogsUI.IconType.Check,
+                            DialogUI.provider.Icon(
+                                icon = DialogUI.IconType.Check,
                                 contentDescription = "",
                                 modifier = Modifier,
                                 tint = onColor

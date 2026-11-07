@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.text.input.KeyboardType
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 @Composable
 internal fun <T : Number> NumericInput(
@@ -35,7 +35,7 @@ internal  fun <T : Number> NumericInput(
     onValueChange: (T?) -> Unit = {}
 ) {
     val text = remember { mutableStateOf(value?.toString() ?: "") }
-    ComposeDialogsUI.provider.OutlinedTextField(
+    DialogUI.provider.OutlinedTextField(
         modifier = modifier,
         value = text.value,
         enabled = true,
@@ -54,9 +54,9 @@ internal  fun <T : Number> NumericInput(
             }
         ),
         label = {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = title,
-                role = ComposeDialogsUI.TextRole.Label,
+                role = DialogUI.TextRole.Label,
                 modifier = Modifier
             )
         },
@@ -64,8 +64,8 @@ internal  fun <T : Number> NumericInput(
         leadingIcon = null,
         trailingIcon = if (text.value.isNotEmpty()) {
             {
-                ComposeDialogsUI.provider.Icon(
-                    icon = ComposeDialogsUI.IconType.Clear,
+                DialogUI.provider.Icon(
+                    icon = DialogUI.IconType.Clear,
                     contentDescription = "clear",
                     modifier = Modifier
                         .clip(CircleShape)
@@ -74,7 +74,7 @@ internal  fun <T : Number> NumericInput(
                             text.value = ""
                             onValueChange(null)
                         },
-                    tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                    tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                 )
             }
         } else null,

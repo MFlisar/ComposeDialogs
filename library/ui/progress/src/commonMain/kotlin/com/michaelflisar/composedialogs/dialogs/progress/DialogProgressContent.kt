@@ -12,7 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 /**
  * Displays optional progress content and a progress indicator without creating a dialog.
@@ -33,12 +33,12 @@ fun DialogProgressContent(
         when (progressStyle) {
             is DialogProgress.Style.Indeterminate -> {
                 val type = if (progressStyle.linear) {
-                    ComposeDialogsUI.ProgressIndicatorType.Linear
+                    DialogUI.ProgressIndicatorType.Linear
                 } else {
-                    ComposeDialogsUI.ProgressIndicatorType.Circular
+                    DialogUI.ProgressIndicatorType.Circular
                 }
                 if (progressStyle.linear) {
-                    ComposeDialogsUI.provider.ProgressIndicator(
+                    DialogUI.provider.ProgressIndicator(
                         type = type,
                         progress = null,
                         modifier = Modifier.fillMaxWidth()
@@ -47,7 +47,7 @@ fun DialogProgressContent(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.TopCenter
                 ) {
-                    ComposeDialogsUI.provider.ProgressIndicator(
+                    DialogUI.provider.ProgressIndicator(
                         type = type,
                         progress = null,
                         modifier = Modifier
@@ -60,8 +60,8 @@ fun DialogProgressContent(
                     targetValue = progressStyle.progress.toFloat() / progressStyle.max.toFloat()
                 )
                 if (progressStyle.linear) {
-                    ComposeDialogsUI.provider.ProgressIndicator(
-                        type = ComposeDialogsUI.ProgressIndicatorType.Linear,
+                    DialogUI.provider.ProgressIndicator(
+                        type = DialogUI.ProgressIndicatorType.Linear,
                         progress = progress,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -69,8 +69,8 @@ fun DialogProgressContent(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.TopCenter
                 ) {
-                    ComposeDialogsUI.provider.ProgressIndicator(
-                        type = ComposeDialogsUI.ProgressIndicatorType.Circular,
+                    DialogUI.provider.ProgressIndicator(
+                        type = DialogUI.ProgressIndicatorType.Circular,
                         progress = progress,
                         modifier = Modifier
                     )

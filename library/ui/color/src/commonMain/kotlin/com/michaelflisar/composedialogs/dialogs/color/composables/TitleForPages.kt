@@ -5,7 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 
 @Composable
@@ -16,7 +16,7 @@ internal fun TitleForPages(
     selectedSubColor: MutableState<Color?>,
     selectedPresetsLevel: MutableState<Int>
 ) {
-    ComposeDialogsUI.provider.TextButton(
+    DialogUI.provider.TextButton(
         modifier = modifier
             .alpha(if (colorState.value == DialogColor.Page.Custom) .5f else 1f),
         onClick = {
@@ -25,20 +25,20 @@ internal fun TitleForPages(
             selectedPresetsLevel.value = 0
         }
     ) {
-        ComposeDialogsUI.provider.Text(
+        DialogUI.provider.Text(
             text = texts.presets,
-            role = ComposeDialogsUI.TextRole.Button,
+            role = DialogUI.TextRole.Button,
             modifier = Modifier
         )
     }
-    ComposeDialogsUI.provider.TextButton(
+    DialogUI.provider.TextButton(
         modifier = modifier
             .alpha(if (colorState.value == DialogColor.Page.Presets) .5f else 1f),
         onClick = { colorState.value = DialogColor.Page.Custom }
     ) {
-        ComposeDialogsUI.provider.Text(
+        DialogUI.provider.Text(
             text = texts.custom,
-            role = ComposeDialogsUI.TextRole.Button,
+            role = DialogUI.TextRole.Button,
             modifier = Modifier
         )
     }

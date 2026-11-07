@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.DialogColorUtil
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
@@ -89,25 +89,25 @@ internal fun Content(
                                 )
                             }
 
-                            ComposeDialogsUI.provider.Card(modifier = Modifier) {
+                            DialogUI.provider.Card(modifier = Modifier) {
                                 Column(
                                     modifier = Modifier
                                         .padding(all = 8.dp)
                                         .weight(1f)
                                 ) {
-                                    ComposeDialogsUI.provider.Text(
+                                    DialogUI.provider.Text(
                                         modifier = Modifier.fillMaxWidth(),
                                         text = if (alphaSupported) "ARGB" else "RGB",
-                                        role = ComposeDialogsUI.TextRole.Label,
+                                        role = DialogUI.TextRole.Label,
                                         color = null,
                                         textAlign = null,
                                         fontWeight = FontWeight.Bold
                                     )
-                                    ComposeDialogsUI.provider.Text(
+                                    DialogUI.provider.Text(
                                         modifier = Modifier.fillMaxWidth(),
                                         text = "#" + color.value.toArgb().toHexString()
                                             .substring(if (alphaSupported) 0 else 2),
-                                        role = ComposeDialogsUI.TextRole.Body,
+                                        role = DialogUI.TextRole.Body,
                                         color = null,
                                         textAlign = null,
                                         fontWeight = null
@@ -219,7 +219,7 @@ private fun DirectEditField(
             updateSelectedPresetColors()
         }
     }
-    ComposeDialogsUI.provider.OutlinedTextField(
+    DialogUI.provider.OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = colorText.value,
         onValueChange = {

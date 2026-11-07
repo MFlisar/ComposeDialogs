@@ -17,14 +17,13 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
 import com.michaelflisar.composedialogs.dialogs.date.composables.CalendarHeader
@@ -100,8 +99,8 @@ fun DialogDateContent(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (title != null) {
-                    ComposeDialogsUI.provider.ProvideTextStyle(
-                        style = ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.HeadlineSmall)
+                    DialogUI.provider.ProvideTextStyle(
+                        style = DialogUI.provider.textStyle(DialogUI.TextRole.HeadlineSmall)
                     ) {
                         Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                             title()

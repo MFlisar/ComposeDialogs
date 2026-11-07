@@ -10,7 +10,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.input.composables.DialogInputTextField
 
 /**
@@ -32,7 +32,7 @@ fun <T : Number> DialogInputNumberContent(
     prefix: String = "",
     suffix: String = "",
     validator: DialogInputValidator = DialogInputNumber.rememberDefaultValidator(value.value),
-    textStyle: TextStyle = ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.Body),
+    textStyle: TextStyle = DialogUI.provider.textStyle(DialogUI.TextRole.Body),
     requestFocus: Boolean = false,
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
     onValueStateChanged: (valid: Boolean, value: T?) -> Unit = { _, _ -> },

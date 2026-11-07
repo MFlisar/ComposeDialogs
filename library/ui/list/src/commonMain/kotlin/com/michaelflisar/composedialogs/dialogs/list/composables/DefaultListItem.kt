@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.list.DialogList
 
 @Composable
@@ -45,7 +45,7 @@ internal fun <T> DefaultListItem(
             .fillMaxWidth()
             .defaultMinSize(minHeight = 48.dp)
             .height(IntrinsicSize.Min)
-            .clip(ComposeDialogsUI.provider.smallShape())
+            .clip(DialogUI.provider.smallShape())
             .then(
                 if (hasItemClick) {
                     Modifier.clickable {
@@ -94,7 +94,7 @@ internal fun <T> DefaultListItem(
         when (val mode = context.selectionMode) {
             is DialogList.SelectionMode.SingleSelect<*> -> {
                 if (mode.selectOnRadioButtonClickOnly) {
-                    ComposeDialogsUI.provider.RadioButton(
+                    DialogUI.provider.RadioButton(
                         selected = context.selected.value,
                         onClick = {
                             context.performItemAction()
@@ -102,7 +102,7 @@ internal fun <T> DefaultListItem(
                     )
                 } else {
                     Box(modifier = Modifier.wrapContentSize()) {
-                        ComposeDialogsUI.provider.RadioButton(
+                        DialogUI.provider.RadioButton(
                             selected = context.selected.value,
                             onClick = null
                         )
@@ -112,7 +112,7 @@ internal fun <T> DefaultListItem(
 
             is DialogList.SelectionMode.MultiSelect<*> -> {
                 if (mode.selectOnCheckboxClickOnly) {
-                    ComposeDialogsUI.provider.Checkbox(
+                    DialogUI.provider.Checkbox(
                         checked = context.selected.value,
                         onCheckedChange = {
                             context.performItemAction()
@@ -120,7 +120,7 @@ internal fun <T> DefaultListItem(
                     )
                 } else {
                     Box(modifier = Modifier.wrapContentSize()) {
-                        ComposeDialogsUI.provider.Checkbox(
+                        DialogUI.provider.Checkbox(
                             checked = context.selected.value,
                             onCheckedChange = null
                         )

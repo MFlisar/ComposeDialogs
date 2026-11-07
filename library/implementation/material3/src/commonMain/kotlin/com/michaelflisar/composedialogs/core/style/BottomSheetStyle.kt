@@ -412,6 +412,8 @@ internal class BottomSheetStyle(
                 ) {
                     Column(
                         modifier = Modifier
+                            .widthIn(max = 640.dp)
+                            .fillMaxWidth()
                             .onGloballyPositioned {
                                 val position = it.positionOnScreen()
                                 // top of buttons is only calculated once!

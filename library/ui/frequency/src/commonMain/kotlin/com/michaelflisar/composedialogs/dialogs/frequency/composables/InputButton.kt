@@ -3,7 +3,7 @@ package com.michaelflisar.composedialogs.dialogs.frequency.composables
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 @Composable
 internal fun InputButton(
@@ -25,11 +25,11 @@ internal fun InputButton(
         leadingIcon = leadingIcon,
         onClick = onClick
     ) {
-        ComposeDialogsUI.provider.Text(
+        DialogUI.provider.Text(
             text = value,
-            role = ComposeDialogsUI.TextRole.Body,
+            role = DialogUI.TextRole.Body,
             modifier = Modifier.fillMaxWidth().then(OutlinedDecoratedContainer.MODIFIER_CORRECTION),
-            color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface),
+            color = DialogUI.provider.color(DialogUI.ColorRole.OnSurface),
             textAlign = null,
             fontWeight = null
         )

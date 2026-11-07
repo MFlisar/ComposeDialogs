@@ -1,14 +1,15 @@
 package com.michaelflisar.composedialogs.core
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
@@ -19,8 +20,6 @@ import com.michaelflisar.composedialogs.core.style.DialogStyle
 import com.michaelflisar.composedialogs.core.style.DialogStyleDefaults
 import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyle
 import com.michaelflisar.composedialogs.core.style.FullscreenDialogStyleDefaults
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
-import com.michaelflisar.composedialogs.core.ui.Material3ComposeDialogsUIProvider
 
 // ------------------
 // defaults functions
@@ -47,9 +46,8 @@ fun Dialog(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    ComposeDialogsUI.setDefault(Material3ComposeDialogsUIProvider.provider)
     style.Show(
         title,
         icon,
@@ -81,7 +79,7 @@ object DialogDefaults {
     @Composable
     fun buttons(
         positive: DialogButton = DialogButton(stringOk()),
-        negative: DialogButton = DialogButton("")
+        negative: DialogButton = DialogButton(""),
     ) = DialogButtons(
         positive,
         negative
@@ -100,7 +98,7 @@ object DialogDefaults {
      */
     @Composable
     fun options(
-        dismissOnButtonClick: Boolean = true
+        dismissOnButtonClick: Boolean = true,
     ) = DialogOptions(
         dismissOnButtonClick
     )
@@ -133,7 +131,7 @@ object DialogDefaults {
         containerColor: Color = DialogStyleDefaults.containerColor,
         iconColor: Color = DialogStyleDefaults.iconColor,
         titleColor: Color = DialogStyleDefaults.titleColor,
-        contentColor: Color = DialogStyleDefaults.contentColor
+        contentColor: Color = DialogStyleDefaults.contentColor,
     ): ComposeDialogStyle
     // end-snippet
     {
@@ -191,7 +189,7 @@ object DialogDefaults {
         containerColor: Color = BottomSheetStyleDefaults.containerColor,
         iconColor: Color = BottomSheetStyleDefaults.iconColor,
         titleColor: Color = BottomSheetStyleDefaults.titleColor,
-        contentColor: Color = BottomSheetStyleDefaults.contentColor
+        contentColor: Color = BottomSheetStyleDefaults.contentColor,
     ): ComposeDialogStyle
     // end-snippet
     {
@@ -255,10 +253,10 @@ object DialogDefaults {
         iconColor: Color = FullscreenDialogStyleDefaults.iconColor,
         containerColor: Color = FullscreenDialogStyleDefaults.containerColor,
         contentColor: Color = FullscreenDialogStyleDefaults.contentColor,
-        applyContentPadding: Boolean = true
+        applyContentPadding: Boolean = true,
     ): ComposeDialogStyle
     // end-snippet
-     {
+    {
         return FullscreenDialogStyle(
             navigationIcon,
             menuActions,
@@ -297,7 +295,7 @@ class DialogInteractionSource internal constructor(
     val buttonPositiveEnabled: MutableState<Boolean>,
     val buttonNegativeEnabled: MutableState<Boolean>,
     val dismissAllowed: MutableState<Boolean>,
-    val swipeAllowed: MutableState<Boolean>
+    val swipeAllowed: MutableState<Boolean>,
 )
 
 /**
@@ -330,7 +328,7 @@ abstract class BaseDialogState {
     }
 
     internal fun dismiss(
-        onEvent: (event: DialogEvent) -> Unit
+        onEvent: (event: DialogEvent) -> Unit,
     ): Boolean {
         if (dismiss())
             onEvent(DialogEvent.Dismissed)
@@ -340,7 +338,7 @@ abstract class BaseDialogState {
     internal fun onButtonPressed(
         onEvent: (event: DialogEvent) -> Unit,
         button: DialogButtonType,
-        dismiss: Boolean
+        dismiss: Boolean,
     ) {
         onEvent(DialogEvent.Button(button, dismiss))
     }
@@ -360,7 +358,7 @@ abstract class BaseDialogState {
      */
     fun enableButton(
         button: DialogButtonType,
-        enabled: Boolean
+        enabled: Boolean,
     ) {
         when (button) {
             DialogButtonType.Positive -> interactionSource.buttonPositiveEnabled.value = enabled
@@ -390,7 +388,7 @@ private class DialogStateImpl<T>(
     interactionSource: MutableState<DialogInteractionSource>,
     private val onBeforeShow: ((data: T) -> Unit)? = null,
     private val onShow: ((data: T) -> Unit)? = null,
-    private val onDismiss: (() -> Unit)? = null
+    private val onDismiss: (() -> Unit)? = null,
 ) : BaseDialogState() {
 
     override val visible: Boolean
@@ -439,7 +437,7 @@ class DialogState<T> internal constructor(
     interactionSource: MutableState<DialogInteractionSource>,
     onBeforeShow: ((data: T) -> Unit)? = null,
     onShow: ((data: T) -> Unit)? = null,
-    onDismiss: (() -> Unit)? = null
+    onDismiss: (() -> Unit)? = null,
 ) : BaseDialogState() {
 
     private val impl = DialogStateImpl(state, interactionSource, onBeforeShow, onShow, onDismiss)
@@ -461,7 +459,7 @@ class DialogStateNoData internal constructor(
     interactionSource: MutableState<DialogInteractionSource>,
     onBeforeShow: (() -> Unit)? = null,
     onShow: (() -> Unit)? = null,
-    onDismiss: (() -> Unit)? = null
+    onDismiss: (() -> Unit)? = null,
 ) : BaseDialogState() {
 
     private val impl = DialogStateImpl(
@@ -491,7 +489,7 @@ class DialogButton(
     val text: String = "",
     val contentColor: Color = Color.Unspecified,
     val containerColor: Color = Color.Unspecified,
-    val shape: Shape? = null
+    val shape: Shape? = null,
 ) {
     companion object {
         val DISABLED = DialogButton("")
@@ -504,15 +502,19 @@ class DialogButton(
     internal fun Render(
         enabled: Boolean,
         colors: ButtonColors,
-        onClick: () -> Unit
+        onClick: () -> Unit,
     ) {
         TextButton(
             enabled = enabled,
             colors = colors.copy(
-                contentColor = contentColor.takeIf { it != Color.Unspecified } ?: colors.contentColor,
-                containerColor = containerColor.takeIf { it != Color.Unspecified } ?: colors.containerColor,
-                disabledContentColor = contentColor.takeIf { it != Color.Unspecified }?.copy(alpha = 0.38f) ?: colors.disabledContentColor,
-                disabledContainerColor = containerColor.takeIf { it != Color.Unspecified }?.copy(alpha = 0.38f) ?: colors.disabledContainerColor,
+                contentColor = contentColor.takeIf { it != Color.Unspecified }
+                    ?: colors.contentColor,
+                containerColor = containerColor.takeIf { it != Color.Unspecified }
+                    ?: colors.containerColor,
+                disabledContentColor = contentColor.takeIf { it != Color.Unspecified }
+                    ?.copy(alpha = 0.38f) ?: colors.disabledContentColor,
+                disabledContainerColor = containerColor.takeIf { it != Color.Unspecified }
+                    ?.copy(alpha = 0.38f) ?: colors.disabledContainerColor,
             ),
             onClick = onClick,
             shape = shape ?: ButtonDefaults.textShape
@@ -528,7 +530,7 @@ class DialogButton(
  */
 class DialogButtons internal constructor(
     val positive: DialogButton,
-    val negative: DialogButton
+    val negative: DialogButton,
 ) {
     companion object {
         val DISABLED = DialogButtons(DialogButton.DISABLED, DialogButton.DISABLED)
@@ -538,7 +540,7 @@ class DialogButtons internal constructor(
 }
 
 class StyleOptions(
-    val iconMode: IconMode = IconMode.CenterTop
+    val iconMode: IconMode = IconMode.CenterTop,
 ) {
     enum class IconMode {
         CenterTop,
@@ -546,17 +548,17 @@ class StyleOptions(
     }
 
     fun copy(
-        iconMode: IconMode = this.iconMode
+        iconMode: IconMode = this.iconMode,
     ) = StyleOptions(iconMode)
 }
 
 class DialogOptions internal constructor(
-    val dismissOnButtonClick: Boolean
+    val dismissOnButtonClick: Boolean,
 )
 
 class DialogSpacing internal constructor(
     val spacingContentToButtons: Dp,
-    val spacingContentToBottom: Dp
+    val spacingContentToBottom: Dp,
 ) {
     fun contentPadding(buttons: DialogButtons) =
         if (buttons.enabled) spacingContentToButtons else spacingContentToBottom

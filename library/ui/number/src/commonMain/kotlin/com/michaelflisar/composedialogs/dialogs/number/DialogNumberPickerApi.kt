@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.number.utils.NumberUtil
 
 class NumberPickerSetup<T : Number>(
@@ -57,44 +57,44 @@ fun <T : Number> rememberDialogNumber(number: T): MutableState<T> =
 object DialogNumberPickerDefaults {
     @Composable
     fun IconDown() {
-        ComposeDialogsUI.provider.Icon(
-            icon = ComposeDialogsUI.IconType.ChevronLeft,
+        DialogUI.provider.Icon(
+            icon = DialogUI.IconType.ChevronLeft,
             contentDescription = null,
             modifier = Modifier,
-            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
         )
     }
 
     @Composable
     fun IconUp() {
-        ComposeDialogsUI.provider.Icon(
-            icon = ComposeDialogsUI.IconType.ChevronRight,
+        DialogUI.provider.Icon(
+            icon = DialogUI.IconType.ChevronRight,
             contentDescription = null,
             modifier = Modifier,
-            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
         )
     }
 
     @Composable
     fun IconDown2() {
-        ComposeDialogsUI.provider.Icon(
-            icon = ComposeDialogsUI.IconType.DoubleChevronLeft,
+        DialogUI.provider.Icon(
+            icon = DialogUI.IconType.DoubleChevronLeft,
             contentDescription = null,
             modifier = Modifier,
-            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
         )
     }
 
     @Composable
     fun IconUp2() {
-        ComposeDialogsUI.provider.Icon(
-            icon = ComposeDialogsUI.IconType.DoubleChevronRight,
+        DialogUI.provider.Icon(
+            icon = DialogUI.IconType.DoubleChevronRight,
             contentDescription = null,
             modifier = Modifier,
-            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
         )
     }
 
     @Composable
-    fun textStyle(): TextStyle = ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.Body)
+    fun textStyle(): TextStyle = DialogUI.provider.textStyle(DialogUI.TextRole.Body)
 }

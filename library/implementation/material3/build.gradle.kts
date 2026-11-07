@@ -43,8 +43,8 @@ kotlin {
         }
 
         commonMain {
+            kotlin.srcDir(project(":composedialogs:core").file("src/commonMain/kotlin"))
             dependencies {
-                api(project(":composedialogs:core"))
                 api(libs.jetbrains.kotlinx.coroutines.core)
                 api(libs.jetbrains.compose.material3)
                 api(libs.jetbrains.compose.ui)

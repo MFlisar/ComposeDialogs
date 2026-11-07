@@ -2,7 +2,7 @@ package com.michaelflisar.composedialogs.dialogs.color
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.color.resources.Res
 import com.michaelflisar.composedialogs.color.resources.composedialogs_color_label_custom
 import com.michaelflisar.composedialogs.color.resources.composedialogs_color_label_presets
@@ -11,7 +11,7 @@ import org.jetbrains.compose.resources.stringResource
 object DialogColorDefaults {
 
     @Composable
-    fun shape(): Shape = ComposeDialogsUI.provider.smallShape()
+    fun shape(): Shape = DialogUI.provider.smallShape()
 
     /**
      * texts for the color pager

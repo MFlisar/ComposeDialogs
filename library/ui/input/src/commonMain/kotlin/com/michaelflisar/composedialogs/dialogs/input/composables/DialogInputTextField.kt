@@ -17,7 +17,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.input.DialogInput
 import com.michaelflisar.composedialogs.dialogs.input.DialogInputValidator
 
@@ -35,7 +35,7 @@ fun DialogInputTextField(
     clearable: Boolean = true,
     prefix: String = "",
     suffix: String = "",
-    textStyle: TextStyle = ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.Body),
+    textStyle: TextStyle = DialogUI.provider.textStyle(DialogUI.TextRole.Body),
     validator: DialogInputValidator = DialogInputValidator(),
     requestFocus: Boolean = false,
     selectionState: DialogInput.SelectionState = DialogInput.SelectionState.Default,
@@ -88,7 +88,7 @@ fun DialogInputTextField(
         }
         var lastTextValue by remember(value.value) { mutableStateOf(value.value) }
 
-        ComposeDialogsUI.provider.OutlinedTextField(
+        DialogUI.provider.OutlinedTextField(
             value = textFieldValue,
             modifier = modifier
                 .focusRequester(focusRequester),
@@ -112,36 +112,36 @@ fun DialogInputTextField(
             textStyle = textStyle,
             prefix = if (prefix.isNotEmpty()) {
                 @Composable {
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         prefix,
-                        ComposeDialogsUI.TextRole.Body,
+                        DialogUI.TextRole.Body,
                         Modifier
                     )
                 }
             } else null,
             suffix = if (suffix.isNotEmpty()) {
                 @Composable {
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         suffix,
-                        ComposeDialogsUI.TextRole.Body,
+                        DialogUI.TextRole.Body,
                         Modifier
                     )
                 }
             } else null,
             label = if (label.isNotEmpty()) {
                 @Composable {
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         label,
-                        ComposeDialogsUI.TextRole.Label,
+                        DialogUI.TextRole.Label,
                         Modifier
                     )
                 }
             } else null,
             placeholder = if (placeholder.isNotEmpty()) {
                 {
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         placeholder,
-                        ComposeDialogsUI.TextRole.Body,
+                        DialogUI.TextRole.Body,
                         Modifier
                     )
                 }
@@ -149,7 +149,7 @@ fun DialogInputTextField(
             trailingIcon = if (clearable) {
                 @Composable {
                     when {
-                        value.value.isNotEmpty() -> ComposeDialogsUI.provider.IconButton(
+                        value.value.isNotEmpty() -> DialogUI.provider.IconButton(
                             onClick = {
                                 value.value = ""
                                 validator.check("")
@@ -160,11 +160,11 @@ fun DialogInputTextField(
                             enabled = true,
                             modifier = Modifier
                         ) {
-                            ComposeDialogsUI.provider.Icon(
-                                icon = ComposeDialogsUI.IconType.Clear,
+                            DialogUI.provider.Icon(
+                                icon = DialogUI.IconType.Clear,
                                 contentDescription = "Clear",
                                 modifier = Modifier,
-                                tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                                tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                             )
                         }
                     }
@@ -172,11 +172,11 @@ fun DialogInputTextField(
             } else null,
             supportingText = if (enabled && validator.getErrorMessage().isNotEmpty()) {
                 {
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         text = validator.getErrorMessage(),
-                        role = ComposeDialogsUI.TextRole.BodySmall,
+                        role = DialogUI.TextRole.BodySmall,
                         modifier = Modifier,
-                        color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Error),
+                        color = DialogUI.provider.color(DialogUI.ColorRole.Error),
                         textAlign = null,
                         fontWeight = null
                     )

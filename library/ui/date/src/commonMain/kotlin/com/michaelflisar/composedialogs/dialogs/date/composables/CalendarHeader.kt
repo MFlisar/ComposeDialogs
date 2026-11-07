@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
@@ -84,16 +84,16 @@ internal fun HeaderItem(
     ) {
         if (showButtons) {
             AnimatedVisibility(visible = viewState.value == DateViewState.Calendar) {
-                ComposeDialogsUI.provider.IconButton(
+                DialogUI.provider.IconButton(
                     enabled = onDownClick != null,
                     modifier = Modifier.size(36.dp),
                     onClick = { onDownClick?.invoke() }
                 ) {
-                    ComposeDialogsUI.provider.Icon(
-                        icon = ComposeDialogsUI.IconType.ChevronLeft,
+                    DialogUI.provider.Icon(
+                        icon = DialogUI.IconType.ChevronLeft,
                         contentDescription = null,
                         modifier = Modifier,
-                        tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                        tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                     )
                 }
             }
@@ -103,7 +103,7 @@ internal fun HeaderItem(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .weight(1f)
-                .clip(ComposeDialogsUI.provider.smallShape())
+                .clip(DialogUI.provider.smallShape())
                 .clickable {
                     if (viewState.value != targetViewState)
                         viewState.value = targetViewState
@@ -112,34 +112,34 @@ internal fun HeaderItem(
                 }
                 .padding(4.dp)
         ) {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = text,
-                role = ComposeDialogsUI.TextRole.BodySmall,
+                role = DialogUI.TextRole.BodySmall,
                 modifier = Modifier.weight(1f),
-                color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface),
+                color = DialogUI.provider.color(DialogUI.ColorRole.OnSurface),
                 textAlign = TextAlign.Center,
                 fontWeight = null
             )
             val rotation = animateFloatAsState(if (viewState.value == targetViewState) 180f else 0f)
-            ComposeDialogsUI.provider.Icon(
+            DialogUI.provider.Icon(
                 modifier = Modifier.rotate(rotation.value),
-                icon = ComposeDialogsUI.IconType.ArrowDropDown,
+                icon = DialogUI.IconType.ArrowDropDown,
                 contentDescription = null,
-                tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
             )
         }
         if (showButtons) {
             AnimatedVisibility(visible = viewState.value == DateViewState.Calendar) {
-                ComposeDialogsUI.provider.IconButton(
+                DialogUI.provider.IconButton(
                     enabled = onUpClick != null,
                     modifier = Modifier.size(36.dp),
                     onClick = { onUpClick?.invoke() }
                 ) {
-                    ComposeDialogsUI.provider.Icon(
-                        icon = ComposeDialogsUI.IconType.ChevronRight,
+                    DialogUI.provider.Icon(
+                        icon = DialogUI.IconType.ChevronRight,
                         contentDescription = null,
                         modifier = Modifier,
-                        tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                        tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                     )
                 }
             }

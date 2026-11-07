@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import com.michaelflisar.composedialogs.dialogs.date.classes.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
@@ -80,13 +80,13 @@ private fun CalendarSelectList(
     val state = rememberLazyListState(
         value - range.first
     )
-    ComposeDialogsUI.provider.HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+    DialogUI.provider.HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
     LazyColumn(state = state) {
         range.forEach {
             item {
                 Row(
                     modifier = Modifier
-                        .clip(ComposeDialogsUI.provider.smallShape())
+                        .clip(DialogUI.provider.smallShape())
                         .clickable {
                             onClick(it)
                         }
@@ -94,18 +94,18 @@ private fun CalendarSelectList(
                         .fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ComposeDialogsUI.provider.Icon(
-                        icon = ComposeDialogsUI.IconType.Check,
+                    DialogUI.provider.Icon(
+                        icon = DialogUI.IconType.Check,
                         contentDescription = null,
                         modifier = Modifier.alpha(if (it == value) 1f else 0f),
-                        tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                        tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                    ComposeDialogsUI.provider.Text(
+                    DialogUI.provider.Text(
                         text = itemFormatter(it),
-                        role = ComposeDialogsUI.TextRole.Body,
+                        role = DialogUI.TextRole.Body,
                         modifier = Modifier,
-                        color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface),
+                        color = DialogUI.provider.color(DialogUI.ColorRole.OnSurface),
                         textAlign = TextAlign.Center,
                         fontWeight = null
                     )

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.TextStyle
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 @Composable
 fun rememberDialogInput(text: String): MutableState<String> =
@@ -25,5 +25,5 @@ object DialogInput {
 
 object DialogInputDefaults {
     @Composable
-    fun textStyle(): TextStyle = ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.Body)
+    fun textStyle(): TextStyle = DialogUI.provider.textStyle(DialogUI.TextRole.Body)
 }

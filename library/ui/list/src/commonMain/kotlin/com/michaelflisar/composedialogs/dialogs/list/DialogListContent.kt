@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,7 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogEvent
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.list.composables.DialogListItem
 
 /**
@@ -66,8 +65,8 @@ fun <T> DialogListContent(
     itemSaver: Saver<MutableState<List<T>>, out Any>? = null,
     loadingIndicator: @Composable () -> Unit = {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            ComposeDialogsUI.provider.ProgressIndicator(
-                type = ComposeDialogsUI.ProgressIndicatorType.Circular,
+            DialogUI.provider.ProgressIndicator(
+                type = DialogUI.ProgressIndicatorType.Circular,
                 progress = null,
                 modifier = Modifier
             )
@@ -142,9 +141,9 @@ internal fun <T> DialogListContentImpl(
 
     Column {
         if (description.isNotEmpty()) {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = description,
-                role = ComposeDialogsUI.TextRole.Body,
+                role = DialogUI.TextRole.Body,
                 modifier = Modifier
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -152,7 +151,7 @@ internal fun <T> DialogListContentImpl(
 
         if (filter?.infoText != null) {
             val info = filter.infoText.invoke(filteredItems.value.size, itemsState.value.size)
-            ComposeDialogsUI.provider.OutlinedTextField(
+            DialogUI.provider.OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
@@ -168,25 +167,25 @@ internal fun <T> DialogListContentImpl(
                 leadingIcon = null,
                 supportingText = if (info.isNotEmpty()) {
                     {
-                        ComposeDialogsUI.provider.Text(
+                        DialogUI.provider.Text(
                             modifier = Modifier.align(Alignment.End),
                             text = info,
-                            role = ComposeDialogsUI.TextRole.BodySmall
+                            role = DialogUI.TextRole.BodySmall
                         )
                     }
                 } else null,
                 trailingIcon = if (filter.showClearIcon && filterText.value.isNotEmpty()) {
                     {
-                        ComposeDialogsUI.provider.IconButton(
+                        DialogUI.provider.IconButton(
                             onClick = { filterText.value = "" },
                             enabled = true,
                             modifier = Modifier
                         ) {
-                            ComposeDialogsUI.provider.Icon(
-                                icon = ComposeDialogsUI.IconType.Clear,
+                            DialogUI.provider.Icon(
+                                icon = DialogUI.IconType.Clear,
                                 contentDescription = "Clear",
                                 modifier = Modifier,
-                                tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                                tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                             )
                         }
                     }
@@ -196,10 +195,10 @@ internal fun <T> DialogListContentImpl(
         }
 
         if (selectionMode is DialogList.SelectionMode.MultiSelect && selectionMode.showSelectionCounter) {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 modifier = Modifier.align(Alignment.End),
                 text = "${selectionMode.selected.value.size}/${itemsState.value.size}",
-                role = ComposeDialogsUI.TextRole.BodySmall
+                role = DialogUI.TextRole.BodySmall
             )
             Spacer(modifier = Modifier.height(8.dp))
         }

@@ -3,22 +3,23 @@ package com.michaelflisar.composedialogs.core.ui
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import com.michaelflisar.composedialogs.implementation.DialogDefaultUIProvider
 
-object ComposeDialogsUI {
+object DialogUI {
 
     interface Provider {
         @Composable
         fun Text(
             text: String,
             role: TextRole,
-            modifier: Modifier
+            modifier: Modifier,
         )
 
         @Composable
@@ -28,7 +29,7 @@ object ComposeDialogsUI {
             modifier: Modifier,
             color: Color?,
             textAlign: TextAlign?,
-            fontWeight: FontWeight?
+            fontWeight: FontWeight?,
         )
 
         @Composable
@@ -47,7 +48,7 @@ object ComposeDialogsUI {
         fun TextButton(
             onClick: () -> Unit,
             modifier: Modifier,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
@@ -55,7 +56,7 @@ object ComposeDialogsUI {
             onClick: () -> Unit,
             enabled: Boolean,
             modifier: Modifier,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
@@ -63,13 +64,13 @@ object ComposeDialogsUI {
             onClick: () -> Unit,
             enabled: Boolean,
             modifier: Modifier,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
         fun Card(
             modifier: Modifier,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
@@ -77,7 +78,7 @@ object ComposeDialogsUI {
             value: String,
             onValueChange: (String) -> Unit,
             modifier: Modifier,
-            isError: Boolean
+            isError: Boolean,
         )
 
         @Composable
@@ -94,7 +95,7 @@ object ComposeDialogsUI {
             placeholder: (@Composable () -> Unit)?,
             leadingIcon: (@Composable () -> Unit)?,
             trailingIcon: (@Composable () -> Unit)?,
-            supportingText: (@Composable () -> Unit)?
+            supportingText: (@Composable () -> Unit)?,
         )
 
         @Composable
@@ -114,7 +115,7 @@ object ComposeDialogsUI {
             prefix: (@Composable () -> Unit)?,
             suffix: (@Composable () -> Unit)?,
             trailingIcon: (@Composable () -> Unit)?,
-            supportingText: (@Composable () -> Unit)?
+            supportingText: (@Composable () -> Unit)?,
         )
 
         @Composable
@@ -126,14 +127,14 @@ object ComposeDialogsUI {
             leadingIcon: (@Composable () -> Unit)?,
             placeholder: (@Composable () -> Unit)?,
             trailingIcon: (@Composable () -> Unit)?,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
         fun Slider(
             value: Float,
             onValueChange: (Float) -> Unit,
-            modifier: Modifier
+            modifier: Modifier,
         )
 
         @Composable
@@ -141,7 +142,7 @@ object ComposeDialogsUI {
             icon: IconType,
             contentDescription: String?,
             modifier: Modifier,
-            tint: Color?
+            tint: Color?,
         )
 
         @Composable
@@ -160,7 +161,7 @@ object ComposeDialogsUI {
         fun DropdownMenu(
             expanded: Boolean,
             onDismissRequest: () -> Unit,
-            content: @Composable ColumnScope.() -> Unit
+            content: @Composable ColumnScope.() -> Unit,
         )
 
         @Composable
@@ -168,7 +169,7 @@ object ComposeDialogsUI {
             modifier: Modifier,
             selected: Boolean,
             text: @Composable () -> Unit,
-            onClick: () -> Unit
+            onClick: () -> Unit,
         )
 
         @Composable
@@ -177,13 +178,13 @@ object ComposeDialogsUI {
             minute: Int,
             is24Hour: Boolean,
             modifier: Modifier,
-            onTimeChange: (hour: Int, minute: Int) -> Unit
+            onTimeChange: (hour: Int, minute: Int) -> Unit,
         )
 
         @Composable
         fun Dialog(
             onDismissRequest: () -> Unit,
-            content: @Composable () -> Unit
+            content: @Composable () -> Unit,
         )
 
         @Composable
@@ -193,7 +194,7 @@ object ComposeDialogsUI {
         fun ProgressIndicator(
             type: ProgressIndicatorType,
             progress: Float?,
-            modifier: Modifier
+            modifier: Modifier,
         )
     }
 
@@ -234,24 +235,14 @@ object ComposeDialogsUI {
         DoubleChevronRight
     }
 
-    private var instance: Provider? = null
+    private var instance: Provider? = DialogDefaultUIProvider.impl
 
     val provider: Provider
-        get() = instance ?: ComposeDialogsUIProvider.provider
+        get() = instance ?: throw NotImplementedError(
+            "No UI provider is registered. Add an implementation module or call DialogUI.set(...) before using dialogs."
+        )
 
-    /**
-     * Installs a custom UI provider instead of the provider selected by the implementation module.
-     */
     fun set(provider: Provider) {
         instance = provider
-    }
-
-    /**
-     * Installs a default provider only when no provider has been set by the caller.
-     */
-    fun setDefault(provider: Provider) {
-        if (instance == null) {
-            instance = provider
-        }
     }
 }

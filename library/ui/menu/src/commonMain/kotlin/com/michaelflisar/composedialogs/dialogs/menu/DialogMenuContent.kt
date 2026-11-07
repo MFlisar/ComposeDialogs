@@ -12,9 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.menu.composables.MenuRow
 
 /**
@@ -45,25 +44,25 @@ fun DialogMenuContent(
         visibleItems.value.forEach {
             when (it) {
                 MenuItem.BackMenu -> Row {
-                    ComposeDialogsUI.provider.IconButton(
+                    DialogUI.provider.IconButton(
                         onClick = {
                             selectedSubMenu.value = selectedSubMenu.value.dropLast(1)
                         },
                         enabled = true,
                         modifier = Modifier
                     ) {
-                        ComposeDialogsUI.provider.Icon(
-                            icon = ComposeDialogsUI.IconType.ArrowBack,
+                        DialogUI.provider.Icon(
+                            icon = DialogUI.IconType.ArrowBack,
                             contentDescription = "Back",
                             modifier = Modifier,
-                            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                         )
                     }
                 }
 
                 is MenuItem.Custom -> it.content()
 
-                MenuItem.Divider -> ComposeDialogsUI.provider.HorizontalDivider(
+                MenuItem.Divider -> DialogUI.provider.HorizontalDivider(
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                 )
 
@@ -91,11 +90,11 @@ fun DialogMenuContent(
                     description = it.description,
                     icon = it.icon,
                     endIcon = {
-                        ComposeDialogsUI.provider.Icon(
-                            icon = ComposeDialogsUI.IconType.ArrowForward,
+                        DialogUI.provider.Icon(
+                            icon = DialogUI.IconType.ArrowForward,
                             contentDescription = "Open SubMenu",
                             modifier = Modifier,
-                            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+                            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
                         )
                     },
                     onMenuClicked = {

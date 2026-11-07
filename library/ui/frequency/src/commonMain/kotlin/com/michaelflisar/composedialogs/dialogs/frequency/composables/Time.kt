@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Column
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.frequency.DialogFrequency
 import com.michaelflisar.composedialogs.dialogs.time.DialogTimeContent
 import kotlinx.datetime.LocalTime
@@ -27,13 +27,13 @@ internal fun Time(
         }
     )
     if (showDialogTime.value) {
-        ComposeDialogsUI.provider.Dialog(
+        DialogUI.provider.Dialog(
             onDismissRequest = { showDialogTime.value = false }
         ) {
             Column {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = texts.time,
-                    role = ComposeDialogsUI.TextRole.TitleSmall,
+                    role = DialogUI.TextRole.TitleSmall,
                     modifier = Modifier
                 )
                 DialogTimeContent(selectedTime)

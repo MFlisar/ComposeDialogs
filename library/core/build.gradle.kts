@@ -31,7 +31,8 @@ val buildTargets = Targets(
     Target.ANDROID,
     Target.IOS,
     Target.JVM,
-    Target.WASM
+    Target.WASM,
+    Target.MACOS
 )
 
 val androidConfig = AndroidLibraryConfig.create(
@@ -73,6 +74,7 @@ kotlin {
         // ---------------------
 
         commonMain {
+            kotlin.srcDir("src/coreOnlyMain/kotlin")
             // Kotlin
             dependencies {
                 api(libs.jetbrains.compose.foundation)

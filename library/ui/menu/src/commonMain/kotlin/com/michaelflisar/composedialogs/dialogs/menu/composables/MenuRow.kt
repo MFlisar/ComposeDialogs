@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 @Composable
 internal fun MenuRow(
@@ -37,7 +37,7 @@ internal fun MenuRow(
             .fillMaxWidth()
             .defaultMinSize(minHeight = 48.dp)
             .height(IntrinsicSize.Min)
-            .clip(ComposeDialogsUI.provider.smallShape())
+            .clip(DialogUI.provider.smallShape())
             .then(
                 if (onMenuClicked != null) {
                     Modifier.clickable { onMenuClicked() }
@@ -56,20 +56,20 @@ internal fun MenuRow(
                 .weight(1f)
                 .padding(vertical = paddingVertical)
         ) {
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = title,
-                role = ComposeDialogsUI.TextRole.BodyLarge,
+                role = DialogUI.TextRole.BodyLarge,
                 modifier = Modifier,
-                color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface),
+                color = DialogUI.provider.color(DialogUI.ColorRole.OnSurface),
                 textAlign = null,
                 fontWeight = if (bold) FontWeight.Bold else null
             )
             if (description?.isNotEmpty() == true) {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = description,
-                    role = if (bold) ComposeDialogsUI.TextRole.BodySmall else ComposeDialogsUI.TextRole.Body,
+                    role = if (bold) DialogUI.TextRole.BodySmall else DialogUI.TextRole.Body,
                     modifier = Modifier,
-                    color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurfaceVariant),
+                    color = DialogUI.provider.color(DialogUI.ColorRole.OnSurfaceVariant),
                     textAlign = null,
                     fontWeight = if (bold) FontWeight.Bold else null
                 )

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import kotlinx.datetime.LocalTime
 
 /**
@@ -20,7 +20,7 @@ fun DialogTimeContent(
     setup: DialogTime.Setup = DialogTimeDefaults.setup()
 ) {
     Column {
-        ComposeDialogsUI.provider.TimeInput(
+        DialogUI.provider.TimeInput(
             hour = time.value.hour,
             minute = time.value.minute,
             is24Hour = setup.is24Hours,

@@ -2,7 +2,7 @@ package com.michaelflisar.composedialogs.dialogs.list.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 @Composable
 internal fun DialogListContent(
@@ -10,22 +10,22 @@ internal fun DialogListContent(
     supportingText: (@Composable () -> Unit)? = null
 ) {
     Column {
-        ComposeDialogsUI.provider.ProvideContentColor(
-            ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurface)
+        DialogUI.provider.ProvideContentColor(
+            DialogUI.provider.color(DialogUI.ColorRole.OnSurface)
         ) {
-            ComposeDialogsUI.provider.ProvideTextStyle(
-                ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.BodyLarge)
+            DialogUI.provider.ProvideTextStyle(
+                DialogUI.provider.textStyle(DialogUI.TextRole.BodyLarge)
             ) {
                 text()
             }
         }
 
         supportingText?.let {
-            ComposeDialogsUI.provider.ProvideContentColor(
-                ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurfaceVariant)
+            DialogUI.provider.ProvideContentColor(
+                DialogUI.provider.color(DialogUI.ColorRole.OnSurfaceVariant)
             ) {
-                ComposeDialogsUI.provider.ProvideTextStyle(
-                    ComposeDialogsUI.provider.textStyle(ComposeDialogsUI.TextRole.Body)
+                DialogUI.provider.ProvideTextStyle(
+                    DialogUI.provider.textStyle(DialogUI.TextRole.Body)
                 ) {
                     it()
                 }

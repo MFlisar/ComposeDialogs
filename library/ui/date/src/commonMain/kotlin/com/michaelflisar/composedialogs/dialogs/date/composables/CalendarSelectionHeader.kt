@@ -12,7 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import com.michaelflisar.composedialogs.dialogs.date.classes.DateViewState
 import kotlinx.coroutines.launch
@@ -30,8 +30,8 @@ internal fun CalendarSelectionHeader(
     //val interactionSource = remember { MutableInteractionSource() }
     Column(modifier = Modifier
         .background(
-            ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Primary),
-            ComposeDialogsUI.provider.smallShape()
+            DialogUI.provider.color(DialogUI.ColorRole.Primary),
+            DialogUI.provider.smallShape()
         )
         .clickable(
             enabled = pagerState.currentPage != currentPage.value || viewState.value != DateViewState.Calendar,
@@ -45,12 +45,12 @@ internal fun CalendarSelectionHeader(
         }
         .padding(8.dp)
     ) {
-        ComposeDialogsUI.provider.Text(
+        DialogUI.provider.Text(
             text = setup.formatterSelectedDate(state.value),
-            role = ComposeDialogsUI.TextRole.TitleMedium,
+            role = DialogUI.TextRole.TitleMedium,
             modifier = Modifier,
             fontWeight = FontWeight.Bold,
-            color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnPrimary),
+            color = DialogUI.provider.color(DialogUI.ColorRole.OnPrimary),
             textAlign = null
         )
     }

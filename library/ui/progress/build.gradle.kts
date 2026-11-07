@@ -33,7 +33,8 @@ val buildTargets = Targets(
     Target.ANDROID,
     Target.IOS,
     Target.JVM,
-    Target.WASM
+    Target.WASM,
+    Target.MACOS
 )
 
 val androidConfig = AndroidLibraryConfig.create(

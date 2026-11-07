@@ -5,7 +5,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.date.resources.Res
 import com.michaelflisar.composedialogs.date.resources.composedialogs_date_today
 import kotlinx.datetime.DayOfWeek
@@ -35,14 +35,14 @@ object DialogDateDefaults {
     @Composable
     fun setup(
         buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)? = { enabled, onClick ->
-            ComposeDialogsUI.provider.OutlinedButton(
+            DialogUI.provider.OutlinedButton(
                 onClick = onClick,
                 enabled = enabled,
                 modifier = Modifier
             ) {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = stringResource(Res.string.composedialogs_date_today),
-                    role = ComposeDialogsUI.TextRole.Button,
+                    role = DialogUI.TextRole.Button,
                     modifier = Modifier
                 )
             }

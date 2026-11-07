@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.list.composables.DefaultListItem
 
 object DialogListDefaults {
@@ -13,8 +13,8 @@ object DialogListDefaults {
     @Composable
     fun LoadingIndicator() {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            ComposeDialogsUI.provider.ProgressIndicator(
-                type = ComposeDialogsUI.ProgressIndicatorType.Circular,
+            DialogUI.provider.ProgressIndicator(
+                type = DialogUI.ProgressIndicatorType.Circular,
                 progress = null,
                 modifier = Modifier
             )

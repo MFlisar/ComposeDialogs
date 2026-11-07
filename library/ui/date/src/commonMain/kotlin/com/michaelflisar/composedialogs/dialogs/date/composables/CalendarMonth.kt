@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.datetime.DayOfWeek
@@ -113,9 +113,9 @@ private fun CalendarCellHeader(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        ComposeDialogsUI.provider.Text(
+        DialogUI.provider.Text(
             text = text,
-            role = ComposeDialogsUI.TextRole.BodySmall,
+            role = DialogUI.TextRole.BodySmall,
             modifier = Modifier
         )
     }
@@ -137,14 +137,14 @@ private fun CalendarCell(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
-                    .clip(ComposeDialogsUI.provider.smallShape())
-                    .background(ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Primary))
+                    .clip(DialogUI.provider.smallShape())
+                    .background(DialogUI.provider.color(DialogUI.ColorRole.Primary))
             ) {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = date.day.toString(),
-                    role = ComposeDialogsUI.TextRole.Body,
+                    role = DialogUI.TextRole.Body,
                     modifier = Modifier,
-                    color = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnPrimary),
+                    color = DialogUI.provider.color(DialogUI.ColorRole.OnPrimary),
                     textAlign = null,
                     fontWeight = null
                 )
@@ -156,17 +156,17 @@ private fun CalendarCell(
                 modifier = modifier
                     .border(
                         if (isToday) 2.dp else 1.dp,
-                        if (isToday) ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Primary)
-                        else ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Outline),
-                        ComposeDialogsUI.provider.smallShape()
+                        if (isToday) DialogUI.provider.color(DialogUI.ColorRole.Primary)
+                        else DialogUI.provider.color(DialogUI.ColorRole.Outline),
+                        DialogUI.provider.smallShape()
                     )
                     .clickable {
                         state.value = date
                     }
             ) {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = date.day.toString(),
-                    role = ComposeDialogsUI.TextRole.Body,
+                    role = DialogUI.TextRole.Body,
                     modifier = Modifier
                 )
             }

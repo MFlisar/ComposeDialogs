@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 internal object OutlinedDecoratedContainer {
     // TODO: find out why extra padding is necessary + fix it
@@ -22,7 +22,7 @@ internal fun OutlinedDecoratedContainer(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    ComposeDialogsUI.provider.OutlinedContainer(
+    DialogUI.provider.OutlinedContainer(
         title = title,
         modifier = modifier,
         enabled = enabled,

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.runtime.getValue
-import com.michaelflisar.composedialogs.core.ui.ComposeDialogsUI
+import com.michaelflisar.composedialogs.core.ui.DialogUI
 
 internal object DropdownDefaults {
 
@@ -35,9 +35,9 @@ internal object DropdownDefaults {
         ) {
             leadingContent()
             Column(modifier = Modifier.weight(1f)) {
-                ComposeDialogsUI.provider.Text(
+                DialogUI.provider.Text(
                     text = text,
-                    role = ComposeDialogsUI.TextRole.BodySmall,
+                    role = DialogUI.TextRole.BodySmall,
                     modifier = Modifier
                 )
             }
@@ -57,12 +57,12 @@ internal object DropdownDefaults {
             verticalAlignment = Alignment.CenterVertically
         ) {
             leadingContent()
-            ComposeDialogsUI.provider.Text(
+            DialogUI.provider.Text(
                 text = text,
-                role = ComposeDialogsUI.TextRole.Body,
+                role = DialogUI.TextRole.Body,
                 modifier = Modifier.weight(1f),
                 color = if (selected) {
-                    ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.Primary)
+                    DialogUI.provider.color(DialogUI.ColorRole.Primary)
                 } else Color.Unspecified,
                 textAlign = null,
                 fontWeight = null
@@ -204,11 +204,11 @@ private fun <T> DropdownContent(
             item
         )
 
-        ComposeDialogsUI.provider.Icon(
+        DialogUI.provider.Icon(
             modifier = Modifier.rotate(rotation),
-            icon = ComposeDialogsUI.IconType.ArrowDropDown,
+            icon = DialogUI.IconType.ArrowDropDown,
             contentDescription = null,
-            tint = ComposeDialogsUI.provider.color(ComposeDialogsUI.ColorRole.OnSurfaceVariant)
+            tint = DialogUI.provider.color(DialogUI.ColorRole.OnSurfaceVariant)
         )
     }
 }
@@ -221,12 +221,12 @@ private fun <T> DropdownDropdown(
     selected: Int,
     onSelectionChange: (Dropdown.Item<T>) -> Unit
 ) {
-    ComposeDialogsUI.provider.DropdownMenu(
+    DialogUI.provider.DropdownMenu(
         expanded = expanded.value,
         onDismissRequest = { expanded.value = false }
     ) {
         filteredItems.forEach {
-            ComposeDialogsUI.provider.DropdownMenuItem(
+            DialogUI.provider.DropdownMenuItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .zIndex(1f),
