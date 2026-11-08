@@ -20,7 +20,7 @@ plugins {
 // Setup
 // ------------------------
 
-val module = AppModuleConfig.readManual(project)
+val module = AppModuleConfig.read(project)
 
 val androidConfig = AndroidAppConfig(
     compileSdk = app.versions.compileSdk,
@@ -49,5 +49,5 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     // Library
-    implementation(project(":demo:app:compose"))
+    implementation(project(":demo:shared"))
 }

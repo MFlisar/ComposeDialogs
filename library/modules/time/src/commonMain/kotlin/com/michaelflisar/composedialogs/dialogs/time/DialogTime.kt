@@ -1,18 +1,12 @@
 package com.michaelflisar.composedialogs.dialogs.time
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TimeInput
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.core.*
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.dialogs.time.utils.TimeUtil
@@ -28,8 +22,9 @@ import kotlinx.datetime.LocalTime
  *
  * @param time the selected time
  * @param setup the [DialogTime.Setup] - use [DialogTimeDefaults.setup] to provide your own data
+ * @param texts localized labels for the hour, minute, and AM/PM controls
+ * @param uiProvider the UI implementation used to render the time controls
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DialogTime(
     state: BaseDialogState,
@@ -43,26 +38,56 @@ fun DialogTime(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
-    onEvent: (event: DialogEvent) -> Unit = {}
+    onEvent: (event: DialogEvent) -> Unit = {},
+    texts: TimePickerTexts = DialogTimeDefaults.texts(),
+    uiProvider: TimeUIProvider = Material3TimeUIProvider
 )
 // end-snippet
 {
-    //if (!setup.seconds) {
-    //    time.seconds.value = 0
-    //}
-
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
-        val state = rememberTimePickerState(
-            time.value.hour,
-            time.value.minute,
-            setup.is24Hours
+    val positiveButtonEnabledBeforeValidation = remember(state) {
+        mutableStateOf<Boolean?>(null)
+    }
+    val onValidationChanged: (Boolean) -> Unit = remember(state) {
+        { isValid ->
+            if (isValid) {
+                positiveButtonEnabledBeforeValidation.value?.let { wasEnabled ->
+                    state.enableButton(DialogButtonType.Positive, wasEnabled)
+                    positiveButtonEnabledBeforeValidation.value = null
+                }
+            } else if (positiveButtonEnabledBeforeValidation.value == null) {
+                positiveButtonEnabledBeforeValidation.value =
+                    state.isButtonEnabled(DialogButtonType.Positive)
+                state.enableButton(DialogButtonType.Positive, false)
+            }
+        }
+    }
+    Dialog(
+        state = state,
+        title = title,
+        icon = icon,
+        style = style,
+        buttons = buttons,
+        options = options,
+        onEvent = { event ->
+            if (event.dismissed) {
+                positiveButtonEnabledBeforeValidation.value?.let { wasEnabled ->
+                    state.enableButton(DialogButtonType.Positive, wasEnabled)
+                    positiveButtonEnabledBeforeValidation.value = null
+                }
+            }
+            onEvent(event)
+        }
+    ) {
+        TimePicker(
+            time = time,
+            is24Hours = setup.is24Hours,
+            minuteStep = setup.minuteStep,
+            hourPickType = setup.hourPickType,
+            minutePickType = setup.minutePickType,
+            texts = texts,
+            uiProvider = uiProvider,
+            onValidationChanged = onValidationChanged
         )
-        LaunchedEffect(state.hour, state.minute) {
-            time.value = LocalTime(state.hour, state.minute)
-        }
-        Column {
-            TimeInput(state = state, modifier = Modifier.align(Alignment.CenterHorizontally))
-        }
     }
 }
 
@@ -76,8 +101,15 @@ object DialogTime {
      */
     class Setup internal constructor(
         //val seconds: Boolean = false,
-        val is24Hours: Boolean
-    )
+        val is24Hours: Boolean,
+        val minuteStep: Int,
+        val hourPickType: TimePickerInputType,
+        val minutePickType: TimePickerInputType
+    ) {
+        init {
+            require(minuteStep in 1..60) { "minuteStep must be between 1 and 60" }
+        }
+    }
 
     val LocalTimeSaver = Saver<MutableState<LocalTime>, Int>(
         save = { it.value.toSecondOfDay() },

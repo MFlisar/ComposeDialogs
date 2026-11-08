@@ -1,14 +1,5 @@
 package com.michaelflisar.composedialogs.dialogs.color
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -18,13 +9,9 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.Dialog
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
@@ -35,8 +22,7 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
-import com.michaelflisar.composedialogs.dialogs.color.composables.Content
-import com.michaelflisar.composedialogs.dialogs.color.composables.TitleForPages
+import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
 import com.michaelflisar.composedialogs.core.BaseDialogState
 
 // begin-snippet: DialogColor::constructor
@@ -50,7 +36,7 @@ import com.michaelflisar.composedialogs.core.BaseDialogState
  * @param color the selected color state
  * @param texts the texts ([DialogColor.Texts]) that are used inside this dialog - use [DialogColorDefaults.texts] to provide your own data
  * @param alphaSupported if true, the dialog supports color alpha values
- * @param directEditSupported if true, the dialog allows direct editing of rgba values (in the custom color page)
+ * @param directEditSupported if true, the custom color page allows direct editing of the color value
  * @param shape the shape of the color cells
  * @param gridSize the size of the color grid
  * @param labelStyle the [DialogColor.LabelStyle] for the color picker
@@ -88,84 +74,60 @@ fun DialogColor(
             DialogColorUtil.getNearestColorGroup(color.value)
         )
     }
-    val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
-    val colorState = rememberSaveable { mutableStateOf(DialogColor.Page.Presets) }
-
-    Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
-
-        val landscape = isLandscape()
-
-        BackHandler(enabled = selectedPresetsLevel.intValue != 0, onBack = {
-            selectedPresetsLevel.intValue = 0
-        })
-
-        Column {
-
-            if (landscape) {
-                Row {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        TitleForPages(
-                            Modifier.weight(1f),
-                            texts,
-                            colorState,
-                            selectedSubColor,
-                            selectedPresetsLevel
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Content(
-                            color,
-                            colorState,
-                            selectedMainColor,
-                            selectedSubColor,
-                            selectedPresetsLevel,
-                            selectedAlpha,
-                            alphaSupported,
-                            directEditSupported,
-                            shape,
-                            gridSize,
-                            labelStyle
-                        )
-                    }
-                }
-            } else {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    TitleForPages(
-                        Modifier.weight(1f),
-                        texts,
-                        colorState,
-                        selectedSubColor,
-                        selectedPresetsLevel
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Content(
-                    color,
-                    colorState,
-                    selectedMainColor,
-                    selectedSubColor,
-                    selectedPresetsLevel,
-                    selectedAlpha,
-                    alphaSupported,
-                    directEditSupported,
-                    shape,
-                    gridSize,
-                    labelStyle
-                )
-            }
+        val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
+        val colorState = rememberSaveable { mutableStateOf(DialogColor.Page.Presets) }
+        val updateSelectedPresetColors = {
+            selectedMainColor.value = DialogColorUtil.getNearestColorGroup(color.value)
+            selectedSubColor.value = null
+            selectedPresetsLevel.value = 0
         }
-    }
+
+        Dialog(state, title, icon, style, buttons, options, onEvent = onEvent) {
+            ColorPicker(
+                uiProvider = Material3ColorUIProvider,
+                color = color,
+                texts = ColorPickerTexts(
+                    presets = texts.presets,
+                    custom = texts.custom,
+                    editColor = texts.editColor,
+                    invalidColor = texts.invalidColor,
+                    apply = texts.apply,
+                    cancel = texts.cancel
+                ),
+                alphaSupported = alphaSupported,
+                directEditSupported = directEditSupported,
+                shape = shape,
+                gridSize = gridSize,
+                labelStyle = when (labelStyle) {
+                    DialogColor.LabelStyle.Value -> ColorPickerLabelStyle.Value
+                    DialogColor.LabelStyle.Percent -> ColorPickerLabelStyle.Percent
+                },
+                landscape = isLandscape(),
+                customPage = colorState.value == DialogColor.Page.Custom,
+                selectedSubColor = selectedSubColor,
+                selectedPresetsLevel = selectedPresetsLevel,
+                selectedAlpha = selectedAlpha,
+                mainColors = ColorDefinitions.COLORS.map { it.getColor() },
+                mainLabels = null,
+                subColors = selectedMainColor.value.colors.map { it.getColor() },
+                subLabels = selectedMainColor.value.colors.map { it.label },
+                onMainColorSelected = {
+                    selectedMainColor.value = ColorDefinitions.COLORS[it]
+                    selectedPresetsLevel.value = 1
+                },
+                onSubColorSelected = {
+                    selectedSubColor.value = selectedMainColor.value.colors[it].getColor()
+                    color.value = selectedSubColor.value!!.copy(selectedAlpha.value)
+                },
+                onPresetsClick = {
+                    colorState.value = DialogColor.Page.Presets
+                    selectedSubColor.value = null
+                    selectedPresetsLevel.value = 0
+                },
+                onCustomClick = { colorState.value = DialogColor.Page.Custom },
+                updateSelectedPresetColors = updateSelectedPresetColors
+            )
+        }
 }
 
 @Stable
@@ -192,7 +154,11 @@ object DialogColor {
     @Immutable
     class Texts internal constructor(
         val presets: String,
-        val custom: String
+        val custom: String,
+        val editColor: String,
+        val invalidColor: String,
+        val apply: String,
+        val cancel: String
     )
 
 }

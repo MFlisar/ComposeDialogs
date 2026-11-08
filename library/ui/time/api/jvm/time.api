@@ -1,0 +1,38 @@
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerInputType : java/lang/Enum {
+	public static final field Dropdown Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
+	public static final field Input Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerKt {
+	public static final fun TimePicker (Landroidx/compose/runtime/MutableState;ZILcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerTexts;Lcom/michaelflisar/composedialogs/dialogs/time/TimeUIProvider;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod : java/lang/Enum {
+	public static final field AM Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;
+	public static final field PM Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerTexts {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getAm ()Ljava/lang/String;
+	public final fun getHour ()Ljava/lang/String;
+	public final fun getInvalidHour ()Ljava/lang/String;
+	public final fun getInvalidMinute ()Ljava/lang/String;
+	public final fun getMinute ()Ljava/lang/String;
+	public final fun getPm ()Ljava/lang/String;
+}
+
+public abstract interface class com/michaelflisar/composedialogs/dialogs/time/TimeUIProvider {
+	public abstract fun LabeledField (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun NumberDropdown (Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/util/List;ILjava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun NumberInput (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun PeriodSelector (Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+}
+

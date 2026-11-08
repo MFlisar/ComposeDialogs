@@ -1,23 +1,9 @@
-import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
-import com.michaelflisar.kmpdevtools.core.utils.ModuleUtil
+import com.michaelflisar.kmpdevtools.BuildFileUtil
 
 plugins {
     kotlin("jvm") apply false
     alias(libs.plugins.dokka)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
 }
 
-dependencies {
-    val libraryConfig = LibraryConfig.read(rootDir)
-    val libraryId = libraryConfig.library.name.lowercase()
-    libraryConfig.modules
-        .filter { it.artifactId.isNotEmpty() }
-        .forEach {
-            val moduleName = ModuleUtil.folderToModuleName(it.path, libraryId)
-            dokka(project(moduleName))
-        }
-}
-
-dokka {
-    val libraryConfig = LibraryConfig.read(rootDir)
-    moduleName.set(libraryConfig.library.name)
-}
+BuildFileUtil.setupDokka(project)

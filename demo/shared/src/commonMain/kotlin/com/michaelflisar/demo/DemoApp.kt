@@ -92,7 +92,7 @@ private fun DemoContent(
         )
 
         DemoStyle.BottomSheet -> DialogDefaults.styleBottomSheet(
-            dragHandle = false,
+            dragHandle = true,
             animateShow = true
             // ...
         )
@@ -107,13 +107,13 @@ private fun DemoContent(
     // ------------
 
     val demos = listOf(
-        Demo.Example("Info Demos") { InfoDemos(style, icon, showInfo) },
-        Demo.Example("Input Demos") { InputDemos(style, icon, showInfo) },
-        Demo.Example("Number Demos") { NumberDemos(style, icon, showInfo) },
-        Demo.Example("Date/Time Demos") { DateTimeDemos(style, icon, showInfo) },
-        Demo.Example("Color Demos") { ColorDemos(style, icon, showInfo) },
-        Demo.Example("List Demos") { ListDemos(style, icon, showInfo) },
-        Demo.Example("Progress Demos") { ProgressDemos(style, icon, showInfo) },
+        Demo.Example("Info Demos") { Scrollable { InfoDemos(style, icon, showInfo) } },
+        Demo.Example("Input Demos") { Scrollable { InputDemos(style, icon, showInfo) } },
+        Demo.Example("Number Demos") { Scrollable { NumberDemos(style, icon, showInfo) } },
+        Demo.Example("Date/Time Demos") { Scrollable { DateTimeDemos(style, icon, showInfo) } },
+        Demo.Example("Color Demos") { Scrollable { ColorDemos(style, icon, showInfo) } },
+        Demo.Example("List Demos") { Scrollable { ListDemos(style, icon, showInfo) } },
+        Demo.Example("Progress Demos") { Scrollable { ProgressDemos(style, icon, showInfo) } },
         Demo.Example("Single Dialog with List") {
             SingleDialogWithListDemos(
                 style,
@@ -121,11 +121,11 @@ private fun DemoContent(
                 showInfo
             )
         },
-        Demo.Example("Menu Demos") { MenuDemos(style, icon, showInfo) },
-        Demo.Example("Frequency Demos") { FrequencyDemos(style, icon, showInfo) },
+        Demo.Example("Menu Demos") { Scrollable { MenuDemos(style, icon, showInfo) } },
+        Demo.Example("Frequency Demos") { Scrollable { FrequencyDemos(style, icon, showInfo) } },
         Demo.Divider,
-        Demo.Example("Various") { VariousDemos(style, icon, showInfo) },
-        Demo.Example("Custom Demos") { CustomDemos(style, icon, showInfo) },
+        Demo.Example("Various") { Scrollable { VariousDemos(style, icon, showInfo) } },
+        Demo.Example("Custom Demos") { Scrollable { CustomDemos(style, icon, showInfo) } },
     )
 
     // ------------
@@ -134,27 +134,38 @@ private fun DemoContent(
 
     val selectedDemo = rememberSelectedDemo()
     val collapsibleRegion = rememberDemoExpandedRegions(ids = listOf(1, 2), single = false)
-    DemoColumn(
-        modifier = modifier.verticalScroll(rememberScrollState())
-    ) {
+    DemoColumn(modifier) {
         if (selectedDemo.intValue == -1) {
             // LEVEL 0 - settings + demo list
-            DemoCollapsibleRegion("Settings", 1, collapsibleRegion) {
-                DemoColumn {
-                    DemoCheckbox(checked = lightTheme, title = "Light Theme?")
-                    DemoSegmentedControl(state = demoStyle, items = DemoStyle.entries)
-                    AnimatedVisibility(visible = demoStyle.value == DemoStyle.Dialog) {
-                        DemoCheckbox(checked = swipeDismiss, title = "Support SwipeDismiss?")
+            DemoColumn(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
+                DemoCollapsibleRegion("Settings", 1, collapsibleRegion) {
+                    DemoColumn {
+                        DemoCheckbox(checked = lightTheme, title = "Light Theme?")
+                        DemoSegmentedControl(state = demoStyle, items = DemoStyle.entries)
+                        AnimatedVisibility(visible = demoStyle.value == DemoStyle.Dialog) {
+                            DemoCheckbox(checked = swipeDismiss, title = "Support SwipeDismiss?")
+                        }
+                        DemoCheckbox(checked = showIcon, title = "Show Icon?")
                     }
-                    DemoCheckbox(checked = showIcon, title = "Show Icon?")
                 }
-            }
-            DemoCollapsibleRegion("Demos", 2, collapsibleRegion) {
-                DemoExamplesList(selectedDemo, demos)
+                DemoCollapsibleRegion("Demos", 2, collapsibleRegion) {
+                    DemoExamplesList(selectedDemo, demos)
+                }
             }
         } else {
             // LEVEL 1 CONTENT - selected demo page
             DemoExamplesContent(selectedDemo, demos)
         }
+    }
+}
+
+@Composable
+fun Scrollable(content: @Composable () -> Unit) {
+    DemoColumn(
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
+        content()
     }
 }

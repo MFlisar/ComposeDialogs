@@ -1,6 +1,5 @@
 package com.michaelflisar.composedialogs.dialogs.date
 
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -17,7 +16,7 @@ import org.jetbrains.compose.resources.stringResource
 object DialogDateDefaults {
 
     /**
-     * @param buttonToday the optional today button that is displayed at top next to the selected date
+     * @param buttonToday the optional content of the today button that is displayed at top next to the selected date
      * @param firstDayOfWeek the first day of the week (use [kotlinx.datetime.DayOfWeek.MONDAY] to [kotlinx.datetime.DayOfWeek.SUNDAY])
      * @param formatterWeekDayLabel the date format for the weekday names of the calendar
      * @param formatterSelectedDate the date format for the text that represents the currently selected date
@@ -34,13 +33,8 @@ object DialogDateDefaults {
      */
     @Composable
     fun setup(
-        buttonToday: (@Composable (enabled: Boolean, onClick: () -> Unit) -> Unit)? = { enabled, onClick ->
-            OutlinedButton(
-                onClick = onClick,
-                enabled = enabled
-            ) {
-                Text(text = stringResource(Res.string.composedialogs_date_today))
-            }
+        buttonToday: (@Composable () -> Unit)? = {
+            Text(text = stringResource(Res.string.composedialogs_date_today))
         },
         firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
         formatterWeekDayLabel: @Composable (dayOfWeek: DayOfWeek) -> String = {

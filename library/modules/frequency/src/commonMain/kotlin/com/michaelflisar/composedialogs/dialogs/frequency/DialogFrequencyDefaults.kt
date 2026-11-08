@@ -10,8 +10,8 @@ object DialogFrequencyDefaults {
     @Composable
     fun texts(
         interval: String = "Interval",
-        type: String = "Type",
-        every: String = "Every",
+        invalidInterval: String = "Enter a positive interval",
+        type: String = "Frequency",
         monthOfYear: String = "Month of Year",
         dayOfMonth: String = "Day of Month",
         dayOfWeek: String = "Day of Week",
@@ -31,8 +31,8 @@ object DialogFrequencyDefaults {
     ): DialogFrequency.Texts {
         return DialogFrequency.Texts(
             interval = interval,
+            invalidInterval = invalidInterval,
             type = type,
-            every = every,
             monthOfYear = monthOfYear,
             dayOfMonth = dayOfMonth,
             dayOfWeek = dayOfWeek,

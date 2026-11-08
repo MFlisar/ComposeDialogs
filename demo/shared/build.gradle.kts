@@ -1,6 +1,6 @@
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.BuildFileUtil
-import com.michaelflisar.kmpdevtools.core.Platform
+import com.michaelflisar.kmpdevtools.core.Target
 import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.setupDependencies
 import com.michaelflisar.kmpdevtools.setupBuildKonfig
@@ -27,20 +27,20 @@ plugins {
 // Setup
 // ------------------------
 
-val module = LibraryModuleConfig.readManual(project)
+val module = LibraryModuleConfig.read(project)
 
 val buildTargets = Targets(
     // mobile
-    android = true,
-    //iOS = true,
+    Target.ANDROID,
+    // Target.IOS,
     // desktop
-    windows = true,
-    //macOS = true,
+    Target.JVM,
+    // Target.MACOS,
     // web
-    wasm = true
+    Target.WASM
 )
 
-val androidConfig = AndroidLibraryConfig.createFromPath(
+val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
@@ -52,7 +52,7 @@ val androidConfig = AndroidLibraryConfig.createFromPath(
 // ------------------------
 
 buildkonfig {
-    setupBuildKonfig(module.appConfig)
+    setupBuildKonfig(project = project, config = module.config)
 }
 
 kotlin {
@@ -80,7 +80,7 @@ kotlin {
 
         setupDependencies(module, buildTargets, sourceSets) {
 
-            notAndroidMain supportedBy !Platform.ANDROID
+            notAndroidMain supportedBy !Target.ANDROID
 
         }
 

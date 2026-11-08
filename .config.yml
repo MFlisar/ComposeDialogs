@@ -1,0 +1,125 @@
+# ---------------------
+# Publishing configuration
+# ---------------------
+
+publish:
+  group-id: io.github.mflisar.composedialogs
+  github:
+    user: MFlisar
+    repo: maven-repository
+    branch: main
+    path: artifacts
+  release-target: maven-central # [none, maven-central, github]
+  test-target: github # [none, maven-central, github]
+
+# ---------------------
+# General configuration
+# ---------------------
+
+config:
+  java-version: 17
+  developer:
+    name: Michael Flisar
+    mail: mflisar.development@gmail.com
+    maven-id: mflisar
+    github-user-name: MFlisar
+
+# ---------------------
+# Project
+# ---------------------
+
+project:
+  namespace: com.michaelflisar.composedialogs
+  repo-name: ComposeDialogs
+  release: 2026
+  license:
+    name: Apache License 2.0
+    path: blob/main/LICENSE
+
+# ---------------------
+# APP / DEMO (optional)
+# ---------------------
+
+apps:
+  - name: ComposeDialogs Demo
+    namespace: com.michaelflisar.composedialogs.demo
+    version-name: 1.0.0
+    module-paths:
+      - demo/app/android
+      - demo/app/jvm
+      - demo/app/wasm
+      - demo/shared
+    # optional - if set, the app will be published to the homepage and linked in the readme
+    publish:
+      url-path: demo
+      description: Explore the interactive demo
+      module-path: demo/app/wasm
+
+# ---------------------
+# Modules
+# ---------------------
+
+modules:
+  # used to detect latest release version of the library (dynamically on the published homepage)
+  primary-artifact-id: core
+  # Modules - list of modules [artifact-id, description, path, (plugin)]
+  modules:
+    - artifact-id: core
+      description: provides the basic dialog classes and styles
+      path: library/core
+    - artifact-id: dialog-color
+      description: provides a color dialog
+      path: library/modules/color
+    - artifact-id: dialog-date
+      description: provides a date picker dialog
+      path: library/modules/date
+    - artifact-id: dialog-frequency
+      description: provides a frequency dialog
+      path: library/modules/frequency
+    - artifact-id: dialog-info
+      description: provides an info dialog
+      path: library/modules/info
+    - artifact-id: dialog-input
+      description: provides an input dialog
+      path: library/modules/input
+    - artifact-id: dialog-list
+      description: provides a list dialog
+      path: library/modules/list
+    - artifact-id: dialog-menu
+      description: provides a menu dialog
+      path: library/modules/menu
+    - artifact-id: dialog-number
+      description: provides a number picker dialog
+      path: library/modules/number
+    - artifact-id: dialog-progress
+      description: provides a progress dialog
+      path: library/modules/progress
+    - artifact-id: dialog-time
+      description: provides a time dialog
+      path: library/modules/time
+    - artifact-id: ui-color
+      description: provides toolkit-neutral UI for the color picker
+      path: library/ui/color
+    - artifact-id: ui-date
+      description: provides toolkit-neutral UI for the date picker
+      path: library/ui/date
+    - artifact-id: ui-frequency
+      description: provides toolkit-neutral UI for the frequency picker
+      path: library/ui/frequency
+    - artifact-id: ui-time
+      description: provides toolkit-neutral UI for the time picker
+      path: library/ui/time
+
+  # XCFrameworks [name, path, targets (ios, macos)]
+  xcframeworks: []
+
+# ---------------------
+# Readme Generation
+# ---------------------
+
+documentation:
+  path: documentation
+  relative-paths:
+    partials: _partials
+    screenshots: screenshots
+    main-screenshot: # screenshots/main.png

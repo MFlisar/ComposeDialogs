@@ -1,0 +1,52 @@
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon : java/lang/Enum {
+	public static final field Check Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
+	public static final field Edit Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerKt {
+	public static final fun ColorPicker (Lcom/michaelflisar/composedialogs/dialogs/color/ColorUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;ZZLandroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle : java/lang/Enum {
+	public static final field Percent Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+	public static final field Value Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getApply ()Ljava/lang/String;
+	public final fun getCancel ()Ljava/lang/String;
+	public final fun getCustom ()Ljava/lang/String;
+	public final fun getEditColor ()Ljava/lang/String;
+	public final fun getInvalidColor ()Ljava/lang/String;
+	public final fun getPresets ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorTextStyle : java/lang/Enum {
+	public static final field BodyMedium Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;
+	public static final field BodySmall Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;
+	public static final field TitleSmall Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;
+	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;
+}
+
+public abstract interface class com/michaelflisar/composedialogs/dialogs/color/ColorUIProvider {
+	public abstract fun Card (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Icon-XO-JAsU (Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;Ljava/lang/String;JLandroidx/compose/runtime/Composer;I)V
+	public abstract fun Input (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ZLandroidx/compose/runtime/Composer;I)V
+	public abstract fun InputDialog (ZLjava/lang/String;Landroidx/compose/runtime/MutableState;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Slider (Landroidx/compose/ui/Modifier;FLkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun TabButton (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Text-xqIIw2o (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;Landroidx/compose/ui/graphics/Color;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun colorPresetShape (Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/Shape;
+}
+

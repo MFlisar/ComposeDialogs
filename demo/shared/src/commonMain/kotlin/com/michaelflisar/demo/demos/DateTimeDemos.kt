@@ -5,7 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Today
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +25,7 @@ import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterWeekDayLabe
 import com.michaelflisar.composedialogs.dialogs.date.rememberDialogDate
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.DialogTimeDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerInputType
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import kotlinx.datetime.DayOfWeek
 
@@ -42,8 +42,12 @@ fun DateTimeDemos(
         DemoDate1(style, icon, showInfo, true)
     }
     DemoRow {
-        DemoTime1(style, icon, showInfo, false)
-        DemoTime1(style, icon, showInfo, true)
+        DemoTime1(style, icon, showInfo, false, false)
+        DemoTime1(style, icon, showInfo, true, false)
+    }
+    DemoRow {
+        DemoTime1(style, icon, showInfo, false, true)
+        DemoTime1(style, icon, showInfo, true, true)
     }
 }
 
@@ -66,10 +70,8 @@ private fun RowScope.DemoDate1(
         )
         if (customSetup) {
             setup = DialogDateDefaults.setup(
-                buttonToday = { enabled, onClick ->
-                    FilledIconButton(onClick = onClick, enabled = enabled) {
-                        Icon(Icons.Default.Today, null)
-                    }
+                buttonToday = {
+                    Icon(Icons.Default.Today, null)
                 },
                 firstDayOfWeek = DayOfWeek.SUNDAY,
                 dateCellHeight = 32.dp,
@@ -127,7 +129,8 @@ private fun RowScope.DemoTime1(
     style: ComposeDialogStyle,
     icon: (@Composable () -> Unit)?,
     showInfo: (info: String) -> Unit,
-    is24Hours: Boolean
+    is24Hours: Boolean,
+    picker: Boolean
 ) {
     val state = rememberDialogState()
     // begin-snippet: Demos::demo-time
@@ -136,7 +139,12 @@ private fun RowScope.DemoTime1(
         // special state for time dialog
         val time = rememberDialogTime()
         // optional settings
-        val setup = DialogTimeDefaults.setup(is24Hours = is24Hours)
+        val setup = DialogTimeDefaults.setup(
+            is24Hours = is24Hours,
+            hourPickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
+            minutePickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
+            minuteStep = if (picker) 5 else 1
+        )
 
         DialogTime(
             state = state,
@@ -158,7 +166,7 @@ private fun RowScope.DemoTime1(
     DemoButton(
         Icons.Default.Schedule,
         "Time Dialog",
-        "Shows a time picker dialog (24h = $is24Hours)"
+        "Shows a time picker dialog (24h = $is24Hours, picker = $picker)"
     ) {
         state.show()
     }

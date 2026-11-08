@@ -3,7 +3,7 @@
 # --
 
 accompanist = 			    "0.37.3"
-composables =               "2.5.0"
+composables =               "2.10.2"
 
 [plugins]
 

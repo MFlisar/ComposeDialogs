@@ -18,6 +18,7 @@ plugins {
     // build tools
     alias(mflisar.plugins.kmpicon.plugin) apply false
     alias(mflisar.plugins.kmpdevtools.buildplugin) // apply, because this plugin does register gradle tasks in the root project!
+    alias(libs.plugins.launch4j) apply false
     alias(libs.plugins.buildkonfig) apply false
     // others
     // --

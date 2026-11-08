@@ -3,5 +3,9 @@
 
     <string name="composedialogs_color_label_presets">Presets</string>
     <string name="composedialogs_color_label_custom">Custom</string>
+    <string name="composedialogs_color_label_edit">Edit color</string>
+    <string name="composedialogs_color_error_invalid">Invalid color value</string>
+    <string name="composedialogs_color_action_apply">Apply</string>
+    <string name="composedialogs_color_action_cancel">Cancel</string>
 
 </resources>

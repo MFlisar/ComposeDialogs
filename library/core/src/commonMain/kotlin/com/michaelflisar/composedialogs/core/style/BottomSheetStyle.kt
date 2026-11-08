@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,10 +59,10 @@ import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogEvent
 import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.StyleOptions
+import com.michaelflisar.composedialogs.core.UpdateNavigationbarColor
 import com.michaelflisar.composedialogs.core.composables.ComposeDialogButtons
 import com.michaelflisar.composedialogs.core.composables.ComposeDialogContent
 import com.michaelflisar.composedialogs.core.composables.ComposeDialogTitle
-import com.michaelflisar.composedialogs.core.UpdateNavigationbarColor
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -240,23 +241,33 @@ internal class BottomSheetStyle(
             }
         ) {
             val bottomOfDragHandle = remember { mutableStateOf(0.dp) }
+            val bottomOfTitle = remember { mutableStateOf(0.dp) }
             val topOfButtons = remember { mutableStateOf(0.dp) }
             val buttonsOffset = remember { mutableStateOf(0.dp) }
+            val bottomOfHeader by remember {
+                derivedStateOf {
+                    bottomOfTitle.value.takeIf { it > 0.dp } ?: bottomOfDragHandle.value
+                }
+            }
 
-            LaunchedEffect(bottomOfDragHandle.value, topOfButtons.value) {
-                val offsetForButtons = if (bottomOfDragHandle.value > topOfButtons.value) {
-                    bottomOfDragHandle.value - topOfButtons.value
+            LaunchedEffect(bottomOfHeader, topOfButtons.value, bottomSheetState.offset) {
+                val offsetForButtons = if (
+                    bottomSheetState.offset > 0f &&
+                    bottomOfHeader > topOfButtons.value
+                ) {
+                    bottomOfHeader - topOfButtons.value
                 } else {
                     0.dp
                 }
-                //println("BOTTOMSHEET - bottomOfDragHandle: ${bottomOfDragHandle.value} | topOfButtons: ${topOfButtons.value} | offsetForButtons: $offsetForButtons")
                 buttonsOffset.value = offsetForButtons
             }
 
             val buttonsAreVisible = remember {
                 derivedStateOf {
                     bottomSheetState.currentDetent != SheetDetent.Hidden &&
-                    (bottomOfDragHandle.value == 0.dp || topOfButtons.value == 0.dp || bottomOfDragHandle.value > topOfButtons.value)
+                            (bottomOfHeader == 0.dp ||
+                                    topOfButtons.value == 0.dp ||
+                                    bottomOfHeader > topOfButtons.value)
                 }
             }
 
@@ -266,7 +277,7 @@ internal class BottomSheetStyle(
             Box(
                 modifier = Modifier
             ) {
-                val footerSize = remember { mutableStateOf(DpSize.Zero) }
+                val buttonsHeight = remember { mutableStateOf(0.dp) }
 
                 val dragHandleHeight = 4.dp
                 val dragHandleVerticalPadding = 22.dp
@@ -286,7 +297,6 @@ internal class BottomSheetStyle(
                                 Modifier
                             } else Modifier.padding(horizontal = 56.dp)
                         )
-                        //.statusBarsPadding()
                         .padding(
                             WindowInsets.navigationBars
                                 .only(WindowInsetsSides.Horizontal)
@@ -303,7 +313,6 @@ internal class BottomSheetStyle(
                     )
                     Sheet(
                         modifier = Modifier
-                            .statusBarsPadding()
                             .shadow(4.dp, shape)
                             .clip(shape)
                             .background(containerColor)
@@ -314,6 +323,17 @@ internal class BottomSheetStyle(
                         Column(
                             Modifier
                                 .fillMaxWidth()
+                                .padding(
+                                    WindowInsets.navigationBars
+                                        .only(WindowInsetsSides.Bottom)
+                                        .asPaddingValues()
+                                )
+                                .consumeWindowInsets(
+                                    WindowInsets.navigationBars
+                                        .only(WindowInsetsSides.Bottom)
+                                        .asPaddingValues()
+                                )
+                           //.statusBarsPadding()
 
                         ) {
 
@@ -325,7 +345,6 @@ internal class BottomSheetStyle(
                                             val position = it.positionOnScreen()
                                             bottomOfDragHandle.value =
                                                 with(density) { (position.y + it.size.height).toDp() }
-                                            //println("BOTTOMSHEET - drag handle position: $position")
                                         }
                                         .align(Alignment.CenterHorizontally)
                                         .padding(vertical = dragHandleVerticalPadding)
@@ -355,7 +374,12 @@ internal class BottomSheetStyle(
                             // 2) Icon + Title
                             ComposeDialogTitle(
                                 modifier = Modifier
-                                    .padding(horizontal = 24.dp),
+                                    .padding(horizontal = 24.dp)
+                                    .onGloballyPositioned {
+                                        val position = it.positionOnScreen()
+                                        bottomOfTitle.value =
+                                            with(density) { (position.y + it.size.height).toDp() }
+                                    },
                                 title = title,
                                 icon = icon,
                                 iconColor = iconColor,
@@ -369,12 +393,18 @@ internal class BottomSheetStyle(
                                 contentColor = contentColor,
                                 modifier = Modifier.weight(weight = 1f, fill = false)
                                     .padding(horizontal = 24.dp),
-                                bottomPadding = spacing.contentPadding(buttons)
+                                bottomPadding = 0.dp
                             )
 
-                            // 4) Footer
+                            val footerReserve =
+                                spacing.contentPadding(buttons) +
+                                        (if (buttons.enabled) buttonsHeight.value else 0.dp)
                             Spacer(
-                                modifier = Modifier.height(footerSize.value.height)
+                                modifier = Modifier.height(footerReserve)
+                            )
+
+                            Spacer(
+                                modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars)
                             )
                         }
                     }
@@ -384,7 +414,7 @@ internal class BottomSheetStyle(
                 val boxSize = remember { mutableStateOf(DpSize.Zero) }
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .align(Alignment.TopCenter)
                         .then(
                             if (isCompact) {
                                 Modifier
@@ -395,17 +425,21 @@ internal class BottomSheetStyle(
                                 .only(WindowInsetsSides.Horizontal)
                                 .asPaddingValues()
                         )
+                        .widthIn(max = 640.dp)
+                        .fillMaxWidth()
                         .fillMaxHeight()
                         .onSizeChanged {
                             boxSize.value =
                                 with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
                         }
                         .offset {
+                            val sheetOffset = with(density) { bottomSheetState.offset.toDp() }
+                            val yOffset =
+                                (boxSize.value.height - sheetOffset).toPx().roundToInt() * -1 +
+                                        with(density) { buttonsOffset.value.toPx().roundToInt() }
                             IntOffset(
                                 0,
-                                (boxSize.value.height - with(density) { bottomSheetState.offset.toDp() }).toPx()
-                                    .roundToInt() * -1
-                                        + with(density) { buttonsOffset.value.toPx().roundToInt() }
+                                yOffset
                             )
                         },
                     contentAlignment = Alignment.BottomCenter,
@@ -418,10 +452,6 @@ internal class BottomSheetStyle(
                                 if (topOfButtons.value == 0.dp)
                                     topOfButtons.value = with(density) { position.y.toDp() }
                             }
-                            .onSizeChanged {
-                                footerSize.value =
-                                    with(density) { DpSize(it.width.toDp(), it.height.toDp()) }
-                            }
                     ) {
                         Footer(
                             buttons = buttons,
@@ -430,6 +460,9 @@ internal class BottomSheetStyle(
                             containerColor = containerColor,
                             onDismiss = onDismiss,
                             setButtonPressed = { buttonPressed = it },
+                            onButtonsHeightChanged = {
+                                buttonsHeight.value = with(density) { it.toDp() }
+                            },
                             onEvent = onEvent
                         )
                     }
@@ -447,13 +480,15 @@ private fun ColumnScope.Footer(
     containerColor: Color,
     onDismiss: () -> Boolean,
     setButtonPressed: (value: Boolean) -> Unit,
+    onButtonsHeightChanged: (heightPx: Int) -> Unit,
     onEvent: (event: DialogEvent) -> Unit,
 ) {
     ComposeDialogButtons(
         modifier = Modifier
             .fillMaxWidth()
             .background(containerColor)
-            .padding(horizontal = 24.dp),
+            .padding(horizontal = 24.dp)
+            .onSizeChanged { onButtonsHeightChanged(it.height) },
         buttons = buttons,
         state = state,
         options = options,

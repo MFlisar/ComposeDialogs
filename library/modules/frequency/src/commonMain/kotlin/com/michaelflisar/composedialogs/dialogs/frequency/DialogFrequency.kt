@@ -1,24 +1,16 @@
 package com.michaelflisar.composedialogs.dialogs.frequency
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.BaseDialogState
 import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.Dialog
+import com.michaelflisar.composedialogs.core.DialogButtonType
 import com.michaelflisar.composedialogs.core.DialogButtons
 import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEvent
@@ -26,10 +18,8 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.FrequencyStateSaver
-import com.michaelflisar.composedialogs.dialogs.frequency.composables.DayOfMonth
-import com.michaelflisar.composedialogs.dialogs.frequency.composables.Dropdown
-import com.michaelflisar.composedialogs.dialogs.frequency.composables.NumericInput
-import com.michaelflisar.composedialogs.dialogs.frequency.composables.Time
+import com.michaelflisar.composedialogs.dialogs.time.DialogTime
+import com.michaelflisar.composedialogs.dialogs.time.DialogTimeDefaults
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.Month
@@ -46,6 +36,8 @@ import kotlinx.datetime.Month
  * @param texts the texts ([DialogFrequency.Texts]) that are used inside this dialog - use [DialogFrequencyDefaults.texts] to provide your own data
  * @param supportedTypes the supported frequency types - default is all types
  * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
+ * @param intervalInputType how the interval is entered
+ * @param timeSetup the setup used by the embedded time picker
  */
 @Composable
 fun DialogFrequency(
@@ -62,13 +54,20 @@ fun DialogFrequency(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
-    onEvent: (event: DialogEvent) -> Unit = {}
+    onEvent: (event: DialogEvent) -> Unit = {},
+    intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
+    timeSetup: DialogTime.Setup = DialogTimeDefaults.setup()
 )
 // end-snippet
 {
+    val positiveButtonEnabledBeforeValidation = remember(state) {
+        mutableStateOf<Boolean?>(null)
+    }
     if (state.visible) {
 
-        val selectedType = rememberSaveable { mutableStateOf(frequency.value.type) }
+        val selectedType = rememberSaveable {
+            mutableStateOf(frequency.value.type.toPickerType())
+        }
         val selectedTime = rememberDialogTime(frequency.value.time)
         val selectedDayOfWeek = rememberSaveable {
             mutableStateOf(
@@ -96,6 +95,20 @@ fun DialogFrequency(
             )
         }
         val selectedInterval = rememberSaveable { mutableStateOf<Int?>(frequency.value.interval) }
+        val intervalIsValid = selectedInterval.value?.let { it > 0 } == true
+
+        LaunchedEffect(intervalIsValid) {
+            if (intervalIsValid) {
+                positiveButtonEnabledBeforeValidation.value?.let { wasEnabled ->
+                    state.enableButton(DialogButtonType.Positive, wasEnabled)
+                    positiveButtonEnabledBeforeValidation.value = null
+                }
+            } else if (positiveButtonEnabledBeforeValidation.value == null) {
+                positiveButtonEnabledBeforeValidation.value =
+                    state.isButtonEnabled(DialogButtonType.Positive)
+                state.enableButton(DialogButtonType.Positive, false)
+            }
+        }
 
         // update frequency if something changes
         LaunchedEffect(
@@ -106,26 +119,29 @@ fun DialogFrequency(
             selectedMonthOfYear.value,
             selectedInterval.value
         ) {
-            val interval = selectedInterval.value ?: 1
+            val interval = selectedInterval.value
+            if (interval == null || interval <= 0) {
+                return@LaunchedEffect
+            }
             frequency.value = when (selectedType.value) {
-                Frequency.Type.Daily -> Frequency.Daily(
+                FrequencyPickerType.Daily -> Frequency.Daily(
                     interval = interval,
                     time = selectedTime.value
                 )
 
-                Frequency.Type.Weekly -> Frequency.Weekly(
+                FrequencyPickerType.Weekly -> Frequency.Weekly(
                     interval = interval,
                     dayOfWeek = selectedDayOfWeek.value,
                     time = selectedTime.value
                 )
 
-                Frequency.Type.Monthly -> Frequency.Monthly(
+                FrequencyPickerType.Monthly -> Frequency.Monthly(
                     interval = interval,
                     dayOfMonth = selectedDayOfMonth.value,
                     time = selectedTime.value
                 )
 
-                Frequency.Type.Yearly -> Frequency.Yearly(
+                FrequencyPickerType.Yearly -> Frequency.Yearly(
                     interval = interval,
                     month = selectedMonthOfYear.value,
                     dayOfMonth = selectedDayOfMonth.value,
@@ -141,97 +157,59 @@ fun DialogFrequency(
             style = style,
             buttons = buttons,
             options = options,
-            onEvent = onEvent
-        ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.animateContentSize()
-            ) {
-                // 1) Interval + Type
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                ) {
-                    Text(texts.every)
-                    NumericInput(
-                        modifier = Modifier.width(128.dp),
-                        title = texts.interval,
-                        value = selectedInterval,
-                    )
-                    Dropdown<Frequency.Type>(
-                        modifier = Modifier.wrapContentWidth(),
-                        items = supportedTypes,
-                        mapper = { item, dropdown ->
-                            texts.nameOfType(
-                                item,
-                                selectedInterval.value ?: 1
-                            )
-                        },
-                        selected = selectedType,
-                        title = texts.type
-                    )
-                }
-
-                // 2) Depending on type, show other inputs
-                when (selectedType.value) {
-                    Frequency.Type.Daily -> {
-                        Time(selectedTime, texts)
-                    }
-
-                    Frequency.Type.Weekly -> {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            com.michaelflisar.composedialogs.dialogs.frequency.composables.DayOfWeek(
-                                selectedDayOfWeek,
-                                firstDayOffset,
-                                texts,
-                                Modifier.weight(1f)
-                            )
-                            Time(selectedTime, texts, Modifier.weight(1f))
-                        }
-                    }
-
-                    Frequency.Type.Monthly -> {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            DayOfMonth(
-                                selectedMonthOfYear.value,
-                                selectedDayOfMonth,
-                                texts,
-                                Modifier.weight(1f)
-                            )
-                            Time(selectedTime, texts, Modifier.weight(1f))
-                        }
-                    }
-
-                    Frequency.Type.Yearly -> {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            com.michaelflisar.composedialogs.dialogs.frequency.composables.Month(
-                                selectedMonthOfYear,
-                                texts,
-                                Modifier.weight(1f)
-                            )
-                            DayOfMonth(
-                                selectedMonthOfYear.value,
-                                selectedDayOfMonth,
-                                texts,
-                                Modifier.weight(1f)
-                            )
-                            Time(selectedTime, texts, Modifier.weight(1f))
-                        }
+            onEvent = { event ->
+                if (event.dismissed) {
+                    positiveButtonEnabledBeforeValidation.value?.let { wasEnabled ->
+                        state.enableButton(DialogButtonType.Positive, wasEnabled)
+                        positiveButtonEnabledBeforeValidation.value = null
                     }
                 }
+                onEvent(event)
             }
+        ) {
+            FrequencyPicker(
+                uiProvider = Material3FrequencyUIProvider,
+                texts = FrequencyPickerTexts(
+                    interval = texts.interval,
+                    invalidInterval = texts.invalidInterval,
+                    type = texts.type,
+                    monthOfYear = texts.monthOfYear,
+                    dayOfMonth = texts.dayOfMonth,
+                    dayOfWeek = texts.dayOfWeek,
+                    time = texts.time,
+                    nameOfType = { type, interval ->
+                        texts.nameOfType(type.toFrequencyType(), interval)
+                    },
+                    nameOfDayOfWeek = texts.nameOfDayOfWeek,
+                    nameOfMonth = texts.nameOfMonth
+                ),
+                supportedTypes = supportedTypes.map { it.toPickerType() },
+                firstDayOffset = firstDayOffset,
+                selectedType = selectedType,
+                selectedTime = selectedTime,
+                selectedDayOfWeek = selectedDayOfWeek,
+                selectedDayOfMonth = selectedDayOfMonth,
+                selectedMonthOfYear = selectedMonthOfYear,
+                selectedInterval = selectedInterval,
+                intervalInputType = intervalInputType,
+                timeSetup = timeSetup
+            )
         }
     }
+}
+
+private fun Frequency.Type.toPickerType() = when (this) {
+    Frequency.Type.Daily -> FrequencyPickerType.Daily
+    Frequency.Type.Weekly -> FrequencyPickerType.Weekly
+    Frequency.Type.Monthly -> FrequencyPickerType.Monthly
+    Frequency.Type.Yearly -> FrequencyPickerType.Yearly
+}
+
+private fun FrequencyPickerType.toFrequencyType() = when (this) {
+    FrequencyPickerType.Daily -> Frequency.Type.Daily
+    FrequencyPickerType.Weekly -> Frequency.Type.Weekly
+    FrequencyPickerType.Monthly -> Frequency.Type.Monthly
+    FrequencyPickerType.Yearly -> Frequency.Type.Yearly
 }
 
 object DialogFrequency {
@@ -239,8 +217,8 @@ object DialogFrequency {
     @Immutable
     class Texts(
         val interval: String,
+        val invalidInterval: String,
         val type: String,
-        val every: String,
         val monthOfYear: String,
         val dayOfMonth: String,
         val dayOfWeek: String,
@@ -265,4 +243,3 @@ fun rememberDialogFrequency(
 ): MutableState<Frequency> {
     return rememberSaveable(saver = FrequencyStateSaver) { mutableStateOf(frequency) }
 }
-
