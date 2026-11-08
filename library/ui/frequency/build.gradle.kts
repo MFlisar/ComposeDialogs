@@ -26,6 +26,7 @@ val buildTargets = Targets(
     Target.ANDROID,
     Target.IOS,
     Target.JVM,
+    Target.MACOS,
     Target.WASM
 )
 val androidConfig = AndroidLibraryConfig.create(
@@ -65,8 +66,9 @@ kotlin {
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
             api(libs.jetbrains.kotlinx.datetime)
-            api(project(":composedialogs:modules:time"))
             implementation(libs.jetbrains.compose.animation)
+
+            api(project(":composedialogs:modules:time"))
         }
     }
 }
