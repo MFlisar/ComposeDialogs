@@ -34,7 +34,7 @@ val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
-    enableAndroidResources = false
+    enableAndroidResources = true
 )
 
 compose.resources {
