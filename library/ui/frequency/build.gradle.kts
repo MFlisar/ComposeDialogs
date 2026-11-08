@@ -68,7 +68,7 @@ kotlin {
             api(libs.jetbrains.kotlinx.datetime)
             implementation(libs.jetbrains.compose.animation)
 
-            api(project(":composedialogs:modules:time"))
+            api(project(":composedialogs:ui:time"))
         }
     }
 }
