@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.michaelflisar.composedialogs.dialogs.time.DialogTime
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.Month
@@ -77,7 +77,7 @@ interface FrequencyUIProvider {
     fun TimeInput(
         selectedTime: MutableState<LocalTime>,
         title: String,
-        setup: DialogTime.Setup,
+        setup: TimePickerSetup,
         modifier: Modifier
     )
 

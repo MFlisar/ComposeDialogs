@@ -51,11 +51,6 @@ val androidConfig = AndroidLibraryConfig.create(
 // Kotlin
 // -------------------
 
-compose.resources {
-    packageOfResClass = "${module.projectNamespace}.date.resources"
-    publicResClass = true
-}
-
 dependencies {
     coreLibraryDesugaring(libs.desugar)
 }
@@ -101,7 +96,6 @@ kotlin {
             implementation(libs.jetbrains.kotlinx.serialization.json)
 
             // Compose + AndroidX
-            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.ui)
             implementation(libs.jetbrains.compose.ui.backhandler)

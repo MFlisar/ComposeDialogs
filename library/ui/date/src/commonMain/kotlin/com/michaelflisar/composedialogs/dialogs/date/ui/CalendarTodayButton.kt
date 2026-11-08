@@ -10,11 +10,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.michaelflisar.composedialogs.dialogs.date.DatePickerButtonType
 import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
 @Composable
-fun CalendarTodayButton(
+internal fun CalendarTodayButton(
     buttonToday: @Composable () -> Unit,
     date: MutableState<LocalDate>,
     todayPage: Int,

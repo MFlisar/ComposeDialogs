@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composedialogs_color_label_presets">Tabelle</string>
+    <string name="composedialogs_color_label_custom">Manuell</string>
+    <string name="composedialogs_color_label_edit">Farbe bearbeiten</string>
+    <string name="composedialogs_color_error_invalid">Ungültiger Farbwert</string>
+    <string name="composedialogs_color_action_apply">Übernehmen</string>
+    <string name="composedialogs_color_action_cancel">Abbrechen</string>
+</resources>

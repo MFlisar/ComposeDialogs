@@ -2,18 +2,36 @@ package com.michaelflisar.composedialogs.dialogs.date
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.date.resources.Res
-import com.michaelflisar.composedialogs.date.resources.composedialogs_date_today
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
-import org.jetbrains.compose.resources.stringResource
 
 @Stable
 object DialogDateDefaults {
+
+    @Immutable
+    class Setup internal constructor(
+        val buttonToday: (@Composable () -> Unit)?,
+        val firstDayOfWeek: DayOfWeek,
+        val formatterWeekDayLabel: @Composable (date: DayOfWeek) -> String,
+        val formatterSelectedDate: @Composable (date: LocalDate) -> String,
+        val formatterSelectedMonth: @Composable (month: Month) -> String,
+        val formatterSelectedYear: @Composable (year: Int) -> String,
+        val formatterMonthSelectorList: @Composable (month: Month) -> String,
+        val formatterYearSelectorList: @Composable (year: Int) -> String,
+        val dateCellHeight: Dp,
+        val showNextPreviousMonthButtons: Boolean,
+        val showNextPreviousYearButtons: Boolean
+    )
+
+    @Immutable
+    class Range internal constructor(
+        val years: IntRange
+    )
 
     /**
      * @param buttonToday the optional content of the today button that is displayed at top next to the selected date
@@ -28,13 +46,13 @@ object DialogDateDefaults {
      * @param showNextPreviousMonthButtons if true, the decrease/increase buttons next to the select month are shown
      * @param showNextPreviousYearButtons if true, the decrease/increase buttons next to the select year are shown
      *
-     * @return a [DialogDate.Setup]
+     * @return a [DialogDateDefaults.Setup]
      *
      */
     @Composable
     fun setup(
         buttonToday: (@Composable () -> Unit)? = {
-            Text(text = stringResource(Res.string.composedialogs_date_today))
+            Text(text = DatePickerDefaults.texts().today)
         },
         firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
         formatterWeekDayLabel: @Composable (dayOfWeek: DayOfWeek) -> String = {
@@ -54,7 +72,7 @@ object DialogDateDefaults {
         dateCellHeight: Dp = 48.dp,
         showNextPreviousMonthButtons: Boolean = true,
         showNextPreviousYearButtons: Boolean = true
-    ) = DialogDate.Setup(
+    ) = Setup(
         buttonToday,
         firstDayOfWeek,
         formatterWeekDayLabel,
@@ -71,9 +89,9 @@ object DialogDateDefaults {
     /**
      * @param years the range that will be supported by the date picker
      *
-     * @return a [DialogDate.Range]
+     * @return a [DialogDateDefaults.Range]
      */
     fun dateRange(
         years: IntRange = 1900..2100
-    ) = DialogDate.Range(years)
+    ) = Range(years)
 }

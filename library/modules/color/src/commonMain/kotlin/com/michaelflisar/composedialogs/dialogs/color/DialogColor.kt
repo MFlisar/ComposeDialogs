@@ -23,6 +23,8 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaver
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorStateSaverNullable
 import com.michaelflisar.composedialogs.dialogs.color.classes.ColorDefinitions
+import com.michaelflisar.composedialogs.dialogs.color.internal.ColorPage
+import com.michaelflisar.composedialogs.dialogs.color.internal.Material3ColorUIProvider
 import com.michaelflisar.composedialogs.core.BaseDialogState
 
 // begin-snippet: DialogColor::constructor
@@ -34,7 +36,7 @@ import com.michaelflisar.composedialogs.core.BaseDialogState
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param color the selected color state
- * @param texts the texts ([DialogColor.Texts]) that are used inside this dialog - use [DialogColorDefaults.texts] to provide your own data
+ * @param texts the texts ([ColorPickerTexts]) that are used inside this dialog - use [ColorPickerDefaults.texts] to provide your own data
  * @param alphaSupported if true, the dialog supports color alpha values
  * @param directEditSupported if true, the custom color page allows direct editing of the color value
  * @param shape the shape of the color cells
@@ -49,7 +51,7 @@ fun DialogColor(
     // Custom - Required
     color: MutableState<Color>,
     // Custom - Optional
-    texts: DialogColor.Texts = DialogColorDefaults.texts(),
+    texts: ColorPickerTexts = ColorPickerDefaults.texts(),
     alphaSupported: Boolean = true,
     directEditSupported: Boolean = true,
     shape: Shape = MaterialTheme.shapes.small,
@@ -75,7 +77,7 @@ fun DialogColor(
         )
     }
         val selectedAlpha = rememberSaveable { mutableFloatStateOf(color.value.alpha) }
-        val colorState = rememberSaveable { mutableStateOf(DialogColor.Page.Presets) }
+        val colorState = rememberSaveable { mutableStateOf(ColorPage.Presets) }
         val updateSelectedPresetColors = {
             selectedMainColor.value = DialogColorUtil.getNearestColorGroup(color.value)
             selectedSubColor.value = null
@@ -86,14 +88,7 @@ fun DialogColor(
             ColorPicker(
                 uiProvider = Material3ColorUIProvider,
                 color = color,
-                texts = ColorPickerTexts(
-                    presets = texts.presets,
-                    custom = texts.custom,
-                    editColor = texts.editColor,
-                    invalidColor = texts.invalidColor,
-                    apply = texts.apply,
-                    cancel = texts.cancel
-                ),
+                texts = texts,
                 alphaSupported = alphaSupported,
                 directEditSupported = directEditSupported,
                 shape = shape,
@@ -103,7 +98,7 @@ fun DialogColor(
                     DialogColor.LabelStyle.Percent -> ColorPickerLabelStyle.Percent
                 },
                 landscape = isLandscape(),
-                customPage = colorState.value == DialogColor.Page.Custom,
+                customPage = colorState.value == ColorPage.Custom,
                 selectedSubColor = selectedSubColor,
                 selectedPresetsLevel = selectedPresetsLevel,
                 selectedAlpha = selectedAlpha,
@@ -120,11 +115,11 @@ fun DialogColor(
                     color.value = selectedSubColor.value!!.copy(selectedAlpha.value)
                 },
                 onPresetsClick = {
-                    colorState.value = DialogColor.Page.Presets
+                    colorState.value = ColorPage.Presets
                     selectedSubColor.value = null
                     selectedPresetsLevel.value = 0
                 },
-                onCustomClick = { colorState.value = DialogColor.Page.Custom },
+                onCustomClick = { colorState.value = ColorPage.Custom },
                 updateSelectedPresetColors = updateSelectedPresetColors
             )
         }
@@ -132,12 +127,6 @@ fun DialogColor(
 
 @Stable
 object DialogColor {
-
-    @Immutable
-    internal enum class Page {
-        Custom,
-        Presets
-    }
 
     /**
      * enum to define how rgba values of a color are displayed (percentages or a value in the range of [0, 255])
@@ -147,19 +136,6 @@ object DialogColor {
         Value,
         Percent
     }
-
-    /**
-     * see [DialogColorDefaults.texts]
-     */
-    @Immutable
-    class Texts internal constructor(
-        val presets: String,
-        val custom: String,
-        val editColor: String,
-        val invalidColor: String,
-        val apply: String,
-        val cancel: String
-    )
 
 }
 

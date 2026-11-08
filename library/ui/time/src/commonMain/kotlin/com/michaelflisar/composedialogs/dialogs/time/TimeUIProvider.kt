@@ -13,16 +13,6 @@ enum class TimePickerPeriod {
     PM
 }
 
-/** Localized labels and validation messages used by the time controls. */
-class TimePickerTexts(
-    val hour: String,
-    val minute: String,
-    val am: String,
-    val pm: String,
-    val invalidHour: String,
-    val invalidMinute: String
-)
-
 /** UI rendering contract for the time picker's labels and controls. */
 interface TimeUIProvider {
 

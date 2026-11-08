@@ -38,7 +38,7 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param frequency the frequency state of the dialog
- * @param texts the texts ([DialogFrequency.Texts]) that are used inside this dialog - use [DialogFrequencyDefaults.texts] to provide your own data
+ * @param texts the texts ([FrequencyPickerTexts]) that are used inside this dialog - use [FrequencyPickerDefaults.texts] to provide your own data
  * @param supportedTypes the supported frequency types - default is all types
  * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
  * @param intervalInputType how the interval is entered
@@ -50,7 +50,7 @@ fun DialogFrequency(
     // Custom - Required
     frequency: MutableState<Frequency>,
     // Custom - Optional
-    texts: DialogFrequency.Texts = DialogFrequencyDefaults.texts(),
+    texts: FrequencyPickerTexts = FrequencyPickerDefaults.texts(),
     supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
     firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
     // Base Dialog - Optional
@@ -61,7 +61,7 @@ fun DialogFrequency(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
     intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: DialogTime.Setup = DialogTimeDefaults.setup()
+    timeSetup: TimePickerSetup = TimePickerDefaults.setup()
 )
 ```
 <!-- endSnippet -->

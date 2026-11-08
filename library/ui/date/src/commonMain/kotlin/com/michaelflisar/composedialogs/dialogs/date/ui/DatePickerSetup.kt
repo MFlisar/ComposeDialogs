@@ -1,12 +1,14 @@
 package com.michaelflisar.composedialogs.dialogs.date.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.Dp
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
-class DatePickerSetup(
+@Immutable
+data class DatePickerSetup(
     val buttonToday: (@Composable () -> Unit)?,
     val firstDayOfWeek: DayOfWeek,
     val formatterWeekDayLabel: @Composable (date: DayOfWeek) -> String,
@@ -20,4 +22,5 @@ class DatePickerSetup(
     val showNextPreviousYearButtons: Boolean
 )
 
-class DatePickerRange(val years: IntRange)
+@Immutable
+data class DatePickerRange(val years: IntRange)

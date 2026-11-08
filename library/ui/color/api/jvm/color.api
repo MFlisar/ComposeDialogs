@@ -1,3 +1,58 @@
+public final class com/michaelflisar/composedialogs/color/resources/ActualResourceCollectorsKt {
+	public static final fun getAllDrawableResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllFontResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllPluralStringResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringArrayResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringResources (Lcom/michaelflisar/composedialogs/color/resources/Res;)Ljava/util/Map;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res;
+	public final fun getUri (Ljava/lang/String;)Ljava/lang/String;
+	public final fun readBytes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$array {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$array;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$drawable {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$drawable;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$font {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$font;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$plurals {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$plurals;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/Res$string {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/color/resources/Res$string;
+}
+
+public final class com/michaelflisar/composedialogs/color/resources/String0_commonMainKt {
+	public static final fun getComposedialogs_color_action_apply (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_action_cancel (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_error_invalid (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_label_custom (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_label_edit (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_color_label_presets (Lcom/michaelflisar/composedialogs/color/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerDefaults;
+	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon : java/lang/Enum {
 	public static final field Check Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
 	public static final field Edit Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon;
@@ -20,8 +75,6 @@ public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerLab
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts {
 	public static final field $stable I
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getApply ()Ljava/lang/String;
 	public final fun getCancel ()Ljava/lang/String;
 	public final fun getCustom ()Ljava/lang/String;

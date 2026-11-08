@@ -88,7 +88,7 @@ kotlin {
             implementation(libs.jetbrains.compose.material.icons.core)
 
             // library
-            implementation(project(":composedialogs:ui:frequency"))
+            api(project(":composedialogs:ui:frequency"))
             implementation(project(":composedialogs:core"))
             implementation(project(":composedialogs:modules:time"))
         }

@@ -2,34 +2,8 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogDefa
 	public static final fun styleWindowsFrequencyDialog-xUkhVMw (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Ljava/lang/String;Landroidx/compose/ui/window/WindowPosition;FFJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 }
 
-public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency {
-	public static final field $stable I
-	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency;
-}
-
-public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency$Texts {
-	public static final field $stable I
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
-	public final fun getDayOfMonth ()Ljava/lang/String;
-	public final fun getDayOfWeek ()Ljava/lang/String;
-	public final fun getInterval ()Ljava/lang/String;
-	public final fun getInvalidInterval ()Ljava/lang/String;
-	public final fun getMonthOfYear ()Ljava/lang/String;
-	public final fun getNameOfDayOfWeek ()Lkotlin/jvm/functions/Function1;
-	public final fun getNameOfMonth ()Lkotlin/jvm/functions/Function1;
-	public final fun getNameOfType ()Lkotlin/jvm/functions/Function2;
-	public final fun getTime ()Ljava/lang/String;
-	public final fun getType ()Ljava/lang/String;
-}
-
-public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequencyDefaults {
-	public static final field $stable I
-	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/frequency/DialogFrequencyDefaults;
-	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency$Texts;
-}
-
 public final class com/michaelflisar/composedialogs/dialogs/frequency/DialogFrequencyKt {
-	public static final fun DialogFrequency (Lcom/michaelflisar/composedialogs/core/BaseDialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/frequency/DialogFrequency$Texts;Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime$Setup;Landroidx/compose/runtime/Composer;III)V
+	public static final fun DialogFrequency (Lcom/michaelflisar/composedialogs/core/BaseDialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Landroidx/compose/runtime/Composer;III)V
 	public static final fun rememberDialogFrequency (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
 }
 

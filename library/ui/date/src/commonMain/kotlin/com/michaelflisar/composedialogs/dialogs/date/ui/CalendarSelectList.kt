@@ -22,7 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerRange
 import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerViewState
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Month
 import com.michaelflisar.composedialogs.dialogs.date.DatePickerIcon
@@ -30,7 +31,7 @@ import com.michaelflisar.composedialogs.dialogs.date.DateTextStyle
 import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 
 @Composable
-fun CalendarSelectListYear(
+internal fun CalendarSelectListYear(
     pageData: State<CalendarPageData>,
     setup: DatePickerSetup,
     dateRange: DatePickerRange,
@@ -54,7 +55,7 @@ fun CalendarSelectListYear(
 }
 
 @Composable
-fun CalendarSelectListMonth(
+internal fun CalendarSelectListMonth(
     pageData: State<CalendarPageData>,
     setup: DatePickerSetup,
     pagerState: PagerState,

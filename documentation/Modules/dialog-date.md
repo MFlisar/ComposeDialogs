@@ -80,16 +80,16 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param date the selected date state
- * @param dateRange the supported [DialogDate.Range] - use [DialogDateDefaults.dateRange] to provide your own data
- * @param setup the [DialogDate.Setup] - use [DialogDateDefaults.setup] to provide your own data
+ * @param dateRange the supported [DialogDateDefaults.Range] - use [DialogDateDefaults.dateRange] to provide your own data
+ * @param setup the [DialogDateDefaults.Setup] - use [DialogDateDefaults.setup] to provide your own data
  */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DialogDate(
     state: BaseDialogState,
     date: MutableState<LocalDate>,
-    dateRange: DialogDate.Range = DialogDateDefaults.dateRange(),
-    setup: DialogDate.Setup = DialogDateDefaults.setup(),
+    dateRange: DialogDateDefaults.Range = DialogDateDefaults.dateRange(),
+    setup: DialogDateDefaults.Setup = DialogDateDefaults.setup(),
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),

@@ -15,8 +15,8 @@ import com.michaelflisar.composedialogs.dialogs.frequency.ui.DayOfMonth
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.DayOfWeek
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.Month
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.NumericInput
-import com.michaelflisar.composedialogs.dialogs.time.DialogTime
-import com.michaelflisar.composedialogs.dialogs.time.DialogTimeDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
 import kotlinx.datetime.DayOfWeek as DateDayOfWeek
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.Month as DateMonth
@@ -47,7 +47,7 @@ fun FrequencyPicker(
     selectedMonthOfYear: MutableState<DateMonth>,
     selectedInterval: MutableState<Int?>,
     intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: DialogTime.Setup = DialogTimeDefaults.setup()
+    timeSetup: TimePickerSetup = TimePickerDefaults.setup()
 ) {
     val ui = uiProvider
     val interval = selectedInterval.value

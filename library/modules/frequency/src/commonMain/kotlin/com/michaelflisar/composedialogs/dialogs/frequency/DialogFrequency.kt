@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.frequency
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -18,9 +17,10 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.FrequencyStateSaver
-import com.michaelflisar.composedialogs.dialogs.time.DialogTime
-import com.michaelflisar.composedialogs.dialogs.time.DialogTimeDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
+import com.michaelflisar.composedialogs.dialogs.frequency.internal.Material3FrequencyUIProvider
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.Month
 
@@ -33,7 +33,7 @@ import kotlinx.datetime.Month
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param frequency the frequency state of the dialog
- * @param texts the texts ([DialogFrequency.Texts]) that are used inside this dialog - use [DialogFrequencyDefaults.texts] to provide your own data
+ * @param texts the texts ([FrequencyPickerTexts]) that are used inside this dialog - use [FrequencyPickerDefaults.texts] to provide your own data
  * @param supportedTypes the supported frequency types - default is all types
  * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
  * @param intervalInputType how the interval is entered
@@ -45,7 +45,7 @@ fun DialogFrequency(
     // Custom - Required
     frequency: MutableState<Frequency>,
     // Custom - Optional
-    texts: DialogFrequency.Texts = DialogFrequencyDefaults.texts(),
+    texts: FrequencyPickerTexts = FrequencyPickerDefaults.texts(),
     supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
     firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
     // Base Dialog - Optional
@@ -56,7 +56,7 @@ fun DialogFrequency(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
     intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: DialogTime.Setup = DialogTimeDefaults.setup()
+    timeSetup: TimePickerSetup = TimePickerDefaults.setup()
 )
 // end-snippet
 {
@@ -169,20 +169,7 @@ fun DialogFrequency(
         ) {
             FrequencyPicker(
                 uiProvider = Material3FrequencyUIProvider,
-                texts = FrequencyPickerTexts(
-                    interval = texts.interval,
-                    invalidInterval = texts.invalidInterval,
-                    type = texts.type,
-                    monthOfYear = texts.monthOfYear,
-                    dayOfMonth = texts.dayOfMonth,
-                    dayOfWeek = texts.dayOfWeek,
-                    time = texts.time,
-                    nameOfType = { type, interval ->
-                        texts.nameOfType(type.toFrequencyType(), interval)
-                    },
-                    nameOfDayOfWeek = texts.nameOfDayOfWeek,
-                    nameOfMonth = texts.nameOfMonth
-                ),
+                texts = texts,
                 supportedTypes = supportedTypes.map { it.toPickerType() },
                 firstDayOffset = firstDayOffset,
                 selectedType = selectedType,
@@ -203,31 +190,6 @@ private fun Frequency.Type.toPickerType() = when (this) {
     Frequency.Type.Weekly -> FrequencyPickerType.Weekly
     Frequency.Type.Monthly -> FrequencyPickerType.Monthly
     Frequency.Type.Yearly -> FrequencyPickerType.Yearly
-}
-
-private fun FrequencyPickerType.toFrequencyType() = when (this) {
-    FrequencyPickerType.Daily -> Frequency.Type.Daily
-    FrequencyPickerType.Weekly -> Frequency.Type.Weekly
-    FrequencyPickerType.Monthly -> Frequency.Type.Monthly
-    FrequencyPickerType.Yearly -> Frequency.Type.Yearly
-}
-
-object DialogFrequency {
-
-    @Immutable
-    class Texts(
-        val interval: String,
-        val invalidInterval: String,
-        val type: String,
-        val monthOfYear: String,
-        val dayOfMonth: String,
-        val dayOfWeek: String,
-        val time: String,
-        val nameOfType: (day: Frequency.Type, interval: Int) -> String,
-        val nameOfDayOfWeek: (day: DayOfWeek) -> String,
-        val nameOfMonth: (month: Month) -> String
-    )
-
 }
 
 /**

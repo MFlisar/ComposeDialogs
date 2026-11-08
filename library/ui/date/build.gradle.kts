@@ -36,6 +36,11 @@ val androidConfig = AndroidLibraryConfig.create(
     enableAndroidResources = false
 )
 
+compose.resources {
+    packageOfResClass = "${module.projectNamespace}.date.resources"
+    publicResClass = true
+}
+
 kotlin {
     //-------------
     // Targets
@@ -66,6 +71,7 @@ kotlin {
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
             api(libs.jetbrains.kotlinx.datetime)
+            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.ui.backhandler)
         }

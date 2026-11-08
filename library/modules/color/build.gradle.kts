@@ -50,11 +50,6 @@ val androidConfig = AndroidLibraryConfig.create(
 // Kotlin
 // -------------------
 
-compose.resources {
-    packageOfResClass = "${module.projectNamespace}.color.resources"
-    publicResClass = true
-}
-
 kotlin {
 
     //-------------
@@ -88,7 +83,6 @@ kotlin {
             implementation(libs.jetbrains.kotlinx.coroutines.core)
 
             // Compose + AndroidX
-            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.ui.backhandler)
             implementation(libs.jetbrains.compose.material.icons.core)
@@ -98,7 +92,7 @@ kotlin {
             implementation(mflisar.composecolors.material.palette)
 
             // library
-            implementation(project(":composedialogs:ui:color"))
+            api(project(":composedialogs:ui:color"))
             implementation(project(":composedialogs:core"))
             implementation(project(":composedialogs:modules:input"))
 

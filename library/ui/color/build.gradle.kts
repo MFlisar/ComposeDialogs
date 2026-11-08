@@ -36,6 +36,11 @@ val androidConfig = AndroidLibraryConfig.create(
     enableAndroidResources = false
 )
 
+compose.resources {
+    packageOfResClass = "${module.projectNamespace}.color.resources"
+    publicResClass = true
+}
+
 kotlin {
     //-------------
     // Targets
@@ -65,6 +70,7 @@ kotlin {
             api(libs.jetbrains.compose.runtime)
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.ui.backhandler)
         }

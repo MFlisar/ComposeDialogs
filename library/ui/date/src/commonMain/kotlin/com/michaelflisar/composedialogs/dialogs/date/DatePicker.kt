@@ -22,8 +22,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarPageData
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerViewState
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerRange
 import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarHeader

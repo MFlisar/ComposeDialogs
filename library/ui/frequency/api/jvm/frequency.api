@@ -20,13 +20,18 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyI
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType$Input;
 }
 
+public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerDefaults {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerDefaults;
+	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerKt {
-	public static final fun FrequencyPicker (Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyUIProvider;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime$Setup;Landroidx/compose/runtime/Composer;III)V
+	public static final fun FrequencyPicker (Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyUIProvider;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Landroidx/compose/runtime/Composer;III)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts {
 	public static final field $stable I
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
 	public final fun getDayOfMonth ()Ljava/lang/String;
 	public final fun getDayOfWeek ()Ljava/lang/String;
 	public final fun getInterval ()Ljava/lang/String;
@@ -68,7 +73,7 @@ public abstract interface class com/michaelflisar/composedialogs/dialogs/frequen
 	public abstract fun MonthDropdown (Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/util/List;Lkotlinx/datetime/Month;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun NumberInput-Yjv_luQ (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;IZLandroidx/compose/runtime/Composer;I)V
 	public abstract fun Text-KAKpwIw (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyTextStyle;Landroidx/compose/ui/graphics/Color;Landroidx/compose/ui/text/style/TextAlign;IILandroidx/compose/runtime/Composer;I)V
-	public abstract fun TimeInput (Landroidx/compose/runtime/MutableState;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime$Setup;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun TimeInput (Landroidx/compose/runtime/MutableState;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/ui/DayOfMonthKt {
@@ -85,5 +90,82 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/ui/InputBu
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/ui/MonthKt {
 	public static final fun Month (Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyUIProvider;Landroidx/compose/runtime/MutableState;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/ActualResourceCollectorsKt {
+	public static final fun getAllDrawableResources (Lcom/michaelflisar/composedialogs/frequency/resources/Res;)Ljava/util/Map;
+	public static final fun getAllFontResources (Lcom/michaelflisar/composedialogs/frequency/resources/Res;)Ljava/util/Map;
+	public static final fun getAllPluralStringResources (Lcom/michaelflisar/composedialogs/frequency/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringArrayResources (Lcom/michaelflisar/composedialogs/frequency/resources/Res;)Ljava/util/Map;
+	public static final fun getAllStringResources (Lcom/michaelflisar/composedialogs/frequency/resources/Res;)Ljava/util/Map;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res;
+	public final fun getUri (Ljava/lang/String;)Ljava/lang/String;
+	public final fun readBytes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res$array {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res$array;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res$drawable {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res$drawable;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res$font {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res$font;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res$plurals {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res$plurals;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/Res$string {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;
+}
+
+public final class com/michaelflisar/composedialogs/frequency/resources/String0_commonMainKt {
+	public static final fun getComposedialogs_frequency_day (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_day_of_month (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_day_of_week (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_day_plural (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_frequency (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_interval (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_invalid_interval (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_month (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_month_of_year (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_month_plural (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_april (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_august (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_december (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_february (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_january (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_july (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_june (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_march (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_may (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_november (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_october (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_monthname_september (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_time (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_week (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_week_plural (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_friday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_monday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_saturday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_sunday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_thursday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_tuesday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_weekday_wednesday (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_year (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
+	public static final fun getComposedialogs_frequency_year_plural (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
 }
 

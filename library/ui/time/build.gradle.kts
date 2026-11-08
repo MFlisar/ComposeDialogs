@@ -3,6 +3,7 @@ import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.configs.AndroidLibraryConfig
 import com.michaelflisar.kmpdevtools.configs.LibraryModuleConfig
 import com.michaelflisar.kmpdevtools.core.Target
+import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
     alias(libs.plugins.jetbrains.kotlin.multiplatform)
@@ -36,6 +37,11 @@ val androidConfig = AndroidLibraryConfig.create(
     enableAndroidResources = false
 )
 
+compose.resources {
+    packageOfResClass = "${module.projectNamespace}.time.resources"
+    publicResClass = true
+}
+
 kotlin {
     //-------------
     // Targets
@@ -55,7 +61,11 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        // --
+        val nativeMain by creating { dependsOn(commonMain.get()) }
+
+        setupDependencies(module, buildTargets, sourceSets) {
+            Target.LIST_APPLE addSourceSet nativeMain
+        }
 
         // ---------------------
         // dependencies
@@ -66,6 +76,7 @@ kotlin {
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
             api(libs.jetbrains.kotlinx.datetime)
+            implementation(libs.jetbrains.compose.components.resources)
         }
     }
 }

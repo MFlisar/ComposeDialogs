@@ -1,5 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.time
 
+import com.michaelflisar.composedialogs.dialogs.time.internal.Material3TimeUIProvider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
@@ -21,7 +22,7 @@ import kotlinx.datetime.LocalTime
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param time the selected time
- * @param setup the [DialogTime.Setup] - use [DialogTimeDefaults.setup] to provide your own data
+ * @param setup the [TimePickerSetup] - use [TimePickerDefaults.setup] to provide your own data
  * @param texts localized labels for the hour, minute, and AM/PM controls
  * @param uiProvider the UI implementation used to render the time controls
  */
@@ -31,7 +32,7 @@ fun DialogTime(
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional
-    setup: DialogTime.Setup = DialogTimeDefaults.setup(),
+    setup: TimePickerSetup = TimePickerDefaults.setup(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -39,7 +40,7 @@ fun DialogTime(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    texts: TimePickerTexts = DialogTimeDefaults.texts(),
+    texts: TimePickerTexts = TimePickerDefaults.texts(),
     uiProvider: TimeUIProvider = Material3TimeUIProvider
 )
 // end-snippet
@@ -93,23 +94,6 @@ fun DialogTime(
 
 @Stable
 object DialogTime {
-
-    /**
-     * time setup
-     *
-     * check out [DialogTimeDefaults.setup]
-     */
-    class Setup internal constructor(
-        //val seconds: Boolean = false,
-        val is24Hours: Boolean,
-        val minuteStep: Int,
-        val hourPickType: TimePickerInputType,
-        val minutePickType: TimePickerInputType
-    ) {
-        init {
-            require(minuteStep in 1..60) { "minuteStep must be between 1 and 60" }
-        }
-    }
 
     val LocalTimeSaver = Saver<MutableState<LocalTime>, Int>(
         save = { it.value.toSecondOfDay() },

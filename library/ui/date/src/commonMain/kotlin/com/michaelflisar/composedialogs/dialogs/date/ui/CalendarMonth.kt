@@ -27,7 +27,7 @@ import com.michaelflisar.composedialogs.dialogs.date.DateColor
 import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 
 @Composable
-fun CalendarMonth(
+internal fun CalendarMonth(
     state: MutableState<LocalDate>,
     setup: DatePickerSetup,
     year: Int,

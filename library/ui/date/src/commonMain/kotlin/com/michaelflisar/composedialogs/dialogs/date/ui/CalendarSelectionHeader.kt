@@ -8,12 +8,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import com.michaelflisar.composedialogs.dialogs.date.DatePickerButtonType
 import com.michaelflisar.composedialogs.dialogs.date.DateTextStyle
 import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 
 @Composable
-fun CalendarSelectionHeader(
+internal fun CalendarSelectionHeader(
     state: MutableState<LocalDate>,
     setup: DatePickerSetup,
     pagerState: PagerState,

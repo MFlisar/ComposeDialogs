@@ -24,7 +24,7 @@ import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterSelectedMon
 import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterWeekDayLabel
 import com.michaelflisar.composedialogs.dialogs.date.rememberDialogDate
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
-import com.michaelflisar.composedialogs.dialogs.time.DialogTimeDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerInputType
 import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
 import kotlinx.datetime.DayOfWeek
@@ -139,7 +139,7 @@ private fun RowScope.DemoTime1(
         // special state for time dialog
         val time = rememberDialogTime()
         // optional settings
-        val setup = DialogTimeDefaults.setup(
+        val setup = TimePickerDefaults.setup(
             is24Hours = is24Hours,
             hourPickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
             minutePickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,

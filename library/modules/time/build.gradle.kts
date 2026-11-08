@@ -47,19 +47,9 @@ val androidConfig = AndroidLibraryConfig.create(
     enableAndroidResources = true
 )
 
-compose.resources {
-    packageOfResClass = "${module.projectNamespace}.time.resources"
-    publicResClass = true
-}
-
 // -------------------
 // Kotlin
 // -------------------
-
-compose.resources {
-    packageOfResClass = "${module.projectNamespace}.time.resources"
-    publicResClass = true
-}
 
 dependencies {
     coreLibraryDesugaring(libs.desugar)
@@ -105,8 +95,6 @@ kotlin {
             api(libs.jetbrains.kotlinx.datetime)
 
             // Compose + AndroidX
-            implementation(libs.jetbrains.compose.components.resources)
-            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.material3)
 
             // library

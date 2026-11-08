@@ -19,7 +19,7 @@ if (state.visible) {
     // special state for time dialog
     val time = rememberDialogTime()
     // optional settings
-    val setup = DialogTimeDefaults.setup(
+    val setup = TimePickerDefaults.setup(
         is24Hours = is24Hours,
         hourPickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
         minutePickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
@@ -57,7 +57,7 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param time the selected time
- * @param setup the [DialogTime.Setup] - use [DialogTimeDefaults.setup] to provide your own data
+ * @param setup the [TimePickerSetup] - use [TimePickerDefaults.setup] to provide your own data
  * @param texts localized labels for the hour, minute, and AM/PM controls
  * @param uiProvider the UI implementation used to render the time controls
  */
@@ -67,7 +67,7 @@ fun DialogTime(
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional
-    setup: DialogTime.Setup = DialogTimeDefaults.setup(),
+    setup: TimePickerSetup = TimePickerDefaults.setup(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -75,7 +75,7 @@ fun DialogTime(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    texts: TimePickerTexts = DialogTimeDefaults.texts(),
+    texts: TimePickerTexts = TimePickerDefaults.texts(),
     uiProvider: TimeUIProvider = Material3TimeUIProvider
 )
 ```

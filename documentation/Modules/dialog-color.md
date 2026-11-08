@@ -47,7 +47,7 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param color the selected color state
- * @param texts the texts ([DialogColor.Texts]) that are used inside this dialog - use [DialogColorDefaults.texts] to provide your own data
+ * @param texts the texts ([ColorPickerTexts]) that are used inside this dialog - use [ColorPickerDefaults.texts] to provide your own data
  * @param alphaSupported if true, the dialog supports color alpha values
  * @param directEditSupported if true, the custom color page allows direct editing of the color value
  * @param shape the shape of the color cells
@@ -62,7 +62,7 @@ fun DialogColor(
     // Custom - Required
     color: MutableState<Color>,
     // Custom - Optional
-    texts: DialogColor.Texts = DialogColorDefaults.texts(),
+    texts: ColorPickerTexts = ColorPickerDefaults.texts(),
     alphaSupported: Boolean = true,
     directEditSupported: Boolean = true,
     shape: Shape = MaterialTheme.shapes.small,
