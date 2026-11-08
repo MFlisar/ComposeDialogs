@@ -16,7 +16,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.minimumInteractiveComponentSize as material3MinimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -27,12 +26,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.core.DialogContentScrollableLazyColumn
-import com.michaelflisar.composedialogs.dialogs.date.DateColor
-import com.michaelflisar.composedialogs.dialogs.date.DatePickerButtonType
-import com.michaelflisar.composedialogs.dialogs.date.DatePickerIcon
-import com.michaelflisar.composedialogs.dialogs.date.DateTextStyle
-import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 import kotlinx.datetime.LocalDate
+import androidx.compose.material3.minimumInteractiveComponentSize as material3MinimumInteractiveComponentSize
 
 internal object Material3DateUIProvider : DateUIProvider {
     @Composable
@@ -166,7 +161,10 @@ internal object Material3DateUIProvider : DateUIProvider {
                     .clip(MaterialTheme.shapes.small)
                     .background(MaterialTheme.colorScheme.primary)
             ) {
-                androidx.compose.material3.Text(date.day.toString(), color = MaterialTheme.colorScheme.onPrimary)
+                androidx.compose.material3.Text(
+                    date.day.toString(),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         } else {
             Box(

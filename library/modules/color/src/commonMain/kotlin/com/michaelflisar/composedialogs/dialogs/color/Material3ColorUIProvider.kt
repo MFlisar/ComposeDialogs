@@ -3,8 +3,8 @@ package com.michaelflisar.composedialogs.dialogs.color
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -167,7 +167,8 @@ internal object Material3ColorUIProvider : ColorUIProvider {
                         }
 
                         DialogEventType.ButtonNegative,
-                        DialogEventType.Dismissed -> onDismissRequest()
+                        DialogEventType.Dismissed,
+                            -> onDismissRequest()
                     }
                 }
             )
