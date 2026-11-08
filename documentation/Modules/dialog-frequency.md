@@ -41,6 +41,8 @@ if (state.visible) {
  * @param texts the texts ([DialogFrequency.Texts]) that are used inside this dialog - use [DialogFrequencyDefaults.texts] to provide your own data
  * @param supportedTypes the supported frequency types - default is all types
  * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
+ * @param intervalInputType how the interval is entered
+ * @param timeSetup the setup used by the embedded time picker
  */
 @Composable
 fun DialogFrequency(
@@ -57,7 +59,9 @@ fun DialogFrequency(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
-    onEvent: (event: DialogEvent) -> Unit = {}
+    onEvent: (event: DialogEvent) -> Unit = {},
+    intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
+    timeSetup: DialogTime.Setup = DialogTimeDefaults.setup()
 )
 ```
 <!-- endSnippet -->

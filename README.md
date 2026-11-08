@@ -1,120 +1,59 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composedialogs/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composedialogs/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeDialogs.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composedialogs/core?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composedialogs/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeDialogs.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeDialogs
-![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge)
 
 This library offers you an easily extendible compose framework for modal dialogs and allows to show them as a **dialog**, **bottom sheet** or even as **full screen dialog**.
 
 > [!NOTE]
 > All features are splitted into separate modules, just include the modules you want to use!
 
+> [!TIP]
+> Try the interactive demo:
+> 
+> [![Open Interactive Demo](https://img.shields.io/badge/ComposeDialogs_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeDialogs/demo/)
+
 # Table of Contents
 
-- [Screenshots](#camera-screenshots)
 - [Supported Platforms](#computer-supported-platforms)
 - [Versions](#arrow_right-versions)
 - [Setup](#wrench-setup)
 - [Usage](#rocket-usage)
-- [Modules](#file_folder-modules)
 - [Demo](#sparkles-demo)
-- [More](#information_source-more)
 - [API](#books-api)
 - [Other Libraries](#bulb-other-libraries)
 
-# :camera: Screenshots
-
-### color
-
-|  |  |  |
-|---|---|---|
-| ![demo_color1](documentation/screenshots/color/demo_color1.jpg) | ![demo_color2](documentation/screenshots/color/demo_color2.jpg) | ![demo_color3](documentation/screenshots/color/demo_color3.jpg) |
-| ![demo_color4](documentation/screenshots/color/demo_color4.jpg) |
-
-### date
-
-|  |  |  |
-|---|---|---|
-| ![demo_calendar1](documentation/screenshots/date/demo_calendar1.jpg) | ![demo_calendar2](documentation/screenshots/date/demo_calendar2.jpg) | ![demo_calendar3](documentation/screenshots/date/demo_calendar3.jpg) |
-
-### frequency
-
-|  |  |  |
-|---|---|---|
-| ![demo_frequency1](documentation/screenshots/frequency/demo_frequency1.png) | ![demo_frequency2](documentation/screenshots/frequency/demo_frequency2.png) | ![demo_frequency3](documentation/screenshots/frequency/demo_frequency3.png) |
-| ![demo_frequency4](documentation/screenshots/frequency/demo_frequency4.png) |
-
-### info
-
-|  |  |  |
-|---|---|---|
-| ![demo_info1](documentation/screenshots/info/demo_info1.jpg) | ![demo_info2](documentation/screenshots/info/demo_info2.jpg) | ![demo_info3](documentation/screenshots/info/demo_info3.jpg) |
-| ![demo_info4](documentation/screenshots/info/demo_info4.jpg) |
-
-### input
-
-|  |  |  |
-|---|---|---|
-| ![demo_input1](documentation/screenshots/input/demo_input1.jpg) | ![demo_input2](documentation/screenshots/input/demo_input2.jpg) |
-
-### list
-
-|  |  |  |
-|---|---|---|
-| ![demo_list1](documentation/screenshots/list/demo_list1.jpg) | ![demo_list2](documentation/screenshots/list/demo_list2.jpg) | ![demo_list3](documentation/screenshots/list/demo_list3.jpg) |
-| ![demo_list4](documentation/screenshots/list/demo_list4.jpg) | ![demo_list5](documentation/screenshots/list/demo_list5.jpg) | ![demo_list6](documentation/screenshots/list/demo_list6.jpg) |
-| ![demo_list7](documentation/screenshots/list/demo_list7.jpg) |
-
-### menu
-
-|  |  |  |
-|---|---|---|
-| ![demo_menu1](documentation/screenshots/menu/demo_menu1.jpg) |
-
-### number
-
-|  |  |  |
-|---|---|---|
-| ![demo_number1](documentation/screenshots/number/demo_number1.jpg) | ![demo_number2](documentation/screenshots/number/demo_number2.jpg) | ![demo_number3](documentation/screenshots/number/demo_number3.jpg) |
-
-### progress
-
-|  |  |  |
-|---|---|---|
-| ![demo_progress1](documentation/screenshots/progress/demo_progress1.jpg) | ![demo_progress2](documentation/screenshots/progress/demo_progress2.jpg) |
-
-### time
-
-|  |  |  |
-|---|---|---|
-| ![demo_time1](documentation/screenshots/time/demo_time1.jpg) | ![demo_time2](documentation/screenshots/time/demo_time2.jpg) |
-
 # :computer: Supported Platforms
 
-| Module | android | iOS | windows | wasm | Notes |
-|---|---|---|---|---|---|
-| core | ✅ | ✅ | ✅ | ✅ | provides all the basic dialog classes and styles |
-| dialog-color | ✅ | ✅ | ✅ | ✅ | provides a color dialog |
-| dialog-date | ✅ | ✅ | ✅ | ✅ | provides a date picker dialog |
-| dialog-info | ✅ | ✅ | ✅ | ✅ | provides an info dialog |
-| dialog-input | ✅ | ✅ | ✅ | ✅ | provides an input dialog |
-| dialog-list | ✅ | ✅ | ✅ | ✅ | provides a list dialog |
-| dialog-menu | ✅ | ✅ | ✅ | ✅ | provides a menu dialog |
-| dialog-number | ✅ | ✅ | ✅ | ✅ | provides a number picker dialog |
-| dialog-progress | ✅ | ✅ | ✅ | ✅ | provides a progress dialog |
-| dialog-time | ✅ | ✅ | ✅ | ✅ | provides a time dialog |
-| dialog-frequency | ✅ | ✅ | ✅ | ✅ | provides a frequency dialog (daily, weekly, monthly, yearly) |
+| Module | Notes |
+|---|---|
+| core | provides the basic dialog classes and styles |
+| dialog-color | provides a color dialog |
+| dialog-date | provides a date picker dialog |
+| dialog-frequency | provides a frequency dialog |
+| dialog-info | provides an info dialog |
+| dialog-input | provides an input dialog |
+| dialog-list | provides a list dialog |
+| dialog-menu | provides a menu dialog |
+| dialog-number | provides a number picker dialog |
+| dialog-progress | provides a progress dialog |
+| dialog-time | provides a time dialog |
+| ui-color | provides toolkit-neutral UI for the color picker |
+| ui-date | provides toolkit-neutral UI for the date picker |
+| ui-frequency | provides toolkit-neutral UI for the frequency picker |
+| ui-time | provides toolkit-neutral UI for the time picker |
 
 # :arrow_right: Versions
 
 | Dependency | Version |
 |---|---|
-| Kotlin | `2.4.0` |
-| Jetbrains Compose | `1.11.1` |
+| Kotlin | `2.4.21` |
+| Jetbrains Compose | `1.12.2` |
 | Jetbrains Compose Material3 | `1.9.0` |
 
 > :warning: Following experimental annotations are used:
 > - **OptIn**
->   - `androidx.compose.material3.ExperimentalMaterial3Api` (5x)
->   - `androidx.compose.ui.ExperimentalComposeUiApi` (5x)
+>   - `androidx.compose.material3.ExperimentalMaterial3Api` (4x)
+>   - `androidx.compose.ui.ExperimentalComposeUiApi` (7x)
 >
 > I try to use as less experimental features as possible, but in this case the ones above are needed!
 
@@ -138,6 +77,7 @@ composedialogs = "<LATEST-VERSION>"
 composedialogs-core = { module = "io.github.mflisar.composedialogs:core", version.ref = "composedialogs" }
 composedialogs-dialog-color = { module = "io.github.mflisar.composedialogs:dialog-color", version.ref = "composedialogs" }
 composedialogs-dialog-date = { module = "io.github.mflisar.composedialogs:dialog-date", version.ref = "composedialogs" }
+composedialogs-dialog-frequency = { module = "io.github.mflisar.composedialogs:dialog-frequency", version.ref = "composedialogs" }
 composedialogs-dialog-info = { module = "io.github.mflisar.composedialogs:dialog-info", version.ref = "composedialogs" }
 composedialogs-dialog-input = { module = "io.github.mflisar.composedialogs:dialog-input", version.ref = "composedialogs" }
 composedialogs-dialog-list = { module = "io.github.mflisar.composedialogs:dialog-list", version.ref = "composedialogs" }
@@ -145,7 +85,10 @@ composedialogs-dialog-menu = { module = "io.github.mflisar.composedialogs:dialog
 composedialogs-dialog-number = { module = "io.github.mflisar.composedialogs:dialog-number", version.ref = "composedialogs" }
 composedialogs-dialog-progress = { module = "io.github.mflisar.composedialogs:dialog-progress", version.ref = "composedialogs" }
 composedialogs-dialog-time = { module = "io.github.mflisar.composedialogs:dialog-time", version.ref = "composedialogs" }
-composedialogs-dialog-frequency = { module = "io.github.mflisar.composedialogs:dialog-frequency", version.ref = "composedialogs" }
+composedialogs-ui-color = { module = "io.github.mflisar.composedialogs:ui-color", version.ref = "composedialogs" }
+composedialogs-ui-date = { module = "io.github.mflisar.composedialogs:ui-date", version.ref = "composedialogs" }
+composedialogs-ui-frequency = { module = "io.github.mflisar.composedialogs:ui-frequency", version.ref = "composedialogs" }
+composedialogs-ui-time = { module = "io.github.mflisar.composedialogs:ui-time", version.ref = "composedialogs" }
 ```
 
 And then use the definitions in your projects **build.gradle.kts** file like following:
@@ -154,6 +97,7 @@ And then use the definitions in your projects **build.gradle.kts** file like fol
 implementation(libs.composedialogs.core)
 implementation(libs.composedialogs.dialog.color)
 implementation(libs.composedialogs.dialog.date)
+implementation(libs.composedialogs.dialog.frequency)
 implementation(libs.composedialogs.dialog.info)
 implementation(libs.composedialogs.dialog.input)
 implementation(libs.composedialogs.dialog.list)
@@ -161,7 +105,10 @@ implementation(libs.composedialogs.dialog.menu)
 implementation(libs.composedialogs.dialog.number)
 implementation(libs.composedialogs.dialog.progress)
 implementation(libs.composedialogs.dialog.time)
-implementation(libs.composedialogs.dialog.frequency)
+implementation(libs.composedialogs.ui.color)
+implementation(libs.composedialogs.ui.date)
+implementation(libs.composedialogs.ui.frequency)
+implementation(libs.composedialogs.ui.time)
 ```
 
 </details>
@@ -180,6 +127,7 @@ val composedialogs = "<LATEST-VERSION>"
 implementation("io.github.mflisar.composedialogs:core:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-color:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-date:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:dialog-frequency:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-info:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-input:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-list:${composedialogs}")
@@ -187,7 +135,10 @@ implementation("io.github.mflisar.composedialogs:dialog-menu:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-number:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-progress:${composedialogs}")
 implementation("io.github.mflisar.composedialogs:dialog-time:${composedialogs}")
-implementation("io.github.mflisar.composedialogs:dialog-frequency:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:ui-color:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:ui-date:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:ui-frequency:${composedialogs}")
+implementation("io.github.mflisar.composedialogs:ui-time:${composedialogs}")
 ```
 
 </details>
@@ -277,38 +228,18 @@ Check out the advanced region on the side for more details.
 
 Check out all the modules to find out more about the available implementations.
 
-# :file_folder: Modules
-
-- [core](documentation/Modules/core.md)
-- [dialog-color](documentation/Modules/dialog-color.md)
-- [dialog-date](documentation/Modules/dialog-date.md)
-- [dialog-frequency](documentation/Modules/dialog-frequency.md)
-- [dialog-info](documentation/Modules/dialog-info.md)
-- [dialog-input](documentation/Modules/dialog-input.md)
-- [dialog-list](documentation/Modules/dialog-list.md)
-- [dialog-menu](documentation/Modules/dialog-menu.md)
-- [dialog-number](documentation/Modules/dialog-number.md)
-- [dialog-progress](documentation/Modules/dialog-progress.md)
-- [dialog-time](documentation/Modules/dialog-time.md)
-
 # :sparkles: Demo
 
-A full [demo](/demo) is included inside the demo module, it shows nearly every usage with working examples.
-
-# :information_source: More
-
-- Advanced
-  - [Buttons](documentation/Advanced/Buttons.md)
-  - [Custom Dialog](documentation/Advanced/Custom%20Dialog.md)
-  - [Events](documentation/Advanced/Events.md)
-  - [Styles](documentation/Advanced/Styles.md)
-- Migration
-  - [v2](documentation/Migration/v2.md)
+A [demo project](demo) is included.
 
 # :books: API
 
-Check out the [API documentation](https://MFlisar.github.io/ComposeDialogs/).
+Check out the [API documentation](https://MFlisar.github.io/ComposeDialogs/api/).
 
 # :bulb: Other Libraries
 
-You can find more libraries (all multiplatform) of mine that all do work together nicely [here](https://mflisar.github.io/Libraries/).
+You can find more of my multiplatform libraries that work well together [here](https://mflisar.github.io/Libraries/).
+
+# :twisted_rightwards_arrows: Compatibility
+
+When combining my libraries, you can find compatibility information [here](https://mflisar.github.io/Libraries/compatibilities/).
