@@ -23,10 +23,8 @@ if (state.visible) {
     )
     if (customSetup) {
         setup = DialogDateDefaults.setup(
-            buttonToday = { enabled, onClick ->
-                FilledIconButton(onClick = onClick, enabled = enabled) {
-                    Icon(Icons.Default.Today, null)
-                }
+            buttonToday = {
+                Icon(Icons.Default.Today, null)
             },
             firstDayOfWeek = DayOfWeek.SUNDAY,
             dateCellHeight = 32.dp,
@@ -89,19 +87,49 @@ if (state.visible) {
 @Composable
 fun DialogDate(
     state: BaseDialogState,
-    // Custom - Required
     date: MutableState<LocalDate>,
-    // Custom - Optional
     dateRange: DialogDate.Range = DialogDateDefaults.dateRange(),
     setup: DialogDate.Setup = DialogDateDefaults.setup(),
-    // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {}
-)
+) {
+    val landscape = isLandscape()
+    Dialog(
+        state,
+        title?.takeIf { !landscape },
+        icon?.takeIf { !landscape },
+        style,
+        buttons,
+        options,
+        onEvent = onEvent
+    ) {
+        DatePicker(
+            uiProvider = Material3DateUIProvider,
+            date = date,
+            dateRange = DatePickerRange(dateRange.years),
+            setup = DatePickerSetup(
+                setup.buttonToday,
+                setup.firstDayOfWeek,
+                setup.formatterWeekDayLabel,
+                setup.formatterSelectedDate,
+                setup.formatterSelectedMonth,
+                setup.formatterSelectedYear,
+                setup.formatterMonthSelectorList,
+                setup.formatterYearSelectorList,
+                setup.dateCellHeight,
+                setup.showNextPreviousMonthButtons,
+                setup.showNextPreviousYearButtons
+            ),
+            landscape = landscape,
+            title = title,
+            icon = icon
+        )
+    }
+}
 ```
 <!-- endSnippet -->
 
