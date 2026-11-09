@@ -40,11 +40,19 @@ dependencyResolutionManagement    {
 pluginManagement {
 
     repositories {
+
+        // main
         mavenCentral()
         google()
         gradlePluginPortal()
-        maven("https://jitpack.io")
+
+        // mine
+        maven("https://raw.githubusercontent.com/MFlisar/maven-repository/refs/heads/main/artifacts")
+        // local
         mavenLocal()
+
+        // jitpack
+        maven("https://jitpack.io")
     }
 }
 
@@ -54,7 +62,7 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.3.0"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.3.3"
 }
 
 // --------------

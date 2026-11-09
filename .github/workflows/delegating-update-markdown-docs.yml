@@ -10,6 +10,6 @@ permissions:
 
 jobs:
   update-markdown-docs:
-    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-update-markdown-docs.yml@9.3.0
+    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-update-markdown-docs.yml@9.3.3
     with:
       config-file: .config.yml
