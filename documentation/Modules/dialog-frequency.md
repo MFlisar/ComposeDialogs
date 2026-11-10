@@ -11,7 +11,8 @@ Check out the composable and it's documentation in the code snipplet below.
 <!-- snippet: Demos::demo-frequency -->
 ```kt
 if (state.visible) {
-    val frequency = rememberDialogFrequency(Frequency.Weekly(DayOfWeek.MONDAY, LocalTime(12, 0), 1))
+    val frequency =
+        rememberFrequency(Frequency.Weekly(DayOfWeek.MONDAY, LocalTime(12, 0), 1))
     DialogFrequency(
         state = state,
         frequency = frequency,
@@ -37,7 +38,7 @@ if (state.visible) {
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
- * @param frequency the frequency state of the dialog
+ * @param frequency the frequency state of the dialog - use [com.michaelflisar.composedialogs.dialogs.frequency.classes.rememberFrequency] to create a state for this parameter
  * @param texts the texts ([FrequencyPickerTexts]) that are used inside this dialog - use [FrequencyPickerDefaults.texts] to provide your own data
  * @param supportedTypes the supported frequency types - default is all types
  * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
@@ -61,7 +62,7 @@ fun DialogFrequency(
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
     intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: TimePickerSetup = TimePickerDefaults.setup()
+    timeSetup: TimePickerSetup = TimePickerDefaults.setup(),
 )
 ```
 <!-- endSnippet -->
