@@ -9,7 +9,7 @@ import com.michaelflisar.composedialogs.core.ComposeDialogStyle
 import com.michaelflisar.composedialogs.core.rememberDialogState
 import com.michaelflisar.composedialogs.dialogs.frequency.DialogFrequency
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
-import com.michaelflisar.composedialogs.dialogs.frequency.rememberDialogFrequency
+import com.michaelflisar.composedialogs.dialogs.frequency.classes.rememberFrequency
 import com.michaelflisar.democomposables.DemoButton
 import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.democomposables.layout.DemoRow
@@ -36,7 +36,8 @@ private fun RowScope.DemoFrequency1(
     val state = rememberDialogState()
     // begin-snippet: Demos::demo-frequency
     if (state.visible) {
-        val frequency = rememberDialogFrequency(Frequency.Weekly(DayOfWeek.MONDAY, LocalTime(12, 0), 1))
+        val frequency =
+            rememberFrequency(Frequency.Weekly(DayOfWeek.MONDAY, LocalTime(12, 0), 1))
         DialogFrequency(
             state = state,
             frequency = frequency,

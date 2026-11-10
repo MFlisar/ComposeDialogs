@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.frequency.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -12,11 +11,12 @@ import kotlinx.datetime.DayOfWeek
 @Composable
 fun DayOfWeek(
     uiProvider: FrequencyUIProvider,
-    selectedDayOfWeek: MutableState<DayOfWeek>,
+    selectedDayOfWeek: DayOfWeek,
     firstDayOffset: DayOfWeek,
     title: String,
     nameOfDay: (DayOfWeek) -> String,
-    modifier: Modifier = Modifier.Companion
+    modifier: Modifier = Modifier.Companion,
+    onDaySelected: (DayOfWeek) -> Unit
 ) {
     val items by remember {
         derivedStateOf {
@@ -32,8 +32,8 @@ fun DayOfWeek(
         modifier = modifier,
         items = items,
         itemText = nameOfDay,
-        selected = selectedDayOfWeek.value,
+        selected = selectedDayOfWeek,
         title = title,
-        onItemSelected = { selectedDayOfWeek.value = it }
+        onItemSelected = onDaySelected
     )
 }

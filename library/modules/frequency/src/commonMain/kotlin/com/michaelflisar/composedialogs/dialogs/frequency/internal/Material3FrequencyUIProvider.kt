@@ -5,7 +5,7 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +18,8 @@ import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogNumberInp
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogTextDropdown
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
+import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
+import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import kotlinx.datetime.LocalTime
 import com.michaelflisar.composedialogs.dialogs.frequency.*
 
@@ -128,22 +130,30 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
 
     @Composable
     override fun TimeInput(
-        selectedTime: MutableState<LocalTime>,
+        selectedTime: LocalTime,
+        onTimeSelected: (LocalTime) -> Unit,
         title: String,
         setup: TimePickerSetup,
         modifier: Modifier,
     ) {
+        val selectedTimeState = rememberDialogTime(selectedTime)
+        LaunchedEffect(selectedTime) {
+            selectedTimeState.value = selectedTime
+        }
+        LaunchedEffect(selectedTimeState.value) {
+            onTimeSelected(selectedTimeState.value)
+        }
         val dialogState = rememberDialogState()
         InputButton(
             modifier = modifier,
             title = title,
-            value = selectedTime.value.toString(),
+            value = selectedTimeState.value.toString(),
             onClick = { dialogState.show() }
         )
         if (dialogState.visible) {
             DialogTime(
                 state = dialogState,
-                time = selectedTime,
+                time = selectedTimeState,
                 setup = setup,
                 title = { Text(title) }
             )
@@ -190,10 +200,10 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
     override fun FrequencyTypeDropdown(
         modifier: Modifier,
         title: String,
-        items: List<FrequencyPickerType>,
-        selected: FrequencyPickerType,
-        itemText: (FrequencyPickerType) -> String,
-        onItemSelected: (FrequencyPickerType) -> Unit,
+        items: List<Frequency.Type>,
+        selected: Frequency.Type,
+        itemText: (Frequency.Type) -> String,
+        onItemSelected: (Frequency.Type) -> Unit,
     ) {
         DropdownImpl(modifier, title, items, selected, itemText, onItemSelected)
     }

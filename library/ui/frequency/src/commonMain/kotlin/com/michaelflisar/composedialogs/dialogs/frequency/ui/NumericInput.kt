@@ -31,7 +31,7 @@ internal  fun <T : Number> NumericInput(
     readOnly: Boolean = false,
     onValueChange: (T?) -> Unit = {}
 ) {
-    val text = remember { mutableStateOf(value?.toString() ?: "") }
+    val text = remember(value) { mutableStateOf(value?.toString() ?: "") }
     uiProvider.NumberInput(
         modifier = modifier,
         value = text.value,

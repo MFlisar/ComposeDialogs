@@ -1,6 +1,11 @@
 package com.michaelflisar.composedialogs.dialogs.frequency.classes
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -19,12 +24,22 @@ import kotlinx.datetime.toLocalDateTime
 @Immutable
 sealed class Frequency {
 
+    object Saver : androidx.compose.runtime.saveable.Saver<MutableState<Frequency>, String> {
+        override fun restore(value: String): MutableState<Frequency> {
+            return mutableStateOf(Frequency.deserialize(value))
+        }
+
+        override fun SaverScope.save(value: MutableState<Frequency>): String {
+            return value.value.serialize()
+        }
+    }
+
     fun serialize(): String {
         return when (this) {
-            is Frequency.Daily -> "D|${time}|${interval}"
-            is Frequency.Weekly -> "W|${dayOfWeek}|${time}|${interval}"
-            is Frequency.Monthly -> "M|${dayOfMonth}|${time}|${interval}"
-            is Frequency.Yearly -> "Y|${month}|${dayOfMonth}|${time}|${interval}"
+            is Daily -> "D|${time}|${interval}"
+            is Weekly -> "W|${dayOfWeek}|${time}|${interval}"
+            is Monthly -> "M|${dayOfMonth}|${time}|${interval}"
+            is Yearly -> "Y|${month}|${dayOfMonth}|${time}|${interval}"
         }
     }
 
@@ -253,4 +268,18 @@ sealed class Frequency {
         }
     }
 
+}
+
+/**
+ * convenient function for [Frequency]
+ *
+ * @param frequency the frequency state of the dialog
+ *
+ * @return a state holding the current frequency value
+ */
+@Composable
+fun rememberFrequency(
+    frequency: Frequency,
+): MutableState<Frequency> {
+    return rememberSaveable(saver = Frequency.Saver) { mutableStateOf(frequency) }
 }

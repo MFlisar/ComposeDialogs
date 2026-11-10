@@ -3,6 +3,7 @@ package com.michaelflisar.composedialogs.dialogs.frequency
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.frequency.resources.Res
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_day
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_day_of_month
@@ -51,7 +52,7 @@ class FrequencyPickerTexts internal constructor(
     val dayOfMonth: String,
     val dayOfWeek: String,
     val time: String,
-    val nameOfType: (type: FrequencyPickerType, interval: Int) -> String,
+    val nameOfType: (type: Frequency.Type, interval: Int) -> String,
     val nameOfDayOfWeek: (day: DayOfWeek) -> String,
     val nameOfMonth: (month: Month) -> String
 )
@@ -67,7 +68,7 @@ object FrequencyPickerDefaults {
         dayOfMonth: String = stringResource(Res.string.composedialogs_frequency_day_of_month),
         dayOfWeek: String = stringResource(Res.string.composedialogs_frequency_day_of_week),
         time: String = stringResource(Res.string.composedialogs_frequency_time),
-        nameOfType: ((type: FrequencyPickerType, interval: Int) -> String)? = null,
+        nameOfType: ((type: Frequency.Type, interval: Int) -> String)? = null,
         nameOfDayOfWeek: ((day: DayOfWeek) -> String)? = null,
         nameOfMonth: ((month: Month) -> String)? = null
     ): FrequencyPickerTexts {
@@ -109,10 +110,10 @@ object FrequencyPickerDefaults {
             time = time,
             nameOfType = nameOfType ?: { frequencyType, count ->
                 val singularAndPlural = when (frequencyType) {
-                    FrequencyPickerType.Daily -> day to dayPlural
-                    FrequencyPickerType.Weekly -> week to weekPlural
-                    FrequencyPickerType.Monthly -> month to monthPlural
-                    FrequencyPickerType.Yearly -> year to yearPlural
+                    Frequency.Type.Daily -> day to dayPlural
+                    Frequency.Type.Weekly -> week to weekPlural
+                    Frequency.Type.Monthly -> month to monthPlural
+                    Frequency.Type.Yearly -> year to yearPlural
                 }
                 if (count == 1) singularAndPlural.first else singularAndPlural.second
             },

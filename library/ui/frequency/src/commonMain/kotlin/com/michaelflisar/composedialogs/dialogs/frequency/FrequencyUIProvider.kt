@@ -1,11 +1,11 @@
 package com.michaelflisar.composedialogs.dialogs.frequency
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalTime
@@ -72,10 +72,11 @@ interface FrequencyUIProvider {
         onClick: () -> Unit
     )
 
-    /** Renders the time slot and its time-picker dialog using the supplied setup. */
+    /** Renders the time slot and its time-picker dialog, reporting edits through [onTimeSelected]. */
     @Composable
     fun TimeInput(
-        selectedTime: MutableState<LocalTime>,
+        selectedTime: LocalTime,
+        onTimeSelected: (LocalTime) -> Unit,
         title: String,
         setup: TimePickerSetup,
         modifier: Modifier
@@ -119,10 +120,10 @@ interface FrequencyUIProvider {
     fun FrequencyTypeDropdown(
         modifier: Modifier,
         title: String,
-        items: List<FrequencyPickerType>,
-        selected: FrequencyPickerType,
-        itemText: (FrequencyPickerType) -> String,
-        onItemSelected: (FrequencyPickerType) -> Unit
+        items: List<Frequency.Type>,
+        selected: Frequency.Type,
+        itemText: (Frequency.Type) -> String,
+        onItemSelected: (Frequency.Type) -> Unit
     )
 
 }
