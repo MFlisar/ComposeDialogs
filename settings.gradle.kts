@@ -62,7 +62,7 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.3.3"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.3.9"
 }
 
 // --------------

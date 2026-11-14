@@ -43,7 +43,9 @@ project:
 apps:
   - name: ComposeDialogs Demo
     namespace: com.michaelflisar.composedialogs.demo
-    version-name: 1.0.0
+    version:
+      code: 1
+      name: 1.0.0
     module-paths:
       - demo/app/android
       - demo/app/jvm

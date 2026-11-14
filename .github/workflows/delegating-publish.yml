@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   publish:
-    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-publish.yml@9.3.3
+    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-publish.yml@9.3.9
     with:
       version: ${{ inputs.version }}
       target: ${{ inputs.target }}

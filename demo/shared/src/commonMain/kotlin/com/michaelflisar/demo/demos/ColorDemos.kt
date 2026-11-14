@@ -60,7 +60,7 @@ private fun RowScope.DemoColor1(
     DemoButton(
         icon = Icons.Default.ColorLens,
         label = "Show Color Dialog",
-        description = "Shows a color dialog (alpha supported)"
+        description = "Shows a color dialog (alpha supported, 0-255 labels, direct edit enabled)"
     ) {
         state.show()
     }
@@ -80,6 +80,7 @@ private fun RowScope.DemoColor2(
             color = color,
             alphaSupported = false,
             labelStyle = DialogColor.LabelStyle.Percent,
+            directEditSupported = false,
             icon = icon,
             title = { Text("Color Dialog") },
             style = style,
@@ -96,7 +97,7 @@ private fun RowScope.DemoColor2(
     DemoButton(
         icon = Icons.Default.ColorLens,
         label = "Show Color Dialog",
-        description = "Shows a color dialog (alpha NOT supported + RGB values are shown in percentages in all sliders)"
+        description = "Shows a color dialog (alpha NOT supported + RGB values are shown in percentages in all sliders, no direct edit)"
     ) {
         state.show()
     }

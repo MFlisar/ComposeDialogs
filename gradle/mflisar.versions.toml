@@ -6,7 +6,7 @@ composecolors =             "2.0.0"
 
 # plugins only
 kmpicon-plugin =            "1.0.0"
-kmpdevtools =               "9.3.3" # use the "devTools" task to change the version
+kmpdevtools =               "9.3.9" # use the "devTools" task to change the version
 
 # demos
 democomposables =           "1.0.5"

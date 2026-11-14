@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -252,7 +253,10 @@ private fun ColorPickerPreview(
 ) {
     if (landscape) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                //.verticalScroll(rememberScrollState())
+            ,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ColorPickerSwatch(
@@ -260,13 +264,14 @@ private fun ColorPickerPreview(
                 shape,
                 Modifier
                     .fillMaxWidth()
-                    .height(colorCellSize)
+                    .weight(1f, fill = false)
+                    .heightIn(max = colorCellSize)
             )
             ColorPickerValueCard(
                 uiProvider = uiProvider,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(colorCellSize),
+                    .heightIn(min = colorCellSize),
                 color = color,
                 texts = texts,
                 alphaSupported = alphaSupported,
@@ -284,8 +289,8 @@ private fun ColorPickerPreview(
             ColorPickerValueCard(
                 uiProvider = uiProvider,
                 modifier = Modifier
-                    .weight(1f)
-                    .height(colorCellSize),
+                    //.weight(1f)
+                    .heightIn(min = colorCellSize),
                 color = color,
                 texts = texts,
                 alphaSupported = alphaSupported,
@@ -333,7 +338,7 @@ private fun ColorPickerValueCard(
     ui.Card(modifier = modifier) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
