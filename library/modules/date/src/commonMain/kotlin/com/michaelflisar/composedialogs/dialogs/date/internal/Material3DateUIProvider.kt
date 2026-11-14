@@ -13,11 +13,9 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -138,6 +136,7 @@ internal object Material3DateUIProvider : DateUIProvider {
     @Composable
     override fun smallShape(): Shape = MaterialTheme.shapes.small
 
+    @Composable
     override fun Modifier.minimumInteractiveComponentSize(): Modifier {
         return material3MinimumInteractiveComponentSize()
     }
@@ -181,13 +180,5 @@ internal object Material3DateUIProvider : DateUIProvider {
                 androidx.compose.material3.Text(date.day.toString())
             }
         }
-    }
-
-    @Composable
-    override fun DialogTitle(content: @Composable () -> Unit) {
-        CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.headlineSmall,
-            content = content
-        )
     }
 }

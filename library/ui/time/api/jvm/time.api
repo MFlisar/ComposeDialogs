@@ -37,6 +37,10 @@ public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerSetup
 	public final fun is24Hours ()Z
 }
 
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerStateKt {
+	public static final fun rememberTimePickerTime (Lkotlinx/datetime/LocalTime;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerTexts {
 	public static final field $stable I
 	public final fun getAm ()Ljava/lang/String;

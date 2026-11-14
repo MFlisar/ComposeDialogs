@@ -12,7 +12,8 @@ import com.michaelflisar.democomposables.DemoButton
 import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.color.DialogColor
-import com.michaelflisar.composedialogs.dialogs.color.rememberDialogColor
+import com.michaelflisar.composedialogs.dialogs.color.ColorPickerLabelStyle
+import com.michaelflisar.composedialogs.dialogs.color.rememberColorPickerColor
 
 @Composable
 fun ColorDemos(
@@ -38,7 +39,7 @@ private fun RowScope.DemoColor1(
     val state = rememberDialogState()
     // begin-snippet: ColorDemos::demo
     if (state.visible) {
-        val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
+        val color = rememberColorPickerColor(Color.Blue.copy(alpha = .5f))
         DialogColor(
             state = state,
             color = color,
@@ -74,12 +75,12 @@ private fun RowScope.DemoColor2(
 ) {
     val state = rememberDialogState()
     if (state.visible) {
-        val color = rememberDialogColor(Color.Red)
+        val color = rememberColorPickerColor(Color.Red)
         DialogColor(
             state = state,
             color = color,
             alphaSupported = false,
-            labelStyle = DialogColor.LabelStyle.Percent,
+            labelStyle = ColorPickerLabelStyle.Percent,
             directEditSupported = false,
             icon = icon,
             title = { Text("Color Dialog") },

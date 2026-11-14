@@ -2,14 +2,7 @@ public final class com/michaelflisar/composedialogs/dialogs/time/DialogDefaultsE
 	public static final fun styleWindowsTimeDialog-xUkhVMw (Lcom/michaelflisar/composedialogs/core/DialogDefaults;Ljava/lang/String;Landroidx/compose/ui/window/WindowPosition;FFJJJLandroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;
 }
 
-public final class com/michaelflisar/composedialogs/dialogs/time/DialogTime {
-	public static final field $stable I
-	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/time/DialogTime;
-	public final fun getLocalTimeSaver ()Landroidx/compose/runtime/saveable/Saver;
-}
-
 public final class com/michaelflisar/composedialogs/dialogs/time/DialogTimeKt {
 	public static final fun DialogTime (Lcom/michaelflisar/composedialogs/core/BaseDialogState;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/composedialogs/core/ComposeDialogStyle;Lcom/michaelflisar/composedialogs/core/DialogButtons;Lcom/michaelflisar/composedialogs/core/DialogOptions;Lkotlin/jvm/functions/Function1;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerTexts;Lcom/michaelflisar/composedialogs/dialogs/time/TimeUIProvider;Landroidx/compose/runtime/Composer;III)V
-	public static final fun rememberDialogTime (Lkotlinx/datetime/LocalTime;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
 }
 

@@ -62,7 +62,7 @@ public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerIco
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerKt {
-	public static final fun ColorPicker (Lcom/michaelflisar/composedialogs/dialogs/color/ColorUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;ZZLandroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Landroidx/compose/runtime/MutableState;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;III)V
+	public static final fun ColorPicker (Lcom/michaelflisar/composedialogs/dialogs/color/ColorUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;ZLandroidx/compose/runtime/Composer;I)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle : java/lang/Enum {
@@ -71,6 +71,10 @@ public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerLab
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
 	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerStateKt {
+	public static final fun rememberColorPickerColor-ek8zF_U (JLandroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts {

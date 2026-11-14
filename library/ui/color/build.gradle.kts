@@ -70,6 +70,8 @@ kotlin {
             api(libs.jetbrains.compose.runtime)
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
+            implementation(mflisar.composecolors.material)
+            implementation(mflisar.composecolors.material.palette)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.ui.backhandler)

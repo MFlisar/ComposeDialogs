@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.android.library)
     // org.jetbrains.kotlin
     alias(libs.plugins.jetbrains.kotlin.compose)
-    alias(libs.plugins.jetbrains.kotlin.parcelize)
     // org.jetbrains.compose
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
@@ -87,16 +86,10 @@ kotlin {
             implementation(libs.jetbrains.compose.ui.backhandler)
             implementation(libs.jetbrains.compose.material.icons.core)
 
-            // Color Palette
-            implementation(mflisar.composecolors.material)
-            implementation(mflisar.composecolors.material.palette)
-
             // library
             api(project(":composedialogs:ui:color"))
             implementation(project(":composedialogs:core"))
             implementation(project(":composedialogs:modules:input"))
-
-            implementation(mflisar.kmp.parcelize)
 
         }
     }

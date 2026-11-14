@@ -20,8 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ModifierInfo
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerRange
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
+import com.michaelflisar.composedialogs.dialogs.date.DatePickerConfig
 import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import kotlinx.coroutines.launch
@@ -33,8 +32,7 @@ import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 @Composable
 internal fun CalendarSelectListYear(
     pageData: State<CalendarPageData>,
-    setup: DatePickerSetup,
-    dateRange: DatePickerRange,
+    config: DatePickerConfig,
     pagerState: PagerState,
     viewState: MutableState<DatePickerViewState>,
     uiProvider: DateUIProvider
@@ -42,13 +40,13 @@ internal fun CalendarSelectListYear(
     val scope = rememberCoroutineScope()
     CalendarSelectList(
         value = pageData.value.year,
-        range = dateRange.years,
+        range = config.years,
         uiProvider = uiProvider,
         itemFormatter = {
-            setup.formatterYearSelectorList(it)
+            config.formatterYearSelectorList(it)
         }
     ) {
-        val offsetPages = (it - dateRange.years.first) * 12 + pageData.value.month - 1
+        val offsetPages = (it - config.years.first) * 12 + pageData.value.month - 1
         scope.launch { pagerState.scrollToPage(offsetPages) }
         viewState.value = DatePickerViewState.Calendar
     }
@@ -57,7 +55,7 @@ internal fun CalendarSelectListYear(
 @Composable
 internal fun CalendarSelectListMonth(
     pageData: State<CalendarPageData>,
-    setup: DatePickerSetup,
+    config: DatePickerConfig,
     pagerState: PagerState,
     viewState: MutableState<DatePickerViewState>,
     uiProvider: DateUIProvider
@@ -68,7 +66,7 @@ internal fun CalendarSelectListMonth(
         range = (1..12),
         uiProvider = uiProvider,
         itemFormatter = {
-            setup.formatterMonthSelectorList(Month(it))
+            config.formatterMonthSelectorList(Month(it))
         }
     ) {
         val offsetPages = it - pageData.value.month

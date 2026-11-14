@@ -109,6 +109,7 @@ kotlin {
             api(project(":composedialogs:modules:number"))
             api(project(":composedialogs:modules:time"))
             api(project(":composedialogs:modules:date"))
+            api(project(":composedialogs:ui:date"))
             api(project(":composedialogs:modules:progress"))
             api(project(":composedialogs:modules:color"))
             api(project(":composedialogs:modules:list"))

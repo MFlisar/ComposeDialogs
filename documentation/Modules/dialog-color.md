@@ -14,7 +14,7 @@ Generally following can be adjusted:
 <!-- snippet: ColorDemos::demo -->
 ```kt
 if (state.visible) {
-    val color = rememberDialogColor(Color.Blue.copy(alpha = .5f))
+    val color = rememberColorPickerColor(Color.Blue.copy(alpha = .5f))
     DialogColor(
         state = state,
         color = color,
@@ -52,7 +52,7 @@ if (state.visible) {
  * @param directEditSupported if true, the custom color page allows direct editing of the color value
  * @param shape the shape of the color cells
  * @param gridSize the size of the color grid
- * @param labelStyle the [DialogColor.LabelStyle] for the color picker
+ * @param labelStyle the [ColorPickerLabelStyle] for the color picker
  */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -67,7 +67,7 @@ fun DialogColor(
     directEditSupported: Boolean = true,
     shape: Shape = MaterialTheme.shapes.small,
     gridSize: Int = if (isLandscape()) 6 else 4,
-    labelStyle: DialogColor.LabelStyle = DialogColor.LabelStyle.Value,
+    labelStyle: ColorPickerLabelStyle = ColorPickerLabelStyle.Value,
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,

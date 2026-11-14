@@ -9,19 +9,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,9 +32,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.color.ColorPickerIcon
-import com.michaelflisar.composedialogs.dialogs.color.ColorUIProvider
-import com.michaelflisar.composedialogs.dialogs.color.ColorTextStyle
 import com.michaelflisar.composedialogs.dialogs.color.ColorPickerTexts
+import com.michaelflisar.composedialogs.dialogs.color.ColorTextStyle
+import com.michaelflisar.composedialogs.dialogs.color.ColorUIProvider
 import com.michaelflisar.composedialogs.dialogs.color.utils.drawCheckerboard
 import com.michaelflisar.composedialogs.dialogs.color.utils.parseColor
 
@@ -60,7 +59,7 @@ internal fun ColorPickerContent(
     subLabels: List<String>?,
     onMainColorSelected: (Int) -> Unit,
     onSubColorSelected: (Int) -> Unit,
-    updateSelectedPresetColors: () -> Unit
+    updateSelectedPresetColors: () -> Unit,
 ) {
     val ui = uiProvider
     val density = LocalDensity.current
@@ -249,13 +248,13 @@ private fun ColorPickerPreview(
     shape: Shape,
     colorCellSize: Dp,
     landscape: Boolean,
-    onEdit: () -> Unit
+    onEdit: () -> Unit,
 ) {
     if (landscape) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                //.verticalScroll(rememberScrollState())
+            //.verticalScroll(rememberScrollState())
             ,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -305,7 +304,7 @@ private fun ColorPickerPreview(
 private fun ColorPickerSwatch(
     color: Color,
     shape: Shape,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     val density = LocalDensity.current
     Box(modifier = modifier) {
@@ -332,7 +331,7 @@ private fun ColorPickerValueCard(
     texts: ColorPickerTexts,
     alphaSupported: Boolean,
     directEditSupported: Boolean,
-    onEdit: () -> Unit
+    onEdit: () -> Unit,
 ) {
     val ui = uiProvider
     ui.Card(modifier = modifier) {

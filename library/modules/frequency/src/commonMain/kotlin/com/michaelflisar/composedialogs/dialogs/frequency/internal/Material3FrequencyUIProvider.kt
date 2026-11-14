@@ -18,7 +18,7 @@ import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogNumberInp
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogTextDropdown
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
-import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
+import com.michaelflisar.composedialogs.dialogs.time.rememberTimePickerTime
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import kotlinx.datetime.LocalTime
 import com.michaelflisar.composedialogs.dialogs.frequency.*
@@ -136,7 +136,7 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
         setup: TimePickerSetup,
         modifier: Modifier,
     ) {
-        val selectedTimeState = rememberDialogTime(selectedTime)
+        val selectedTimeState = rememberTimePickerTime(selectedTime)
         LaunchedEffect(selectedTime) {
             selectedTimeState.value = selectedTime
         }

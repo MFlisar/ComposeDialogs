@@ -9,6 +9,20 @@ Generally following can be adjusted:
 * cel height of the calendar
 * optional next/previous month buttons
 
+On Android API 24-25, enable core library desugaring in the consuming app module:
+
+```kotlin
+android {
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+}
+```
+
 #### Example
 
 <!-- snippet: Demos::demo-date -->
@@ -16,13 +30,13 @@ Generally following can be adjusted:
 if (state.visible) {
 
     // special state for date dialog
-    val date = rememberDialogDate()
+    val date = rememberDatePickerDate()
     // optional settings
-    var setup = DialogDateDefaults.setup(
+    var config = DatePickerDefaults.config(
         dateCellHeight = 32.dp
     )
     if (customSetup) {
-        setup = DialogDateDefaults.setup(
+        config = DatePickerDefaults.config(
             buttonToday = {
                 Icon(Icons.Default.Today, null)
             },
@@ -46,13 +60,11 @@ if (state.visible) {
             formatterYearSelectorList = { it.toString() }
         )
     }
-    val dateRange = DialogDateDefaults.dateRange()
 
     DialogDate(
         state = state,
         date = date,
-        setup = setup,
-        dateRange = dateRange,
+        config = config,
         icon = icon,
         title = { Text("Select Date") },
         style = style,
@@ -73,23 +85,20 @@ if (state.visible) {
 <!-- snippet: DialogDate::constructor -->
 ```kt
 /**
- * Shows a dialog with an input field
+ * Shows a dialog with a date picker.
  *
  * &nbsp;
  *
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param date the selected date state
- * @param dateRange the supported [DialogDateDefaults.Range] - use [DialogDateDefaults.dateRange] to provide your own data
- * @param setup the [DialogDateDefaults.Setup] - use [DialogDateDefaults.setup] to provide your own data
+ * @param config the date picker's formatting, behavior, and supported year range
  */
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DialogDate(
     state: BaseDialogState,
     date: MutableState<LocalDate>,
-    dateRange: DialogDateDefaults.Range = DialogDateDefaults.dateRange(),
-    setup: DialogDateDefaults.Setup = DialogDateDefaults.setup(),
+    config: DatePickerConfig = DatePickerDefaults.config(),
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
@@ -107,27 +116,52 @@ fun DialogDate(
         options,
         onEvent = onEvent
     ) {
-        DatePicker(
+        DatePickerMain(
             uiProvider = Material3DateUIProvider,
             date = date,
-            dateRange = DatePickerRange(dateRange.years),
-            setup = DatePickerSetup(
-                setup.buttonToday,
-                setup.firstDayOfWeek,
-                setup.formatterWeekDayLabel,
-                setup.formatterSelectedDate,
-                setup.formatterSelectedMonth,
-                setup.formatterSelectedYear,
-                setup.formatterMonthSelectorList,
-                setup.formatterYearSelectorList,
-                setup.dateCellHeight,
-                setup.showNextPreviousMonthButtons,
-                setup.showNextPreviousYearButtons
-            ),
-            landscape = landscape,
-            title = title,
-            icon = icon
-        )
+            config = config,
+            landscape = landscape
+        ) { selectedDateEnabled, onSelectedDateClick, todayEnabled, onTodayClick ->
+            if (landscape) {
+                Column {
+                    if (icon != null) {
+                        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                            icon()
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    if (title != null) {
+                        ProvideTextStyle(MaterialTheme.typography.headlineSmall) {
+                            Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                                title()
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    DatePickerButtons(
+                        uiProvider = Material3DateUIProvider,
+                        date = date,
+                        config = config,
+                        landscape = true,
+                        selectedDateEnabled = selectedDateEnabled,
+                        onSelectedDateClick = onSelectedDateClick,
+                        todayEnabled = todayEnabled,
+                        onTodayClick = onTodayClick
+                    )
+                }
+            } else {
+                DatePickerButtons(
+                    uiProvider = Material3DateUIProvider,
+                    date = date,
+                    config = config,
+                    landscape = false,
+                    selectedDateEnabled = selectedDateEnabled,
+                    onSelectedDateClick = onSelectedDateClick,
+                    todayEnabled = todayEnabled,
+                    onTodayClick = onTodayClick
+                )
+            }
+        }
     }
 }
 ```

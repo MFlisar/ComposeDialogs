@@ -51,10 +51,6 @@ val androidConfig = AndroidLibraryConfig.create(
 // Kotlin
 // -------------------
 
-dependencies {
-    coreLibraryDesugaring(libs.desugar)
-}
-
 kotlin {
 
     //-------------
@@ -90,19 +86,12 @@ kotlin {
 
         commonMain.dependencies {
 
-            // kotlinx
-            implementation(libs.jetbrains.kotlinx.coroutines.core)
-            api(libs.jetbrains.kotlinx.datetime)
-            implementation(libs.jetbrains.kotlinx.serialization.json)
-
-            // Compose + AndroidX
+            // Material 3 implementation
             implementation(libs.jetbrains.compose.material3)
-            implementation(libs.jetbrains.compose.ui)
-            implementation(libs.jetbrains.compose.ui.backhandler)
             implementation(libs.jetbrains.compose.material.icons.core)
 
             // library
-            implementation(project(":composedialogs:ui:date"))
+            api(project(":composedialogs:ui:date"))
             implementation(project(":composedialogs:core"))
 
             //implementation(libs.moko.parcelize)

@@ -19,8 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerRange
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
+import com.michaelflisar.composedialogs.dialogs.date.DatePickerConfig
 import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
 import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import kotlinx.coroutines.launch
@@ -32,8 +31,7 @@ import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 @Composable
 internal fun CalendarHeader(
     pagerState: PagerState,
-    range: DatePickerRange,
-    setup: DatePickerSetup,
+    config: DatePickerConfig,
     pageData: State<CalendarPageData>,
     viewState: MutableState<DatePickerViewState>,
     uiProvider: DateUIProvider
@@ -45,8 +43,8 @@ internal fun CalendarHeader(
     ) {
         HeaderItem(
             modifier = Modifier.weight(1f),
-            text = setup.formatterSelectedMonth(Month(pageData.value.month)),
-            showButtons = setup.showNextPreviousMonthButtons,
+            text = config.formatterSelectedMonth(Month(pageData.value.month)),
+            showButtons = config.showNextPreviousMonthButtons,
             onDownClick = if (pagerState.currentPage > 0) {
                 { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) } }
             } else null,
@@ -60,12 +58,12 @@ internal fun CalendarHeader(
         //Spacer(modifier = Modifier.width(8.dp))
         HeaderItem(
             modifier = Modifier.weight(1f),
-            text = setup.formatterSelectedYear(pageData.value.year),
-            showButtons = setup.showNextPreviousYearButtons,
-            onDownClick = if (pageData.value.year > range.years.first) {
+            text = config.formatterSelectedYear(pageData.value.year),
+            showButtons = config.showNextPreviousYearButtons,
+            onDownClick = if (pageData.value.year > config.years.first) {
                 { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 12) } }
             } else null,
-            onUpClick = if (pageData.value.year < range.years.last) {
+            onUpClick = if (pageData.value.year < config.years.last) {
                 { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 12) } }
             } else null,
             viewState = viewState,

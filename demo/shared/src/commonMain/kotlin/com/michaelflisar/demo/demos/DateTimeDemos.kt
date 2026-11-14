@@ -17,16 +17,16 @@ import com.michaelflisar.democomposables.DemoButton
 import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.democomposables.layout.DemoRow
 import com.michaelflisar.composedialogs.dialogs.date.DialogDate
-import com.michaelflisar.composedialogs.dialogs.date.DialogDateDefaults
+import com.michaelflisar.composedialogs.dialogs.date.DatePickerDefaults
 import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterSelectedDate
 import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterSelectedMonth
 import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterSelectedMonthInSelectorList
 import com.michaelflisar.composedialogs.dialogs.date.defaultFormatterWeekDayLabel
-import com.michaelflisar.composedialogs.dialogs.date.rememberDialogDate
+import com.michaelflisar.composedialogs.dialogs.date.rememberDatePickerDate
 import com.michaelflisar.composedialogs.dialogs.time.DialogTime
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
 import com.michaelflisar.composedialogs.dialogs.time.TimePickerInputType
-import com.michaelflisar.composedialogs.dialogs.time.rememberDialogTime
+import com.michaelflisar.composedialogs.dialogs.time.rememberTimePickerTime
 import kotlinx.datetime.DayOfWeek
 
 @Composable
@@ -63,13 +63,13 @@ private fun RowScope.DemoDate1(
     if (state.visible) {
 
         // special state for date dialog
-        val date = rememberDialogDate()
+        val date = rememberDatePickerDate()
         // optional settings
-        var setup = DialogDateDefaults.setup(
+        var config = DatePickerDefaults.config(
             dateCellHeight = 32.dp
         )
         if (customSetup) {
-            setup = DialogDateDefaults.setup(
+            config = DatePickerDefaults.config(
                 buttonToday = {
                     Icon(Icons.Default.Today, null)
                 },
@@ -93,13 +93,11 @@ private fun RowScope.DemoDate1(
                 formatterYearSelectorList = { it.toString() }
             )
         }
-        val dateRange = DialogDateDefaults.dateRange()
 
         DialogDate(
             state = state,
             date = date,
-            setup = setup,
-            dateRange = dateRange,
+            config = config,
             icon = icon,
             title = { Text("Select Date") },
             style = style,
@@ -137,7 +135,7 @@ private fun RowScope.DemoTime1(
     if (state.visible) {
 
         // special state for time dialog
-        val time = rememberDialogTime()
+        val time = rememberTimePickerTime()
         // optional settings
         val setup = TimePickerDefaults.setup(
             is24Hours = is24Hours,

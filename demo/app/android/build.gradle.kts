@@ -42,11 +42,16 @@ android {
         checkDebugKeyStoreProperty = true,
         setupBuildTypesDebugAndRelease = true
     )
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.activity.compose)
+    coreLibraryDesugaring(libs.desugar)
 
     // Library
     implementation(project(":demo:shared"))

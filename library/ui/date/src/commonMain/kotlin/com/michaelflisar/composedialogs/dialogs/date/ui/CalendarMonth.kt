@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
+import com.michaelflisar.composedialogs.dialogs.date.DatePickerConfig
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -29,7 +29,7 @@ import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 @Composable
 internal fun CalendarMonth(
     state: MutableState<LocalDate>,
-    setup: DatePickerSetup,
+    config: DatePickerConfig,
     year: Int,
     month: Int,
     uiProvider: DateUIProvider
@@ -51,9 +51,9 @@ internal fun CalendarMonth(
         derivedStateOf { DateUtil.today() }
     }
 
-    val weekdays = DateUtil.getSortedWeekDays(setup.firstDayOfWeek)
+    val weekdays = DateUtil.getSortedWeekDays(config.firstDayOfWeek)
 
-    val items = remember(year, month, setup.firstDayOfWeek) {
+    val items = remember(year, month, config.firstDayOfWeek) {
         derivedStateOf {
             val items = mutableListOf<LocalDate?>()
             val colIndexOfFirstDay = weekdays.indexOf(firstDayOfMonth.value.dayOfWeek)
@@ -85,14 +85,14 @@ internal fun CalendarMonth(
             .padding(4.dp)
         val modifierCell = Modifier
             .weight(1f)
-            .height(setup.dateCellHeight)
+            .height(config.dateCellHeight)
 
         val rows = items.value.size / 7
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             repeat(7) {
-                CalendarCellHeader(uiProvider, setup, weekdays[it], modifierHeader)
+                CalendarCellHeader(uiProvider, config, weekdays[it], modifierHeader)
             }
         }
         repeat(rows) { row ->
@@ -120,11 +120,11 @@ internal fun CalendarMonth(
 @Composable
 private fun CalendarCellHeader(
     uiProvider: DateUIProvider,
-    setup: DatePickerSetup,
+    config: DatePickerConfig,
     dayOfWeek: DayOfWeek,
     modifier: Modifier
 ) {
-    val text = setup.formatterWeekDayLabel(dayOfWeek)
+    val text = config.formatterWeekDayLabel(dayOfWeek)
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center

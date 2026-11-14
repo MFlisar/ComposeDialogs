@@ -1,7 +1,6 @@
 package com.michaelflisar.composedialogs.dialogs.date
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,58 +16,84 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
-import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerRange
-import com.michaelflisar.composedialogs.dialogs.date.ui.DatePickerSetup
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarHeader
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarMonth
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarSelectListMonth
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarSelectListYear
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarSelectionHeader
 import com.michaelflisar.composedialogs.dialogs.date.ui.CalendarTodayButton
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.CalendarPageData
+import com.michaelflisar.composedialogs.dialogs.date.ui.internal.DatePickerViewState
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.number
+import kotlinx.coroutines.launch
 
 /**
- * Renders a date picker using the caller-supplied [DateUIProvider].
+ * Renders a complete date picker using the caller-supplied [DateUIProvider].
  *
- * [DatePickerSetup] controls its formatting and behavior, while [DatePickerRange] limits selectable years.
+ * [config] controls formatting and behavior as well as the supported year range.
  */
 @Composable
 fun DatePicker(
     uiProvider: DateUIProvider,
     date: MutableState<LocalDate>,
-    dateRange: DatePickerRange,
-    setup: DatePickerSetup,
-    landscape: Boolean,
-    title: (@Composable () -> Unit)?,
-    icon: (@Composable () -> Unit)?
+    config: DatePickerConfig,
+    landscape: Boolean
 ) {
-    DatePickerContent(uiProvider, date, dateRange, setup, landscape, title, icon)
+    DatePickerMain(
+        uiProvider = uiProvider,
+        date = date,
+        config = config,
+        landscape = landscape
+    ) { selectedDateEnabled, onSelectedDateClick, todayEnabled, onTodayClick ->
+        DatePickerButtons(
+            uiProvider = uiProvider,
+            date = date,
+            config = config,
+            landscape = landscape,
+            selectedDateEnabled = selectedDateEnabled,
+            onSelectedDateClick = onSelectedDateClick,
+            todayEnabled = todayEnabled,
+            onTodayClick = onTodayClick
+        )
+    }
 }
 
+/**
+ * Renders the calendar and exposes navigation actions to [controls].
+ *
+ * The pager and view-mode state stay internal; callers only share [date] and can
+ * compose controls alongside dialog-specific content without a picker state holder.
+ *
+ * @param controls receives the selected-date button's enabled state and click action,
+ * followed by the Today button's enabled state and click action
+ */
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
-private fun DatePickerContent(
+fun DatePickerMain(
     uiProvider: DateUIProvider,
     date: MutableState<LocalDate>,
-    dateRange: DatePickerRange,
-    setup: DatePickerSetup,
+    config: DatePickerConfig,
     landscape: Boolean,
-    title: (@Composable () -> Unit)?,
-    icon: (@Composable () -> Unit)?
+    controls: @Composable (
+        selectedDateEnabled: Boolean,
+        onSelectedDateClick: () -> Unit,
+        todayEnabled: Boolean,
+        onTodayClick: () -> Unit
+    ) -> Unit
 ) {
-    val pages = (dateRange.years.last - dateRange.years.first + 1) * 12
-    val currentPage = remember(date.value.year, date.value.month.number) {
+    val pages = config.years.last - config.years.first + 1
+    val monthPages = pages * 12
+    val currentPage = remember(date.value.year, date.value.month.number, config.years) {
         derivedStateOf {
-            val offsetInYears = date.value.year - dateRange.years.first
+            val offsetInYears = date.value.year - config.years.first
             val offsetMonths = date.value.month.number - 1
             offsetInYears * 12 + offsetMonths
         }
@@ -76,152 +101,121 @@ private fun DatePickerContent(
     val today by remember {
         derivedStateOf { DateUtil.today() }
     }
-    val todayPage by remember(pages, today) {
+    val todayPage by remember(monthPages, today, config.years) {
         derivedStateOf {
-            val offsetInYears = today.year - dateRange.years.first
+            val offsetInYears = today.year - config.years.first
             val offsetMonths = today.month.number - 1
             val offset = offsetInYears * 12 + offsetMonths
-            offset.takeIf { it in 0..<pages }
+            offset.takeIf { it in 0..<monthPages }
         }
     }
     val pagerState = rememberPagerState(
         initialPage = currentPage.value,
         initialPageOffsetFraction = 0f,
-        pageCount = { pages }
+        pageCount = { monthPages }
     )
-    val pageData = remember(pagerState.currentPage) {
+    val pageData = remember(pagerState.currentPage, config.years) {
         derivedStateOf {
-            CalendarPageData(pagerState.currentPage, dateRange)
+            CalendarPageData(pagerState.currentPage, config.years)
         }
     }
     val viewState = remember {
         mutableStateOf(DatePickerViewState.Calendar)
+    }
+    val scope = rememberCoroutineScope()
+
+    val selectedDateEnabled by remember(
+        pagerState.currentPage,
+        currentPage.value,
+        viewState.value
+    ) {
+        derivedStateOf {
+            pagerState.currentPage != currentPage.value &&
+                viewState.value == DatePickerViewState.Calendar
+        }
+    }
+    val hasTodayButton = config.buttonToday != null
+    val todayEnabled by remember(
+        pagerState.currentPage,
+        date.value,
+        todayPage,
+        hasTodayButton
+    ) {
+        derivedStateOf {
+            hasTodayButton && todayPage != null &&
+                (pagerState.currentPage != todayPage || date.value != today)
+        }
+    }
+
+    val onSelectedDateClick: () -> Unit = {
+        scope.launch { pagerState.animateScrollToPage(currentPage.value) }
+    }
+    val onTodayClick: () -> Unit = {
+        date.value = today
+        if (viewState.value != DatePickerViewState.Calendar) {
+            viewState.value = DatePickerViewState.Calendar
+        }
+        todayPage?.let { page ->
+            scope.launch { pagerState.animateScrollToPage(page) }
+        }
     }
 
     BackHandler(enabled = viewState.value != DatePickerViewState.Calendar) {
         viewState.value = DatePickerViewState.Calendar
     }
 
-    if (landscape) {
-        Row {
-            Column {
-                if (icon != null) {
-                    Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                        icon()
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
+    val controlsContent: @Composable () -> Unit = {
+        controls(
+            selectedDateEnabled,
+            onSelectedDateClick,
+            todayEnabled,
+            onTodayClick
+        )
+    }
+    val calendarItems: @Composable () -> Unit = {
+        CalendarHeader(pagerState, config, pageData, viewState, uiProvider)
+        when (viewState.value) {
+            DatePickerViewState.Calendar -> {
+                HorizontalPager(state = pagerState, verticalAlignment = Alignment.Top) {
+                    val page = CalendarPageData(it, config.years)
+                    CalendarMonth(date, config, page.year, page.month, uiProvider)
                 }
-                if (title != null) {
-                    uiProvider.DialogTitle {
-                        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                            title()
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-                CalendarSelectionHeader(
-                    date,
-                    setup,
+            }
+
+            DatePickerViewState.SelectYear -> {
+                CalendarSelectListYear(
+                    pageData,
+                    config,
                     pagerState,
-                    currentPage,
                     viewState,
                     uiProvider
                 )
-                if (todayPage != null && setup.buttonToday != null) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    CalendarTodayButton(
-                        setup.buttonToday,
-                        date,
-                        todayPage!!,
-                        today,
-                        pagerState,
-                        viewState,
-                        uiProvider
-                    )
-                }
             }
+
+            DatePickerViewState.SelectMonth -> {
+                CalendarSelectListMonth(pageData, config, pagerState, viewState, uiProvider)
+            }
+        }
+    }
+
+    if (landscape) {
+        Row {
+            controlsContent()
             Spacer(modifier = Modifier.width(8.dp))
-            val modifier = when (viewState.value) {
-                DatePickerViewState.Calendar -> Modifier.verticalScroll(rememberScrollState())
-                DatePickerViewState.SelectYear,
-                DatePickerViewState.SelectMonth -> Modifier
+            val modifier = if (viewState.value == DatePickerViewState.Calendar) {
+                Modifier.verticalScroll(rememberScrollState())
+            } else {
+                Modifier
             }
             Column(modifier = modifier.animateContentSize()) {
-                CalendarHeader(pagerState, dateRange, setup, pageData, viewState, uiProvider)
-                when (viewState.value) {
-                    DatePickerViewState.Calendar -> {
-                        HorizontalPager(state = pagerState, verticalAlignment = Alignment.Top) {
-                            val page = CalendarPageData(it, dateRange)
-                            CalendarMonth(date, setup, page.year, page.month, uiProvider)
-                        }
-                    }
-
-                    DatePickerViewState.SelectYear -> {
-                        CalendarSelectListYear(
-                            pageData,
-                            setup,
-                            dateRange,
-                            pagerState,
-                            viewState,
-                            uiProvider
-                        )
-                    }
-
-                    DatePickerViewState.SelectMonth -> {
-                        CalendarSelectListMonth(pageData, setup, pagerState, viewState, uiProvider)
-                    }
-                }
+                calendarItems()
             }
         }
     } else {
         Column(modifier = Modifier.animateContentSize()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                CalendarSelectionHeader(
-                    date,
-                    setup,
-                    pagerState,
-                    currentPage,
-                    viewState,
-                    uiProvider
-                )
-                if (todayPage != null && setup.buttonToday != null) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    CalendarTodayButton(
-                        setup.buttonToday,
-                        date,
-                        todayPage!!,
-                        today,
-                        pagerState,
-                        viewState,
-                        uiProvider
-                    )
-                }
-            }
+            controlsContent()
             Spacer(modifier = Modifier.height(8.dp))
-            CalendarHeader(pagerState, dateRange, setup, pageData, viewState, uiProvider)
-            when (viewState.value) {
-                DatePickerViewState.Calendar -> {
-                    HorizontalPager(state = pagerState, verticalAlignment = Alignment.Top) {
-                        val page = CalendarPageData(it, dateRange)
-                        CalendarMonth(date, setup, page.year, page.month, uiProvider)
-                    }
-                }
-
-                DatePickerViewState.SelectYear -> {
-                    CalendarSelectListYear(
-                        pageData,
-                        setup,
-                        dateRange,
-                        pagerState,
-                        viewState,
-                        uiProvider
-                    )
-                }
-
-                DatePickerViewState.SelectMonth -> {
-                    CalendarSelectListMonth(pageData, setup, pagerState, viewState, uiProvider)
-                }
-            }
+            calendarItems()
         }
     }
 }

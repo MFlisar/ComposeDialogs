@@ -175,7 +175,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/FrequencyKt {
-	public static final fun rememberDialogFrequency (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberFrequency (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/ui/DayOfMonthKt {

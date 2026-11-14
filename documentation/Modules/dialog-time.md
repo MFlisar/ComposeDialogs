@@ -17,7 +17,7 @@ Generally following can be adjusted:
 if (state.visible) {
 
     // special state for time dialog
-    val time = rememberDialogTime()
+    val time = rememberTimePickerTime()
     // optional settings
     val setup = TimePickerDefaults.setup(
         is24Hours = is24Hours,

@@ -90,6 +90,7 @@ interface DateUIProvider {
     fun smallShape(): Shape
 
     /** Applies a minimum touch-target size to year/month selection rows. */
+    @Composable
     fun Modifier.minimumInteractiveComponentSize(): Modifier
 
     /** Renders the scrolling list used to select a year or month. */
@@ -108,8 +109,4 @@ interface DateUIProvider {
         modifier: Modifier,
         onClick: () -> Unit
     )
-
-    /** Styles the caller-provided title when the picker is shown in a dialog. */
-    @Composable
-    fun DialogTitle(content: @Composable () -> Unit)
 }

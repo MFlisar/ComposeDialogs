@@ -3,6 +3,7 @@ import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.configs.AndroidLibraryConfig
 import com.michaelflisar.kmpdevtools.configs.LibraryModuleConfig
 import com.michaelflisar.kmpdevtools.core.Target
+import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
     alias(libs.plugins.jetbrains.kotlin.multiplatform)
@@ -41,6 +42,10 @@ compose.resources {
     publicResClass = true
 }
 
+dependencies {
+    coreLibraryDesugaring(libs.desugar)
+}
+
 kotlin {
     //-------------
     // Targets
@@ -60,7 +65,11 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        // --
+        val nativeMain by creating { dependsOn(commonMain.get()) }
+
+        setupDependencies(module, buildTargets, sourceSets) {
+            Target.LIST_APPLE addSourceSet nativeMain
+        }
 
         // ---------------------
         // dependencies
@@ -71,6 +80,7 @@ kotlin {
             api(libs.jetbrains.compose.foundation)
             api(libs.jetbrains.compose.ui)
             api(libs.jetbrains.kotlinx.datetime)
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.ui.backhandler)
