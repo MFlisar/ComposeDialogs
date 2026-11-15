@@ -111,76 +111,8 @@ fun DialogDate(
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
-    onEvent: (event: DialogEvent) -> Unit = {}
-) {
-    val landscape = isLandscape()
-    Dialog(
-        state,
-        title?.takeIf { !landscape },
-        icon?.takeIf { !landscape },
-        style,
-        buttons,
-        options,
-        onEvent = onEvent
-    ) {
-        val pickerState = rememberDatePickerState(date, config)
-        val modifier = if (landscape) {
-            Modifier.verticalScroll(rememberScrollState())
-        } else {
-            Modifier
-        }
-
-        if (landscape) {
-            Row {
-                Column {
-                    if (icon != null) {
-                        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                            icon()
-                        }
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
-                    if (title != null) {
-                        ProvideTextStyle(MaterialTheme.typography.headlineSmall) {
-                            Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                                title()
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
-                    DatePickerButtons(
-                        uiProvider = Material3DateUIProvider,
-                        state = pickerState,
-                        config = config,
-                        landscape = true
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                DatePicker(
-                    uiProvider = Material3DateUIProvider,
-                    state = pickerState,
-                    config = config,
-                    modifier = modifier
-                )
-            }
-        } else {
-            Column {
-                DatePickerButtons(
-                    uiProvider = Material3DateUIProvider,
-                    state = pickerState,
-                    config = config,
-                    landscape = false
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                DatePicker(
-                    uiProvider = Material3DateUIProvider,
-                    state = pickerState,
-                    config = config,
-                    modifier = modifier
-                )
-            }
-        }
-    }
-}
+    onEvent: (event: DialogEvent) -> Unit = {},
+)
 ```
 <!-- endSnippet -->
 
