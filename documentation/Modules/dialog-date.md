@@ -96,6 +96,7 @@ if (state.visible) {
  *
  * @param date the selected date state
  * @param config the date picker's formatting, behavior, and supported year range
+ * @param texts the texts ([DatePickerTexts]) used inside this dialog - use [DatePickerDefaults.texts] to provide your own data
  * @param buttonToday optional content for the Today button; pass null to hide it
  */
 @Composable
@@ -103,8 +104,9 @@ fun DialogDate(
     state: BaseDialogState,
     date: MutableState<LocalDate>,
     config: DatePickerConfig = DatePickerDefaults.config(),
+    texts: DatePickerTexts = DatePickerDefaults.texts(),
     buttonToday: (@Composable () -> Unit)? = {
-        BasicText(text = DatePickerDefaults.texts().today)
+        BasicText(text = texts.today)
     },
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
