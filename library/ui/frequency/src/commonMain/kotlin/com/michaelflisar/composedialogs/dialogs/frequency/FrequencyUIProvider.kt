@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerConfig
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.Month
@@ -78,7 +78,7 @@ interface FrequencyUIProvider {
         selectedTime: LocalTime,
         onTimeSelected: (LocalTime) -> Unit,
         title: String,
-        setup: TimePickerSetup,
+        config: TimePickerConfig,
         modifier: Modifier
     )
 

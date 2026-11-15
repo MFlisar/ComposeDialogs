@@ -50,7 +50,17 @@ public final class com/michaelflisar/composedialogs/color/resources/String0_comm
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerDefaults {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerDefaults;
+	public final fun config (ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerConfig;
 	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerConfig {
+	public static final field $stable I
+	public final fun getAlphaSupported ()Z
+	public final fun getDirectEditSupported ()Z
+	public final fun getGridSize ()I
+	public final fun getLabelStyle ()Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;
+	public final fun getShape ()Landroidx/compose/ui/graphics/Shape;
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerIcon : java/lang/Enum {
@@ -62,7 +72,7 @@ public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerIco
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerKt {
-	public static final fun ColorPicker (Lcom/michaelflisar/composedialogs/dialogs/color/ColorUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;ZZLandroidx/compose/ui/graphics/Shape;ILcom/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle;ZLandroidx/compose/runtime/Composer;I)V
+	public static final fun ColorPicker (Lcom/michaelflisar/composedialogs/dialogs/color/ColorUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerConfig;Lcom/michaelflisar/composedialogs/dialogs/color/ColorPickerTexts;ZLandroidx/compose/runtime/Composer;I)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/color/ColorPickerLabelStyle : java/lang/Enum {
@@ -106,4 +116,3 @@ public abstract interface class com/michaelflisar/composedialogs/dialogs/color/C
 	public abstract fun Text-xqIIw2o (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/dialogs/color/ColorTextStyle;Landroidx/compose/ui/graphics/Color;Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun colorPresetShape (Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/graphics/Shape;
 }
-

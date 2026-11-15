@@ -76,6 +76,10 @@ kotlin {
 
             api(project(":composedialogs:ui:time"))
         }
+
+        jvmTest.dependencies {
+            implementation(libs.jetbrains.kotlin.test)
+        }
     }
 }
 

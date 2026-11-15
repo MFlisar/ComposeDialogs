@@ -18,7 +18,7 @@ if (state.visible) {
     DialogColor(
         state = state,
         color = color,
-        alphaSupported = true,
+        config = ColorPickerDefaults.config(alphaSupported = true),
         icon = icon,
         title = { Text("Color Dialog") },
         style = style,
@@ -48,11 +48,7 @@ if (state.visible) {
  *
  * @param color the selected color state
  * @param texts the texts ([ColorPickerTexts]) that are used inside this dialog - use [ColorPickerDefaults.texts] to provide your own data
- * @param alphaSupported if true, the dialog supports color alpha values
- * @param directEditSupported if true, the custom color page allows direct editing of the color value
- * @param shape the shape of the color cells
- * @param gridSize the size of the color grid
- * @param labelStyle the [ColorPickerLabelStyle] for the color picker
+ * @param config the color picker's behavior and appearance
  */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -62,12 +58,11 @@ fun DialogColor(
     // Custom - Required
     color: MutableState<Color>,
     // Custom - Optional
+    config: ColorPickerConfig = ColorPickerDefaults.config(
+        shape = MaterialTheme.shapes.small,
+        gridSize = if (isLandscape()) 6 else 4
+    ),
     texts: ColorPickerTexts = ColorPickerDefaults.texts(),
-    alphaSupported: Boolean = true,
-    directEditSupported: Boolean = true,
-    shape: Shape = MaterialTheme.shapes.small,
-    gridSize: Int = if (isLandscape()) 6 else 4,
-    labelStyle: ColorPickerLabelStyle = ColorPickerLabelStyle.Value,
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,

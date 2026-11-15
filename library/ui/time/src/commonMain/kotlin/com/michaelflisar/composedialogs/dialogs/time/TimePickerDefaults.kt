@@ -13,12 +13,15 @@ import com.michaelflisar.composedialogs.time.resources.composedialogs_time_pm
 import org.jetbrains.compose.resources.stringResource
 
 @Immutable
-class TimePickerSetup internal constructor(
+class TimePickerConfig internal constructor(
     val is24Hours: Boolean,
     val minuteStep: Int,
-    val hourPickType: TimePickerInputType,
-    val minutePickType: TimePickerInputType
-)
+    val inputType: TimePickerInputType
+) {
+    init {
+        require(minuteStep in 1..60) { "minuteStep must be between 1 and 60" }
+    }
+}
 
 @Immutable
 class TimePickerTexts internal constructor(
@@ -33,16 +36,14 @@ class TimePickerTexts internal constructor(
 @Stable
 object TimePickerDefaults {
     @Composable
-    fun setup(
+    fun config(
         is24Hours: Boolean = is24HourFormat(),
         minuteStep: Int = 1,
-        hourPickType: TimePickerInputType = TimePickerInputType.Input,
-        minutePickType: TimePickerInputType = TimePickerInputType.Input
-    ) = TimePickerSetup(
+        inputType: TimePickerInputType = TimePickerInputType.Input
+    ) = TimePickerConfig(
         is24Hours = is24Hours,
         minuteStep = minuteStep,
-        hourPickType = hourPickType,
-        minutePickType = minutePickType
+        inputType = inputType
     )
 
     @Composable

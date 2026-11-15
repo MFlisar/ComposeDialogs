@@ -8,7 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import kotlinx.datetime.LocalDate
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
 
-private val DatePickerDateSaver = Saver<MutableState<LocalDate>, Long>(
+val DateSaver = Saver<MutableState<LocalDate>, Long>(
     save = { it.value.toEpochDays() },
     restore = { mutableStateOf(LocalDate.fromEpochDays(it)) }
 )
@@ -22,6 +22,6 @@ private val DatePickerDateSaver = Saver<MutableState<LocalDate>, Long>(
 @Composable
 fun rememberDatePickerDate(
     date: LocalDate = DateUtil.today()
-): MutableState<LocalDate> = rememberSaveable(saver = DatePickerDateSaver) {
+): MutableState<LocalDate> = rememberSaveable(saver = DateSaver) {
     mutableStateOf(date)
 }

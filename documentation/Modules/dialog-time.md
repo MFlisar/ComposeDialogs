@@ -19,17 +19,16 @@ if (state.visible) {
     // special state for time dialog
     val time = rememberTimePickerTime()
     // optional settings
-    val setup = TimePickerDefaults.setup(
+    val config = TimePickerDefaults.config(
         is24Hours = is24Hours,
-        hourPickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
-        minutePickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
+        inputType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
         minuteStep = if (picker) 5 else 1
     )
 
     DialogTime(
         state = state,
         time = time,
-        setup = setup,
+        config = config,
         icon = icon,
         title = { Text("Select Time") },
         style = style,
@@ -57,7 +56,7 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param time the selected time
- * @param setup the [TimePickerSetup] - use [TimePickerDefaults.setup] to provide your own data
+ * @param config the [TimePickerConfig] - use [TimePickerDefaults.config] to provide your own configuration
  * @param texts localized labels for the hour, minute, and AM/PM controls
  * @param uiProvider the UI implementation used to render the time controls
  */
@@ -67,7 +66,7 @@ fun DialogTime(
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional
-    setup: TimePickerSetup = TimePickerDefaults.setup(),
+    config: TimePickerConfig = TimePickerDefaults.config(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,

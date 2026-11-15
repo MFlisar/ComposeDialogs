@@ -25,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.SideEffect
@@ -122,6 +123,13 @@ fun InternalDialogNumberInput(
             )
         }
     }
+    LaunchedEffect(focused.value, readOnly) {
+        if (focused.value && !readOnly) {
+            textFieldValue.value = textFieldValue.value.copy(
+                selection = TextRange(0, textFieldValue.value.text.length)
+            )
+        }
+    }
     val focusedColor = MaterialTheme.colorScheme.primary
     val unfocusedColor = MaterialTheme.colorScheme.outlineVariant
     BasicTextField(
@@ -130,11 +138,6 @@ fun InternalDialogNumberInput(
             .padding(horizontal = 4.dp)
             .onFocusChanged {
                 focused.value = it.isFocused
-                if (it.isFocused && !readOnly) {
-                    textFieldValue.value = textFieldValue.value.copy(
-                        selection = TextRange(0, textFieldValue.value.text.length)
-                    )
-                }
                 onFocusChanged(it.isFocused)
             }
             .drawBehind {

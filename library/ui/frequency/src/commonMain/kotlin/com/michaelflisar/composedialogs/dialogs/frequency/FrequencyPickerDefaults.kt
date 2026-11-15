@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerConfig
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerInputType
 import com.michaelflisar.composedialogs.frequency.resources.Res
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_day
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_day_of_month
@@ -44,6 +47,14 @@ import kotlinx.datetime.Month
 import org.jetbrains.compose.resources.stringResource
 
 @Immutable
+class FrequencyPickerConfig internal constructor(
+    val supportedTypes: List<Frequency.Type>,
+    val firstDayOffset: DayOfWeek,
+    val intervalInputType: FrequencyIntervalInputType,
+    val timeConfig: TimePickerConfig
+)
+
+@Immutable
 class FrequencyPickerTexts internal constructor(
     val interval: String,
     val invalidInterval: String,
@@ -59,6 +70,21 @@ class FrequencyPickerTexts internal constructor(
 
 @Stable
 object FrequencyPickerDefaults {
+    @Composable
+    fun config(
+        supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
+        firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
+        intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
+        timeConfig: TimePickerConfig = TimePickerDefaults.config(
+            inputType = TimePickerInputType.Dropdown
+        )
+    ) = FrequencyPickerConfig(
+        supportedTypes = supportedTypes,
+        firstDayOffset = firstDayOffset,
+        intervalInputType = intervalInputType,
+        timeConfig = timeConfig
+    )
+
     @Composable
     fun texts(
         interval: String = stringResource(Res.string.composedialogs_frequency_interval),

@@ -19,8 +19,6 @@ import com.michaelflisar.composedialogs.dialogs.frequency.ui.DayOfMonth
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.DayOfWeek
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.Month
 import com.michaelflisar.composedialogs.dialogs.frequency.ui.NumericInput
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
 import kotlinx.datetime.DayOfWeek as DateDayOfWeek
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.Month as DateMonth
@@ -38,13 +36,14 @@ import kotlinx.datetime.Month as DateMonth
 fun FrequencyPicker(
     uiProvider: FrequencyUIProvider,
     frequency: MutableState<Frequency>,
-    supportedTypes: List<Frequency.Type>,
-    firstDayOffset: DateDayOfWeek,
+    config: FrequencyPickerConfig,
     texts: FrequencyPickerTexts,
-    intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: TimePickerSetup = TimePickerDefaults.setup(),
     onIntervalValidityChanged: (Boolean) -> Unit = {}
 ) {
+    val supportedTypes = config.supportedTypes
+    val firstDayOffset = config.firstDayOffset
+    val intervalInputType = config.intervalInputType
+    val timeConfig = config.timeConfig
     val ui = uiProvider
     val selectedFrequency = frequency.value
     val selectedInterval = remember(selectedFrequency.interval) {
@@ -197,7 +196,7 @@ fun FrequencyPicker(
                             selectedTime = selectedFrequency.time,
                             onTimeSelected = { updateTime(it) },
                             title = texts.time,
-                            setup = timeSetup,
+                            config = timeConfig,
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
@@ -221,7 +220,7 @@ fun FrequencyPicker(
                                 selectedTime = selectedFrequency.time,
                                 onTimeSelected = { updateTime(it) },
                                 title = texts.time,
-                                setup = timeSetup,
+                                config = timeConfig,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
@@ -245,7 +244,7 @@ fun FrequencyPicker(
                                 selectedTime = selectedFrequency.time,
                                 onTimeSelected = { updateTime(it) },
                                 title = texts.time,
-                                setup = timeSetup,
+                                config = timeConfig,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
@@ -280,7 +279,7 @@ fun FrequencyPicker(
                                     selectedTime = selectedFrequency.time,
                                     onTimeSelected = { updateTime(it) },
                                     title = texts.time,
-                                    setup = timeSetup,
+                                    config = timeConfig,
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
@@ -314,7 +313,7 @@ fun FrequencyPicker(
                                     selectedTime = selectedFrequency.time,
                                     onTimeSelected = { updateTime(it) },
                                     title = texts.time,
-                                    setup = timeSetup,
+                                    config = timeConfig,
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }

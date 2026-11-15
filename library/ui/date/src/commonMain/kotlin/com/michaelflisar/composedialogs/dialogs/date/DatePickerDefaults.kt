@@ -1,6 +1,5 @@
 package com.michaelflisar.composedialogs.dialogs.date
 
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
@@ -27,7 +26,6 @@ object DatePickerDefaults {
     ) = DatePickerTexts(today = today)
 
     /**
-     * @param buttonToday the optional content of the today button that is displayed at top next to the selected date
      * @param firstDayOfWeek the first day of the week (use [DayOfWeek.MONDAY] to [DayOfWeek.SUNDAY])
      * @param formatterWeekDayLabel the date format for the weekday names of the calendar
      * @param formatterSelectedDate the date format for the text that represents the currently selected date
@@ -45,9 +43,6 @@ object DatePickerDefaults {
     @Composable
     fun config(
         years: IntRange = 1900..2100,
-        buttonToday: (@Composable () -> Unit)? = {
-            BasicText(text = texts().today)
-        },
         firstDayOfWeek: DayOfWeek = DayOfWeek.MONDAY,
         formatterWeekDayLabel: @Composable (dayOfWeek: DayOfWeek) -> String = {
             defaultFormatterWeekDayLabel(it)
@@ -68,7 +63,6 @@ object DatePickerDefaults {
         showNextPreviousYearButtons: Boolean = true
     ) = DatePickerConfig(
         years,
-        buttonToday,
         firstDayOfWeek,
         formatterWeekDayLabel,
         formatterSelectedDate,

@@ -6,6 +6,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import kotlinx.datetime.DateTimePeriod
+import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -17,6 +19,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 
 /**
  * Represents different frequency types for scheduling events.
@@ -93,45 +96,40 @@ sealed class Frequency {
 
     // begin-snippet: Frequency::calcNextOccurrence
     /**
-     * Calculates the next occurrence of the event based on the frequency settings.
+     * Calculates the first occurrence strictly after [after], based on the frequency settings.
      *
-     * @param from The starting point to calculate the next occurrence from.
+     * @param after The local date and time after which to calculate the next occurrence.
      * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
-     * @param offset An optional offset to adjust the calculation (default is 0).
      * @return The next occurrence as a LocalDateTime.
      */
     abstract fun calcNextOccurrence(
-        from: LocalDate,
+        after: LocalDateTime,
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
-        offset: Int = 0,
     ): LocalDateTime
     // end-snippet
 
-    // begin-snippet: Frequency::calcNextOccurrences
     /**
-     * Calculates the next [count] occurrences of the event based on the frequency settings.
+     * Calculates the next occurrence after the current time.
      *
-     * @param from The starting point to calculate the next occurrences from.
-     * @param offset An optional offset to adjust the calculation (default is 0).
-     * @param count The number of occurrences to calculate.
      * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
-     * @return A list of the next occurrences as LocalDateTime objects.
+     * @return The next occurrence as a LocalDateTime.
      */
-    fun calcNextOccurrences(
-        from: LocalDate,
-        count: Int,
-        offset: Int = 0,
+    fun calcNextOccurrence(
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
-    ): List<LocalDateTime>
-    // end-snippet
-    {
-        val occurrences = mutableListOf<LocalDateTime>()
-        while (occurrences.size < count) {
-            val next = calcNextOccurrence(from, timeZone, offset + occurrences.size)
-            occurrences.add(next)
-        }
-        return occurrences
+    ): LocalDateTime {
+        val now = Clock.System.now().toLocalDateTime(timeZone)
+        return calcNextOccurrence(now, timeZone)
     }
+
+    // begin-snippet: Frequency::duration
+    /**
+     * Calendar period between occurrences. Month and year periods depend on the date they are applied to.
+     *
+     * For month-end and leap-day frequencies, use [calcNextOccurrence] to build a sequence so the
+     * selected day is preserved when a month or year is shorter.
+     */
+    abstract val duration: DateTimePeriod
+    // end-snippet
 
     internal fun updateTimeWithTime(date: LocalDate): LocalDateTime {
         return LocalDateTime(
@@ -145,17 +143,20 @@ sealed class Frequency {
         )
     }
 
-    internal fun calcDate(
-        from: LocalDate,
+    internal fun isAfter(
+        candidate: LocalDateTime,
+        after: LocalDateTime,
         timeZone: TimeZone,
-        unit: DateTimeUnit,
-        offset: Int,
-    ): LocalDateTime {
-        val dateTime = updateTimeWithTime(from)
-        val instant = dateTime.toInstant(timeZone)
-        val instantNext = instant.plus(interval * (1 + offset), unit, timeZone)
-        val dateTimeNext = instantNext.toLocalDateTime(timeZone)
-        return dateTimeNext
+    ): Boolean {
+        return candidate.toInstant(timeZone) > after.toInstant(timeZone)
+    }
+
+    internal fun dateInMonth(year: Int, month: Month, dayOfMonth: Int): LocalDate {
+        val firstOfMonth = LocalDate(year, month, 1)
+        val lastDay = firstOfMonth.plus(DatePeriod(months = 1))
+            .minus(1, DateTimeUnit.DAY)
+            .day
+        return LocalDate(year, month, minOf(dayOfMonth, lastDay))
     }
 
     /**
@@ -170,10 +171,21 @@ sealed class Frequency {
         override val interval: Int,
     ) : Frequency() {
 
-        override val type = Type.Daily
+        init {
+            require(interval > 0) { "interval must be positive" }
+        }
 
-        override fun calcNextOccurrence(from: LocalDate, timeZone: TimeZone, offset: Int) =
-            calcDate(from, timeZone, DateTimeUnit.DAY, offset)
+        override val type = Type.Daily
+        override val duration = DateTimePeriod(days = interval)
+
+        override fun calcNextOccurrence(after: LocalDateTime, timeZone: TimeZone): LocalDateTime {
+            val today = updateTimeWithTime(after.date)
+            return if (isAfter(today, after, timeZone)) {
+                today
+            } else {
+                updateTimeWithTime(after.date.plus(DatePeriod(days = interval)))
+            }
+        }
     }
 
     /**
@@ -190,18 +202,25 @@ sealed class Frequency {
         override val interval: Int,
     ) : Frequency() {
 
+        init {
+            require(interval in 1..(Int.MAX_VALUE / 7)) { "interval must be positive and representable" }
+        }
+
         override val type = Type.Weekly
+        override val duration = DateTimePeriod(days = interval * 7)
 
         override fun calcNextOccurrence(
-            from: LocalDate,
+            after: LocalDateTime,
             timeZone: TimeZone,
-            offset: Int,
         ): LocalDateTime {
-            var from = from
-            while (from.dayOfWeek != dayOfWeek) {
-                from = from.minus(1, DateTimeUnit.DAY)
+            val daysUntilTarget = (dayOfWeek.ordinal - after.dayOfWeek.ordinal + 7) % 7
+            val targetDate = after.date.plus(daysUntilTarget, DateTimeUnit.DAY)
+            val target = updateTimeWithTime(targetDate)
+            return if (isAfter(target, after, timeZone)) {
+                target
+            } else {
+                updateTimeWithTime(targetDate.plus(DatePeriod(days = interval * 7)))
             }
-            return calcDate(from, timeZone, DateTimeUnit.WEEK, offset)
         }
     }
 
@@ -219,18 +238,29 @@ sealed class Frequency {
         override val interval: Int,
     ) : Frequency() {
 
+        init {
+            require(dayOfMonth in 1..31) { "dayOfMonth must be between 1 and 31" }
+            require(interval > 0) { "interval must be positive" }
+        }
+
         override val type = Type.Monthly
+        override val duration = DateTimePeriod(months = interval)
 
         override fun calcNextOccurrence(
-            from: LocalDate,
+            after: LocalDateTime,
             timeZone: TimeZone,
-            offset: Int,
         ): LocalDateTime {
-            var from = from
-            while (from.day != dayOfMonth) {
-                from = from.minus(1, DateTimeUnit.DAY)
+            val currentMonth = LocalDate(after.year, after.month, 1)
+            var monthOffset = 0
+            while (true) {
+                val targetMonth = currentMonth.plus(DatePeriod(months = monthOffset))
+                val targetDate = dateInMonth(targetMonth.year, targetMonth.month, dayOfMonth)
+                val candidate = updateTimeWithTime(targetDate)
+                if (isAfter(candidate, after, timeZone)) {
+                    return candidate
+                }
+                monthOffset += interval
             }
-            return calcDate(from, timeZone, DateTimeUnit.MONTH, offset)
         }
     }
 
@@ -250,21 +280,28 @@ sealed class Frequency {
         override val interval: Int,
     ) : Frequency() {
 
+        init {
+            require(dayOfMonth in 1..31) { "dayOfMonth must be between 1 and 31" }
+            require(interval > 0) { "interval must be positive" }
+        }
+
         override val type = Type.Yearly
+        override val duration = DateTimePeriod(years = interval)
 
         override fun calcNextOccurrence(
-            from: LocalDate,
+            after: LocalDateTime,
             timeZone: TimeZone,
-            offset: Int,
         ): LocalDateTime {
-            var from = from
-            val targetInSameYear = LocalDate(from.year, month, dayOfMonth)
-            if (from < targetInSameYear) {
-                from = targetInSameYear.minus(1, DateTimeUnit.YEAR)
-            } else if (from >= targetInSameYear) {
-                from = targetInSameYear
+            var yearOffset = 0
+            while (true) {
+                val targetYear = after.year + yearOffset
+                val targetDate = dateInMonth(targetYear, month, dayOfMonth)
+                val candidate = updateTimeWithTime(targetDate)
+                if (isAfter(candidate, after, timeZone)) {
+                    return candidate
+                }
+                yearOffset += interval
             }
-            return calcDate(from, timeZone, DateTimeUnit.YEAR, offset)
         }
     }
 

@@ -19,7 +19,7 @@ internal object NullableColorStateSaver : Saver<MutableState<Color?>, String> {
     }
 }
 
-private object ColorStateSaver : Saver<MutableState<Color>, Int> {
+object ColorSaver : Saver<MutableState<Color>, Int> {
     override fun restore(value: Int): MutableState<Color> = mutableStateOf(Color(value))
 
     override fun SaverScope.save(value: MutableState<Color>): Int = value.value.toArgb()
@@ -28,5 +28,5 @@ private object ColorStateSaver : Saver<MutableState<Color>, Int> {
 /** Remembers a saveable color value for a color picker. */
 @Composable
 fun rememberColorPickerColor(color: Color): MutableState<Color> {
-    return rememberSaveable(saver = ColorStateSaver) { mutableStateOf(color) }
+    return rememberSaveable(saver = ColorSaver) { mutableStateOf(color) }
 }

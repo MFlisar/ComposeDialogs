@@ -149,35 +149,63 @@ internal object Material3DateUIProvider : DateUIProvider {
     @Composable
     override fun CalendarCell(
         date: LocalDate,
-        selected: Boolean,
-        today: Boolean,
+        type: DatePickerCellType,
         modifier: Modifier,
         onClick: () -> Unit,
     ) {
-        if (selected) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = modifier
-                    .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.primary)
-            ) {
-                androidx.compose.material3.Text(
-                    date.day.toString(),
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+        when (type) {
+            is DatePickerCellType.OtherMonth -> {
+                val background = if (type.selected) {
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                } else {
+                    Color.Transparent
+                }
+                val textColor = if (type.selected) {
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.38f)
+                } else {
+                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = modifier
+                        .clip(MaterialTheme.shapes.small)
+                        .background(background)
+                ) {
+                    androidx.compose.material3.Text(date.day.toString(), color = textColor)
+                }
             }
-        } else {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = modifier
-                    .border(
-                        if (today) 2.dp else 1.dp,
-                        if (today) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
-                        MaterialTheme.shapes.small
-                    )
-                    .clickable(onClick = onClick)
-            ) {
-                androidx.compose.material3.Text(date.day.toString())
+
+            is DatePickerCellType.CurrentMonth -> {
+                if (type.selected) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = modifier
+                            .clip(MaterialTheme.shapes.small)
+                            .background(MaterialTheme.colorScheme.primary)
+                    ) {
+                        androidx.compose.material3.Text(
+                            date.day.toString(),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                } else {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = modifier
+                            .border(
+                                if (type.today) 2.dp else 1.dp,
+                                if (type.today) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.outline
+                                },
+                                MaterialTheme.shapes.small
+                            )
+                            .clickable(onClick = onClick)
+                    ) {
+                        androidx.compose.material3.Text(date.day.toString())
+                    }
+                }
             }
         }
     }

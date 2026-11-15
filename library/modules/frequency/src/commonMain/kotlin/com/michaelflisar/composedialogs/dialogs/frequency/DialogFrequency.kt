@@ -16,9 +16,6 @@ import com.michaelflisar.composedialogs.core.DialogOptions
 import com.michaelflisar.composedialogs.core.defaultDialogStyle
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
 import com.michaelflisar.composedialogs.dialogs.frequency.internal.Material3FrequencyUIProvider
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerDefaults
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
-import kotlinx.datetime.DayOfWeek
 
 // begin-snippet: DialogFrequency::constructor
 /**
@@ -29,11 +26,8 @@ import kotlinx.datetime.DayOfWeek
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param frequency the frequency state of the dialog - use [com.michaelflisar.composedialogs.dialogs.frequency.classes.rememberFrequency] to create a state for this parameter
+ * @param config the frequency picker's behavior and embedded time picker configuration
  * @param texts the texts ([FrequencyPickerTexts]) that are used inside this dialog - use [FrequencyPickerDefaults.texts] to provide your own data
- * @param supportedTypes the supported frequency types - default is all types
- * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
- * @param intervalInputType how the interval is entered
- * @param timeSetup the setup used by the embedded time picker
  */
 @Composable
 fun DialogFrequency(
@@ -41,9 +35,8 @@ fun DialogFrequency(
     // Custom - Required
     frequency: MutableState<Frequency>,
     // Custom - Optional
+    config: FrequencyPickerConfig = FrequencyPickerDefaults.config(),
     texts: FrequencyPickerTexts = FrequencyPickerDefaults.texts(),
-    supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
-    firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -51,8 +44,6 @@ fun DialogFrequency(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: TimePickerSetup = TimePickerDefaults.setup(),
 )
 // end-snippet
 {
@@ -97,11 +88,8 @@ fun DialogFrequency(
             FrequencyPicker(
                 uiProvider = Material3FrequencyUIProvider,
                 texts = texts,
-                supportedTypes = supportedTypes,
-                firstDayOffset = firstDayOffset,
                 frequency = frequency,
-                intervalInputType = intervalInputType,
-                timeSetup = timeSetup,
+                config = config,
                 onIntervalValidityChanged = { intervalIsValid.value = it }
             )
         }

@@ -14,24 +14,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.LocalTime
 
 @Composable
 fun TimePicker(
     time: MutableState<LocalTime>,
-    is24Hours: Boolean,
-    minuteStep: Int,
-    hourPickType: TimePickerInputType,
-    minutePickType: TimePickerInputType,
+    config: TimePickerConfig,
     texts: TimePickerTexts,
     uiProvider: TimeUIProvider,
     modifier: Modifier = Modifier,
     onValidationChanged: (Boolean) -> Unit = {}
 ) {
-    require(minuteStep in 1..60) { "minuteStep must be between 1 and 60" }
-
-    val ui = uiProvider
+    val is24Hours = config.is24Hours
+    val minuteStep = config.minuteStep
+    val inputType = config.inputType
     val displayedHour = displayHour(time.value.hour, is24Hours)
     val period = period(time.value.hour)
     val hourText = remember { mutableStateOf(displayedHour.toString().padStart(2, '0')) }
@@ -40,20 +39,22 @@ fun TimePicker(
     val minuteFocused = remember { mutableStateOf(false) }
     val hourEdited = remember { mutableStateOf(false) }
     val minuteEdited = remember { mutableStateOf(false) }
+    val moveFocusToMinute = remember { mutableStateOf(false) }
+    val minuteFocusRequester = remember { FocusRequester() }
     val hourInputValid = !hourEdited.value || hourText.value.toIntOrNull()?.let {
         it in (if (is24Hours) 0..23 else 1..12)
     } == true
     val minuteInputValid = !minuteEdited.value || minuteText.value.toIntOrNull()?.let {
         it in 0..59 && it % minuteStep == 0
     } == true
-    val isValid = (hourPickType != TimePickerInputType.Input || hourInputValid) &&
-        (minutePickType != TimePickerInputType.Input || minuteInputValid)
-    val hourError = if (hourPickType == TimePickerInputType.Input && !hourInputValid) {
+    val isValid = inputType != TimePickerInputType.Input ||
+        (hourInputValid && minuteInputValid)
+    val hourError = if (inputType == TimePickerInputType.Input && !hourInputValid) {
         texts.invalidHour
     } else {
         null
     }
-    val minuteError = if (minutePickType == TimePickerInputType.Input && !minuteInputValid) {
+    val minuteError = if (inputType == TimePickerInputType.Input && !minuteInputValid) {
         texts.invalidMinute
     } else {
         null
@@ -75,6 +76,12 @@ fun TimePicker(
             minuteText.value = time.value.minute.toString().padStart(2, '0')
         }
     }
+    LaunchedEffect(moveFocusToMinute.value) {
+        if (moveFocusToMinute.value) {
+            minuteFocusRequester.requestFocus()
+            moveFocusToMinute.value = false
+        }
+    }
     LaunchedEffect(isValid, onValidationChanged) {
         onValidationChanged(isValid)
     }
@@ -86,18 +93,19 @@ fun TimePicker(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ui.LabeledField(
+        uiProvider.LabeledField(
             label = texts.hour,
             modifier = Modifier.weight(1f),
             errorMessage = hourError
         ) {
-            when (hourPickType) {
+            when (inputType) {
                 TimePickerInputType.Input -> {
-                    ui.NumberInput(
+                    uiProvider.NumberInput(
                         modifier = Modifier.fillMaxWidth(),
                         value = hourText.value,
                         onValueChange = { input ->
                             if (input.isNumericInput()) {
+                                val previousHourText = hourText.value
                                 hourText.value = input
                                 hourEdited.value = true
                                 val value = input.toIntOrNull()
@@ -105,6 +113,9 @@ fun TimePicker(
                                 val minHour = if (is24Hours) 0 else 1
                                 if (value != null && value in minHour..maxHour) {
                                     time.value = time.value.withDisplayedHour(value, is24Hours)
+                                    if (previousHourText.length < 2 && input.length == 2) {
+                                        moveFocusToMinute.value = true
+                                    }
                                 }
                             }
                         },
@@ -125,7 +136,7 @@ fun TimePicker(
                 }
 
                 TimePickerInputType.Dropdown -> {
-                    ui.NumberDropdown(
+                    uiProvider.NumberDropdown(
                         modifier = Modifier.fillMaxWidth(),
                         title = texts.hour,
                         items = hours,
@@ -138,15 +149,17 @@ fun TimePicker(
             }
         }
 
-        ui.LabeledField(
+        uiProvider.LabeledField(
             label = texts.minute,
             modifier = Modifier.weight(1f),
             errorMessage = minuteError
         ) {
-            when (minutePickType) {
+            when (inputType) {
                 TimePickerInputType.Input -> {
-                    ui.NumberInput(
-                        modifier = Modifier.fillMaxWidth(),
+                    uiProvider.NumberInput(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .focusRequester(minuteFocusRequester),
                         value = minuteText.value,
                         onValueChange = { input ->
                             if (input.isNumericInput()) {
@@ -172,7 +185,7 @@ fun TimePicker(
                 }
 
                 TimePickerInputType.Dropdown -> {
-                    ui.NumberDropdown(
+                    uiProvider.NumberDropdown(
                         modifier = Modifier.fillMaxWidth(),
                         title = texts.minute,
                         items = minutes,
@@ -186,7 +199,7 @@ fun TimePicker(
         }
 
         if (!is24Hours) {
-            ui.PeriodSelector(
+            uiProvider.PeriodSelector(
                 modifier = Modifier
                     .width(64.dp)
                     .fillMaxHeight(),

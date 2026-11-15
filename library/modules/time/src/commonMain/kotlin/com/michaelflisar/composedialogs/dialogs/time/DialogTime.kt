@@ -18,7 +18,7 @@ import kotlinx.datetime.LocalTime
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param time the selected time
- * @param setup the [TimePickerSetup] - use [TimePickerDefaults.setup] to provide your own data
+ * @param config the [TimePickerConfig] - use [TimePickerDefaults.config] to provide your own configuration
  * @param texts localized labels for the hour, minute, and AM/PM controls
  * @param uiProvider the UI implementation used to render the time controls
  */
@@ -28,7 +28,7 @@ fun DialogTime(
     // Custom - Required
     time: MutableState<LocalTime>,
     // Custom - Optional
-    setup: TimePickerSetup = TimePickerDefaults.setup(),
+    config: TimePickerConfig = TimePickerDefaults.config(),
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -77,10 +77,7 @@ fun DialogTime(
     ) {
         TimePicker(
             time = time,
-            is24Hours = setup.is24Hours,
-            minuteStep = setup.minuteStep,
-            hourPickType = setup.hourPickType,
-            minutePickType = setup.minutePickType,
+            config = config,
             texts = texts,
             uiProvider = uiProvider,
             onValidationChanged = onValidationChanged

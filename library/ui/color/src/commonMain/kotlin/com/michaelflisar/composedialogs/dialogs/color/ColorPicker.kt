@@ -19,11 +19,12 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composedialogs.dialogs.color.internal.ColorDefinitions
 import com.michaelflisar.composedialogs.dialogs.color.internal.ColorPickerPage
 import com.michaelflisar.composedialogs.dialogs.color.ui.ColorPickerContent
 import com.michaelflisar.composedialogs.dialogs.color.ui.TitleForPages
+import com.michaelflisar.composedialogs.dialogs.color.utils.getNearestColorGroupIndex
 
 /**
  * Renders the color picker using the caller-supplied [ColorUIProvider].
@@ -35,14 +36,15 @@ import com.michaelflisar.composedialogs.dialogs.color.ui.TitleForPages
 fun ColorPicker(
     uiProvider: ColorUIProvider,
     color: MutableState<Color>,
+    config: ColorPickerConfig,
     texts: ColorPickerTexts,
-    alphaSupported: Boolean,
-    directEditSupported: Boolean,
-    shape: Shape,
-    gridSize: Int,
-    labelStyle: ColorPickerLabelStyle,
     landscape: Boolean
 ) {
+    val alphaSupported = config.alphaSupported
+    val directEditSupported = config.directEditSupported
+    val shape = config.shape
+    val gridSize = config.gridSize
+    val labelStyle = config.labelStyle
     val selectedSubColor = rememberSaveable(saver = NullableColorStateSaver) {
         mutableStateOf<Color?>(null)
     }

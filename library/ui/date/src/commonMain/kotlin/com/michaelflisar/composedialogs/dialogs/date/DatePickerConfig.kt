@@ -10,7 +10,6 @@ import kotlinx.datetime.Month
 @Immutable
 class DatePickerConfig internal constructor(
     val years: IntRange,
-    val buttonToday: (@Composable () -> Unit)?,
     val firstDayOfWeek: DayOfWeek,
     val formatterWeekDayLabel: @Composable (date: DayOfWeek) -> String,
     val formatterSelectedDate: @Composable (date: LocalDate) -> String,

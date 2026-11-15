@@ -1,6 +1,7 @@
 package com.michaelflisar.demo.demos
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Schedule
@@ -64,15 +65,17 @@ private fun RowScope.DemoDate1(
 
         // special state for date dialog
         val date = rememberDatePickerDate()
+        val buttonToday: (@Composable () -> Unit)? = if (customSetup) {
+            { Icon(Icons.Default.Today, null) }
+        } else {
+            { BasicText(text = DatePickerDefaults.texts().today) }
+        }
         // optional settings
         var config = DatePickerDefaults.config(
             dateCellHeight = 32.dp
         )
         if (customSetup) {
             config = DatePickerDefaults.config(
-                buttonToday = {
-                    Icon(Icons.Default.Today, null)
-                },
                 firstDayOfWeek = DayOfWeek.SUNDAY,
                 dateCellHeight = 32.dp,
                 showNextPreviousMonthButtons = false,
@@ -98,6 +101,7 @@ private fun RowScope.DemoDate1(
             state = state,
             date = date,
             config = config,
+            buttonToday = buttonToday,
             icon = icon,
             title = { Text("Select Date") },
             style = style,
@@ -137,17 +141,16 @@ private fun RowScope.DemoTime1(
         // special state for time dialog
         val time = rememberTimePickerTime()
         // optional settings
-        val setup = TimePickerDefaults.setup(
+        val config = TimePickerDefaults.config(
             is24Hours = is24Hours,
-            hourPickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
-            minutePickType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
+            inputType = if (picker) TimePickerInputType.Dropdown else TimePickerInputType.Input,
             minuteStep = if (picker) 5 else 1
         )
 
         DialogTime(
             state = state,
             time = time,
-            setup = setup,
+            config = config,
             icon = icon,
             title = { Text("Select Time") },
             style = style,

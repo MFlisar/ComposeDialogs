@@ -11,8 +11,9 @@ import com.michaelflisar.composedialogs.core.*
 import com.michaelflisar.democomposables.DemoButton
 import com.michaelflisar.democomposables.layout.DemoRegion
 import com.michaelflisar.democomposables.layout.DemoRow
-import com.michaelflisar.composedialogs.dialogs.color.DialogColor
+import com.michaelflisar.composedialogs.dialogs.color.ColorPickerDefaults
 import com.michaelflisar.composedialogs.dialogs.color.ColorPickerLabelStyle
+import com.michaelflisar.composedialogs.dialogs.color.DialogColor
 import com.michaelflisar.composedialogs.dialogs.color.rememberColorPickerColor
 
 @Composable
@@ -43,7 +44,7 @@ private fun RowScope.DemoColor1(
         DialogColor(
             state = state,
             color = color,
-            alphaSupported = true,
+            config = ColorPickerDefaults.config(alphaSupported = true),
             icon = icon,
             title = { Text("Color Dialog") },
             style = style,
@@ -79,9 +80,11 @@ private fun RowScope.DemoColor2(
         DialogColor(
             state = state,
             color = color,
-            alphaSupported = false,
-            labelStyle = ColorPickerLabelStyle.Percent,
-            directEditSupported = false,
+            config = ColorPickerDefaults.config(
+                alphaSupported = false,
+                labelStyle = ColorPickerLabelStyle.Percent,
+                directEditSupported = false
+            ),
             icon = icon,
             title = { Text("Color Dialog") },
             style = style,

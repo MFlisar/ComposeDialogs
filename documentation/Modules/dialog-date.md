@@ -31,15 +31,17 @@ if (state.visible) {
 
     // special state for date dialog
     val date = rememberDatePickerDate()
+    val buttonToday: (@Composable () -> Unit)? = if (customSetup) {
+        { Icon(Icons.Default.Today, null) }
+    } else {
+        { BasicText(text = DatePickerDefaults.texts().today) }
+    }
     // optional settings
     var config = DatePickerDefaults.config(
         dateCellHeight = 32.dp
     )
     if (customSetup) {
         config = DatePickerDefaults.config(
-            buttonToday = {
-                Icon(Icons.Default.Today, null)
-            },
             firstDayOfWeek = DayOfWeek.SUNDAY,
             dateCellHeight = 32.dp,
             showNextPreviousMonthButtons = false,
@@ -65,6 +67,7 @@ if (state.visible) {
         state = state,
         date = date,
         config = config,
+        buttonToday = buttonToday,
         icon = icon,
         title = { Text("Select Date") },
         style = style,
@@ -93,12 +96,16 @@ if (state.visible) {
  *
  * @param date the selected date state
  * @param config the date picker's formatting, behavior, and supported year range
+ * @param buttonToday optional content for the Today button; pass null to hide it
  */
 @Composable
 fun DialogDate(
     state: BaseDialogState,
     date: MutableState<LocalDate>,
     config: DatePickerConfig = DatePickerDefaults.config(),
+    buttonToday: (@Composable () -> Unit)? = {
+        BasicText(text = DatePickerDefaults.texts().today)
+    },
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
     style: ComposeDialogStyle = DialogDefaults.defaultDialogStyle(),
@@ -116,13 +123,15 @@ fun DialogDate(
         options,
         onEvent = onEvent
     ) {
-        DatePickerMain(
-            uiProvider = Material3DateUIProvider,
-            date = date,
-            config = config,
-            landscape = landscape
-        ) { selectedDateEnabled, onSelectedDateClick, todayEnabled, onTodayClick ->
-            if (landscape) {
+        val pickerState = rememberDatePickerState(date, config)
+        val modifier = if (landscape) {
+            Modifier.verticalScroll(rememberScrollState())
+        } else {
+            Modifier
+        }
+
+        if (landscape) {
+            Row {
                 Column {
                     if (icon != null) {
                         Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -140,25 +149,33 @@ fun DialogDate(
                     }
                     DatePickerButtons(
                         uiProvider = Material3DateUIProvider,
-                        date = date,
+                        state = pickerState,
                         config = config,
-                        landscape = true,
-                        selectedDateEnabled = selectedDateEnabled,
-                        onSelectedDateClick = onSelectedDateClick,
-                        todayEnabled = todayEnabled,
-                        onTodayClick = onTodayClick
+                        landscape = true
                     )
                 }
-            } else {
+                Spacer(modifier = Modifier.width(8.dp))
+                DatePicker(
+                    uiProvider = Material3DateUIProvider,
+                    state = pickerState,
+                    config = config,
+                    modifier = modifier
+                )
+            }
+        } else {
+            Column {
                 DatePickerButtons(
                     uiProvider = Material3DateUIProvider,
-                    date = date,
+                    state = pickerState,
                     config = config,
-                    landscape = false,
-                    selectedDateEnabled = selectedDateEnabled,
-                    onSelectedDateClick = onSelectedDateClick,
-                    todayEnabled = todayEnabled,
-                    onTodayClick = onTodayClick
+                    landscape = false
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                DatePicker(
+                    uiProvider = Material3DateUIProvider,
+                    state = pickerState,
+                    config = config,
+                    modifier = modifier
                 )
             }
         }

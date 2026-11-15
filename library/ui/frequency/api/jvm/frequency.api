@@ -23,11 +23,20 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyI
 public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerDefaults {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerDefaults;
+	public final fun config (Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerConfig;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerConfig;
 	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;
 }
 
+public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerConfig {
+	public static final field $stable I
+	public final fun getFirstDayOffset ()Lkotlinx/datetime/DayOfWeek;
+	public final fun getIntervalInputType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;
+	public final fun getSupportedTypes ()Ljava/util/List;
+	public final fun getTimeConfig ()Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerConfig;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerKt {
-	public static final fun FrequencyPicker (Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyUIProvider;Landroidx/compose/runtime/MutableState;Ljava/util/List;Lkotlinx/datetime/DayOfWeek;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyIntervalInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun FrequencyPicker (Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerConfig;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/frequency/FrequencyPickerTexts {
@@ -63,16 +72,17 @@ public abstract interface class com/michaelflisar/composedialogs/dialogs/frequen
 	public abstract fun MonthDropdown (Landroidx/compose/ui/Modifier;Ljava/lang/String;Ljava/util/List;Lkotlinx/datetime/Month;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun NumberInput-Yjv_luQ (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;IZLandroidx/compose/runtime/Composer;I)V
 	public abstract fun Text-KAKpwIw (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lcom/michaelflisar/composedialogs/dialogs/frequency/FrequencyTextStyle;Landroidx/compose/ui/graphics/Color;Landroidx/compose/ui/text/style/TextAlign;IILandroidx/compose/runtime/Composer;I)V
-	public abstract fun TimeInput (Lkotlinx/datetime/LocalTime;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun TimeInput (Lkotlinx/datetime/LocalTime;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;I)V
 }
 
 public abstract class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
 	public static final field Companion Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Companion;
-	public abstract fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
-	public static synthetic fun calcNextOccurrence$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;IILjava/lang/Object;)Lkotlinx/datetime/LocalDateTime;
-	public final fun calcNextOccurrences (Lkotlinx/datetime/LocalDate;IILkotlinx/datetime/TimeZone;)Ljava/util/List;
-	public static synthetic fun calcNextOccurrences$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Lkotlinx/datetime/LocalDate;IILkotlinx/datetime/TimeZone;ILjava/lang/Object;)Ljava/util/List;
+	public abstract fun calcNextOccurrence (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
+	public static synthetic fun calcNextOccurrence$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;ILjava/lang/Object;)Lkotlinx/datetime/LocalDateTime;
+	public final fun calcNextOccurrence (Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
+	public static synthetic fun calcNextOccurrence$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency;Lkotlinx/datetime/TimeZone;ILjava/lang/Object;)Lkotlinx/datetime/LocalDateTime;
+	public abstract fun getDuration ()Lkotlinx/datetime/DateTimePeriod;
 	public abstract fun getInterval ()I
 	public abstract fun getTime ()Lkotlinx/datetime/LocalTime;
 	public abstract fun getType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Type;
@@ -86,12 +96,13 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Daily : com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
 	public fun <init> (Lkotlinx/datetime/LocalTime;I)V
-	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
+	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
 	public final fun component1 ()Lkotlinx/datetime/LocalTime;
 	public final fun component2 ()I
 	public final fun copy (Lkotlinx/datetime/LocalTime;I)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Daily;
 	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Daily;Lkotlinx/datetime/LocalTime;IILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Daily;
 	public fun equals (Ljava/lang/Object;)Z
+	public fun getDuration ()Lkotlinx/datetime/DateTimePeriod;
 	public fun getInterval ()I
 	public fun getTime ()Lkotlinx/datetime/LocalTime;
 	public fun getType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Type;
@@ -102,7 +113,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Monthly : com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
 	public fun <init> (ILkotlinx/datetime/LocalTime;I)V
-	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
+	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
 	public final fun component1 ()I
 	public final fun component2 ()Lkotlinx/datetime/LocalTime;
 	public final fun component3 ()I
@@ -110,6 +121,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Monthly;ILkotlinx/datetime/LocalTime;IILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Monthly;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDayOfMonth ()I
+	public fun getDuration ()Lkotlinx/datetime/DateTimePeriod;
 	public fun getInterval ()I
 	public fun getTime ()Lkotlinx/datetime/LocalTime;
 	public fun getType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Type;
@@ -139,7 +151,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Weekly : com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
 	public fun <init> (Lkotlinx/datetime/DayOfWeek;Lkotlinx/datetime/LocalTime;I)V
-	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
+	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
 	public final fun component1 ()Lkotlinx/datetime/DayOfWeek;
 	public final fun component2 ()Lkotlinx/datetime/LocalTime;
 	public final fun component3 ()I
@@ -147,6 +159,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Weekly;Lkotlinx/datetime/DayOfWeek;Lkotlinx/datetime/LocalTime;IILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Weekly;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDayOfWeek ()Lkotlinx/datetime/DayOfWeek;
+	public fun getDuration ()Lkotlinx/datetime/DateTimePeriod;
 	public fun getInterval ()I
 	public fun getTime ()Lkotlinx/datetime/LocalTime;
 	public fun getType ()Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Type;
@@ -157,7 +170,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Yearly : com/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency {
 	public static final field $stable I
 	public fun <init> (Lkotlinx/datetime/Month;ILkotlinx/datetime/LocalTime;I)V
-	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/TimeZone;I)Lkotlinx/datetime/LocalDateTime;
+	public fun calcNextOccurrence (Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/TimeZone;)Lkotlinx/datetime/LocalDateTime;
 	public final fun component1 ()Lkotlinx/datetime/Month;
 	public final fun component2 ()I
 	public final fun component3 ()Lkotlinx/datetime/LocalTime;
@@ -166,6 +179,7 @@ public final class com/michaelflisar/composedialogs/dialogs/frequency/classes/Fr
 	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Yearly;Lkotlinx/datetime/Month;ILkotlinx/datetime/LocalTime;IILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/frequency/classes/Frequency$Yearly;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDayOfMonth ()I
+	public fun getDuration ()Lkotlinx/datetime/DateTimePeriod;
 	public fun getInterval ()I
 	public final fun getMonth ()Lkotlinx/datetime/Month;
 	public fun getTime ()Lkotlinx/datetime/LocalTime;
@@ -270,4 +284,3 @@ public final class com/michaelflisar/composedialogs/frequency/resources/String0_
 	public static final fun getComposedialogs_frequency_year (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
 	public static final fun getComposedialogs_frequency_year_plural (Lcom/michaelflisar/composedialogs/frequency/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
 }
-

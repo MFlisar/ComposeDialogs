@@ -40,10 +40,7 @@ if (state.visible) {
  *
  * @param frequency the frequency state of the dialog - use [com.michaelflisar.composedialogs.dialogs.frequency.classes.rememberFrequency] to create a state for this parameter
  * @param texts the texts ([FrequencyPickerTexts]) that are used inside this dialog - use [FrequencyPickerDefaults.texts] to provide your own data
- * @param supportedTypes the supported frequency types - default is all types
- * @param firstDayOffset the first day of the week - default is [DayOfWeek.MONDAY]
- * @param intervalInputType how the interval is entered
- * @param timeSetup the setup used by the embedded time picker
+ * @param config the frequency picker's behavior and embedded time picker configuration
  */
 @Composable
 fun DialogFrequency(
@@ -51,9 +48,8 @@ fun DialogFrequency(
     // Custom - Required
     frequency: MutableState<Frequency>,
     // Custom - Optional
+    config: FrequencyPickerConfig = FrequencyPickerDefaults.config(),
     texts: FrequencyPickerTexts = FrequencyPickerDefaults.texts(),
-    supportedTypes: List<Frequency.Type> = Frequency.Type.entries,
-    firstDayOffset: DayOfWeek = DayOfWeek.MONDAY,
     // Base Dialog - Optional
     title: (@Composable () -> Unit)? = null,
     icon: (@Composable () -> Unit)? = null,
@@ -61,55 +57,45 @@ fun DialogFrequency(
     buttons: DialogButtons = DialogDefaults.buttons(),
     options: DialogOptions = DialogDefaults.options(),
     onEvent: (event: DialogEvent) -> Unit = {},
-    intervalInputType: FrequencyIntervalInputType = FrequencyIntervalInputType.Input,
-    timeSetup: TimePickerSetup = TimePickerDefaults.setup(),
 )
 ```
 <!-- endSnippet -->
 
 #### Frequency class
 
-This class offers some helpful functions to calculate the next date based on a given start date.
+The frequency API can calculate the next occurrence after a local date and time. Calling
+`calcNextOccurrence()` without an argument calculates it after the current time, using the supplied
+time zone (or the system time zone by default).
 
 <!-- snippet: Frequency::calcNextOccurrence -->
 ```kt
 /**
- * Calculates the next occurrence of the event based on the frequency settings.
+ * Calculates the first occurrence strictly after [after], based on the frequency settings.
  *
- * @param from The starting point to calculate the next occurrence from.
+ * @param after The local date and time after which to calculate the next occurrence.
  * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
- * @param offset An optional offset to adjust the calculation (default is 0).
  * @return The next occurrence as a LocalDateTime.
  */
 abstract fun calcNextOccurrence(
-    from: LocalDate,
+    after: LocalDateTime,
     timeZone: TimeZone = TimeZone.currentSystemDefault(),
-    offset: Int = 0,
 ): LocalDateTime
 ```
 <!-- endSnippet -->
 
-<!-- snippet: Frequency::calcNextOccurrences -->
+<!-- snippet: Frequency::duration -->
 ```kt
 /**
- * Calculates the next [count] occurrences of the event based on the frequency settings.
+ * Calendar period between occurrences. Month and year periods depend on the date they are applied to.
  *
- * @param from The starting point to calculate the next occurrences from.
- * @param offset An optional offset to adjust the calculation (default is 0).
- * @param count The number of occurrences to calculate.
- * @param timeZone The time zone to consider for the calculation (defaults to the system's current time zone).
- * @return A list of the next occurrences as LocalDateTime objects.
+ * For month-end and leap-day frequencies, use [calcNextOccurrence] to build a sequence so the
+ * selected day is preserved when a month or year is shorter.
  */
-fun calcNextOccurrences(
-    from: LocalDate,
-    count: Int,
-    offset: Int = 0,
-    timeZone: TimeZone = TimeZone.currentSystemDefault(),
-): List<LocalDateTime>
+abstract val duration: DateTimePeriod
 ```
 <!-- endSnippet -->
 
-Here's a small example how to use it:
+Here's a small example:
 
 ```kotlin
 val time = LocalTime(12, 0)
@@ -118,24 +104,23 @@ val frequencyWeekly1 = Frequency.Weekly(DayOfWeek.MONDAY, time, 1)
 val frequencyMonthly1 = Frequency.Monthly(31, time, 1)
 val frequencyYearly1 = Frequency.Yearly(Month.JANUARY, 31, time, 1)
 
-// Friday, January 31, 2025
-val date = LocalDate(2025, Month.JANUARY, 31)
+// Friday, January 31, 2025, after the scheduled time
+val after = LocalDateTime(2025, Month.JANUARY, 31, 12, 1)
 
-val nextDaily1 = frequencyDaily1.calcNextOccurrence(date) // February 1, 2025
-val nextWeekly1 = frequencyWeekly1.calcNextOccurrence(date) // February 3 (next monday after date)
-val nextMonthly1 = frequencyMonthly1.calcNextOccurrence(date) // March 31, 2025 (31st of next month)
-val nextYearly1 = frequencyYearly1.calcNextOccurrence(date) // January 31, 2026 (31st of January next year)
+val nextDaily1 = frequencyDaily1.calcNextOccurrence(after) // February 1, 2025
+val nextWeekly1 = frequencyWeekly1.calcNextOccurrence(after) // February 3, 2025
+val nextMonthly1 = frequencyMonthly1.calcNextOccurrence(after) // February 28, 2025
+val nextYearly1 = frequencyYearly1.calcNextOccurrence(after) // January 31, 2026
+val dailyDuration = frequencyDaily1.duration // DateTimePeriod(days = 1)
 
-// TIPP: do not use calcNextOccurrence recursively to get multiple occurrences, use calcNextOccurrence(..., offset = n) instead
-// this avoid issues for example with monthly frequencies where the next month does not have the same day (e.g. 31st) and similar!
-
-// you can also get multiple occurrences at once:
-val next3Daily1 = frequencyDaily1.calcNextOccurrences(date, 3) // February 1, 2, 3 of 2025
-val next3Weekly1 = frequencyWeekly1.calcNextOccurrences(date, 3) // February 3, 10, 17 of 2025
-val next3Monthly1 = frequencyMonthly1.calcNextOccurrences(date, 3) // March 31, April 30, May 31 of 2025
-val next3Yearly1 = frequencyYearly1.calcNextOccurrences(date, 3) // January 31 of 2026, 2027, 2028
-
-// TIPP2: calcNextOccurrences does also support an offset parameter
+// Build a sequence while preserving the selected day for month-end and leap-day frequencies.
+val next3Monthly1 = buildList {
+    var occurrence = after
+    repeat(3) {
+        occurrence = frequencyMonthly1.calcNextOccurrence(occurrence)
+        add(occurrence)
+    }
+}
 ```
 
 #### Screenshots

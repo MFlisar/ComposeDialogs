@@ -8,7 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import com.michaelflisar.composedialogs.dialogs.time.utils.TimeUtil
 import kotlinx.datetime.LocalTime
 
-private val TimePickerTimeSaver = Saver<MutableState<LocalTime>, Int>(
+val LocalTimeSaver = Saver<MutableState<LocalTime>, Int>(
     save = { it.value.toSecondOfDay() },
     restore = { mutableStateOf(LocalTime.fromSecondOfDay(it)) }
 )
@@ -17,6 +17,6 @@ private val TimePickerTimeSaver = Saver<MutableState<LocalTime>, Int>(
 @Composable
 fun rememberTimePickerTime(
     time: LocalTime = TimeUtil.now().time
-): MutableState<LocalTime> = rememberSaveable(saver = TimePickerTimeSaver) {
+): MutableState<LocalTime> = rememberSaveable(saver = LocalTimeSaver) {
     mutableStateOf(time)
 }

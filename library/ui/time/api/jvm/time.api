@@ -5,7 +5,7 @@ public final class com/michaelflisar/composedialogs/dialogs/time/Platform_jvmKt 
 public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerDefaults {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerDefaults;
-	public final fun setup (ZILcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerSetup;
+	public final fun config (ZILcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerConfig;
 	public final fun texts (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerTexts;
 }
 
@@ -18,7 +18,7 @@ public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerInput
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerKt {
-	public static final fun TimePicker (Landroidx/compose/runtime/MutableState;ZILcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerTexts;Lcom/michaelflisar/composedialogs/dialogs/time/TimeUIProvider;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun TimePicker (Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerConfig;Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerTexts;Lcom/michaelflisar/composedialogs/dialogs/time/TimeUIProvider;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod : java/lang/Enum {
@@ -29,10 +29,9 @@ public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerPerio
 	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerPeriod;
 }
 
-public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerSetup {
+public final class com/michaelflisar/composedialogs/dialogs/time/TimePickerConfig {
 	public static final field $stable I
-	public final fun getHourPickType ()Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
-	public final fun getMinutePickType ()Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
+	public final fun getInputType ()Lcom/michaelflisar/composedialogs/dialogs/time/TimePickerInputType;
 	public final fun getMinuteStep ()I
 	public final fun is24Hours ()Z
 }
@@ -106,4 +105,3 @@ public final class com/michaelflisar/composedialogs/time/resources/String0_commo
 	public static final fun getComposedialogs_time_minute (Lcom/michaelflisar/composedialogs/time/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
 	public static final fun getComposedialogs_time_pm (Lcom/michaelflisar/composedialogs/time/resources/Res$string;)Lorg/jetbrains/compose/resources/StringResource;
 }
-

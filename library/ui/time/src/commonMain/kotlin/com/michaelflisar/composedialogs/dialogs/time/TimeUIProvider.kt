@@ -25,7 +25,7 @@ interface TimeUIProvider {
         content: @Composable () -> Unit
     )
 
-    /** Renders the editable hour or minute field. */
+    /** Renders the editable hour or minute field, applies [modifier] to the focusable input, and selects all on focus. */
     @Composable
     fun NumberInput(
         modifier: Modifier,

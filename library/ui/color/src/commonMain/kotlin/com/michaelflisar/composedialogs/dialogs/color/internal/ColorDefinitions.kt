@@ -1,4 +1,4 @@
-package com.michaelflisar.composedialogs.dialogs.color
+package com.michaelflisar.composedialogs.dialogs.color.internal
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb

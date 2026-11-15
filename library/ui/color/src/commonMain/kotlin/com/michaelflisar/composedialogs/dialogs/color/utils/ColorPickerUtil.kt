@@ -1,6 +1,7 @@
-package com.michaelflisar.composedialogs.dialogs.color
+package com.michaelflisar.composedialogs.dialogs.color.utils
 
 import androidx.compose.ui.graphics.Color
+import com.michaelflisar.composedialogs.dialogs.color.internal.ColorDefinitions
 import kotlin.math.abs
 
 internal fun getNearestColorGroupIndex(color: Color): Int {

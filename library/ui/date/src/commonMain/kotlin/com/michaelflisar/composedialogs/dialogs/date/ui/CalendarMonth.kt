@@ -7,10 +7,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -20,9 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composedialogs.dialogs.date.DatePickerConfig
+import com.michaelflisar.composedialogs.dialogs.date.DatePickerCellType
 import com.michaelflisar.composedialogs.dialogs.date.utils.DateUtil
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import com.michaelflisar.composedialogs.dialogs.date.DateColor
 import com.michaelflisar.composedialogs.dialogs.date.DateUIProvider
 
@@ -55,30 +59,18 @@ internal fun CalendarMonth(
 
     val items = remember(year, month, config.firstDayOfWeek) {
         derivedStateOf {
-            val items = mutableListOf<LocalDate?>()
             val colIndexOfFirstDay = weekdays.indexOf(firstDayOfMonth.value.dayOfWeek)
-            val colIndexOfLastDay = weekdays.indexOf(lastDayOfMonth.value.dayOfWeek)
-            repeat(colIndexOfFirstDay) {
-                items.add(null)
+            val daysInGrid = colIndexOfFirstDay + lastDayOfMonth.value.day
+            val cellCount = ((daysInGrid + 6) / 7) * 7
+            List(cellCount) { index ->
+                firstDayOfMonth.value.plus(index - colIndexOfFirstDay, DateTimeUnit.DAY)
             }
-            repeat(lastDayOfMonth.value.day) {
-                val date = LocalDate(
-                    firstDayOfMonth.value.year,
-                    firstDayOfMonth.value.month,
-                    it + 1
-                )
-                items.add(date)
-            }
-            repeat(7 - colIndexOfLastDay - 1) {
-                items.add(null)
-            }
-            items
         }
     }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier.wrapContentHeight()
+        modifier = Modifier.wrapContentHeight().verticalScroll(rememberScrollState())
     ) {
         val modifierHeader = Modifier
             .weight(1f)
@@ -99,17 +91,26 @@ internal fun CalendarMonth(
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 repeat(7) { col ->
                     val date = items.value[row * 7 + col]
-                    if (date != null) {
-                        ui.CalendarCell(
-                            date = date,
-                            selected = date == state.value,
-                            today = date == today.value,
-                            modifier = modifierCell
-                        ) {
+                    val selected = date == state.value
+                    val isCurrentMonth = date.year == year && date.month == firstDayOfMonth.value.month
+                    val type = if (isCurrentMonth) {
+                        DatePickerCellType.CurrentMonth(
+                            selected = selected,
+                            today = date == today.value
+                        )
+                    } else {
+                        DatePickerCellType.OtherMonth(
+                            selected = selected
+                        )
+                    }
+                    ui.CalendarCell(
+                        date = date,
+                        type = type,
+                        modifier = modifierCell
+                    ) {
+                        if (type is DatePickerCellType.CurrentMonth) {
                             state.value = date
                         }
-                    } else {
-                        Spacer(modifier = modifierCell)
                     }
                 }
             }

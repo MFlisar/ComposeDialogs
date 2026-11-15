@@ -1,6 +1,5 @@
 package com.michaelflisar.composedialogs.dialogs.frequency.internal
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,17 +10,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.michaelflisar.composedialogs.core.rememberDialogState
+import com.michaelflisar.composedialogs.core.DialogEventType
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogInputButton
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogLabeledField
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogNumberInput
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogTextDropdown
-import com.michaelflisar.composedialogs.dialogs.time.DialogTime
-import com.michaelflisar.composedialogs.dialogs.time.TimePickerSetup
-import com.michaelflisar.composedialogs.dialogs.time.rememberTimePickerTime
+import com.michaelflisar.composedialogs.core.rememberDialogState
+import com.michaelflisar.composedialogs.dialogs.frequency.FrequencyTextStyle
+import com.michaelflisar.composedialogs.dialogs.frequency.FrequencyUIProvider
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
+import com.michaelflisar.composedialogs.dialogs.time.DialogTime
+import com.michaelflisar.composedialogs.dialogs.time.TimePickerConfig
+import com.michaelflisar.composedialogs.dialogs.time.rememberTimePickerTime
 import kotlinx.datetime.LocalTime
-import com.michaelflisar.composedialogs.dialogs.frequency.*
 
 internal object Material3FrequencyUIProvider : FrequencyUIProvider {
 
@@ -30,7 +31,7 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
         label: String,
         modifier: Modifier,
         errorMessage: String?,
-        content: @Composable () -> Unit
+        content: @Composable () -> Unit,
     ) {
         InternalDialogLabeledField(
             label = label,
@@ -96,7 +97,7 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
         min: Int,
         max: Int,
         selected: Int,
-        onItemSelected: (Int) -> Unit
+        onItemSelected: (Int) -> Unit,
     ) {
         val items = remember(min, max) { (min..max).toList() }
         InternalDialogTextDropdown(
@@ -133,13 +134,10 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
         selectedTime: LocalTime,
         onTimeSelected: (LocalTime) -> Unit,
         title: String,
-        setup: TimePickerSetup,
+        config: TimePickerConfig,
         modifier: Modifier,
     ) {
         val selectedTimeState = rememberTimePickerTime(selectedTime)
-        LaunchedEffect(selectedTime) {
-            selectedTimeState.value = selectedTime
-        }
         LaunchedEffect(selectedTimeState.value) {
             onTimeSelected(selectedTimeState.value)
         }
@@ -151,11 +149,17 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
             onClick = { dialogState.show() }
         )
         if (dialogState.visible) {
+            val selectedTimeState2 = rememberTimePickerTime(selectedTime)
             DialogTime(
                 state = dialogState,
-                time = selectedTimeState,
-                setup = setup,
-                title = { Text(title) }
+                time = selectedTimeState2,
+                config = config,
+                title = { Text(title) },
+                onEvent = { event ->
+                    if (event.type == DialogEventType.ButtonPositive) {
+                        selectedTimeState.value = selectedTimeState2.value
+                    }
+                }
             )
         }
     }

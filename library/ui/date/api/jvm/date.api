@@ -65,13 +65,42 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerButto
 	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerButtonType;
 }
 
+public abstract interface class com/michaelflisar/composedialogs/dialogs/date/DatePickerCellType {
+	public abstract fun getSelected ()Z
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$CurrentMonth : com/michaelflisar/composedialogs/dialogs/date/DatePickerCellType {
+	public static final field $stable I
+	public fun <init> (ZZ)V
+	public final fun component1 ()Z
+	public final fun component2 ()Z
+	public final fun copy (ZZ)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$CurrentMonth;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$CurrentMonth;ZZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$CurrentMonth;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSelected ()Z
+	public final fun getToday ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$OtherMonth : com/michaelflisar/composedialogs/dialogs/date/DatePickerCellType {
+	public static final field $stable I
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$OtherMonth;
+	public static synthetic fun copy$default (Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$OtherMonth;ZILjava/lang/Object;)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType$OtherMonth;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getSelected ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerButtonsKt {
-	public static final fun DatePickerButtons (Lcom/michaelflisar/composedialogs/dialogs/date/DateUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;ZZLkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+	public static final fun DatePickerButtons (Lcom/michaelflisar/composedialogs/dialogs/date/DateUIProvider;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerConfig {
 	public static final field $stable I
-	public final fun getButtonToday ()Lkotlin/jvm/functions/Function2;
 	public final fun getDateCellHeight-D9Ej5fM ()F
 	public final fun getFirstDayOfWeek ()Lkotlinx/datetime/DayOfWeek;
 	public final fun getFormatterMonthSelectorList ()Lkotlin/jvm/functions/Function3;
@@ -92,7 +121,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerDateK
 public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerDefaults {
 	public static final field $stable I
 	public static final field INSTANCE Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerDefaults;
-	public final fun config-XFD2ZOI (Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function2;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;
+	public final fun config-Wu8B24Y (Lkotlin/ranges/IntRange;Lkotlinx/datetime/DayOfWeek;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;FZZLandroidx/compose/runtime/Composer;III)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;
 	public final fun texts (Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerTexts;
 }
 
@@ -106,9 +135,20 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerIcon 
 	public static fun values ()[Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerIcon;
 }
 
+public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerState {
+	public static final field $stable I
+	public final fun getSelectedDateEnabled ()Z
+	public final fun getTodayEnabled ()Z
+	public final fun onSelectedDateClick ()V
+	public final fun onTodayClick ()V
+}
+
+public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerStateKt {
+	public static final fun rememberDatePickerState (Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;Landroidx/compose/runtime/Composer;I)Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerState;
+}
+
 public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerKt {
-	public static final fun DatePicker (Lcom/michaelflisar/composedialogs/dialogs/date/DateUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;ZLandroidx/compose/runtime/Composer;I)V
-	public static final fun DatePickerMain (Lcom/michaelflisar/composedialogs/dialogs/date/DateUIProvider;Landroidx/compose/runtime/MutableState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;ZLkotlin/jvm/functions/Function6;Landroidx/compose/runtime/Composer;I)V
+	public static final fun DatePicker (Lcom/michaelflisar/composedialogs/dialogs/date/DateUIProvider;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerState;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerConfig;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/michaelflisar/composedialogs/dialogs/date/DatePickerTexts {
@@ -128,7 +168,7 @@ public final class com/michaelflisar/composedialogs/dialogs/date/DateTextStyle :
 
 public abstract interface class com/michaelflisar/composedialogs/dialogs/date/DateUIProvider {
 	public abstract fun Button (Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerButtonType;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-	public abstract fun CalendarCell (Lkotlinx/datetime/LocalDate;ZZLandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun CalendarCell (Lkotlinx/datetime/LocalDate;Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerCellType;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun Divider (Landroidx/compose/ui/Modifier;ZLandroidx/compose/runtime/Composer;I)V
 	public abstract fun Icon-AhBaYpU (Lcom/michaelflisar/composedialogs/dialogs/date/DatePickerIcon;Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Color;Landroidx/compose/runtime/Composer;I)V
 	public abstract fun IconButton (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
@@ -155,4 +195,3 @@ public final class com/michaelflisar/composedialogs/dialogs/date/utils/DateUtil 
 	public final fun now ()Lkotlinx/datetime/LocalDateTime;
 	public final fun today ()Lkotlinx/datetime/LocalDate;
 }
-

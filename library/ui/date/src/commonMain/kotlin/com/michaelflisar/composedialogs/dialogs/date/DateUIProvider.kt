@@ -35,6 +35,22 @@ enum class DateColor {
     Outline
 }
 
+/** Describes a calendar cell's relationship to the displayed month. */
+sealed interface DatePickerCellType {
+    val selected: Boolean
+
+    /** A day belonging to the displayed month. */
+    data class CurrentMonth(
+        override val selected: Boolean,
+        val today: Boolean
+    ) : DatePickerCellType
+
+    /** A disabled day filling a partial week. */
+    data class OtherMonth(
+        override val selected: Boolean
+    ) : DatePickerCellType
+}
+
 /** UI rendering contract for the date picker's calendar and selection controls. */
 interface DateUIProvider {
 
@@ -100,12 +116,11 @@ interface DateUIProvider {
         content: LazyListScope.() -> Unit
     )
 
-    /** Renders one calendar day, including selected/today styling and click behavior. */
+    /** Renders one calendar day, including its month, selected, and today state. */
     @Composable
     fun CalendarCell(
         date: LocalDate,
-        selected: Boolean,
-        today: Boolean,
+        type: DatePickerCellType,
         modifier: Modifier,
         onClick: () -> Unit
     )
