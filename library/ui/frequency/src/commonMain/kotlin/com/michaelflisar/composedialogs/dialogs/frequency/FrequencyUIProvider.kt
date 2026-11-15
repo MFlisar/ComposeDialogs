@@ -78,6 +78,7 @@ interface FrequencyUIProvider {
         selectedTime: LocalTime,
         onTimeSelected: (LocalTime) -> Unit,
         title: String,
+        saveTime: String,
         config: TimePickerConfig,
         modifier: Modifier
     )

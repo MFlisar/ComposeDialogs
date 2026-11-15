@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composedialogs_time_hour">Hora</string>
+    <string name="composedialogs_time_minute">Minuto</string>
+    <string name="composedialogs_time_am">a. m.</string>
+    <string name="composedialogs_time_pm">p. m.</string>
+    <string name="composedialogs_time_invalid_hour">Hora no válida</string>
+    <string name="composedialogs_time_invalid_minute">Minuto no válido</string>
+</resources>

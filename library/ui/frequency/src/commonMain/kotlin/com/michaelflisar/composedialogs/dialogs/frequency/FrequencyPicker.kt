@@ -196,6 +196,7 @@ fun FrequencyPicker(
                             selectedTime = selectedFrequency.time,
                             onTimeSelected = { updateTime(it) },
                             title = texts.time,
+                            saveTime = texts.saveTime,
                             config = timeConfig,
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -220,6 +221,7 @@ fun FrequencyPicker(
                                 selectedTime = selectedFrequency.time,
                                 onTimeSelected = { updateTime(it) },
                                 title = texts.time,
+                                saveTime = texts.saveTime,
                                 config = timeConfig,
                                 modifier = Modifier.fillMaxWidth()
                             )
@@ -244,6 +246,7 @@ fun FrequencyPicker(
                                 selectedTime = selectedFrequency.time,
                                 onTimeSelected = { updateTime(it) },
                                 title = texts.time,
+                                saveTime = texts.saveTime,
                                 config = timeConfig,
                                 modifier = Modifier.fillMaxWidth()
                             )
@@ -279,6 +282,7 @@ fun FrequencyPicker(
                                     selectedTime = selectedFrequency.time,
                                     onTimeSelected = { updateTime(it) },
                                     title = texts.time,
+                                    saveTime = texts.saveTime,
                                     config = timeConfig,
                                     modifier = Modifier.fillMaxWidth()
                                 )
@@ -313,6 +317,7 @@ fun FrequencyPicker(
                                     selectedTime = selectedFrequency.time,
                                     onTimeSelected = { updateTime(it) },
                                     title = texts.time,
+                                    saveTime = texts.saveTime,
                                     config = timeConfig,
                                     modifier = Modifier.fillMaxWidth()
                                 )

@@ -42,6 +42,7 @@ import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequ
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_monthname_november
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_monthname_october
 import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_monthname_september
+import com.michaelflisar.composedialogs.frequency.resources.composedialogs_frequency_time_save
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.Month
 import org.jetbrains.compose.resources.stringResource
@@ -63,6 +64,7 @@ class FrequencyPickerTexts internal constructor(
     val dayOfMonth: String,
     val dayOfWeek: String,
     val time: String,
+    val saveTime: String,
     val nameOfType: (type: Frequency.Type, interval: Int) -> String,
     val nameOfDayOfWeek: (day: DayOfWeek) -> String,
     val nameOfMonth: (month: Month) -> String
@@ -94,6 +96,7 @@ object FrequencyPickerDefaults {
         dayOfMonth: String = stringResource(Res.string.composedialogs_frequency_day_of_month),
         dayOfWeek: String = stringResource(Res.string.composedialogs_frequency_day_of_week),
         time: String = stringResource(Res.string.composedialogs_frequency_time),
+        saveTime: String = stringResource(Res.string.composedialogs_frequency_time_save),
         nameOfType: ((type: Frequency.Type, interval: Int) -> String)? = null,
         nameOfDayOfWeek: ((day: DayOfWeek) -> String)? = null,
         nameOfMonth: ((month: Month) -> String)? = null
@@ -134,6 +137,7 @@ object FrequencyPickerDefaults {
             dayOfMonth = dayOfMonth,
             dayOfWeek = dayOfWeek,
             time = time,
+            saveTime = saveTime,
             nameOfType = nameOfType ?: { frequencyType, count ->
                 val singularAndPlural = when (frequencyType) {
                     Frequency.Type.Daily -> day to dayPlural

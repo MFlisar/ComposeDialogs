@@ -10,12 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import com.michaelflisar.composedialogs.core.DialogButton
+import com.michaelflisar.composedialogs.core.DialogDefaults
 import com.michaelflisar.composedialogs.core.DialogEventType
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogInputButton
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogLabeledField
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogNumberInput
 import com.michaelflisar.composedialogs.core.internal.ui.InternalDialogTextDropdown
 import com.michaelflisar.composedialogs.core.rememberDialogState
+import com.michaelflisar.composedialogs.core.stringOk
 import com.michaelflisar.composedialogs.dialogs.frequency.FrequencyTextStyle
 import com.michaelflisar.composedialogs.dialogs.frequency.FrequencyUIProvider
 import com.michaelflisar.composedialogs.dialogs.frequency.classes.Frequency
@@ -134,6 +137,7 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
         selectedTime: LocalTime,
         onTimeSelected: (LocalTime) -> Unit,
         title: String,
+        saveTime: String,
         config: TimePickerConfig,
         modifier: Modifier,
     ) {
@@ -155,6 +159,9 @@ internal object Material3FrequencyUIProvider : FrequencyUIProvider {
                 time = selectedTimeState2,
                 config = config,
                 title = { Text(title) },
+                buttons = DialogDefaults.buttons(
+                    positive = DialogButton(saveTime),
+                ),
                 onEvent = { event ->
                     if (event.type == DialogEventType.ButtonPositive) {
                         selectedTimeState.value = selectedTimeState2.value

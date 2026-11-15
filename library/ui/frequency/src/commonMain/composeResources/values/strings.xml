@@ -34,4 +34,5 @@
     <string name="composedialogs_frequency_monthname_october">October</string>
     <string name="composedialogs_frequency_monthname_november">November</string>
     <string name="composedialogs_frequency_monthname_december">December</string>
+    <string name="composedialogs_frequency_time_save">Save</string>
 </resources>

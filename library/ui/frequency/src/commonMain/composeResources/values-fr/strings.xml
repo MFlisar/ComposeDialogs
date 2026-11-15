@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composedialogs_frequency_interval">Intervalle</string>
+    <string name="composedialogs_frequency_invalid_interval">L’intervalle doit être supérieur à zéro</string>
+    <string name="composedialogs_frequency_frequency">Fréquence</string>
+    <string name="composedialogs_frequency_month_of_year">Mois de l’année</string>
+    <string name="composedialogs_frequency_day_of_month">Jour du mois</string>
+    <string name="composedialogs_frequency_day_of_week">Jour de la semaine</string>
+    <string name="composedialogs_frequency_time">Heure</string>
+    <string name="composedialogs_frequency_day">jour</string>
+    <string name="composedialogs_frequency_day_plural">jours</string>
+    <string name="composedialogs_frequency_week">semaine</string>
+    <string name="composedialogs_frequency_week_plural">semaines</string>
+    <string name="composedialogs_frequency_month">mois</string>
+    <string name="composedialogs_frequency_month_plural">mois</string>
+    <string name="composedialogs_frequency_year">an</string>
+    <string name="composedialogs_frequency_year_plural">ans</string>
+    <string name="composedialogs_frequency_weekday_monday">lundi</string>
+    <string name="composedialogs_frequency_weekday_tuesday">mardi</string>
+    <string name="composedialogs_frequency_weekday_wednesday">mercredi</string>
+    <string name="composedialogs_frequency_weekday_thursday">jeudi</string>
+    <string name="composedialogs_frequency_weekday_friday">vendredi</string>
+    <string name="composedialogs_frequency_weekday_saturday">samedi</string>
+    <string name="composedialogs_frequency_weekday_sunday">dimanche</string>
+    <string name="composedialogs_frequency_monthname_january">janvier</string>
+    <string name="composedialogs_frequency_monthname_february">février</string>
+    <string name="composedialogs_frequency_monthname_march">mars</string>
+    <string name="composedialogs_frequency_monthname_april">avril</string>
+    <string name="composedialogs_frequency_monthname_may">mai</string>
+    <string name="composedialogs_frequency_monthname_june">juin</string>
+    <string name="composedialogs_frequency_monthname_july">juillet</string>
+    <string name="composedialogs_frequency_monthname_august">août</string>
+    <string name="composedialogs_frequency_monthname_september">septembre</string>
+    <string name="composedialogs_frequency_monthname_october">octobre</string>
+    <string name="composedialogs_frequency_monthname_november">novembre</string>
+    <string name="composedialogs_frequency_monthname_december">décembre</string>
+    <string name="composedialogs_frequency_time_save">Enregistrer</string>
+</resources>

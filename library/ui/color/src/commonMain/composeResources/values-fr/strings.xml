@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composedialogs_color_label_presets">Préréglages</string>
+    <string name="composedialogs_color_label_custom">Personnalisé</string>
+    <string name="composedialogs_color_label_edit">Modifier la couleur</string>
+    <string name="composedialogs_color_error_invalid">La valeur de la couleur est invalide</string>
+    <string name="composedialogs_color_action_apply">Appliquer</string>
+    <string name="composedialogs_color_action_cancel">Annuler</string>
+</resources>
