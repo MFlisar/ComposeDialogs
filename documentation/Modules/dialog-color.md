@@ -47,10 +47,9 @@ if (state.visible) {
  * **Basic Parameters:** all params not described here are derived from [Dialog], check it out for more details
  *
  * @param color the selected color state
- * @param texts the texts ([ColorPickerTexts]) that are used inside this dialog - use [ColorPickerDefaults.texts] to provide your own data
  * @param config the color picker's behavior and appearance
+ * @param texts the texts ([ColorPickerTexts]) that are used inside this dialog - use [ColorPickerDefaults.texts] to provide your own data
  */
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DialogColor(
     // Base Dialog - State
